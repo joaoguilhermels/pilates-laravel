@@ -27,6 +27,18 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot($router);
+        
+        // Easy calls just getting the id from the urls
+        $router->model('professionals', 'App\Professional');
+        $router->model('rooms', 'App\Room');
+        $router->model('clients', 'App\Client');
+        $router->model('classes', 'App\ClassType');
+        
+        //If we need more verification like if a user is enabled for example we can use the following code
+        //$route->bind('articles', function($id)
+        //{
+        //    return \App\Article::published()->findOrFail($id);  
+        //});
     }
 
     /**

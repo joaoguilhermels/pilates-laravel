@@ -40,7 +40,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                    Pilates
                 </a>
             </div>
 
@@ -48,6 +48,10 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li><a href="{{ url('/clients') }}">Clients</a></li>
+                    <li><a href="{{ url('/rooms') }}">Rooms</a></li>
+                    <li><a href="{{ url('/classes') }}">Classes</a></li>
+                    <li><a href="{{ url('/professionals') }}">Professionals</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
