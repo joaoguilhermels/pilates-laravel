@@ -63,4 +63,11 @@ class ProfessionalsController extends Controller
 
         return redirect('professionals');
     }
+
+    public function destroy(Professional $professional)
+    {      
+        $professional->delete();
+
+        return redirect('professionals');
+    }
 }

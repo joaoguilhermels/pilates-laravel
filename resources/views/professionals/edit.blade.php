@@ -3,7 +3,7 @@
 @section('content')
   <div class="container">
   <h1>Edit {{ $professional->name }}</h1>
-  
+  <a href="{{ action('ProfessionalsController@index') }}">Back to Professionals List</a>
   <hr />
   
   @include('errors.list')

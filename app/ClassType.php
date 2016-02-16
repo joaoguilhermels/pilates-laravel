@@ -20,4 +20,12 @@ class ClassType extends Model
     {
         return $this->belongsToMany('App\Professional')->withTimestamps();
     }
+
+    /**
+     * The rooms where this class can be given.
+     */
+    public function rooms()
+    {
+        return $this->belongsToMany('App\Room')->withTimestamps();
+    }
 }

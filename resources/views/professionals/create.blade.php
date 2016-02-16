@@ -3,8 +3,10 @@
 
 @section('content')
   <div class="container">
-  <h1>Create New Professional</h1>
-  
+  <h1>
+    Create New Professional
+  </h1>
+  <a href="{{ action('ProfessionalsController@index') }}">Back to Professionals List</a>
   <hr />
   
   @include('errors.list')

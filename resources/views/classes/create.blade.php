@@ -4,7 +4,7 @@
 @section('content')
   <div class="container">
   <h1>Create New Class</h1>
-  
+  <a href="{{ action('ClassTypesController@index') }}">Back to Classes List</a>
   <hr />
   
   @include('errors.list')

@@ -20,8 +20,8 @@ class ClientsController extends Controller
     public function index() {
       $clients = Client::all();
       
-      //return view('clients.index', compact('clients')); // or view('clients.index')->with('clients', $clients);
-      return view('clients.index')->with('clients', $clients);
+      return view('clients.index', compact('clients')); // or view('clients.index')->with('clients', $clients);
+      //return view('clients.index')->with('clients', $clients);
     }
     
     public function show(Client $client)
@@ -49,6 +49,13 @@ class ClientsController extends Controller
     public function update(Client $client, ClientRequest $request)
     {        
         $client->update($request->all());
+
+        return redirect('clients');
+    }
+
+    public function destroy(Client $client)
+    {        
+        $client->delete();
 
         return redirect('clients');
     }

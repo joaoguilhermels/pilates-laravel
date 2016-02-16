@@ -2,10 +2,20 @@
 
 @section('content')
   <div class="container">
-    <h1>Professionals</h1>
+    <h1>
+      Professionals
+      &nbsp;&nbsp;&nbsp;
+      <a href="{{ action('ProfessionalsController@create') }}" class="btn btn-primary">Add New Professional</a>
+    </h1>
     
     <hr />
   
+    @if (count($professionals) == 0)
+  
+    <h2>There no professionals yet. You can <a href="{{ action('ProfessionalsController@create') }}">add one here.</a>
+  
+    @else
+    
     <div class="table-responsive">          
     <table class="table">
       <thead>
@@ -24,11 +34,17 @@
           <td>{{ $professional->phone }}</td>
           <td>{{ $professional->email }}</td>
           <td>{{ $professional->description }}</td>
-          <td><a href="{{ action('ProfessionalsController@edit', [$professional->id]) }}">edit</a></td>
+          <td>
+            <a href="{{ action('ProfessionalsController@edit', [$professional->id]) }}" class="btn pull-left">edit</a>
+            {!! Form::open(['route' => ['professionals.destroy', $professional->id], 'method' => 'delete']) !!}
+            <button type="submit" class="btn btn-link pull-left">delete</button>
+            {!! Form::close() !!}
+          </td>
         </tr>
         @endforeach
       </tbody>
     </table>
-    </div>    
+    </div>
+    @endif
   </div>
 @stop

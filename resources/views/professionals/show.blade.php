@@ -2,20 +2,31 @@
 
 @section('content')
 
+  <div class="container">
     <h1>{{ $professional->name }}</h1>
+    <a href="{{ action('ProfessionalsController@index') }}">Back to Professionals List</a>
+    <hr />
 
-    <article>
-      <h3>{{ $professional->phone }}</h3>
-      <h3>{{ $professional->email }}</h3>
-      <div class="body">
-        {{ $professional->description }}
+    <div class="row">
+      <div class="col-md-8">
+        <dl class="dl-horizontal">
+          <dt>Phone:</dt>
+          <dd>{{ $professional->phone }}</dd>
+        </dl>
+        <dl class="dl-horizontal">
+          <dt>Email:</dt>
+          <dd>{{ $professional->email }}</dd>
+        </dl>
+        <dl class="dl-horizontal">
+          <dt>Observation:</dt>
+          <dd>{{ $professional->description }}</dd>
+        </dl>
+        <a href="{{ action('ProfessionalsController@edit', [$professional->id]) }}" class="btn btn-block btn-primary">Edit This Professional</a>
       </div>
-    </article>
-    
-    <h5>Classes given by the professional:</h5>
-    <ul>
-      @foreach($professional->classTypes as $classType)
-        <li>{{ $classType->name }}</li>
-      @endforeach
-    </ul>
+      <div class="col-md-4">
+        @include('professionals.partials.classes-block')
+      </div>
+    </div>
+  </div>
+
 @stop

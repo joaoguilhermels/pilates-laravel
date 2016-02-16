@@ -2,8 +2,11 @@
 
 @section('content')
   <div class="container">
-    <h1>Classes</h1>
-    
+    <h1>
+      Classes
+      &nbsp;&nbsp;&nbsp;
+      <a href="{{ action('ClassTypesController@create') }}" class="btn btn-primary">Add New Class</a>
+    </h1>
     <hr />
   
     <div class="table-responsive">          
@@ -18,7 +21,12 @@
         @foreach ($classTypes as $classType)
         <tr>
           <td><a href="{{ action('ClassTypesController@show', [$classType->id]) }}">{{ $classType->name }}</a></td>
-          <td><a href="{{ action('ClassTypesController@edit', [$classType->id]) }}">edit</a></td>
+          <td>
+            <a href="{{ action('ClassTypesController@edit', [$classType->id]) }}" class="btn pull-left">edit</a>
+            {!! Form::open(['route' => ['classes.destroy', $classType->id], 'method' => 'delete']) !!}
+            <button type="submit" class="btn btn-link pull-left">delete</button>
+            {!! Form::close() !!}
+          </td>
         </tr>
         @endforeach
       </tbody>
