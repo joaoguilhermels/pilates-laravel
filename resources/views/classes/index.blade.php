@@ -9,6 +9,12 @@
     </h1>
     <hr />
   
+    @if (count($classTypes) == 0)
+  
+    <h2>There no classes yet. You can <a href="{{ action('ClassTypesController@create') }}">add one here.</a>
+  
+    @else
+  
     <div class="table-responsive">          
     <table class="table">
       <thead>
@@ -32,5 +38,6 @@
       </tbody>
     </table>
     </div>    
+    @endif
   </div>
 @stop

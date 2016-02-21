@@ -10,6 +10,12 @@
 
     <hr />
   
+    @if (count($rooms) == 0)
+  
+    <h2>There no rooms yet. You can <a href="{{ action('RoomsController@create') }}">add one here.</a>
+  
+    @else
+  
     <div class="table-responsive">          
     <table class="table">
       <thead>
@@ -32,6 +38,7 @@
         @endforeach
       </tbody>
     </table>
-    </div>    
+    </div>
+    @endif
   </div>
 @stop

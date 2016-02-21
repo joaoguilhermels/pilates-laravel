@@ -31,7 +31,7 @@
         <tr>
           <td><a href="{{ action('ClientsController@show', [$client->id]) }}">{{ $client->name }}</a></td>
           <td>{{ $client->phone }}</td>
-          <td>{{ $client->mail }}</td>
+          <td>{{ $client->email }}</td>
           <td>{{ $client->description }}</td>
           <td>
             <a href="{{ action('ClientsController@edit', [$client->id]) }}" class="btn pull-left">edit</a>

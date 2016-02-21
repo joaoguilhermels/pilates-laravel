@@ -28,4 +28,12 @@ class ClassType extends Model
     {
         return $this->belongsToMany('App\Room')->withTimestamps();
     }
+
+    /**
+     * The statuses of this class.
+     */
+    public function statuses()
+    {
+        return $this->hasMany('App\ClassTypeStatus');
+    }
 }
