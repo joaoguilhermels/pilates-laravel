@@ -21,7 +21,6 @@ class ClientsController extends Controller
       $clients = Client::all();
       
       return view('clients.index', compact('clients')); // or view('clients.index')->with('clients', $clients);
-      //return view('clients.index')->with('clients', $clients);
     }
     
     public function show(Client $client)

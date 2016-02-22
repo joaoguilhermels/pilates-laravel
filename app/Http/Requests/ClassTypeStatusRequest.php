@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class ClassTypeRequest extends Request
+class ClassTypeStatusRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,10 @@ class ClassTypeRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required',
-            'max_number_of_clients' => 'required|numeric|min:1',
-            'duration' => 'required|numeric|min:1',
+            'status_name' => 'array',
+            'charge_client' => 'array',
+            'pay_professional' => 'array',
+            'color' => 'array',
         ];
     }
 }

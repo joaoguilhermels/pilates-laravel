@@ -31,10 +31,10 @@
         <tbody>
         @foreach ($statuses as $status)
           <tr>
-            <td>{!! Form::text('status_name[]', $status->name, ['class' => 'form-control']) !!}</td>
-            <td>{!! Form::checkbox('charge_client[]', $status->charge_client, $status->charge_client, ['class' => 'form-control']) !!}</td>
-            <td>{!! Form::checkbox('pay_professional[]', $status->pay_professional, $status->pay_professional, ['class' => 'form-control']) !!}</td>
-            <td>{!! Form::input('color[]', 'color', $status->color, null, ['class' => 'form-control']) !!}</td>
+            <td>{!! Form::text('status[' . $status->id . '][name]', $status->name, ['class' => 'form-control', 'id' => 'name.' . $status->id]) !!}</td>
+            <td>{!! Form::checkbox('status[' . $status->id . '][charge_client]', $status->charge_client == false ? 0 : 1, $status->charge_client, ['class' => 'form-control', 'id' => 'charge_client.' . $status->id]) !!}</td>
+            <td>{!! Form::checkbox('status[' . $status->id . '][pay_professional]', $status->pay_professional == false ? 0 : 1, $status->pay_professional, ['class' => 'form-control', 'id' => 'pay_professional.' . $status->id]) !!}</td>
+            <td>{!! Form::input('color', 'status[' . $status->id . '][color]', $status->color, null, ['class' => 'form-control', 'id' => 'color.' . $status->id]) !!}</td>
           </tr>
         @endforeach
         </tbody>
