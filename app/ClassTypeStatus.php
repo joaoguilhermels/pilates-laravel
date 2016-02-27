@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class ClassTypeStatus extends Model
 {
     protected $fillable = [
-      'id',
       'name',
       'charge_client',
       'pay_professional',
@@ -30,5 +29,15 @@ class ClassTypeStatus extends Model
     public function getPayProfessionalAttribute($value)
     {
         return $value == 1 ? true : false;
+    }
+
+    public function setChargeClientAttribute($value)
+    {
+        $this->attributes['charge_client'] = $value == 'on' ? 1 : 0;
+    }
+
+    public function setPayProfessionalAttribute($value)
+    {
+        $this->attributes['pay_professional'] = $value == 'on' ? 1 : 0;
     }
 }

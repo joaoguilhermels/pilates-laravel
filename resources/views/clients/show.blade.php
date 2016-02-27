@@ -34,10 +34,7 @@
         </div>
 
       </div>
-      <div id="planos" class="tab-pane fade">
-        <h3>Planos</h3>
-        <p>Planos do cliente</p>
-      </div>
+      @include('clients.partials.plans')
     </div>
   </div>
 @stop

@@ -23,10 +23,17 @@ class ClassTypeRequest extends Request
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name' => 'required',
             'max_number_of_clients' => 'required|numeric|min:1',
             'duration' => 'required|numeric|min:1',
         ];
+
+        foreach($this->request->get('status') as $key => $val)
+        {
+            $rules['status.' . $key . '.name'] = 'required';
+        }
+
+        return $rules;
     }
 }

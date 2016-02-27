@@ -1,6 +1,3 @@
-<?php
-//dd($statuses);
-?>
 <div class="form-group">
   {!! Form::label('name', 'Name: ') !!}
   {!! Form::text('name', null, ['class' => 'form-control']) !!}
@@ -15,34 +12,64 @@
 </div>
 
 <div class="form-group">
-  @if (count($statuses) == 0)
+  @if (count($classType->statuses) == 0)
     empty
   @else
     <div class="table-responsive">
-      <table class="table">
+      <table class="table" id="status_table">
         <thead>
           <tr>
             <th>Status</th>
             <th>Charge Client?</th>
             <th>Pay Professional?</th>
             <th>Color</th>
+            <!--th></th-->
           </tr>
         </thead>
         <tbody>
-        @foreach ($statuses as $status)
+        @foreach ($classType->statuses as $key => $status)
           <tr>
-            <td>{!! Form::text('status[' . $status->id . '][name]', $status->name, ['class' => 'form-control', 'id' => 'name.' . $status->id]) !!}</td>
-            <td>{!! Form::checkbox('status[' . $status->id . '][charge_client]', $status->charge_client == false ? 0 : 1, $status->charge_client, ['class' => 'form-control', 'id' => 'charge_client.' . $status->id]) !!}</td>
-            <td>{!! Form::checkbox('status[' . $status->id . '][pay_professional]', $status->pay_professional == false ? 0 : 1, $status->pay_professional, ['class' => 'form-control', 'id' => 'pay_professional.' . $status->id]) !!}</td>
-            <td>{!! Form::input('color', 'status[' . $status->id . '][color]', $status->color, null, ['class' => 'form-control', 'id' => 'color.' . $status->id]) !!}</td>
+            <td>
+              {!! Form::hidden('status[' . $key . '][id]', $status->id == null ? NULL : $status->id) !!}
+              {!! Form::text('status[' . $key . '][name]', $status->name, ['class' => 'form-control', 'id' => 'name.' . $key]) !!}
+            </td>
+            <td>
+              {!! Form::hidden('status[' . $key . '][charge_client]', 0) !!}
+              {!! Form::checkbox('status[' . $key . '][charge_client]', $status->charge_client == false ? NULL : 'on', $status->charge_client, ['class' => 'form-control', 'id' => 'charge_client.' . $key]) !!}
+            </td>
+            <td>
+              {!! Form::hidden('status[' . $key . '][pay_professional]', 0) !!}
+              {!! Form::checkbox('status[' . $key . '][pay_professional]', $status->pay_professional == false ? NULL : 'on', $status->pay_professional, ['class' => 'form-control', 'id' => 'pay_professional.' . $key]) !!}
+            </td>
+            <td>
+              {!! Form::input('color', 'status[' . $key . '][color]', $status->color, null, ['class' => 'form-control', 'id' => 'color.' . $key]) !!}
+            </td>
+            <!--td>
+              <button value="<?php print 'status.' . $status->id; ?>" id="<?php print 'btn.status.' . $status->id; ?>">delete</button>
+            </td-->
           </tr>
         @endforeach
         </tbody>
       </table>
     </div>
+    <!--button type="button" class="btn btn-default" aria-label="Left Align" id="add_new_status">
+      Add new status
+    </button-->
   @endif
 </div>
 
 <div class="form-group">
   {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
 </div>
+<script>
+// Code to delete a row on the status table. Will come back to it later.
+/*$('#status_table button').on('click', function(e) {
+  var tr = $(this).closest('tr');
+  tr.css("background-color", "#FF3700");
+  tr.fadeOut(400, function(){
+    tr.remove();
+  });
+
+  e.preventDefault();
+});*/
+</script>

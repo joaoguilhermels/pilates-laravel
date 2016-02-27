@@ -35,19 +35,21 @@ class ClassTypeStatusesController extends Controller
     public function create()
     {
       return view('classes.create');
-    }
+    }*/
     
     public function store(ClassTypeStatusRequest $request)
     {
+        dd('asdf');
         ClassType::create($request->all());
       
         return redirect('classes');
     }
 
     public function update(ClassType $classType, ClassTypeRequest $request)
-    {       
+    {
+        dd('fdsa');
         $classType->update($request->all());
 
         return redirect('classes');
-    }*/
+    }
 }
