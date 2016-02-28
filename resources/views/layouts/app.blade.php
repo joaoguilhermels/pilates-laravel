@@ -51,6 +51,7 @@
                     <li><a href="{{ url('/clients') }}">Clients</a></li>
                     <li><a href="{{ url('/rooms') }}">Rooms</a></li>
                     <li><a href="{{ url('/classes') }}">Classes</a></li>
+                    <li><a href="{{ url('/plans') }}">Plans</a></li>
                     <li><a href="{{ url('/professionals') }}">Professionals</a></li>
                 </ul>
 

@@ -36,4 +36,12 @@ class ClassType extends Model
     {
         return $this->hasMany('App\ClassTypeStatus');
     }
+
+    /**
+     * The plans of this class.
+     */
+    public function plans()
+    {
+        return $this->hasMany('App\Plan');
+    }
 }

@@ -35,13 +35,9 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/home', 'HomeController@index');
 
-    /*Route::get('clients', 'ClientsController@index');
-    Route::get('clients/create', 'ClientsController@create');
-    Route::get('clients/{id}', 'ClientsController@show');
-    Route::post('clients', 'ClientsController@store');
-    Route::edit('clients/{id}/edit', 'ClientsController@edit');*/
     Route::resource('clients', 'ClientsController');
     Route::resource('professionals', 'ProfessionalsController');
     Route::resource('rooms', 'RoomsController');
     Route::resource('classes', 'ClassTypesController');
+    Route::resource('plans', 'PlansController');
 });

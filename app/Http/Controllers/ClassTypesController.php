@@ -43,7 +43,9 @@ class ClassTypesController extends Controller
     
     public function create()
     {
-        $statuses = create_default_statuses();
+        $statuses = $this->create_default_statuses();
+        
+        $classType = new ClassType;
         
         $classType->statuses = $statuses;
 
@@ -82,7 +84,7 @@ class ClassTypesController extends Controller
     public function create_default_statuses() {
         $statusOk = new ClassTypeStatus([
           'name' => 'OK',
-          'charge_client' => NULL,
+          'charge_client' => TRUE,
           'pay_professional' => TRUE,
           'color' => '#6FCB6D'
         ]);
@@ -91,26 +93,26 @@ class ClassTypesController extends Controller
           'name' => 'Desmarcou',
           'charge_client' => NULL,
           'pay_professional' => NULL,
-          'color' => '#685DFF'
+          'color' => '#00B9FE'
         ]);
         
         $statusFaltou = new ClassTypeStatus([
           'name' => 'Faltou',
           'charge_client' => TRUE,
           'pay_professional' => NULL,
-          'color' => '#00B9FE'
+          'color' => '#FF1E00'
         ]);
 
         $statusReposicao = new ClassTypeStatus([
           'name' => 'Reposição',
           'charge_client' => TRUE,
-          'pay_professional' => NULL,
-          'color' => '#FF1E00'
+          'pay_professional' => TRUE,
+          'color' => '#685DFF'
         ]);
       
         $statuses = collect([$statusOk, $statusDesmarcou, $statusReposicao, $statusFaltou]);
         
-        $classType = new ClassType;
+        return $statuses;
     }
 
 }

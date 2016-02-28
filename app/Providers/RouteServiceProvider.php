@@ -33,6 +33,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('rooms', 'App\Room');
         $router->model('clients', 'App\Client');
         $router->model('classes', 'App\ClassType');
+        $router->model('plans', 'App\Plan');
         
         //If we need more verification like if a user is enabled for example we can use the following code
         //$route->bind('articles', function($id)
