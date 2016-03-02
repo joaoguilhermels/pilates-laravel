@@ -16,11 +16,13 @@
     {!! Form::select('duration_type', array('week' => 'week', 'month' => 'month'), 'month', ['class' => 'form-control']) !!}
   </div>
 </div>
-<div class="form-group">
-  {!! Form::label('price', 'Price: ') !!}
-  {!! Form::text('price', null, ['class' => 'form-control']) !!}
-  {!! Form::label('price', 'per ') !!}
-  {!! Form::select('price_type', array('class' => 'class', 'month' => 'month'), 'class', ['class' => 'form-control']) !!}
+<div class="form-inline">
+  <div class="form-group">
+    {!! Form::label('price', 'Price: ') !!}
+    {!! Form::text('price', null, ['class' => 'form-control']) !!}
+    {!! Form::label('price', 'per ') !!}
+    {!! Form::select('price_type', array('class' => 'class', 'month' => 'month'), 'class', ['class' => 'form-control']) !!}
+  </div>
 </div>
 <div class="form-group">
   {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}

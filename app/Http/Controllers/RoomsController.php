@@ -46,8 +46,10 @@ class RoomsController extends Controller
     public function store(RoomRequest $request)
     {
         $room = room::create($request->all());
-        
-        $room->classTypes()->sync($request->input('class_type_list'));
+
+        if ($request->input('class_type_list') != NULL) {
+            $room->classTypes()->sync($request->input('class_type_list'));
+        }
       
         return redirect('rooms');
     }

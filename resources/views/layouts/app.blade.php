@@ -53,6 +53,7 @@
                     <li><a href="{{ url('/classes') }}">Classes</a></li>
                     <li><a href="{{ url('/plans') }}">Plans</a></li>
                     <li><a href="{{ url('/professionals') }}">Professionals</a></li>
+                    <li><a href="{{ url('/schedules') }}">Schedules</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

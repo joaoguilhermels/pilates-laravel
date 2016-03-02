@@ -40,4 +40,5 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('rooms', 'RoomsController');
     Route::resource('classes', 'ClassTypesController');
     Route::resource('plans', 'PlansController');
+    Route::resource('schedules', 'SchedulesController');
 });

@@ -34,6 +34,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('clients', 'App\Client');
         $router->model('classes', 'App\ClassType');
         $router->model('plans', 'App\Plan');
+        $router->model('schedules', 'App\Schedule');
         
         //If we need more verification like if a user is enabled for example we can use the following code
         //$route->bind('articles', function($id)
