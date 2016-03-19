@@ -14,6 +14,7 @@
     <!-- Styles -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
+    @yield('css')
 
     <style>
         body {
@@ -54,6 +55,8 @@
                     <li><a href="{{ url('/plans') }}">Plans</a></li>
                     <li><a href="{{ url('/professionals') }}">Professionals</a></li>
                     <li><a href="{{ url('/schedules') }}">Schedules</a></li>
+                    <li><a href="{{ url('/calendar') }}">Calendar</a></li>
+                    <li><a href="{{ url('/expenses') }}">Expenses</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -84,5 +87,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    @yield('script_footer')
 </body>
 </html>

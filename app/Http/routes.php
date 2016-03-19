@@ -35,10 +35,18 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/home', 'HomeController@index');
 
+    Route::get('/calendar', 'SchedulesController@calendar');
+    Route::get('/calendar/group', 'SchedulesController@groupCalendar');
+
+    Route::get('clients/{clients}/plans/new', 'ClientPlansController@createClientPlan');
+    Route::post('clients/{clients}/plans/new', 'ClientPlansController@reviewClientPlan');
+    Route::post('clients/{clients}/plans/review', 'ClientPlansController@store');
+
     Route::resource('clients', 'ClientsController');
     Route::resource('professionals', 'ProfessionalsController');
     Route::resource('rooms', 'RoomsController');
     Route::resource('classes', 'ClassTypesController');
     Route::resource('plans', 'PlansController');
     Route::resource('schedules', 'SchedulesController');
+    Route::resource('expenses', 'ExpensesController');
 });

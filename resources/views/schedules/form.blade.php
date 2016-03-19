@@ -23,6 +23,10 @@
   {!! Form::select('room_id', $rooms, null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
+  {!! Form::label('price', 'Price: ') !!}
+  {!! Form::text('price', null, ['class' => 'form-control']) !!}
+</div>
+<div class="form-group">
   {!! Form::label('start_at', 'Start: ') !!}
   {!! Form::input('datetime-local', 'start_at', null, ['class' => 'form-control']) !!}
 </div>

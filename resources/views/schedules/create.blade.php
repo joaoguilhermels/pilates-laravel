@@ -9,7 +9,7 @@
   
   @include('errors.list')
   
-  {!! Form::open(['url' => 'schedules']) !!}
+  {!! Form::open(['url' => 'clients/{client}/plans/new']) !!}
     {!! Form::hidden('class_type_status_id', 53) !!}
     @include('schedules.form', ['submitButtonText' => 'Add New Schedule'])
 

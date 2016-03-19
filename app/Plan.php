@@ -25,4 +25,10 @@ class Plan extends Model
     {
         return $this->belongsTo('App\ClassType');
     }
+
+
+    public function getNameWithClassAttribute()
+    { 
+        return $this->classType->name . ' - ' . $this->name . ' - ' . $this->times . ' per ' . $this->times_type;
+    }
 }

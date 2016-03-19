@@ -24,6 +24,8 @@
           <th>Client</th>
           <th>Room</th>
           <th>Professional</th>
+          <th>Status</th>
+          <th>Price</th>
           <th>Start At</th>
           <th>End At</th>
           <th>Actions</th>
@@ -36,6 +38,8 @@
           <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->client->name }}</a></td>
           <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->room->name }}</a></td>
           <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->professional->name }}</a></td>
+          <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->classTypeStatus->name }}</a></td>
+          <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->price }}</a></td>
           <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->start_at }}</a></td>
           <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->end_at }}</a></td>
           <td>

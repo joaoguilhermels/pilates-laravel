@@ -25,4 +25,16 @@ class Professional extends Model
     {
         return $this->classTypes->pluck('id')->all();
     }
+    
+    public function getNameWithClassesAttribute()
+    {
+        $classTypes = $this->classTypes->all();
+        $classTypesList = '';
+
+        foreach($classTypes as $classType) {
+            $classTypesList .= $classTypesList == '' ? $classType->name : ', ' . $classType->name;
+        }
+
+        return $this->name . ' (' . $classTypesList . ')';
+    }
 }

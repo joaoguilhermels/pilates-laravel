@@ -3,13 +3,24 @@
 @section('content')
 
   <div class="container">
-    <h1>{{ $room->name }}</h1>
-    <a href="{{ action('ClientsController@index') }}">Back to Rooms List</a>
+    <h1>{{ $schedule->name }}</h1>
+    <a href="{{ action('ClientsController@index') }}">Back to Schedules List</a>
     <hr />
+
+    <div>{{ $schedule->client->name }}</div>
+    <div>{{ $schedule->plan->name }}</div>
+    <div>{{ $schedule->classType->name }}</div>
+    <div>{{ $schedule->professional->name }}</div>
+    <div>{{ $schedule->room->name }}</div>
+    <div>{{ $schedule->classTypeStatus->name }}</div>
+
+    <div>{{ $schedule->price }}</div>
+    <div>{{ $schedule->start_at }}</div>
+    <div>{{ $schedule->end_at }}</div>
 
     <div class="row">
       <div class="col-md-12">
-        <a href="{{ action('RoomsController@edit', [$room->id]) }}" class="btn btn-block btn-primary">Edit This Room</a>
+        <a href="{{ action('SchedulesController@edit', [$schedule->id]) }}" class="btn btn-block btn-primary">Edit This Schedule</a>
       </div>
     </div>
   </div>
