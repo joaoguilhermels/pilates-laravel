@@ -34,12 +34,22 @@
               {!! Form::text('status[' . $key . '][name]', $status->name, ['class' => 'form-control', 'id' => 'name.' . $key]) !!}
             </td>
             <td>
+              <div class="checkbox">
+                <label>
               {!! Form::hidden('status[' . $key . '][charge_client]', 0) !!}
-              {!! Form::checkbox('status[' . $key . '][charge_client]', $status->charge_client == false ? NULL : 'on', $status->charge_client, ['class' => 'form-control', 'id' => 'charge_client.' . $key]) !!}
+              {!! Form::checkbox('status[' . $key . '][charge_client]', $status->charge_client == false ? NULL : 'on', $status->charge_client, ['id' => 'charge_client.' . $key]) !!}
+              Yes
+                </label>
+              </div>              
             </td>
             <td>
-              {!! Form::hidden('status[' . $key . '][pay_professional]', 0) !!}
-              {!! Form::checkbox('status[' . $key . '][pay_professional]', $status->pay_professional == false ? NULL : 'on', $status->pay_professional, ['class' => 'form-control', 'id' => 'pay_professional.' . $key]) !!}
+              <div class="checkbox">
+                <label>
+                  {!! Form::hidden('status[' . $key . '][pay_professional]', 0) !!}
+                  {!! Form::checkbox('status[' . $key . '][pay_professional]', $status->pay_professional == false ? NULL : 'on', $status->pay_professional, ['id' => 'pay_professional.' . $key]) !!}
+                  Yes
+                </label>
+              </div>
             </td>
             <td>
               {!! Form::input('color', 'status[' . $key . '][color]', $status->color, null, ['class' => 'form-control', 'id' => 'color.' . $key]) !!}

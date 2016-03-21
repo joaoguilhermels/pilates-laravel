@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Session;
 use App\Client;
 use App\Http\Requests;
 use App\Http\Requests\ClientRequest;
@@ -40,7 +41,9 @@ class ClientsController extends Controller
     
     public function store(ClientRequest $request)
     {
-        Client::create($request->all());
+        $client = Client::create($request->all());
+      
+        Session::flash('message', 'Successfully created client ' . $client->name);
       
         return redirect('clients');
     }
@@ -49,11 +52,15 @@ class ClientsController extends Controller
     {        
         $client->update($request->all());
 
+        Session::flash('message', 'Successfully updated client ' . $client->name);
+
         return redirect('clients');
     }
 
     public function destroy(Client $client)
-    {        
+    {
+        Session::flash('message', 'Successfully deleted client ' . $client->name);
+      
         $client->delete();
 
         return redirect('clients');
