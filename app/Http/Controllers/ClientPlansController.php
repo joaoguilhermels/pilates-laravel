@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 use App\Plan;
 use App\Room;
 use App\Client;
+use App\ClientPlan;
+use App\ClientPlanDetail;
 use App\ClassType;
 use App\ClassTypeStatus;
 use App\Professional;
+use App\Schedule;
 use App\Http\Requests;
 use App\Http\Requests\ClientPlanRequest;
 use App\Http\Controllers\Controller;
@@ -25,7 +28,7 @@ class ClientPlansController extends Controller
                 5 => 'Friday',
                 6 => 'Saturday'
               );
-  
+
     public function createClientPlan(Client $client)
     {
         $form = $this->prepareCreateForm();
@@ -79,7 +82,7 @@ class ClientPlansController extends Controller
           );
 
           foreach($values as $date) {
-            $dates[] = $date->format("d-m-Y l");
+            $dates[] = $date->format("d-m-Y");
           }
         }
 
@@ -107,15 +110,120 @@ class ClientPlansController extends Controller
         return $t1 - $t2;
     }
 
-    public function store(ClientPlanRequest $request)
+    public function store(ClientPlanRequest $request, Client $client)
     {
         $requestAll = $request->all();
-        
-        dd($request->all());
-        
 
-        //$clientPlan = clientPlan::create($request->all());
+        $clientPlan = new ClientPlan;
+
+        $clientPlan->class_id = $request->class_id;
+        $clientPlan->plan_id = $request->plan_id;
+        $clientPlan->start_at = $request->start_at;
+
+        $clientPlan->save();
+
+        foreach($request->daysOfWeek as $dayOfWeek) {
+          $clientPlanDetail = new ClientPlanDetail;
+  
+          $clientPlanDetail->client_plan_id = $clientPlan->plan_id;
+          $clientPlanDetail->day_of_week = $dayOfWeek['day_of_week'];
+          $clientPlanDetail->hour = $dayOfWeek['hour'] . ':00';
+          $clientPlanDetail->professional_id = $dayOfWeek['professional_id'];
+          $clientPlanDetail->room_id = $dayOfWeek['room_id'];
+  
+          $clientPlanDetail->save();
+        }
+
+
+        /***********************************************************************************/
+
+
+        $classType = ClassType::with('statuses', 'plans')->findOrFail($requestAll['class_id']);
+
+        $plan = $classType->plans()->where('id', '=', $requestAll['plan_id'])->first();
+        $statuses = $classType->statuses;
+
+        $rooms = Room::all()->lists('name_with_classes', 'id');
+
+        $startDate = \Carbon\Carbon::parse($requestAll['start_at']);
+        $startDateMonth = $startDate->formatLocalized('%B');
+        $startDateYear = $startDate->formatLocalized('%Y');
+
+        $dates = array();
+
+        foreach($requestAll['daysOfWeek'] as $key => $dayOfWeek)
+        {
+            $nameOfDayOfWeek = array_get($this->daysOfWeek, $dayOfWeek['day_of_week']);
+            
+            $values = new \DatePeriod(
+                \Carbon\Carbon::parse("first " . $nameOfDayOfWeek . " of " . $startDateMonth . " " . $startDateYear),
+                \Carbon\CarbonInterval::week(),
+                \Carbon\Carbon::parse("first " . $nameOfDayOfWeek . " of " . $startDateMonth . " " . $startDateYear . " + " . $plan->duration . " " . $plan->duration_type)
+            );
+  
+            foreach($values as $date)
+            {
+                $dates[] = $date->format("d-m-Y");
+  
+                $dateObj = date_create($date);
+  
+                list($year, $month) = explode(" ", $dateObj->format("F Y"));
+  
+                $datesGrouped[$year . " " . $month][] = $dateObj->format("d-m-Y");
+            }
+        }
+
+        foreach($requestAll['daysOfWeek'] as $key => $dayOfWeek)
+        {
+            $nameOfDayOfWeek = array_get($this->daysOfWeek, $dayOfWeek['day_of_week']);
+
+            $values = new \DatePeriod(
+                \Carbon\Carbon::parse("first " . $nameOfDayOfWeek . " of " . $startDateMonth . " " . $startDateYear),
+                \Carbon\CarbonInterval::week(),
+                \Carbon\Carbon::parse("first " . $nameOfDayOfWeek . " of " . $startDateMonth . " " . $startDateYear . " + " . $plan->duration . " " . $plan->duration_type)
+            );
+
+            foreach($values as $date) {
+                //$dates[] = $date->format("d-m-Y");
+    
+                $dateObj = date_create($date);
+                $dateObj->setTime($dayOfWeek['hour'], 0);
+    
+                $dateEndObj = date_create($date);
+                $dateEndObj->setTime($dayOfWeek['hour'] + ($classType->duration / 60), 0);
+                
+                $schedule = new Schedule;
+    
+                $schedule->client_id            = $client->id;
+                $schedule->price                = $this->setPrice($plan, $dateObj, $datesGrouped);
+                $schedule->plan_id              = $request->plan_id;
+                $schedule->class_type_id        = $request->class_id;
+                $schedule->room_id              = $dayOfWeek['room_id'];
+                $schedule->professional_id      = $dayOfWeek['professional_id'];
+                $schedule->start_at             = $dateObj->format("Y-m-d H:i:s");
+                $schedule->end_at               = $dateEndObj->format("Y-m-d H:i:s");
+                $schedule->class_type_status_id = $statuses->where('name', 'OK')->first()->id;
+    
+                $schedule->save();
+            }
+        }
+
       
-        //return redirect('clients');
+        return redirect('clients');
+    }
+
+    public function setPrice (Plan $plan, $dateObj, Array $datesGrouped)
+    {
+        if ($plan->price_type == 'class')
+        {
+            return $plan->price;
+        }
+        else
+        {
+            $key = $dateObj->format("F Y");
+            $daysCount = count($datesGrouped[$key]);
+            return $plan->price / $daysCount;
+        }
+        
     }
 }

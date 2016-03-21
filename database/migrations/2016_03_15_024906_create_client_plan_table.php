@@ -12,7 +12,7 @@ class CreateClientPlanTable extends Migration
      */
     public function up()
     {
-        Schema::create('client_plan', function (Blueprint $table) {
+        Schema::create('client_plans', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('class_id');
             $table->integer('plan_id');
@@ -28,6 +28,6 @@ class CreateClientPlanTable extends Migration
      */
     public function down()
     {
-        Schema::drop('client_plan');
+        Schema::drop('client_plans');
     }
 }

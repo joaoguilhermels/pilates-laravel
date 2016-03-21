@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class ClientPlan extends Model
 {
+    protected $fillable = [
+      'class_id',
+      'plan_id',
+      'start_at'
+    ];
+  
     public function client()
     {
         return $this->belongsTo('App\Client');

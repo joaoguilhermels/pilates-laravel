@@ -8,7 +8,7 @@
   
   @include('errors.list')
 
-  {!! Form::open(array('action' => array('ClientPlansController@reviewClientPlan', $client->id))) !!}
+  {!! Form::open(array('action' => array('ClientPlansController@store', $client->id))) !!}
     @include('clientPlans.form', ['submitButtonText' => 'Add New Plan for this Client'])
 
   {!! Form::close() !!}
