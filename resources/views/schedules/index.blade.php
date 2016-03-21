@@ -32,23 +32,30 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($schedules as $schedule)
+        @foreach ($schedules as $key => $schedule)
         <tr>
-          <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->classType->name }}</a></td>
-          <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->client->name }}</a></td>
-          <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->room->name }}</a></td>
-          <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->professional->name }}</a></td>
-          <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->classTypeStatus->name }}</a></td>
-          <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->price }}</a></td>
-          <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->start_at }}</a></td>
-          <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->end_at }}</a></td>
-          <td>
-            <a href="{{ action('SchedulesController@edit', [$schedule->id]) }}" class="btn pull-left">edit</a>
-            {!! Form::open(['route' => ['schedules.destroy', $schedule->id], 'method' => 'delete']) !!}
-            <button type="submit" class="btn btn-link pull-left">delete</button>
-            {!! Form::close() !!}
+          <td colspan="9">
+            {{ $key }}
           </td>
         </tr>
+          @foreach ($schedules[$key] as $schedule)
+          <tr>
+            <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->classType->name }}</a></td>
+            <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->client->name }}</a></td>
+            <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->room->name }}</a></td>
+            <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->professional->name }}</a></td>
+            <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->classTypeStatus->name }}</a></td>
+            <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->price }}</a></td>
+            <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->start_at }}</a></td>
+            <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->end_at }}</a></td>
+            <td>
+              <a href="{{ action('SchedulesController@edit', [$schedule->id]) }}" class="btn pull-left">edit</a>
+              {!! Form::open(['route' => ['schedules.destroy', $schedule->id], 'method' => 'delete']) !!}
+              <button type="submit" class="btn btn-link pull-left">delete</button>
+              {!! Form::close() !!}
+            </td>
+          </tr>
+          @endforeach
         @endforeach
       </tbody>
     </table>

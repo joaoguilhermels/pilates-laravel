@@ -170,6 +170,9 @@ class SchedulesController extends Controller
 
     public function index() {
       $schedules = Schedule::all();
+      $schedules = $schedules->groupBy(function ($item, $key) {
+          return date_create($item->start_at)->format("F Y");
+      });
       
       return view('schedules.index')->with('schedules', $schedules);
     }
