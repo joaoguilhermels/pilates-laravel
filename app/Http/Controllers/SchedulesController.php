@@ -25,15 +25,21 @@ class SchedulesController extends Controller
     public function calendar() {
         $events = [];
 
-        $schedules = Schedule::all();
+        //$schedules = Schedule::all();
+        $schedules = Schedule::with(['ClassType', 'ClassTypeStatus', 'Professional'])->get();
         
         foreach($schedules as $schedule) {
             $events[] = \Calendar::event(
-              $schedule->client->name, //event title
+              $schedule->client->name . ' - ' . $schedule->classType->name, //event title
               false, //full day event?
               $schedule->start_at, //start time (you can also use Carbon instead of DateTime)
               $schedule->end_at, //end time (you can also use Carbon instead of DateTime)
-              $schedule->id //optionally, you can specify an event ID
+              $schedule->id, //optionally, you can specify an event ID
+              [
+                'color' => $schedule->classTypeStatus->color,
+                'url' => '/schedules/' . $schedule->id . '/edit',
+                'description' => $this->eventDescription($schedule)
+              ]
             );
         }
 
@@ -57,13 +63,9 @@ class SchedulesController extends Controller
 
         $calendar = \Calendar::setCallbacks(array(
             'dayClick' => 'function (date, jsEvent, view) {
-                alert(\'Clicked on: \' + date.format());
+                //alert(\'Clicked on: \' + date.format());
             }',
-            'eventClick' => 'function (calEvent, jsEvent, view) {
-                alert(\'Event: \' + calEvent.title);
-                alert(\'Coordinates: \' + jsEvent.pageX + \',\' + jsEvent.pageY);
-                alert(\'View: \' + view.name);
-        
+            'eventClick' => 'function (calEvent, jsEvent, view) {       
                 // change the border color just for fun
                 $(this).css(\'border-color\', \'red\');
             }',
@@ -71,7 +73,7 @@ class SchedulesController extends Controller
                 element.qtip({
                     prerender: true,
                     content: {
-                        \'text\': event.title
+                        \'text\': event.description
                     },
                     position: {
                   			at: \'top left\',
@@ -91,6 +93,18 @@ class SchedulesController extends Controller
         ));
         
         return view('calendar.index', compact('calendar'));
+    }
+
+    public function eventDescription(Schedule $schedule) 
+    {
+        $description =  $schedule->client->name . '<br>' . 
+                        $schedule->classType->name . '<br>' .
+                        $schedule->start_at . '<br>' .
+                        $schedule->end_at . '<br>' .
+                        $schedule->professional->name . '<br>' .
+                        $schedule->classTypeStatus->name;
+        
+        return $description;
     }
 
     /*public function groupCalendar() {

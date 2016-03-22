@@ -28,11 +28,11 @@
 </div>
 <div class="form-group">
   {!! Form::label('start_at', 'Start: ') !!}
-  {!! Form::input('datetime-local', 'start_at', null, ['class' => 'form-control']) !!}
+  {!! Form::text('start_at', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
   {!! Form::label('end_at', 'End: ') !!}
-  {!! Form::input('datetime-local', 'end_at', null, ['class' => 'form-control']) !!}
+  {!! Form::text('end_at', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
   {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
