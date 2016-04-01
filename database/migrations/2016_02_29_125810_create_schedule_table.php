@@ -16,17 +16,18 @@ class CreateScheduleTable extends Migration
             $table->increments('id');
             $table->integer('client_id')->index();
 
-            $table->integer('plan_id')->unsigned()->index();
-            $table->foreign('plan_id')->references('id')->on('plans');
+            $table->integer('client_plan_id')->nullable()->unsigned()->index();
+            
+            $table->boolean('trial')->default(false);
+
+            $table->integer('room_id')->unsigned()->index();
+            $table->foreign('room_id')->references('id')->on('rooms');
 
             $table->integer('class_type_id')->unsigned()->index();
             $table->foreign('class_type_id')->references('id')->on('class_types');
-            
+
             $table->integer('professional_id')->unsigned()->index();
             $table->foreign('professional_id')->references('id')->on('professionals');
-            
-            $table->integer('room_id')->unsigned()->index();
-            $table->foreign('room_id')->references('id')->on('rooms');
             
             $table->integer('class_type_status_id')->unsigned()->index();
             $table->foreign('class_type_status_id')->references('id')->on('class_type_statuses');

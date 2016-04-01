@@ -18,7 +18,12 @@ class Professional extends Model
      */
     public function classTypes()
     {
-        return $this->belongsToMany('App\ClassType')->withTimestamps();
+        return $this->belongsToMany('App\ClassType')->withPivot('value', 'value_type')->withTimestamps();
+    }
+
+    public function scheudles()
+    {
+        return $this->hasMany('App\Schedules')->withTimestamps();
     }
     
     public function getClassTypeListAttribute()

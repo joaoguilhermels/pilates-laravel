@@ -19,10 +19,10 @@ class ClientPlan extends Model
 
     public function plan()
     {
-        return $this->hasOne('App\Plan');
+        return $this->belongsTo('App\Plan');
     }
     
-    public function professionals()
+    /*public function professionals()
     {
         return $this->hasMany('App\Professional');
     }
@@ -30,5 +30,15 @@ class ClientPlan extends Model
     public function rooms()
     {
         return $this->hasMany('App\Room');
+    }*/
+    
+    public function classType()
+    {
+        return $this->belongsTo('App\ClassType');
+    }
+
+    public function clientPlanDetails()
+    {
+        return $this->hasMany('App\ClientPlanDetail');
     }
 }

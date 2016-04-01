@@ -18,4 +18,14 @@ class ClientPlanDetail extends Model
     {
         return $this->belongsTo('App\ClientPlan');
     }
+
+    public function professional()
+    {
+        return $this->belongsTo('App\Professional');
+    }
+
+    public function room()
+    {
+        return $this->belongsTo('App\Room');
+    }
 }

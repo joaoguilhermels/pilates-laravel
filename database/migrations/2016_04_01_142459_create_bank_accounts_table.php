@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClientPlanTable extends Migration
+class CreateBankAccountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,13 @@ class CreateClientPlanTable extends Migration
      */
     public function up()
     {
-        Schema::create('client_plans', function (Blueprint $table) {
+        Schema::create('bank_accounts', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('client_id');
-            $table->integer('class_type_id');
-            $table->integer('plan_id');
-            $table->date('start_at');
+            $table->string('name');
+            $table->string('bank');
+            $table->string('agency');
+            $table->string('account');
+            $table->string('balance');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateClientPlanTable extends Migration
      */
     public function down()
     {
-        Schema::drop('client_plans');
+        Schema::drop('bank_accounts');
     }
 }

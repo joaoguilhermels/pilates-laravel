@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClientPlanTable extends Migration
+class CreatePaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,11 @@ class CreateClientPlanTable extends Migration
      */
     public function up()
     {
-        Schema::create('client_plans', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('client_id');
-            $table->integer('class_type_id');
-            $table->integer('plan_id');
-            $table->date('start_at');
+            $table->integer('entity_id');
+            $table->string('bundle');
+            $table->enum('type', array('received', 'paid'));
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateClientPlanTable extends Migration
      */
     public function down()
     {
-        Schema::drop('client_plans');
+        Schema::drop('payments');
     }
 }

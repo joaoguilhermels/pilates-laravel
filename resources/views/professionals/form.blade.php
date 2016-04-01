@@ -1,6 +1,3 @@
-<?php
-  //dd(get_defined_vars());
-?>
 <div class="form-group">
   {!! Form::label('name', 'Name: ') !!}
   {!! Form::text('name', null, ['class' => 'form-control']) !!}
@@ -27,10 +24,30 @@
       </thead>
       <tbody>
         @foreach($classTypes as $id => $classType)
+          <?php $value = '';?>
+          @if(isset($professional))
+          @foreach($professional->classTypes->where('id', $id) as $professionalClassType)
+              <?php $value = $professionalClassType->pivot->value; ?>
+          @endforeach
+          @endif
         <tr>
           <td>
-            {!! Form::checkbox('class_type_list[]', $id, $classTypes) !!}
-            {!! Form::label('class_type_list[]', $classType) !!}
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="class_type_list[{{ $id }}][class_type_id]" value="{{ $id }}" @if(isset($professional) && $professional->classTypes->contains($id)) checked @endif>
+                {{ $classType }}
+              </label>
+            </div>
+          </td>
+          <td>
+            <input type="number" name="class_type_list[{{ $id }}][value]" class="form-control" value="{{ $value }}">
+          </td>
+          <td>
+            <select name="class_type_list[{{ $id }}][value_type]" class="form-control">
+              <option value="percentage">%</option>
+              <option value="value_per_client">Per Client</option>
+              <option value="value_per_class">Per Class</option>
+            </select>
           </td>
         </tr>
         @endforeach

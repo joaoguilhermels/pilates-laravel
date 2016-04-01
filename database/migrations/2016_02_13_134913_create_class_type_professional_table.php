@@ -19,6 +19,9 @@ class CreateClassTypeProfessionalTable extends Migration
             $table->integer('professional_id')->unsigned()->index();
             $table->foreign('professional_id')->references('id')->on('professionals')->onDelete('cascade');
             
+            $table->float('value');
+            $table->string('value_type', '20');
+            
             $table->timestamps();
         });
     }

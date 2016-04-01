@@ -49,4 +49,9 @@ class ClassType extends Model
     {
         return $this->hasMany('App\Schedule');
     }
+    
+    public function clientPlans()
+    {
+        return $this->hasMany('App\ClientPlan');
+    }
 }

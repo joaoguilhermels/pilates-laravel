@@ -116,31 +116,34 @@ class ClientPlansController extends Controller
 
         $clientPlan = new ClientPlan;
 
-        $clientPlan->class_id = $request->class_id;
+        //$clientPlan->client_id = $client->id;
+        $clientPlan->class_type_id = $request->class_type_id;
         $clientPlan->plan_id = $request->plan_id;
         $clientPlan->start_at = $request->start_at;
 
-        $clientPlan->save();
+        //$clientPlan->save();
+        $clientPlan = $client->clientPlans()->save($clientPlan);
 
         foreach($request->daysOfWeek as $dayOfWeek) {
           $clientPlanDetail = new ClientPlanDetail;
   
-          $clientPlanDetail->client_plan_id = $clientPlan->plan_id;
+          //$clientPlanDetail->client_plan_id = $clientPlan->id;
           $clientPlanDetail->day_of_week = $dayOfWeek['day_of_week'];
           $clientPlanDetail->hour = $dayOfWeek['hour'] . ':00';
           $clientPlanDetail->professional_id = $dayOfWeek['professional_id'];
           $clientPlanDetail->room_id = $dayOfWeek['room_id'];
   
-          $clientPlanDetail->save();
+          $clientPlanDetail = $clientPlan->clientPlanDetails()->save($clientPlanDetail);
         }
 
 
         /***********************************************************************************/
 
 
-        $classType = ClassType::with('statuses', 'plans')->findOrFail($requestAll['class_id']);
+        $classType = ClassType::with('statuses', 'plans')->findOrFail($requestAll['class_type_id']);
 
         $plan = $classType->plans()->where('id', '=', $requestAll['plan_id'])->first();
+
         $statuses = $classType->statuses;
 
         $rooms = Room::all()->lists('name_with_classes', 'id');
@@ -193,16 +196,17 @@ class ClientPlansController extends Controller
                 $dateEndObj->setTime($dayOfWeek['hour'] + ($classType->duration / 60), 0);
                 
                 $schedule = new Schedule;
-    
+
+                $schedule->trial                = false;
                 $schedule->client_id            = $client->id;
-                $schedule->price                = $this->setPrice($plan, $dateObj, $datesGrouped);
-                $schedule->plan_id              = $request->plan_id;
-                $schedule->class_type_id        = $request->class_id;
+                $schedule->class_type_id        = $request->class_type_id;
                 $schedule->room_id              = $dayOfWeek['room_id'];
+                $schedule->client_plan_id       = $clientPlan->id;
                 $schedule->professional_id      = $dayOfWeek['professional_id'];
                 $schedule->start_at             = $dateObj->format("Y-m-d H:i:s");
                 $schedule->end_at               = $dateEndObj->format("Y-m-d H:i:s");
                 $schedule->class_type_status_id = $statuses->where('name', 'OK')->first()->id;
+                $schedule->price                = $this->setPrice($plan, $dateObj, $datesGrouped);
     
                 $schedule->save();
             }

@@ -42,6 +42,10 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('clients/{clients}/plans/new', 'ClientPlansController@reviewClientPlan');
     Route::post('clients/{clients}/plans/review', 'ClientPlansController@store');
 
+    Route::get('professionals/{professionals}/payments/report', 'ProfessionalsController@reportPayment');
+
+    Route::get('clients/{clients}/charges/report', 'ClientsController@reportCharge');
+
     Route::resource('clients', 'ClientsController');
     Route::resource('professionals', 'ProfessionalsController');
     Route::resource('rooms', 'RoomsController');

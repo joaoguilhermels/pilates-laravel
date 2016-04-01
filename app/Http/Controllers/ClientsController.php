@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Session;
 use App\Client;
+use App\Schedule;
 use App\Http\Requests;
 use App\Http\Requests\ClientRequest;
 use App\Http\Controllers\Controller;
@@ -18,14 +19,18 @@ class ClientsController extends Controller
       $this->middleware('auth');
     }
 
-    public function index() {
-      $clients = Client::all();
-      
-      return view('clients.index', compact('clients')); // or view('clients.index')->with('clients', $clients);
+    public function index()
+    {
+        $clients = Client::all();
+        
+        return view('clients.index', compact('clients'));
     }
     
     public function show(Client $client)
     {
+        //$plans = Client::with('clientPlans', 'clientPlans.clientPlanDetails')->get();
+        $client->load('clientPlans', 'clientPlans.clientPlanDetails', 'clientPlans.classType');
+
         return view('clients.show', compact('client'));
     }
 
@@ -33,7 +38,23 @@ class ClientsController extends Controller
     {
         return view('clients.edit', compact('client'));
     }
-    
+
+    public function reportCharge(Client $client) {
+        $rows = Schedule::where('client_id', $client->id)
+                        ->whereMonth('start_at', '=', 3)
+                        ->whereYear('start_at', '=', 2016)
+                        ->get();
+
+        $total = Schedule::where('client_id', $client->id)
+                          ->whereMonth('start_at', '=', 3)
+                          ->whereYear('start_at', '=', 2016)
+                          ->sum('price');
+
+        //{{ $row->price * ($professional->classTypes()->where('id', $row->class_type_id)->first()->pivot->value / 100) }}
+
+        return view('clients.report_charge', compact('client', 'rows', 'total'));
+    }
+
     public function create()
     {
       return view('clients.create');
