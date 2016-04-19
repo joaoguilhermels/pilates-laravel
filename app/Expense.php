@@ -11,4 +11,12 @@ class Expense extends Model
       'date',
       'price'
     ];
+
+    /**
+     * Get all of the staff member's photos.
+     */
+    public function financialTransaction()
+    {
+        return $this->morphMany('App\FinancialTransaction', 'financiable');
+    }
 }

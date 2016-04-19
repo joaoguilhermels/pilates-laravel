@@ -29,6 +29,8 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot($router);
         
         // Easy calls just getting the id from the urls
+        $router->model('payment_methods', 'App\PaymentMethod');
+        $router->model('bank_accounts', 'App\BankAccount');
         $router->model('professionals', 'App\Professional');
         $router->model('rooms', 'App\Room');
         $router->model('clients', 'App\Client');

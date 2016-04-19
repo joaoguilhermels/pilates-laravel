@@ -9,7 +9,7 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
     // Permitted mass assingment fields
     protected $fillable = [
       'client_id',
-      'plan_id',
+      'client_plan_detail_id',
       'class_type_id',
       'professional_id',
       'room_id',
@@ -56,6 +56,11 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
     public function status()
     {
         return $this->hasOne('App\Plan');
+    }
+    
+    public function clientPlanDetail()
+    {
+        return $this->belongsTo('App\ClientPlanDetail');
     }
 
     /**

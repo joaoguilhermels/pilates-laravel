@@ -41,11 +41,14 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('clients/{clients}/plans/new', 'ClientPlansController@createClientPlan');
     Route::post('clients/{clients}/plans/new', 'ClientPlansController@reviewClientPlan');
     Route::post('clients/{clients}/plans/review', 'ClientPlansController@store');
+    Route::delete('clients/{clients}/plans/{clientPlans}/delete', 'ClientPlansController@destroy');
 
     Route::get('professionals/{professionals}/payments/report', 'ProfessionalsController@reportPayment');
 
     Route::get('clients/{clients}/charges/report', 'ClientsController@reportCharge');
 
+    Route::resource('payment-methods', 'PaymentMethodsController');
+    Route::resource('bank-accounts', 'BankAccountsController');
     Route::resource('clients', 'ClientsController');
     Route::resource('professionals', 'ProfessionalsController');
     Route::resource('rooms', 'RoomsController');

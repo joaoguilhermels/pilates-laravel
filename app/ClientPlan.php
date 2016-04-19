@@ -22,16 +22,6 @@ class ClientPlan extends Model
         return $this->belongsTo('App\Plan');
     }
     
-    /*public function professionals()
-    {
-        return $this->hasMany('App\Professional');
-    }
-
-    public function rooms()
-    {
-        return $this->hasMany('App\Room');
-    }*/
-    
     public function classType()
     {
         return $this->belongsTo('App\ClassType');

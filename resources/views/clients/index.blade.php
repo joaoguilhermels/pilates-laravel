@@ -43,6 +43,10 @@
         @endforeach
       </tbody>
     </table>
+    
+    <div class="text-center">
+    {!! $clients->render() !!}
+    </div>
     </div>
     @endif
   </div>

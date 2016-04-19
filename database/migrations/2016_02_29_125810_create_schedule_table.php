@@ -16,7 +16,7 @@ class CreateScheduleTable extends Migration
             $table->increments('id');
             $table->integer('client_id')->index();
 
-            $table->integer('client_plan_id')->nullable()->unsigned()->index();
+            $table->integer('client_plan_detail_id')->nullable()->unsigned()->index();
             
             $table->boolean('trial')->default(false);
 

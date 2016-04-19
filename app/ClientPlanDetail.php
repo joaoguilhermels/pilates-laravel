@@ -28,4 +28,9 @@ class ClientPlanDetail extends Model
     {
         return $this->belongsTo('App\Room');
     }
+    
+    public function schedules()
+    {
+        return $this->hasMany('App\Schedule');
+    }
 }

@@ -57,6 +57,13 @@
                     <li><a href="{{ url('/schedules') }}">Schedules</a></li>
                     <li><a href="{{ url('/calendar') }}">Calendar</a></li>
                     <li><a href="{{ url('/expenses') }}">Expenses</a></li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Config <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="{{ url('/bank-accounts') }}">Bank Accounts</a></li>
+                        <li><a href="{{ url('/payment-methods') }}">Payment Methods</a></li>
+                      </ul>
+                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -93,7 +100,7 @@
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.20/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.js"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
     @yield('script_footer')
 </body>

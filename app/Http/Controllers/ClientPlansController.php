@@ -20,13 +20,13 @@ use App\Http\Controllers\Controller;
 class ClientPlansController extends Controller
 {
     protected $daysOfWeek = array(
-                0 => 'Sunday',
-                1 => 'Monday',
-                2 => 'Tuesday',
-                3 => 'Wednesday',
-                4 => 'Thursday',
-                5 => 'Friday',
-                6 => 'Saturday'
+                  0 => 'Sunday',
+                  1 => 'Monday',
+                  2 => 'Tuesday',
+                  3 => 'Wednesday',
+                  4 => 'Thursday',
+                  5 => 'Friday',
+                  6 => 'Saturday'
               );
 
     public function createClientPlan(Client $client)
@@ -136,9 +136,7 @@ class ClientPlansController extends Controller
           $clientPlanDetail = $clientPlan->clientPlanDetails()->save($clientPlanDetail);
         }
 
-
         /***********************************************************************************/
-
 
         $classType = ClassType::with('statuses', 'plans')->findOrFail($requestAll['class_type_id']);
 
@@ -186,9 +184,7 @@ class ClientPlansController extends Controller
                 \Carbon\Carbon::parse("first " . $nameOfDayOfWeek . " of " . $startDateMonth . " " . $startDateYear . " + " . $plan->duration . " " . $plan->duration_type)
             );
 
-            foreach($values as $date) {
-                //$dates[] = $date->format("d-m-Y");
-    
+            foreach($values as $date) {    
                 $dateObj = date_create($date);
                 $dateObj->setTime($dayOfWeek['hour'], 0);
     
@@ -197,16 +193,17 @@ class ClientPlansController extends Controller
                 
                 $schedule = new Schedule;
 
-                $schedule->trial                = false;
-                $schedule->client_id            = $client->id;
-                $schedule->class_type_id        = $request->class_type_id;
-                $schedule->room_id              = $dayOfWeek['room_id'];
-                $schedule->client_plan_id       = $clientPlan->id;
-                $schedule->professional_id      = $dayOfWeek['professional_id'];
-                $schedule->start_at             = $dateObj->format("Y-m-d H:i:s");
-                $schedule->end_at               = $dateEndObj->format("Y-m-d H:i:s");
-                $schedule->class_type_status_id = $statuses->where('name', 'OK')->first()->id;
-                $schedule->price                = $this->setPrice($plan, $dateObj, $datesGrouped);
+                $schedule->trial                 = false;
+                $schedule->client_id             = $client->id;
+                $schedule->class_type_id         = $request->class_type_id;
+                $schedule->room_id               = $dayOfWeek['room_id'];
+                //$schedule->client_plan_id       = $clientPlan->id;
+                $schedule->client_plan_detail_id = $clientPlanDetail->id;
+                $schedule->professional_id       = $dayOfWeek['professional_id'];
+                $schedule->start_at              = $dateObj->format("Y-m-d H:i:s");
+                $schedule->end_at                = $dateEndObj->format("Y-m-d H:i:s");
+                $schedule->class_type_status_id  = $statuses->where('name', 'OK')->first()->id;
+                $schedule->price                 = $this->setPrice($plan, $dateObj, $datesGrouped);
     
                 $schedule->save();
             }
@@ -229,5 +226,16 @@ class ClientPlansController extends Controller
             return $plan->price / $daysCount;
         }
         
+    }
+    
+    public function destroy(ClientPlan $clientPlan)
+    {
+        Session::flash('message', 'Successfully deleted client ' . $client->name);
+      
+        $clientPlan->clientPlanDetails()->schedules()->delete();
+        $clientPlan->clientPlanDetails()->delete();
+        $clientPlan->delete();
+
+        return redirect('clients');
     }
 }

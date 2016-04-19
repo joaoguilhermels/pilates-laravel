@@ -59,9 +59,7 @@ class ProfessionalsController extends Controller
     public function create()
     {
         $classTypes = ClassType::lists('name', 'id');
-        
-        //dd($classTypes);
-        
+
         return view('professionals.create', compact('classTypes'));
     }
     

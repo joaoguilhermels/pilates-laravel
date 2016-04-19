@@ -24,9 +24,6 @@ class ExpensesController extends Controller
     
     public function show(Expense $expense)
     {
-        // Not needed because we are using route model binding on RouteServiceProvider::boot
-        //$expense = Expense::findOrFail($id);
-
         return view('expenses.show', compact('expense'));
     }
 
