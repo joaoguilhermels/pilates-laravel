@@ -7,7 +7,7 @@
   <input type="date" class="form-control" name="date" value="@if(isset($expense)){{ $expense->date }}@else{{ old('date') }}@endif">
 </div>
 <div class="form-group">
-  {!! Form::label('price', 'Price: ') !!}
+  <label for="value">Value:</label>
   <input type="number" class="form-control" name="price" value="@if(isset($expense)){{ $expense->price }}@else{{ old('price') }}@endif">
 </div>
 <div class="form-group">

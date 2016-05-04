@@ -18,7 +18,7 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
       'end_at'
     ];
     
-    //protected $dates = ['start_at', 'end_at'];
+    protected $dates = ['start_at', 'end_at', 'created_at', 'updated_at'];
     
     /**
      * The roles that belong to the user.
@@ -46,11 +46,6 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
     public function classTypeStatus()
     {
         return $this->belongsTo('App\ClassTypeStatus');
-    }
-
-    public function plan()
-    {
-        return $this->belongsTo('App\Plan');
     }
 
     public function status()

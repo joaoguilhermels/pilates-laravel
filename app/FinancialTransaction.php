@@ -2,9 +2,10 @@
 
 namespace App;
 
+use App\Professional;
 use Illuminate\Database\Eloquent\Model;
 
-class FinacialTransaction extends Model
+class FinancialTransaction extends Model
 {
     protected $fillable = [
       'entity_id',
@@ -22,11 +23,21 @@ class FinacialTransaction extends Model
       'observation'
     ];
 
+    protected $datas = ['confirmed_date'];
+    
     /**
      * Get all of the owning imageable models.
      */
     public function financiable()
     {
         return $this->morphTo();
+    }
+    
+    public function paymentMethod() {
+        return $this->belongsTo('App\PaymentMethod');
+    }
+    
+    public function bankAccount() {
+        return $this->belongsTo('App\BankAccount');        
     }
 }

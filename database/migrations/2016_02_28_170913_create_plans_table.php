@@ -20,11 +20,11 @@ class CreatePlansTable extends Migration
             $table->foreign('class_type_id')->references('id')->on('class_types')->onDelete('cascade');
 
             $table->integer('times');
-            $table->enum('times_type', array('week', 'month'))->default('week');
+            $table->enum('times_type', array('week', 'month', 'class'))->default('week'); // class = package
             $table->float('price');
-            $table->enum('price_type', array('class', 'month'))->default('month');
+            $table->enum('price_type', array('class', 'month', 'package'))->default('month'); // package is only used with class times_type
             $table->integer('duration');
-            $table->enum('duration_type', array('week', 'month'))->default('month');
+            $table->enum('duration_type', array('week', 'month', 'do-not-repeat'))->default('month'); // do-not-repeat waiting for a better name
             $table->timestamps();
         });
     }

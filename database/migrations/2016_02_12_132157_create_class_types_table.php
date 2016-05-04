@@ -15,6 +15,7 @@ class CreateClassTypesTable extends Migration
         Schema::create('class_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->boolean('free_trial')->default(false);
             $table->smallInteger('max_number_of_clients')->unsigned();
             $table->smallInteger('duration')->unsigned();
             $table->timestamps();

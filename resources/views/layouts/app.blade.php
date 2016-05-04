@@ -54,6 +54,7 @@
                     <li><a href="{{ url('/classes') }}">Classes</a></li>
                     <li><a href="{{ url('/plans') }}">Plans</a></li>
                     <li><a href="{{ url('/professionals') }}">Professionals</a></li>
+                    <li><a href="{{ url('/professionals/payments') }}">Pro Payments</a></li>
                     <li><a href="{{ url('/schedules') }}">Schedules</a></li>
                     <li><a href="{{ url('/calendar') }}">Calendar</a></li>
                     <li><a href="{{ url('/expenses') }}">Expenses</a></li>
@@ -101,6 +102,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.js"></script>
+    
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
     @yield('script_footer')
 </body>

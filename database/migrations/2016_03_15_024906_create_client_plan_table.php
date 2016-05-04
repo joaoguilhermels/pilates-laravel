@@ -14,9 +14,9 @@ class CreateClientPlanTable extends Migration
     {
         Schema::create('client_plans', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('client_id');
-            $table->integer('class_type_id');
-            $table->integer('plan_id');
+            $table->integer('client_id')->unsigned();
+            $table->integer('class_type_id'); // Not needed because class_type_id is already on the plans table
+            $table->integer('plan_id')->unsigned();
             $table->date('start_at');
             $table->timestamps();
         });

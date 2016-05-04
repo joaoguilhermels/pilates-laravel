@@ -37,6 +37,10 @@ class CreateScheduleTable extends Migration
             $table->dateTime('start_at');
             $table->dateTime('end_at');
 
+            $table->integer('professional_payment_financial_transaction_id')->unsigned()->index();
+
+            $table->integer('client_payment_financial_transaction_id')->unsigned()->index();
+
             $table->timestamps();
         });
     }

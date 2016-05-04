@@ -13,6 +13,10 @@ class Professional extends Model
       'email',
     ];
     
+    public function financialTransactions() {
+        return $this->morphMany('App\FinancialTransaction', 'financiable');
+    }
+    
     /**
      * The class types given by the professional
      */

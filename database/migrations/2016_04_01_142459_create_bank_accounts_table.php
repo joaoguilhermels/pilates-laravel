@@ -18,7 +18,7 @@ class CreateBankAccountsTable extends Migration
             $table->string('bank');
             $table->string('agency');
             $table->string('account');
-            $table->string('balance');
+            $table->float('balance');
             $table->timestamps();
         });
     }

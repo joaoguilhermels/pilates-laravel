@@ -16,7 +16,7 @@ class CreateExpensesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->date('date');
-            $table->float('price');
+            $table->float('value');
             $table->timestamps();
         });
     }

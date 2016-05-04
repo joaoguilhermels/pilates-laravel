@@ -26,10 +26,6 @@ Route::get('/', function () {
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
-});
-
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
@@ -38,12 +34,16 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/calendar', 'SchedulesController@calendar');
     Route::get('/calendar/group', 'SchedulesController@groupCalendar');
 
-    Route::get('clients/{clients}/plans/new', 'ClientPlansController@createClientPlan');
-    Route::post('clients/{clients}/plans/new', 'ClientPlansController@reviewClientPlan');
+    Route::get('clients/{clients}/plans/create', 'ClientPlansController@createClientPlan');
+    Route::post('clients/{clients}/plans/create', 'ClientPlansController@reviewClientPlan');
     Route::post('clients/{clients}/plans/review', 'ClientPlansController@store');
     Route::delete('clients/{clients}/plans/{clientPlans}/delete', 'ClientPlansController@destroy');
 
     Route::get('professionals/{professionals}/payments/report', 'ProfessionalsController@reportPayment');
+    Route::get('professionals/payments', 'ProfessionalsController@indexPayments');
+    Route::get('professionals/payments/create', 'ProfessionalsController@createProfessionalPayment');
+    Route::post('professionals/payments/review', 'ProfessionalsController@generatePaymentReport');
+    Route::post('professionals/{professionals}/payments/store', 'ProfessionalsController@professionalPaymentStore');
 
     Route::get('clients/{clients}/charges/report', 'ClientsController@reportCharge');
 

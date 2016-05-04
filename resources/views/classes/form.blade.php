@@ -7,8 +7,15 @@
   {!! Form::text('max_number_of_clients', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-  {!! Form::label('duration', 'Duration (Mins): ') !!}
+  <label for="duration">Duration (Mins): </label>
   {!! Form::text('duration', 60, ['class' => 'form-control']) !!}
+</div>
+<div class="form-group">
+  <label for="free_trial">Does this class offers a free trial? </label>
+  <select name="free_trial" class="form-control">
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+  </select>
 </div>
 
 <div class="form-group">
