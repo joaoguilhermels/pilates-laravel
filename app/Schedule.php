@@ -15,11 +15,12 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
       'room_id',
       'class_type_status_id',
       'start_at',
-      'end_at'
+      'end_at',
+      'observation'
     ];
-    
+
     protected $dates = ['start_at', 'end_at', 'created_at', 'updated_at'];
-    
+
     /**
      * The roles that belong to the user.
      */
@@ -37,12 +38,12 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
     {
         return $this->belongsTo('App\Professional');
     }
-    
+
     public function room()
     {
         return $this->belongsTo('App\Room');
     }
-    
+
     public function classTypeStatus()
     {
         return $this->belongsTo('App\ClassTypeStatus');
@@ -52,7 +53,7 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
     {
         return $this->hasOne('App\Plan');
     }
-    
+
     public function clientPlanDetail()
     {
         return $this->belongsTo('App\ClientPlanDetail');
@@ -106,7 +107,7 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
     {
         return $this->end;
     }
-    
+
     /**
      * Optional FullCalendar.io settings for this event
      *

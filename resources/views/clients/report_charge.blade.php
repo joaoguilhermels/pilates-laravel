@@ -30,24 +30,11 @@
               <td>&nbsp;</td>
             </tr>
           </tfoot>
-          <tbody>
           @foreach($rows as $row)
+            <tbody>
             <tr>
               <td>
-                {{ $row->start_at }}
-              </td>
-              <td>
-                @if($row->classTypeStatus->charge_client)
-                  {{ $row->price }}
-                @else
-                  0
-                @endif
-              </td>
-              <td>
-                {{ $row->classTypeStatus->name }}
-              </td>
-              <td>
-                {{ $row->room->name }}
+                {{ $row->client->name }}
               </td>
               <td>
                 {{ $row->classType->name }}
@@ -56,8 +43,16 @@
                 {{ $row->plan->name }}
               </td>
             </tr>
+            @foreach($row->clientPlanDetails as $planDetail)
+              <tr>
+                <td>{{ $planDetail->day_of_week }}</td>
+                <td>{{ $planDetail->hour }}</td>
+                <td>{{ $planDetail->professional->name }}</td>
+                <td>{{ $planDetail->room->name }}</td>
+              </tr>
+            @endforeach
+            </tbody>
           @endforeach
-          </tbody>
         </table>
     </div>
   </div>

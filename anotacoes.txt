@@ -1,0 +1,2 @@
+Quando for marcar uma reposição, puxar o valor da aula original.
+Observação no schedule
