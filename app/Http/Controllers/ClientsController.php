@@ -8,6 +8,9 @@ use Session;
 use App\Client;
 use App\Schedule;
 use App\ClientPlan;
+use App\BankAccount;
+use App\PaymentMethod;
+use App\FinancialTransaction;
 use App\Http\Requests;
 use App\Http\Requests\ClientRequest;
 use App\Http\Controllers\Controller;
@@ -88,5 +91,49 @@ class ClientsController extends Controller
         $client->delete();
 
         return redirect('clients');
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    public function indexCharges()
+    {
+        $charges = FinancialTransaction::where('financiable_type', 'App\ClientPlan')->paginate(10);
+
+        return view('clients.charges.index', compact('charges'));
+    }
+
+    public function createCharge()
+    {
+        return view('clients.charges.create');
+    }
+
+    public function showCharge(FinancialTransaction $charge)
+    {
+        return view('clients.charges.show', compact('charge'));
+    }
+
+    public function editCharge(FinancialTransaction $charge)
+    {
+        $bankAccounts = BankAccount::all();
+        $paymentMethods = PaymentMethod::all();
+
+        return view('clients.charges.edit', compact('charge', 'bankAccounts', 'paymentMethods'));
+    }
+
+    public function updateCharge(FinancialTransaction $charge, FinancialTransactionRequest $request)
+    {
+        $charge->update($request->all());
+
+        Session::flash('message', 'Successfully updated charge ' . $charge->name);
+
+        return redirect('clients/charges');
+    }
+
+    public function destroyCharge(FinancialTransaction $charge)
+    {
+        Session::flash('message', 'Successfully deleted charge ' . $charge->name);
+
+        $charge->delete();
+
+        return redirect('clients/charges');
     }
 }

@@ -14,9 +14,11 @@ class CreateScheduleTable extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('parent_id')->unsigned()->index()->references('id')->on('schedules'); // This will be used to have related class like reposition
             $table->integer('client_id')->index();
 
-            $table->integer('client_plan_detail_id')->nullable()->unsigned()->index();
+            //$table->integer('client_plan_detail_id')->nullable()->unsigned()->index();
+            $table->morphs('scheduable');
 
             $table->boolean('trial')->default(false);
 
@@ -39,9 +41,9 @@ class CreateScheduleTable extends Migration
 
             $table->string('observation');
 
-            $table->integer('professional_payment_financial_transaction_id')->unsigned()->index();
+            $table->integer('professional_payment_financial_transaction_id')->unsigned()->index()->references('id')->on('financial_transactions');
 
-            $table->integer('client_payment_financial_transaction_id')->unsigned()->index();
+            $table->integer('client_payment_financial_transaction_id')->unsigned()->index()->references('id')->on('financial_transactions');
 
             $table->timestamps();
         });

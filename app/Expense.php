@@ -15,7 +15,7 @@ class Expense extends Model
     /**
      * Get all of the staff member's photos.
      */
-    public function financialTransaction()
+    public function financialTransactions()
     {
         return $this->morphMany('App\FinancialTransaction', 'financiable');
     }

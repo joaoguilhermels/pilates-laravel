@@ -39,7 +39,7 @@ class ExpensesController extends Controller
         return view('expenses.create');
     }
 
-    public function store(ExpenseRequest $request)
+    public function store(ExpenseRequest $request, Expense $expense)
     {
         //$expense = Expense::create($request->all());
 
@@ -85,7 +85,8 @@ class ExpensesController extends Controller
             'observation' => 'Expense observation'
         );*/
 
-        FinancialTransaction::create($request->all());
+        //FinancialTransaction::create($request->all());
+        $expense->financialTransactions()->create($request->all());
 
         return redirect('expenses');
     }

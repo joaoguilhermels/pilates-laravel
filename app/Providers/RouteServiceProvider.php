@@ -27,7 +27,7 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot($router);
-        
+
         // Easy calls just getting the id from the urls
         $router->model('payment_methods', 'App\PaymentMethod');
         $router->model('bank_accounts', 'App\BankAccount');
@@ -38,11 +38,12 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('plans', 'App\Plan');
         $router->model('schedules', 'App\Schedule');
         $router->model('expenses', 'App\Expense');
-        
+        $router->model('financial_transactions', 'App\FinancialTransaction');
+
         //If we need more verification like if a user is enabled for example we can use the following code
         //$route->bind('articles', function($id)
         //{
-        //    return \App\Article::published()->findOrFail($id);  
+        //    return \App\Article::published()->findOrFail($id);
         //});
     }
 

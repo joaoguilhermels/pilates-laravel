@@ -17,6 +17,9 @@
           Details
         </th>
         <th>
+          Status
+        </th>
+        <th>
           Actions
         </th>
       </tr>
@@ -30,6 +33,9 @@
         @foreach($clientPlan->clientPlanDetails as $clientPlanDetail)
           {{ $clientPlanDetail->day_of_week }} - {{ $clientPlanDetail->hour }} - {{ $clientPlanDetail->professional->name }} - {{ $clientPlanDetail->room->name }}<br>
         @endforeach
+      </td>
+      <td>
+        {{ $clientPlan->start_at }}
       </td>
       <td>
         <a href="#" class="btn btn-info btn-sm">Add Payment</a>

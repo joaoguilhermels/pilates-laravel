@@ -11,7 +11,7 @@ class ClientPlan extends Model
       'plan_id',
       'start_at'
     ];
-  
+
     public function client()
     {
         return $this->belongsTo('App\Client');
@@ -21,7 +21,7 @@ class ClientPlan extends Model
     {
         return $this->belongsTo('App\Plan');
     }
-    
+
     public function classType()
     {
         return $this->belongsTo('App\ClassType');
@@ -30,5 +30,9 @@ class ClientPlan extends Model
     public function clientPlanDetails()
     {
         return $this->hasMany('App\ClientPlanDetail');
+    }
+
+    public function financialTransactions() {
+        return $this->morphMany('App\FinancialTransaction', 'financiable');
     }
 }
