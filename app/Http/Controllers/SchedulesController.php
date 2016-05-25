@@ -197,8 +197,9 @@ class SchedulesController extends Controller
     }*/
 
     public function index() {
-      $schedules = Schedule::all();
-      $schedules = $schedules->groupBy(function ($item, $key) {
+      $schedules = Schedule::orderBy('start_at', 'asc')
+        ->get()
+        ->groupBy(function ($item, $key) {
           return date_create($item->start_at)->format("F Y");
       });
 

@@ -9,7 +9,6 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
     // Permitted mass assingment fields
     protected $fillable = [
       'client_id',
-      'client_plan_detail_id',
       'class_type_id',
       'professional_id',
       'room_id',
@@ -21,9 +20,11 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
 
     protected $dates = ['start_at', 'end_at', 'created_at', 'updated_at'];
 
-    /**
-     * The roles that belong to the user.
-     */
+    public function scheduable()
+    {
+        return $this->morphTo();
+    }
+
     public function classType()
     {
         return $this->belongsTo('App\ClassType');

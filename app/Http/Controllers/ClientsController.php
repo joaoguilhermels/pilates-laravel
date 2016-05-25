@@ -56,7 +56,7 @@ class ClientsController extends Controller
 
         //{{ $row->price * ($professional->classTypes()->where('id', $row->class_type_id)->first()->pivot->value / 100) }}
 
-        $rows = ClientPlan::where('client_id', $client->id)->get();
+        //$rows = ClientPlan::where('client_id', $client->id)->get();
 
         return view('clients.report_charge', compact('client', 'rows', 'total'));
     }

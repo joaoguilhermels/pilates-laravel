@@ -28,7 +28,7 @@ class ProfessionalsController extends Controller
 
     public function index() {
       $professionals = Professional::all();
-      
+
       return view('professionals.index')->with('professionals', $professionals);
     }
 
@@ -37,14 +37,14 @@ class ProfessionalsController extends Controller
                                     ->get();
 
       return view('professionals.payments.index', compact('financialTransactions'));
-    }    
+    }
 
     public function reportPayment(Professional $professional) {
         $rows = Schedule::where('professional_id', $professional->id)
                         ->get();
 //                        ->whereMonth('start_at', '=', 3)
 //                        ->whereYear('start_at', '=', 2016)
-                        
+
         $total = Schedule::where('professional_id', $professional->id)
                           ->sum('price');
 //                          ->whereMonth('start_at', '=', 3)
@@ -69,14 +69,14 @@ class ProfessionalsController extends Controller
 
         return view('professionals.edit', compact('professional', 'classTypes'));
     }
-    
+
     public function create()
     {
         $classTypes = ClassType::lists('name', 'id');
 
         return view('professionals.create', compact('classTypes'));
     }
-    
+
     public function createProfessionalPayment() {
         $professionals = Professional::lists('name', 'id');
 
@@ -84,26 +84,26 @@ class ProfessionalsController extends Controller
     }
 
     public function generatePaymentReport(PaymentReportRequest $request) {
-        $requestAll     = $request->all();
-        $professionalId = $requestAll['professional'];
-        $startAt        = Carbon::parse($requestAll['start_at']);
-        $professional   = Professional::findOrFail($requestAll['professional']);
+        //$requestAll     = $request->all();
+        //$professionalId = $requestAll['professional'];
+        $startAt        = Carbon::parse($request->get('start_at'));
+        $professional   = Professional::findOrFail($request->get('professional'));
         $bankAccounts   = BankAccount::all();
         $paymentMethods = PaymentMethod::all();
-  
-        $rows = Schedule::where('professional_id', $professionalId)
+
+        $rows = Schedule::where('professional_id', $request->get('professional'))
                           ->whereMonth('start_at', '=', $startAt->month)
                           ->whereYear('start_at', '=', $startAt->year)
                           ->get();
-  
-        $total = Schedule::where('professional_id', $professionalId)
+
+        $total = Schedule::where('professional_id', $request->get('professional'))
                             ->whereMonth('start_at', '=', $startAt->month)
                             ->whereYear('start_at', '=', $startAt->year)
                             ->sum('price');
 
         return view('professionals.report_payment', compact('professional', 'bankAccounts', 'paymentMethods', 'rows', 'total'));
     }
-    
+
     public function professionalPaymentStore(ProfessionalPaymentStoreRequest $request, Professional $professional) {
         /*$extraData = array(
             'entity_type' => 'professional_payment',
@@ -129,16 +129,16 @@ class ProfessionalsController extends Controller
         ]);
 
         //$financialTransaction = FinancialTransaction::create($request->all());
-        
+
         $professional->financialTransactions()->create($request->all());
-        
+
         return redirect('professionals/payments');
     }
 
     public function store(ProfessionalRequest $request)
     {
         $classTypeList = $request->input('class_type_list');
-        
+
         foreach($classTypeList as $key => $classType)
         {
             if (!isset($classType['class_type_id']))
@@ -160,7 +160,7 @@ class ProfessionalsController extends Controller
         $professional->update($request->all());
 
         $classTypeList = $request->input('class_type_list');
-        
+
         foreach($classTypeList as $key => $classType)
         {
             if (!isset($classType['class_type_id']))
@@ -176,7 +176,7 @@ class ProfessionalsController extends Controller
     }
 
     public function destroy(Professional $professional)
-    {      
+    {
         $professional->delete();
 
         return redirect('professionals');
