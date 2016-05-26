@@ -33,4 +33,14 @@ class ClientPlanDetail extends Model
     {
         return $this->morphMany('App\Schedule', 'scheduable');
     }
+
+    public function getDayOfWeekAttribute($value)
+    {
+        return date('l', strtotime("Sunday +{$value} days"));
+    }
+
+    public function getHourAttribute($value)
+    {
+        return date('H:i', strtotime($value));
+    }
 }

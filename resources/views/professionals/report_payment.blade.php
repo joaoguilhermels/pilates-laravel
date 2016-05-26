@@ -77,8 +77,6 @@
           </table>
         </div>
 
-| type | payment_method_id | bank_account_id | date       | value  | payment_number | total_number_of_payments | status | confirmed_value | confirmed_date | observation         | created_at          | updated_at          |
-
         <form action="/professionals/{{ $professional->id }}/payments/store" method="POST">
           {{ csrf_field() }}
           <div class="form-group">

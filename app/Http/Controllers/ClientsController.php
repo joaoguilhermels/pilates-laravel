@@ -44,8 +44,17 @@ class ClientsController extends Controller
     }
 
     public function reportCharge(Client $client) {
-        $rows = Schedule::where('client_id', $client->id)
-                        ->get();
+        $rows = Schedule::with('professional', 'room')
+          ->where('client_id', $client->id)
+          ->orderBy('start_at', 'asc')
+          ->get()
+          ->groupBy(function ($item, $key) {
+            return date_create($item->start_at)->format("F Y");
+        });
+
+
+        //$rows = Schedule::with('professional', 'room')->where('client_id', $client->id)
+                        //->get();
                         //->whereMonth('start_at', '=', 3)
                         //->whereYear('start_at', '=', 2016)
 

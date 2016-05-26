@@ -12,44 +12,45 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>Date</th>
-              <th>Full Price</th>
-              <th>Status</th>
-              <th>Room</th>
               <th>Class</th>
-              <th>Plan</th>
+              <th>Day of Week</th>
+              <th>Hour</th>
+              <th>Professional</th>
+              <th>Room</th>
+              <th>Date</th>
+              <th>Price</th>
             </tr>
           </thead>
           <tfoot>
             <tr>
               <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
               <td>{{ $total }}</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
             </tr>
           </tfoot>
-          @foreach($rows as $row)
+            @foreach ($rows as $key => $schedule)
             <tbody>
             <tr>
-              <td>
-                {{ $row->client->name }}
+              <td colspan="7">
+                {{ $key }}
               </td>
+            </tr>
+            @foreach ($rows[$key] as $row)
+            <tr>
               <td>
                 {{ $row->classType->name }}
               </td>
-              <td>
-                {{ $row }}
-              </td>
+              <td>{{ $row->scheduable->day_of_week }}</td>
+              <td>{{ $row->scheduable->hour }}</td>
+              <td>{{ $row->scheduable->professional->name }}</td>
+              <td>{{ $row->scheduable->room->name }}</td>
+              <td>{{ $row->start_at }}</td>
+              <td>{{ $row->price }}</td>
             </tr>
-            @foreach($row->clientPlanDetails as $planDetail)
-              <tr>
-                <td>{{ $planDetail->day_of_week }}</td>
-                <td>{{ $planDetail->hour }}</td>
-                <td>{{ $planDetail->professional->name }}</td>
-                <td>{{ $planDetail->room->name }}</td>
-              </tr>
             @endforeach
             </tbody>
           @endforeach
