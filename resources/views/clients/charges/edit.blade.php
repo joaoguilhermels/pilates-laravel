@@ -9,6 +9,7 @@
   @include('errors.list')
 
   {!! Form::model($charge, ['method' => 'PATCH', 'action' => ['ClientsController@updateCharge', $charge->id]]) !!}
+    {{ csrf_field() }}
     @include('clients.charges.form', ['submitButtonText' => 'Update Charge'])
 
   {!! Form::close() !!}

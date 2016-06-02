@@ -9,9 +9,8 @@
 
   @include('errors.list')
 
-  {!! Form::open(['url' => 'clients']) !!}
-  <form action="clients" method="post">
-    {{ csrf_token(); }}
+  <form action="{{ action('ClientsController@storeCharge') }}" method="post">
+    {{ csrf_field() }}
     @include('clients.charges.form', ['submitButtonText' => 'Add New Charge'])
   </form>
   </div>

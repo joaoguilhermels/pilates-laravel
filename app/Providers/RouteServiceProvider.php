@@ -34,6 +34,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('professionals', 'App\Professional');
         $router->model('rooms', 'App\Room');
         $router->model('clients', 'App\Client');
+        $router->model('client_plans', 'App\ClientPlan');
         $router->model('classes', 'App\ClassType');
         $router->model('plans', 'App\Plan');
         $router->model('schedules', 'App\Schedule');

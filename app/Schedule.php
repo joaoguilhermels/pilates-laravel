@@ -18,6 +18,8 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
       'observation'
     ];
 
+    //protected $with = ['scheduable.clientplandetail'];
+
     protected $dates = ['start_at', 'end_at', 'created_at', 'updated_at'];
 
     public function scheduable()

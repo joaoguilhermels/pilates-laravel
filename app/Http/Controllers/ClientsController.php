@@ -13,6 +13,7 @@ use App\PaymentMethod;
 use App\FinancialTransaction;
 use App\Http\Requests;
 use App\Http\Requests\ClientRequest;
+use App\Http\Requests\FinancialTransactionRequest;
 use App\Http\Controllers\Controller;
 
 class ClientsController extends Controller
@@ -112,7 +113,22 @@ class ClientsController extends Controller
 
     public function createCharge()
     {
-        return view('clients.charges.create');
+        $paymentMethods = PaymentMethod::all();
+        $bankAccounts = BankAccount::all();
+
+        return view('clients.charges.create', compact('paymentMethods', 'bankAccounts'));
+    }
+
+    public function storeCharge(FinancialTransaction $charge, FinancialTransactionRequest $request)
+    {
+        $request->request->add([
+            financiable_type => 'App\ClientPlan'
+        ]);
+        $client = FinancialTransaction::create($request->all());
+
+        Session::flash('message', 'Successfully created client ' . $client->name);
+
+        return redirect('clients/charges');
     }
 
     public function showCharge(FinancialTransaction $charge)

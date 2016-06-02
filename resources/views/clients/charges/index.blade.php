@@ -12,7 +12,7 @@
 
     @if (count($charges) == 0)
 
-    <h2>There no charges yet. You can <a href="{{ action('chargesController@createCharge') }}">add one here.</a>
+    <h2>There no charges yet. You can <a href="{{ action('ClientsController@createCharge') }}">add one here.</a>
 
     @else
     <div class="table-responsive">

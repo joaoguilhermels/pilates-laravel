@@ -35,6 +35,7 @@ class CreateScheduleTable extends Migration
             $table->foreign('class_type_status_id')->references('id')->on('class_type_statuses');
 
             $table->float('price');
+            $table->float('value_professional_receives');
 
             $table->dateTime('start_at');
             $table->dateTime('end_at');
