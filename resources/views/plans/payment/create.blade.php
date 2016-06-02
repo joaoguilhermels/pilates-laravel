@@ -1,0 +1,17 @@
+@extends('layouts/app')
+
+
+@section('content')
+  <div class="container">
+  <h1>Create New Plan Payment</h1>
+  <a href="{{ back() }}">Back</a>
+  <hr />
+
+  @include('errors.list')
+
+  <form action="/plans/{{ $professional->id }}/payments/store" method="POST">
+    @include('plans.payment.form', ['submitButtonText' => 'Add New Plan'])
+
+  </form>
+  </div>
+@stop
