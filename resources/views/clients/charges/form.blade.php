@@ -1,5 +1,5 @@
 <?php dump(get_defined_vars()); ?>
-{{$charge}}
+
 <div class="form-group">
   <label for="name">Name</label>
   <input type="text" name="name" class="form-control" value="{{ old('name', $charge->name) }}">

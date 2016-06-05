@@ -21,16 +21,8 @@ class CreateFinancialTransactionsTable extends Migration
 
             $table->enum('type', array('received', 'paid'));
 
-            $table->integer('payment_method_id');
-            $table->integer('bank_account_id')->nullable; //pagamento em dinheiro não precisa de banco
-            $table->date('date');
-            $table->float('value');
-            $table->integer('payment_number')->unsigned()->default(1);
             $table->integer('total_number_of_payments')->unsigned()->default(1);
 
-            $table->integer('status')->unsigned(); // Confirmado, aguardando
-            $table->float('confirmed_value')->nullable;
-            $table->date('confirmed_date')->nullable;
             $table->string('observation')->nullable;
 
             $table->timestamps();
