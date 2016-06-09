@@ -111,12 +111,11 @@ class SchedulesController extends Controller
 
     public function eventDescription(Schedule $schedule)
     {
-        $description =  $schedule->client->name . '<br>' .
-                        $schedule->classType->name . '<br>' .
-                        $schedule->start_at . '<br>' .
-                        $schedule->end_at . '<br>' .
-                        $schedule->professional->name . '<br>' .
-                        $schedule->classTypeStatus->name;
+        $description =  '<strong>Client:</strong> ' . $schedule->client->name . '<br>' .
+                        '<strong>Class:</strong> ' . $schedule->classType->name . '<br>' .
+                        '<strong>Date/Time:</strong> ' . $schedule->start_at->format("d/m/Y H:i") . ' to ' . $schedule->end_at->format("H:i") . '<br>' .
+                        '<strong>Professional:</strong> ' . $schedule->professional->name . '<br>' .
+                        '<strong>Status:</strong> ' . $schedule->classTypeStatus->name;
 
         return $description;
     }

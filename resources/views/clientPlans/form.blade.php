@@ -8,15 +8,14 @@
       @endforeach
     </select>
   </div>
-  
+
   <div class="form-group">
     <label for="start_date">Start Date:</label>
     <input type="date" class="form-control" name="start_at">
   </div>
   
-  
   <plans list="{{ json_encode($classTypePlans) }}"></plans>
-  
+
   <template id="plans-template">
     <div class="form-group">
     <label for="plans">Plan: </label>
