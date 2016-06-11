@@ -159,10 +159,11 @@ class ClientPlansController extends Controller
             $dates = array();
 
             // To have the month of starting date plus X months remove the "- 1"
-            $month = $startDate->format("n") + $plan->duration - 1;
+            $month = $startDate->addMonths($plan->duration - 1)->format("n");
+            $year = $startDate->addMonths($plan->duration - 1)->format("Y");
 
             $beginDate = strtotime("first day of " . $startDate->format("Y") . "-" . $startDate->format("n"));
-            $endDate = strtotime("last day of " . $startDate->format("Y") . "-" . $month);
+            $endDate = strtotime("last day of " . $year . "-" . $month);
 
             for ($date = strtotime($nameOfDayOfWeek, $beginDate); $date <= $endDate; $date = strtotime('+1 week', $date)) {
               $dates[] = new \Carbon\Carbon(date('Y-m-d', $date));
@@ -193,6 +194,8 @@ class ClientPlansController extends Controller
 
     public function setSchedules(ClientPlanRequest $request, Client $client, ClientPlanDetail $clientPlanDetail, $dayOfWeek, $groupedDates)
     {
+
+        //dd($request);
         $classType = ClassType::with([
             'statuses' => function ($query) {
                               return $query->where('name', 'OK');

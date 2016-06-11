@@ -11,6 +11,10 @@
   {!! Form::text('duration', 60, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
+  <label for="duration">Extra class price: </label>
+  {!! Form::text('extra_class_price', null, ['class' => 'form-control']) !!}
+</div>
+<div class="form-group">
   <label for="free_trial">Does this class offers a free trial? </label>
   <select name="free_trial" class="form-control">
     <option value="yes">Yes</option>
@@ -47,7 +51,7 @@
               {!! Form::checkbox('status[' . $key . '][charge_client]', $status->charge_client == false ? NULL : 'on', $status->charge_client, ['id' => 'charge_client.' . $key]) !!}
               Yes
                 </label>
-              </div>              
+              </div>
             </td>
             <td>
               <div class="checkbox">

@@ -37,7 +37,8 @@ $factory->define(App\ClassType::class, function (Faker\Generator $faker) {
     return [
         'name' => 'Class ' . $faker->name,
         'max_number_of_clients' => rand(1, 3),
-        'duration' => 60
+        'duration' => 60,
+        'extra_class_price' => rand(50, 70)
     ];
 });
 
@@ -87,7 +88,7 @@ $factory->define(App\ClientPlan::class, function (Faker\Generator $faker) {
     $classes = App\ClassType::all()->lists('id')->toArray();
     $plans = App\Plan::all()->lists('id')->toArray();
 
-    return [       
+    return [
         'client_id' => $faker->randomElement($clients),
         'class_type_id' => $faker->randomElement($classes),
         'plan_id' => $faker->randomElement($plans),

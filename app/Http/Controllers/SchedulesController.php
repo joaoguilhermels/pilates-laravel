@@ -19,7 +19,7 @@ class SchedulesController extends Controller
 {
     public function __construct()
     {
-      $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function calendar() {
@@ -63,7 +63,7 @@ class SchedulesController extends Controller
 
         $calendar = \Calendar::setCallbacks(array(
             'dayClick' => 'function (date, jsEvent, view) {
-                //alert(\'Clicked on: \' + date.format());
+                vm.showModalNow(date.format());
             }',
             'eventClick' => 'function (calEvent, jsEvent, view) {
                 // change the border color just for fun
@@ -196,13 +196,13 @@ class SchedulesController extends Controller
     }*/
 
     public function index() {
-      $schedules = Schedule::orderBy('start_at', 'asc')
-        ->get()
-        ->groupBy(function ($item, $key) {
-          return date_create($item->start_at)->format("F Y");
-      });
+        $schedules = Schedule::orderBy('start_at', 'asc')
+          ->get()
+          ->groupBy(function ($item, $key) {
+            return date_create($item->start_at)->format("F Y");
+        });
 
-      return view('schedules.index')->with('schedules', $schedules);
+        return view('schedules.index')->with('schedules', $schedules);
     }
 
     public function show(schedule $schedule)
@@ -212,6 +212,8 @@ class SchedulesController extends Controller
 
     public function edit(schedule $schedule)
     {
+
+        dd($schedule);
         $rooms              = Room::lists('name', 'id');
         $plans              = Plan::lists('name', 'id');
         $clients            = Client::lists('name', 'id');

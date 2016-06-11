@@ -10,7 +10,8 @@ class ClassType extends Model
     protected $fillable = [
       'name',
       'max_number_of_clients',
-      'duration'
+      'duration',
+      'extra_class_price'
     ];
 
     /**
@@ -49,7 +50,7 @@ class ClassType extends Model
     {
         return $this->hasMany('App\Schedule');
     }
-    
+
     public function clientPlans()
     {
         return $this->hasMany('App\ClientPlan');

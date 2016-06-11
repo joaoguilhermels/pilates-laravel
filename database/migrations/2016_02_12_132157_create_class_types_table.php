@@ -18,6 +18,7 @@ class CreateClassTypesTable extends Migration
             $table->boolean('free_trial')->default(false);
             $table->smallInteger('max_number_of_clients')->unsigned();
             $table->smallInteger('duration')->unsigned();
+            $table->float('extra_class_price')->unsigned();
             $table->timestamps();
         });
     }

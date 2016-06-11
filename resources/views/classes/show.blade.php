@@ -17,6 +17,10 @@
           <dt>Duration:</dt>
           <dd>{{ $classType->duration }}</dd>
         </dl>
+        <dl class="dl-horizontal">
+          <dt>Extra Class Price:</dt>
+          <dd>{{ $classType->extra_class_price }}</dd>
+        </dl>
         <a href="{{ action('ClassTypesController@edit', [$classType->id]) }}" class="btn btn-block btn-primary">Edit This Class</a>
       </div>
       <div class="col-md-4">

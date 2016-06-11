@@ -9,21 +9,18 @@
 <div class="form-inline">
   <div class="form-group">
     {!! Form::label('times', 'The client will go ') !!}
-    {!! Form::text('times', null, ['class' => 'form-control']) !!}
-    {!! Form::label('times_type', 'per ') !!}
-    {!! Form::select('times_type', array('week' => 'week', 'month' => 'month'), 'week', ['class' => 'form-control']) !!}
-    {!! Form::label('duration', 'and the plan will last for ') !!} {!! Form::text('duration', null, ['class' => 'form-control']) !!}
-    {!! Form::select('duration_type', array('week' => 'week', 'month' => 'month'), 'month', ['class' => 'form-control']) !!}
-  </div>
-</div>
-<div class="form-inline">
-  <div class="form-group">
-    {!! Form::label('price', 'Price: ') !!}
-    {!! Form::text('price', null, ['class' => 'form-control']) !!}
+    {!! Form::text('times', null, ['class' => 'form-control input-sm', 'size' => 5]) !!}
+    {!! Form::label('times_type', ' times per ') !!}
+    {!! Form::select('times_type', array('week' => 'week(s)', 'month' => 'month(s)'), 'week', ['class' => 'form-control input-sm']) !!}
+    {!! Form::label('duration', ', the plan will last for ') !!} {!! Form::text('duration', null, ['class' => 'form-control input-sm', 'size' => 5]) !!}
+    {!! Form::select('duration_type', array('week' => 'week(s)', 'month' => 'month(s)'), 'month', ['class' => 'form-control input-sm']) !!}
+    {!! Form::label('price', ' and the price is ') !!}
+    {!! Form::text('price', null, ['class' => 'form-control input-sm', 'size' => 5]) !!}
     {!! Form::label('price', 'per ') !!}
-    {!! Form::select('price_type', array('class' => 'class', 'month' => 'month'), 'class', ['class' => 'form-control']) !!}
+    {!! Form::select('price_type', array('class' => 'class', 'month' => 'month'), 'class', ['class' => 'form-control input-sm']) !!}
   </div>
 </div>
+<div>&nbsp;</div>
 <div class="form-group">
   {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
 </div>
