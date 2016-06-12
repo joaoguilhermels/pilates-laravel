@@ -141,12 +141,15 @@ class ClientPlansController extends Controller
     public function getGroupedDates(ClientPlanRequest $request)
     {
         $startDate = \Carbon\Carbon::parse($request->start_at);
+        $endDate = clone $startDate;
 
         $plan = Plan::where('id', $request->plan_id)->first();
 
+        $endDate->addMonths($plan->duration - 1);
+
         $daysOfWeek = collect($request->daysOfWeek);
 
-        $datesGrouped = $daysOfWeek->map(function ($dayOfWeek) use ($startDate, $plan) {
+        $datesGrouped = $daysOfWeek->map(function ($dayOfWeek) use ($startDate, $endDate, $plan) {
             $nameOfDayOfWeek = array_get($this->daysOfWeek, $dayOfWeek['day_of_week']);
 
             // User for 30 days calculation
@@ -159,8 +162,8 @@ class ClientPlansController extends Controller
             $dates = array();
 
             // To have the month of starting date plus X months remove the "- 1"
-            $month = $startDate->addMonths($plan->duration - 1)->format("n");
-            $year = $startDate->addMonths($plan->duration - 1)->format("Y");
+            $month = $endDate->format("n");
+            $year = $endDate->format("Y");
 
             $beginDate = strtotime("first day of " . $startDate->format("Y") . "-" . $startDate->format("n"));
             $endDate = strtotime("last day of " . $year . "-" . $month);
@@ -194,8 +197,6 @@ class ClientPlansController extends Controller
 
     public function setSchedules(ClientPlanRequest $request, Client $client, ClientPlanDetail $clientPlanDetail, $dayOfWeek, $groupedDates)
     {
-
-        //dd($request);
         $classType = ClassType::with([
             'statuses' => function ($query) {
                               return $query->where('name', 'OK');
