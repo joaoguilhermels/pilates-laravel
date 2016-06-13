@@ -203,9 +203,16 @@ class ClientPlansController extends Controller
                           },
             'plans' =>  function ($query) use ($request) {
                             return $query->where('id', $request->plan_id);
-                        }
+                        },
+            'professionals' =>  function ($query) use ($clientPlanDetail) {
+                                    return $query->where('professional_id', $clientPlanDetail->professional_id);
+                                }
         ])
         ->findOrFail($request->class_type_id);
+dd($classType);
+        $clientPlanDetail->load('professional');
+        $clientPlanDetail->professional->load('classTypes');
+        dd($clientPlanDetail->professional->classTypes->first()->pivot);
 
         $plan = $classType->plans->first();
 
@@ -228,15 +235,16 @@ class ClientPlansController extends Controller
 
             $schedule = new Schedule;
 
-            $schedule->trial                 = false;
-            $schedule->client_id             = $client->id;
-            $schedule->room_id               = $clientPlanDetail->room_id;
-            $schedule->class_type_id         = $request->class_type_id;
-            $schedule->professional_id       = $clientPlanDetail->professional_id;
-            $schedule->start_at              = $dateStart->format("Y-m-d H:i:s");
-            $schedule->end_at                = $dateEnd->format("Y-m-d H:i:s");
-            $schedule->class_type_status_id  = $classTypeStatusOkId;
-            $schedule->price                 = $this->setPrice($plan, $dateStart, $groupedDates);
+            $schedule->price                       = $this->setPrice($plan, $dateStart, $groupedDates);
+            $schedule->trial                       = false;
+            $schedule->end_at                      = $dateEnd->format("Y-m-d H:i:s");
+            $schedule->room_id                     = $clientPlanDetail->room_id;
+            $schedule->start_at                    = $dateStart->format("Y-m-d H:i:s");
+            $schedule->client_id                   = $client->id;
+            $schedule->class_type_id               = $request->class_type_id;
+            $schedule->professional_id             = $clientPlanDetail->professional_id;
+            $schedule->class_type_status_id        = $classTypeStatusOkId;
+            $schedule->value_professional_receives = $this->setProfessionalValue();
 
             $clientPlanDetail->schedules()->save($schedule);
         }
@@ -253,6 +261,11 @@ class ClientPlansController extends Controller
             $daysCount = $groupedDates->where('month_year', $date->format("m-Y"))->count();
             return $plan->price / $daysCount;
         }
+    }
+
+    public function setProfessionalValue(Professional $professional, $price)
+    {
+
     }
 
     public function destroy(ClientPlan $clientPlan)
