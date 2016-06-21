@@ -38,7 +38,7 @@
         {{ $clientPlan->start_at }}
       </td>
       <td>
-        <a href="#" class="btn btn-info btn-sm">Add Payment</a>
+        <a href="{{ action('FinancialTransactionsController@createPlanPayment', [$clientPlan->id]) }}" class="btn btn-info btn-sm">Add Payment</a>
         {!! Form::open(['route' => ['plans.destroy', $clientPlan->id], 'method' => 'delete']) !!}
         <button type="submit" class="btn btn-link pull-left">delete</button>
         {!! Form::close() !!}

@@ -175,10 +175,20 @@ class ProfessionalsController extends Controller
         return redirect('professionals');
     }
 
+    /**
+     * Deletes a professional
+     * @param  Professional $professional [description]
+     * @return [type]                     [description]
+     */
     public function destroy(Professional $professional)
     {
         $professional->delete();
 
         return redirect('professionals');
+    }
+
+    public function getPricePerClass(Professional $professional, ClassType $classType, Plan $plan, $classPrice)
+    {
+        return null;
     }
 }

@@ -8,6 +8,7 @@ use App\Schedule;
 use App\Client;
 use App\ClassType;
 use App\ClassTypeStatus;
+use App\ClientPlanDetail;
 use App\Room;
 use App\Plan;
 use App\Professional;
@@ -212,22 +213,15 @@ class SchedulesController extends Controller
 
     public function edit(schedule $schedule)
     {
+        $rooms              = $schedule->classType->rooms;
+        $professionals      = $schedule->classType->professionals;
+        $classTypeStatuses  = $schedule->classType->statuses;
 
-        dd($schedule);
-        $rooms              = Room::lists('name', 'id');
-        $plans              = Plan::lists('name', 'id');
-        $clients            = Client::lists('name', 'id');
-        $classTypes         = ClassType::lists('name', 'id');
-        $professionals      = Professional::lists('name', 'id');
-        $classTypeStatuses  = ClassTypeStatus::lists('name', 'id');
+        $schedule->load('client')
+                  ->load('scheduable');
 
-        $schedule->load('client');
-        $schedule->load('clientPlanDetail');
-        $schedule->load('classType');
-        $schedule->load('room');
-        $schedule->load('professional');
-
-        return view('schedules.edit', compact('schedule', 'plans', 'clients', 'classTypes', 'rooms', 'professionals', 'classTypeStatuses'));
+        //return view('schedules.edit', compact('schedule', 'plans', 'client', 'classTypes', 'rooms', 'professionals', 'classTypeStatuses'));
+        return view('schedules.edit', compact('schedule', 'rooms', 'professionals', 'classTypeStatuses'));
     }
 
     public function create()

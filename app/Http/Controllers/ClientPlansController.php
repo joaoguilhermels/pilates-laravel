@@ -209,10 +209,11 @@ class ClientPlansController extends Controller
                                 }
         ])
         ->findOrFail($request->class_type_id);
-dd($classType);
+
         $clientPlanDetail->load('professional');
         $clientPlanDetail->professional->load('classTypes');
-        dd($clientPlanDetail->professional->classTypes->first()->pivot);
+
+        $professionalClass = $clientPlanDetail->professional->classTypes->first()->pivot;
 
         $plan = $classType->plans->first();
 
@@ -233,9 +234,11 @@ dd($classType);
             $dateEnd = clone $date['date'];
             $dateEnd->setTime($dayOfWeek['hour'] + ($classType->duration / 60), 0);
 
+            $classPrice = $this->setPrice($plan, $dateStart, $groupedDates);
+
             $schedule = new Schedule;
 
-            $schedule->price                       = $this->setPrice($plan, $dateStart, $groupedDates);
+            $schedule->price                       = $classPrice;
             $schedule->trial                       = false;
             $schedule->end_at                      = $dateEnd->format("Y-m-d H:i:s");
             $schedule->room_id                     = $clientPlanDetail->room_id;
@@ -244,7 +247,7 @@ dd($classType);
             $schedule->class_type_id               = $request->class_type_id;
             $schedule->professional_id             = $clientPlanDetail->professional_id;
             $schedule->class_type_status_id        = $classTypeStatusOkId;
-            $schedule->value_professional_receives = $this->setProfessionalValue();
+            $schedule->value_professional_receives = $this->setProfessionalValue($professionalClass, $classPrice);
 
             $clientPlanDetail->schedules()->save($schedule);
         }
@@ -259,13 +262,24 @@ dd($classType);
         else // per month
         {
             $daysCount = $groupedDates->where('month_year', $date->format("m-Y"))->count();
-            return $plan->price / $daysCount;
+            return round($plan->price / $daysCount, 2);
         }
     }
 
-    public function setProfessionalValue(Professional $professional, $price)
+    /**
+     * Returns the value the professional receives for one specific class
+     *
+     * Undocumented function long description
+     *
+     * @param type var Description
+     * @return float
+     */
+    public function setProfessionalValue($professionalClass, $price)
     {
-
+        // Move this to a professional classTypes
+        if ($professionalClass->value_type == 'percentage') {
+          return round($price * ($professionalClass->value / 100), 2);
+        }
     }
 
     public function destroy(ClientPlan $clientPlan)

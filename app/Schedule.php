@@ -18,7 +18,7 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
       'observation'
     ];
 
-    //protected $with = ['scheduable.clientplandetail'];
+    protected $with = ['clientPlanDetail.clientPlan.plan', 'professional'];
 
     protected $dates = ['start_at', 'end_at', 'created_at', 'updated_at'];
 
@@ -52,14 +52,9 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
         return $this->belongsTo('App\ClassTypeStatus');
     }
 
-    public function status()
-    {
-        return $this->hasOne('App\Plan');
-    }
-
     public function clientPlanDetail()
     {
-        return $this->belongsTo('App\ClientPlanDetail');
+        return $this->belongsTo('App\ClientPlanDetail', 'scheduable_id');
     }
 
     /**

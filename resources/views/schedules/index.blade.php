@@ -9,14 +9,14 @@
     </h1>
 
     <hr />
-  
+
     @if (count($schedules) == 0)
-  
+
     <h2>There no schedules yet. You can <a href="{{ action('SchedulesController@create') }}">add one here.</a>
-  
+
     @else
-  
-    <div class="table-responsive">          
+
+    <div class="table-responsive">
     <table class="table">
       <thead>
         <tr>

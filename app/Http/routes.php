@@ -39,7 +39,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('clients/{clients}/plans/review', 'ClientPlansController@store');
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    Route::get('clients/charges', 'ClientsController@indexCharges');
+    /*Route::get('clients/charges', 'ClientsController@indexCharges');
     Route::get('clients/charges/create', 'ClientsController@createCharge');
     Route::post('clients/charges/review', 'ClientsController@reviewCharge');
     Route::post('clients/charges/store', 'ClientsController@storeCharge');
@@ -49,9 +49,10 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::delete('clients/{clients}/plans/{clientPlans}/delete', 'ClientPlansController@destroy');
 
-    Route::get('clients/{clients}/charges/report', 'ClientsController@reportCharge');
+    Route::get('clients/{clients}/charges/report', 'ClientsController@reportCharge');*/
 
-    Route::get('client-plans/{client_plans}/payment', 'PlansController@createPayment');
+    Route::get('client-plans/{client_plans}/payment', 'FinancialTransactionsController@createPlanPayment');
+    Route::post('client-plans/{client_plans}/payment', 'FinancialTransactionsController@storePlanPayment');
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
