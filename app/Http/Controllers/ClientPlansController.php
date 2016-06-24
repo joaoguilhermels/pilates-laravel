@@ -29,6 +29,11 @@ class ClientPlansController extends Controller
                   6 => 'Saturday'
               );
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function createClientPlan(Client $client)
     {
         $form = $this->prepareCreateForm();

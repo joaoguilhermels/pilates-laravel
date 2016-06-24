@@ -23,8 +23,6 @@ class FinancialTransactionRequest extends Request
      */
     public function rules()
     {
-        return [
-            'value' => 'required',
-        ];
+        return [];
     }
 }

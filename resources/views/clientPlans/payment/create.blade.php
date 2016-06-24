@@ -8,7 +8,8 @@
 
   @include('errors.list')
 
-  <form action="{{ action('FinancialTransactionsController@storePlanPayment', [$clientPlan->id]) }}">
+  <form action="{{ action('FinancialTransactionsController@storePlanPayment', [$clientPlan->id]) }}" method="post">
+    {{ csrf_field() }}
     @include('clientPlans.payment.form', ['submitButtonText' => 'Add Plan Payment'])
   </form>
   </div>

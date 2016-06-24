@@ -8,23 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class FinancialTransaction extends Model
 {
     protected $fillable = [
-      'entity_id',
-      'entity_type',
+      'financiable_id',
+      'financiable_type',
+      'name',
       'type',
-      'payment_method_id',
-      'bank_account_id',
-      'date',
-      'value',
-      'payment_number',
       'total_number_of_payments',
-      'status',
-      'confirmed_value',
-      'confirmed_date',
       'observation'
     ];
 
-    protected $datas = ['confirmed_date'];
-    
     /**
      * Get all of the owning imageable models.
      */
@@ -32,12 +23,8 @@ class FinancialTransaction extends Model
     {
         return $this->morphTo();
     }
-    
-    public function paymentMethod() {
-        return $this->belongsTo('App\PaymentMethod');
-    }
-    
-    public function bankAccount() {
-        return $this->belongsTo('App\BankAccount');        
+
+    public function financialTransactionDetails() {
+        return $this->hasMany('App\FinancialTransactionDetails');
     }
 }
