@@ -36,8 +36,6 @@ Vue.component('plans', {
     }
 });
 
-Vue.config.debug = true
-
 var vm = new Vue({
     el: '#app',
 });

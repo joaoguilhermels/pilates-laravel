@@ -34,7 +34,7 @@ class ClientsController extends Controller
     public function show(Client $client)
     {
         //$plans = Client::with('clientPlans', 'clientPlans.clientPlanDetails')->get();
-        $client->load('clientPlans', 'clientPlans.clientPlanDetails', 'clientPlans.classType');
+        $client->load('clientPlans', 'clientPlans.clientPlanDetails', 'clientPlans.classType', 'clientPlans.financialTransactions');
 
         return view('clients.show', compact('client'));
     }

@@ -44,7 +44,8 @@ class CreateScheduleTable extends Migration
 
             $table->integer('professional_payment_financial_transaction_id')->unsigned()->index()->references('id')->on('financial_transactions');
 
-            $table->integer('client_payment_financial_transaction_id')->unsigned()->index()->references('id')->on('financial_transactions');
+            // No need for this columns because we can track payments based off of the clientplandeatils and clientplan on the financialtransactions table
+            //$table->integer('client_payment_financial_transaction_id')->unsigned()->index()->references('id')->on('financial_transactions');
 
             $table->timestamps();
         });

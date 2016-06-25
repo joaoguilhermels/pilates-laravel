@@ -53,6 +53,8 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('client-plans/{client_plans}/payment', 'FinancialTransactionsController@createPlanPayment');
     Route::post('client-plans/{client_plans}/payment', 'FinancialTransactionsController@storePlanPayment');
+    Route::get('payment/{financial_transaction}', 'FinancialTransactionsController@editPlanPayment');
+    Route::put('payment/{financial_transaction}', 'FinancialTransactionsController@updatePlanPayment');
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -60,7 +62,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('professionals/payments', 'ProfessionalsController@indexPayments');
     Route::get('professionals/payments/create', 'ProfessionalsController@createProfessionalPayment');
     Route::post('professionals/payments/review', 'ProfessionalsController@generatePaymentReport');
-    Route::post('professionals/{professionals}/payments/store', 'ProfessionalsController@professionalPaymentStore');
+    Route::post('professionals/{professionals}/payments/store', 'ProfessionalsController@storeProfessionalPayment');
 
     Route::resource('payment-methods', 'PaymentMethodsController');
     Route::resource('bank-accounts', 'BankAccountsController');

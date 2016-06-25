@@ -1,16 +1,18 @@
 <div class="form-group">
   <label for="client">Client:</label> {{ $clientPlan->client->name }}<br>
-  <label for="client">Class:</label> {{ $clientPlan->classType->name }}<br>
-  <label for="client">Plan:</label> {{ $clientPlan->plan->name }}
+  <label for="class">Class:</label> {{ $clientPlan->classType->name }}<br>
+  <label for="plan">Plan:</label> {{ $clientPlan->plan->name }}<br>
+  <label for="price">Price:</label> {{ $clientPlan->plan->price }}/{{ $clientPlan->plan->price_type }}<br>
+  <label for="plan">Duration:</label> {{ $clientPlan->plan->duration }} {{ $clientPlan->plan->duration_type }}
 </div>
 <div id="app">
-  <plan-payment></plan-payment>
+  <plan-payment plan-duration="{{ $clientPlan->plan->duration }}"></plan-payment>
 
   <template id="plan-payment-template">
     <div class="form-group">
-    <label for="number_of_payments">Number of Payments:</label>
-    <select name="number_of_payments" class="form-control" v-model="numberOfPayments">
-      <option v-for="n in 10" v-bind:value="n">@{{ n }}</option>
+    <label for="total_number_of_payments">Number of Payments:</label>
+    <select name="total_number_of_payments" class="form-control" v-model="numberOfPayments">
+      <option v-for="n in 13" v-bind:value="n">@{{ n }}</option>
     </select>
     </div>
 
@@ -22,8 +24,9 @@
         <table class="table table-striped">
           <tr v-for="paymentNumber in numberOfPayments">
             <td class="col-md-2">
-              <label for="payments[@{{ paymentNumber }}][paymentMethod]">Payment Method: </label>
-              <select name="payments[@{{ paymentNumber }}][paymentMethod]" class="form-control">
+              <input type="hidden" name="payments[@{{ paymentNumber }}][payment_number]" value="@{{ paymentNumber + 1 }}">
+              <label for="payments[@{{ paymentNumber }}][payment_method_id]">Payment Method: </label>
+              <select name="payments[@{{ paymentNumber }}][payment_method_id]" class="form-control">
                 <option value=""></option>
                 @foreach($paymentMethods as $paymentMethod)
                   <option value="{{ $paymentMethod->id }}">{{ $paymentMethod->name }}</option>
@@ -31,8 +34,8 @@
               </select>
             </td>
             <td class="col-md-3">
-              <label for="payments[@{{ paymentNumber }}][bankAccount]">Bank Account:</label>
-              <select class="form-control" name="payments[@{{ paymentNumber }}][bankAccount]">
+              <label for="payments[@{{ paymentNumber }}][bank_account_id]">Bank Account:</label>
+              <select class="form-control" name="payments[@{{ paymentNumber }}][bank_account_id]">
                 <option value=""></option>
                 @foreach($bankAccounts as $bankAccount)
                   <option value="{{ $bankAccount->id }}">{{ $bankAccount->name }}</option>
@@ -45,7 +48,7 @@
             </td>
             <td class="col-md-2">
               <label for="room">Value: </label>
-              <input type="float" name="payments[@{{ paymentNumber }}][value]" class="form-control">
+              <input type="float" name="payments[@{{ paymentNumber }}][value]" class="form-control" value="{{ $clientPlan->plan->price }}">
             </td>
             <td class="col-md-3">
               <label for="observation">Observation: </label>

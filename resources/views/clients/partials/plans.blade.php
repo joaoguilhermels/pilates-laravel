@@ -38,7 +38,11 @@
         {{ $clientPlan->start_at }}
       </td>
       <td>
+        @if ($clientPlan->financialTransactions->count() == 0)
         <a href="{{ action('FinancialTransactionsController@createPlanPayment', [$clientPlan->id]) }}" class="btn btn-info btn-sm">Add Payment</a>
+        @else
+        <a href="{{ action('FinancialTransactionsController@editPlanPayment', [$clientPlan->financialTransactions->first()->id]) }}" class="btn btn-info btn-sm">Edit Payment</a>
+        @endif
         {!! Form::open(['route' => ['plans.destroy', $clientPlan->id], 'method' => 'delete']) !!}
         <button type="submit" class="btn btn-link pull-left">delete</button>
         {!! Form::close() !!}

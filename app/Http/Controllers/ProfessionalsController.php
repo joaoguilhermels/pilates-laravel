@@ -104,7 +104,7 @@ class ProfessionalsController extends Controller
         return view('professionals.report_payment', compact('professional', 'bankAccounts', 'paymentMethods', 'rows', 'total'));
     }
 
-    public function professionalPaymentStore(ProfessionalPaymentStoreRequest $request, Professional $professional) {
+    public function storeProfessionalPayment(ProfessionalPaymentStoreRequest $request, Professional $professional) {
         /*$extraData = array(
             'entity_type' => 'professional_payment',
             'type' => 'paid',

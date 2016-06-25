@@ -1,9 +1,11 @@
 Vue.component('plan-payment', {
     template: '#plan-payment-template',
 
+    props: ['plan-duration'],
+
     data: function() {
         return {
-            numberOfPayments: 1
+            numberOfPayments: parseInt(this.planDuration) || 1
         }
     },
 });

@@ -25,6 +25,6 @@ class FinancialTransaction extends Model
     }
 
     public function financialTransactionDetails() {
-        return $this->hasMany('App\FinancialTransactionDetails');
+        return $this->hasMany('App\FinancialTransactionDetail');
     }
 }
