@@ -53,8 +53,8 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('client-plans/{client_plans}/payment', 'FinancialTransactionsController@createPlanPayment');
     Route::post('client-plans/{client_plans}/payment', 'FinancialTransactionsController@storePlanPayment');
-    Route::get('payment/{financial_transaction}', 'FinancialTransactionsController@editPlanPayment');
-    Route::put('payment/{financial_transaction}', 'FinancialTransactionsController@updatePlanPayment');
+    Route::get('payment/{financial_transactions}', 'FinancialTransactionsController@editPlanPayment');
+    Route::put('payment/{financial_transactions}', 'FinancialTransactionsController@updatePlanPayment');
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 

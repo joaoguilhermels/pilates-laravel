@@ -11,7 +11,12 @@
     <form action="{{ action('FinancialTransactionsController@updatePlanPayment', [$financialTransaction->id]) }}" method="post">
       {{ csrf_field() }}
       {{ method_field('UPDATE') }}
-      @include('clientPlans.payment.form', ['submitButtonText' => 'Update Plan Payment'])
+      @include('clientPlans.payment.edit-form', ['submitButtonText' => 'Update Plan Payment'])
     </form>
   </div>
+@stop
+
+@section('script_footer')
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+  <script src="/js/clientPlanPayment/clientPlanPayment.js"></script>
 @stop

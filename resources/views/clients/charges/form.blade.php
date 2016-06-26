@@ -1,5 +1,3 @@
-<?php dump(get_defined_vars()); ?>
-
 <div class="form-group">
   <label for="name">Name</label>
   <input type="text" name="name" class="form-control" value="{{ old('name', $charge->name) }}">
@@ -44,7 +42,7 @@
   <div class="col-md-2">
     <div class="form-group">
       <label for="value">Value</label>
-      <input type="number" name="value"  class="form-control" value="{{ old('number', $charge->value) }}">
+      <input type="number" name="value"  class="form-control" value="@{{ payment.observation }}">
     </div>
   </div>
   <div class="col-md-3">

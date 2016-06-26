@@ -60,9 +60,13 @@ class FinancialTransactionsController extends Controller
 
     public function editPlanPayment(financialTransaction $financialTransaction)
     {
-        //$FinancialTransaction->load();
+        $paymentMethods = PaymentMethod::all();
+        $bankAccounts = BankAccount::all();
+        $clientPlan = $financialTransaction->financiable;
 
-        return view('clientPlans.payment.edit', compact('financialTransaction'));
+        $financialTransaction->load('financialTransactionDetails');
+
+        return view('clientPlans.payment.edit', compact('financialTransaction', 'clientPlan', 'paymentMethods', 'bankAccounts'));
     }
 
     public function updatePlanPayment(Client $client, ClientRequest $request)

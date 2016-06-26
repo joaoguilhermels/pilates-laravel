@@ -16,8 +16,6 @@ class FinancialTransactionDetail extends Model
       'observation'
     ];
 
-    protected $dates = ['date'];
-
     public function financialTransaction() {
         return $this->belongsTo('App\FinancialTransaction');
     }
