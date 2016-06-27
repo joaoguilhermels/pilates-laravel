@@ -120,17 +120,14 @@ class ProfessionalsController extends Controller
 
         $request->request->add([
             'type' => 'paid',
-            'payment_number' => 1,
             'total_number_of_payments' => 1,
-            'status' => 1, // Define how these statuses will work
-            'confirmed_value' => $request->input('value'),
-            'confirmed_date' => Carbon::now(),
             'oberservation' => ''
         ]);
 
         //$financialTransaction = FinancialTransaction::create($request->all());
+        $financialTransaction = $professional->financialTransactions()->create($request->all());
 
-        $professional->financialTransactions()->create($request->all());
+        $financialTransaction->financialTransactionDetails()->create($request->all());
 
         return redirect('professionals/payments');
     }
