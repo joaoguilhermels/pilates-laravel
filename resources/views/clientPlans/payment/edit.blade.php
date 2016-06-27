@@ -10,7 +10,7 @@
 
     <form action="{{ action('FinancialTransactionsController@updatePlanPayment', [$financialTransaction->id]) }}" method="post">
       {{ csrf_field() }}
-      {{ method_field('UPDATE') }}
+      {{ method_field('PUT') }}
       @include('clientPlans.payment.edit-form', ['submitButtonText' => 'Update Plan Payment'])
     </form>
   </div>

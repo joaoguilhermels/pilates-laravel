@@ -55,6 +55,8 @@ class FinancialTransactionsController extends Controller
                 ->update(['client_payment_financial_transaction_id' => $financialTransaction->id]);
         });*/
 
+        \Session::flash('message', 'Successfully added Client Plan Payment');
+
         return redirect('clients');
     }
 
@@ -69,11 +71,22 @@ class FinancialTransactionsController extends Controller
         return view('clientPlans.payment.edit', compact('financialTransaction', 'clientPlan', 'paymentMethods', 'bankAccounts'));
     }
 
-    public function updatePlanPayment(Client $client, ClientRequest $request)
+    public function updatePlanPayment(FinancialTransactionRequest $request, financialTransaction $financialTransaction)
     {
-        $client->update($request->all());
+        $request->request->add([
+            'name' => 'Plan payment',
+            'type' => 'received',
+        ]);
 
-        Session::flash('message', 'Successfully updated client ' . $client->name);
+        $financialTransaction->update($request->all());
+
+        $payments = collect($request->payments);
+        $payments->map(function ($payment) use ($financialTransaction)
+        {
+            $financialTransaction->financialTransactionDetails()->where('id', $payment['id'])->update($payment);
+        });
+
+        \Session::flash('message', 'Successfully updated Client Plan Payment');
 
         return redirect('clients');
     }

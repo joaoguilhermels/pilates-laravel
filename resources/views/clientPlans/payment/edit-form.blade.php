@@ -27,6 +27,8 @@
           <tr v-for="paymentNumber in numberOfPayments">
             <td class="col-md-2">
               <input type="hidden" name="payments[@{{ paymentNumber }}][payment_number]" value="@{{ paymentNumber + 1 }}">
+              <input type="hidden" name="payments[@{{ paymentNumber }}][financial_transaction_id]" v-bind:value="payments[paymentNumber].financial_transaction_id">
+              <input type="hidden" name="payments[@{{ paymentNumber }}][id]" v-bind:value="payments[paymentNumber].id">
               <label for="payments[@{{ paymentNumber }}][payment_method_id]">Payment Method: </label>
               <select name="payments[@{{ paymentNumber }}][payment_method_id]" class="form-control" v-model="payments[paymentNumber].payment_method_id">
                 <option value=""></option>

@@ -8,7 +8,7 @@ Vue.component('plan-payment', {
             numberOfPayments: parseInt(this.planDuration) || 1,
             paymentMethodsObjs: JSON.parse(this.paymentMethods),
             bankAccountsObjs: JSON.parse(this.bankAccounts),
-            payments: JSON.parse(this.selectedValues)
+            payments: this.selectedValues == "" ? "" : JSON.parse(this.selectedValues)
         }
     },
 });
