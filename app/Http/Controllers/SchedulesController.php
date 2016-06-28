@@ -233,32 +233,45 @@ class SchedulesController extends Controller
     {
         //$classTypes         = ClassType::where('free_trial', true)->with('professionals', 'rooms', 'statuses')->get();
 
-        $clients            = Client::whereHas('schedules.classTypeStatus', function ($query) {
-          $query->where('name', '=', 'Desmarcou');
+        $schedules = Schedule::whereHas('classTypeStatus', function ($query) {
+            $query->where('name', '=', 'Desmarcou');
         })
+        ->where('id', '<>', 'parent_id')
+        ->with('client')
+        ->groupBy('client_id')
         ->get();
 
-        $rooms              = Room::lists('name', 'id');
-        $classTypes         = ClassType::lists('name', 'id');
-        $professionals      = Professional::lists('name', 'id');
-        $classTypeStatuses  = ClassTypeStatus::lists('name', 'id');
+        dump($schedules);
 
-        return view('schedules.reposition.create', compact('clients', 'classTypes', 'rooms', 'professionals', 'classTypeStatuses'));
+        // List only class which weren't already reescheduled
+        $clients            = Client::whereHas('schedules.classTypeStatus', function ($query) {
+            $query->where('name', '=', 'Desmarcou');
+        })
+        ->join('schedules', 'clients.id', '=', 'schedules.client_id')
+        ->where('schedules.id', '<>', 'schedules.parent_id')
+        ->groupBy('clients.id')
+        ->count()
+        ->get();
+
+        dd($clients);
+
+        $rooms              = Room::all();
+        $classTypes         = ClassType::all();
+        $professionals      = Professional::all();
+        //$classTypeStatuses  = ClassTypeStatus::lists('name', 'id');
+
+        return view('schedules.reposition.create', compact('clients', 'classTypes', 'rooms', 'professionals'));
     }
 
     public function storeReposition(ScheduleRequest $request)
     {
         $request->request->add([
-            'observation' => 'New client. Scheduled a trial class.',
+            'observation' => 'Reposition class.',
         ]);
 
-        $client = Client::create($request->all());
-
-        $classTypeStatus = ClassTypeStatus::where('class_type_id', $request->class_type_id)->where('name', 'OK')->first();
+        $classTypeStatus = ClassTypeStatus::where('class_type_id', $request->class_type_id)->where('name', 'Reposição')->first();
 
         $request->request->add([
-            'trial' => true,
-            'client_id' => $client->id,
             'class_type_status_id' => $classTypeStatus->id
         ]);
 
