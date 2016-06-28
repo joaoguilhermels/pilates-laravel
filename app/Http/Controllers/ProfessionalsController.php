@@ -26,17 +26,19 @@ class ProfessionalsController extends Controller
       $this->middleware('auth');
     }
 
-    public function index() {
-      $professionals = Professional::all();
+    public function index()
+    {
+        $professionals = Professional::all();
 
-      return view('professionals.index')->with('professionals', $professionals);
+        return view('professionals.index')->with('professionals', $professionals);
     }
 
-    public function indexPayments() {
-      $financialTransactions = FinancialTransaction::where('financiable_type', 'App\Professional')
-                                    ->get();
+    public function indexPayments()
+    {
+        $financialTransactions = FinancialTransaction::where('financiable_type', 'App\Professional')
+                                      ->get();
 
-      return view('professionals.payments.index', compact('financialTransactions'));
+        return view('professionals.payments.index', compact('financialTransactions'));
     }
 
     public function reportPayment(Professional $professional) {
@@ -57,9 +59,6 @@ class ProfessionalsController extends Controller
 
     public function show(Professional $professional)
     {
-        // Not needed because we are using route model binding on RouteServiceProvider::boot
-        //$professional = Professional::findOrFail($id);
-
         return view('professionals.show', compact('professional'));
     }
 
@@ -77,15 +76,15 @@ class ProfessionalsController extends Controller
         return view('professionals.create', compact('classTypes'));
     }
 
-    public function createProfessionalPayment() {
+    public function createProfessionalPayment()
+    {
         $professionals = Professional::lists('name', 'id');
 
         return view('professionals.payments.create', compact('professionals'));
     }
 
-    public function generatePaymentReport(PaymentReportRequest $request) {
-        //$requestAll     = $request->all();
-        //$professionalId = $requestAll['professional'];
+    public function generatePaymentReport(PaymentReportRequest $request)
+    {
         $startAt        = Carbon::parse($request->get('start_at'));
         $professional   = Professional::findOrFail($request->get('professional'));
         $bankAccounts   = BankAccount::all();
@@ -104,27 +103,14 @@ class ProfessionalsController extends Controller
         return view('professionals.report_payment', compact('professional', 'bankAccounts', 'paymentMethods', 'rows', 'total'));
     }
 
-    public function storeProfessionalPayment(ProfessionalPaymentStoreRequest $request, Professional $professional) {
-        /*$extraData = array(
-            'entity_type' => 'professional_payment',
-            'type' => 'paid',
-            'payment_number' => 1,
-            'total_number_of_payments' => 1,
-            'status' => 1, // Define how these statuses will work
-            'confirmed_value' => $requestAll['value'],
-            'confirmed_date' => Carbon::now(),
-            'oberservation' => '',
-        );
-
-        $requestAll = array_merge($requestAll, $extraData);*/
-
+    public function storeProfessionalPayment(ProfessionalPaymentStoreRequest $request, Professional $professional)
+    {
         $request->request->add([
             'type' => 'paid',
             'total_number_of_payments' => 1,
             'oberservation' => ''
         ]);
 
-        //$financialTransaction = FinancialTransaction::create($request->all());
         $financialTransaction = $professional->financialTransactions()->create($request->all());
 
         $financialTransaction->financialTransactionDetails()->create($request->all());
@@ -146,7 +132,6 @@ class ProfessionalsController extends Controller
 
         $professional = Professional::create($request->all());
 
-        //$professional->classTypes()->sync($request->input('class_type_list'));
         $professional->classTypes()->sync($classTypeList);
 
         return redirect('professionals');
@@ -166,7 +151,6 @@ class ProfessionalsController extends Controller
             }
         }
 
-        //$professional->classTypes()->sync($request->input('class_type_list'));
         $professional->classTypes()->sync($classTypeList);
 
         return redirect('professionals');

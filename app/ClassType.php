@@ -8,10 +8,11 @@ class ClassType extends Model
 {
     //
     protected $fillable = [
-      'name',
+      //'name', // Do not let users change the status names for now. Review this later.
       'max_number_of_clients',
       'duration',
-      'extra_class_price'
+      'extra_class_price',
+      'free_trial'
     ];
 
     /**

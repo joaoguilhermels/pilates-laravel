@@ -1,5 +1,5 @@
 @section('css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.min.css"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/fullcalendar.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.2/jquery.qtip.min.css"/>
     <style>
     .modal-mask {
@@ -60,6 +60,10 @@
     .modal-leave .modal-container {
       -webkit-transform: scale(1.1);
       transform: scale(1.1);
+    }
+
+    .past-event {
+      opacity: 0.7;
     }
     </style>
 @stop

@@ -28,7 +28,7 @@ $factory->define(App\Client::class, function (Faker\Generator $faker) {
         'name' => $faker->name,
         'phone' => $faker->phoneNumber,
         'email' => $faker->email,
-        'description' => $faker->paragraph,
+        'observation' => $faker->paragraph,
     ];
 });
 

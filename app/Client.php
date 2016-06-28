@@ -12,7 +12,7 @@ class Client extends Model
       'phone',
       'email'
     ];
-    
+
     public function clientPlans()
     {
         return $this->hasMany('App\ClientPlan');

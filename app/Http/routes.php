@@ -64,6 +64,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('professionals/payments/review', 'ProfessionalsController@generatePaymentReport');
     Route::post('professionals/{professionals}/payments/store', 'ProfessionalsController@storeProfessionalPayment');
 
+    Route::get('schedules/trial/create', 'SchedulesController@createTrialClass');
+    Route::post('schedules/trial/create', 'SchedulesController@storeTrialClass');
+    Route::get('schedules/reposition/create', 'SchedulesController@createReposition');
+    Route::post('schedules/reposition/create', 'SchedulesController@storeReposition');
+
     Route::resource('payment-methods', 'PaymentMethodsController');
     Route::resource('bank-accounts', 'BankAccountsController');
     Route::resource('clients', 'ClientsController');

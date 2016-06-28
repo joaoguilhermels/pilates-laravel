@@ -82,7 +82,6 @@ class SchedulesController extends Controller
                 } else {
                     if (eventEnd < ntoday){
                         element.addClass(\'past-event\');
-                        element.children().addClass(\'past-event\');
                     }
                 }
                 element.qtip({
@@ -206,22 +205,9 @@ class SchedulesController extends Controller
         return view('schedules.index')->with('schedules', $schedules);
     }
 
-    public function show(schedule $schedule)
+    public function show(Schedule $schedule)
     {
         return view('schedules.show', compact('schedule'));
-    }
-
-    public function edit(schedule $schedule)
-    {
-        $rooms              = $schedule->classType->rooms;
-        $professionals      = $schedule->classType->professionals;
-        $classTypeStatuses  = $schedule->classType->statuses;
-
-        $schedule->load('client')
-                  ->load('scheduable');
-
-        //return view('schedules.edit', compact('schedule', 'plans', 'client', 'classTypes', 'rooms', 'professionals', 'classTypeStatuses'));
-        return view('schedules.edit', compact('schedule', 'rooms', 'professionals', 'classTypeStatuses'));
     }
 
     public function create()
@@ -238,19 +224,102 @@ class SchedulesController extends Controller
 
     public function store(scheduleRequest $request)
     {
-        $schedule = schedule::create($request->all());
+        $schedule = Schedule::create($request->all());
 
         return redirect('schedules');
     }
 
-    public function update(schedule $schedule, scheduleRequest $request)
+    public function createReposition()
+    {
+        //$classTypes         = ClassType::where('free_trial', true)->with('professionals', 'rooms', 'statuses')->get();
+
+        $clients            = Client::whereHas('schedules.classTypeStatus', function ($query) {
+          $query->where('name', '=', 'Desmarcou');
+        })
+        ->get();
+
+        $rooms              = Room::lists('name', 'id');
+        $classTypes         = ClassType::lists('name', 'id');
+        $professionals      = Professional::lists('name', 'id');
+        $classTypeStatuses  = ClassTypeStatus::lists('name', 'id');
+
+        return view('schedules.reposition.create', compact('clients', 'classTypes', 'rooms', 'professionals', 'classTypeStatuses'));
+    }
+
+    public function storeReposition(ScheduleRequest $request)
+    {
+        $request->request->add([
+            'observation' => 'New client. Scheduled a trial class.',
+        ]);
+
+        $client = Client::create($request->all());
+
+        $classTypeStatus = ClassTypeStatus::where('class_type_id', $request->class_type_id)->where('name', 'OK')->first();
+
+        $request->request->add([
+            'trial' => true,
+            'client_id' => $client->id,
+            'class_type_status_id' => $classTypeStatus->id
+        ]);
+
+        $schedule = Schedule::create($request->all());
+
+        return redirect('schedules');
+    }
+
+    public function createTrialClass()
+    {
+        //$classTypes         = ClassType::where('free_trial', true)->with('professionals', 'rooms', 'statuses')->get();
+
+        $rooms              = Room::lists('name', 'id');
+        $classTypes         = ClassType::lists('name', 'id');
+        $professionals      = Professional::lists('name', 'id');
+        $classTypeStatuses  = ClassTypeStatus::lists('name', 'id');
+
+        return view('schedules.trial.create', compact('plans', 'classTypes', 'rooms', 'professionals', 'classTypeStatuses'));
+    }
+
+    public function storeTrialClass(ScheduleRequest $request)
+    {
+        $request->request->add([
+            'observation' => 'New client. Scheduled a trial class.',
+        ]);
+
+        $client = Client::create($request->all());
+
+        $classTypeStatus = ClassTypeStatus::where('class_type_id', $request->class_type_id)->where('name', 'OK')->first();
+
+        $request->request->add([
+            'trial' => true,
+            'client_id' => $client->id,
+            'class_type_status_id' => $classTypeStatus->id
+        ]);
+
+        $schedule = Schedule::create($request->all());
+
+        return redirect('schedules');
+    }
+
+    public function edit(Schedule $schedule)
+    {
+        $rooms              = $schedule->classType->rooms;
+        $professionals      = $schedule->classType->professionals;
+        $classTypeStatuses  = $schedule->classType->statuses;
+
+        $schedule->load('client')
+                  ->load('scheduable');
+
+        return view('schedules.edit', compact('schedule', 'rooms', 'professionals', 'classTypeStatuses'));
+    }
+
+    public function update(Schedule $schedule, ScheduleRequest $request)
     {
         $schedule->update($request->all());
 
         return redirect('schedules');
     }
 
-    public function destroy(schedule $schedule)
+    public function destroy(Schedule $schedule)
     {
         $schedule->destroy($schedule->id);
 

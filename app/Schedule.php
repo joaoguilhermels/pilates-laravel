@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\IdentifiableEvent
 {
-    // Permitted mass assingment fields
     protected $fillable = [
       'client_id',
       'class_type_id',
       'professional_id',
       'room_id',
       'class_type_status_id',
+      'trial',
       'start_at',
       'end_at',
       'observation'

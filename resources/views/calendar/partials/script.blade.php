@@ -1,7 +1,7 @@
 @section('script_footer')
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.2/jquery.qtip.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/fullcalendar.min.js"></script>
   {!! $calendar->script() !!}
   <!-- template for the modal component -->
   <script type="x/template" id="modal-template">
@@ -15,7 +15,7 @@
           </div>
 
           <div class="modal-body">
-            <a href="" class="btn btn-info btn-block">Trial Class</a>
+            <a href="schedules/trial/create" class="btn btn-info btn-block">Trial Class</a>
             <a href="" class="btn btn-info btn-block">Extra Class</a>
             <a href="" class="btn btn-info btn-block">Replacement</a>
             <a href="" class="btn btn-info btn-block">Practice (no professional)</a>

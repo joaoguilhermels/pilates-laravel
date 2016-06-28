@@ -17,8 +17,8 @@
 <div class="form-group">
   <label for="free_trial">Does this class offers a free trial? </label>
   <select name="free_trial" class="form-control">
-    <option value="yes">Yes</option>
-    <option value="no">No</option>
+    <option value="1" {{ $classType->free_trial == 1 ? "selected" : "" }}>Yes</option>
+    <option value="0" {{ $classType->free_trial == 0 ? "selected" : "" }}>No</option>
   </select>
 </div>
 
@@ -41,22 +41,22 @@
         @foreach ($classType->statuses as $key => $status)
           <tr>
             <td>
-              {!! Form::hidden('status[' . $key . '][id]', $status->id == null ? NULL : $status->id) !!}
-              {!! Form::text('status[' . $key . '][name]', $status->name, ['class' => 'form-control', 'id' => 'name.' . $key]) !!}
+              <input type="hidden" name="status[{{ $key }}][id]" value="{{ $status->id == null ? NULL : $status->id }}">
+              {{ $status->name }}
             </td>
             <td>
               <div class="checkbox">
                 <label>
-              {!! Form::hidden('status[' . $key . '][charge_client]', 0) !!}
-              {!! Form::checkbox('status[' . $key . '][charge_client]', $status->charge_client == false ? NULL : 'on', $status->charge_client, ['id' => 'charge_client.' . $key]) !!}
-              Yes
+                  <input type="hidden" name="status[{{ $key }}][charge_client]" value="0">
+                  {!! Form::checkbox('status[' . $key . '][charge_client]', $status->charge_client == false ? NULL : 'on', $status->charge_client, ['id' => 'charge_client.' . $key]) !!}
+                  Yes
                 </label>
               </div>
             </td>
             <td>
               <div class="checkbox">
                 <label>
-                  {!! Form::hidden('status[' . $key . '][pay_professional]', 0) !!}
+                  <input type="hidden" name="status[{{ $key }}][pay_professional]" value="0">
                   {!! Form::checkbox('status[' . $key . '][pay_professional]', $status->pay_professional == false ? NULL : 'on', $status->pay_professional, ['id' => 'pay_professional.' . $key]) !!}
                   Yes
                 </label>
@@ -82,15 +82,3 @@
 <div class="form-group">
   {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
 </div>
-<script>
-// Code to delete a row on the status table. Will come back to it later.
-/*$('#status_table button').on('click', function(e) {
-  var tr = $(this).closest('tr');
-  tr.css("background-color", "#FF3700");
-  tr.fadeOut(400, function(){
-    tr.remove();
-  });
-
-  e.preventDefault();
-});*/
-</script>

@@ -22,36 +22,36 @@ class ClassTypesController extends Controller
 
     public function index() {
         $classTypes = ClassType::all();
-  
+
         return view('classes.index', compact('classTypes'));
     }
-    
+
     public function show(ClassType $classType)
     {
         // Eager loading class type statuses;
         $classType->load('statuses');
-      
+
         return view('classes.show', compact('classType'));
     }
 
     public function edit(ClassType $classType)
-    {      
+    {
         $classType->load('statuses');
-      
+
         return view('classes.edit', compact('classType'));
     }
-    
+
     public function create()
     {
         $statuses = $this->create_default_statuses();
-        
+
         $classType = new ClassType;
-        
+
         $classType->statuses = $statuses;
 
         return view('classes.create', compact('classType'));
     }
-    
+
     public function store(ClassTypeRequest $request)
     {
         $classType = ClassType::create($request->all());
@@ -67,7 +67,7 @@ class ClassTypesController extends Controller
     {
         $classType->update($request->all());
 
-        foreach($request->get('status') as $status) {
+        foreach($request->status as $status) {
             $classType->statuses()->find($status['id'])->update($status);
         }
 
@@ -75,7 +75,7 @@ class ClassTypesController extends Controller
     }
 
     public function destroy(ClassType $classType)
-    {       
+    {
         $classType->delete();
 
         return redirect('classes');
@@ -95,7 +95,7 @@ class ClassTypesController extends Controller
           'pay_professional' => NULL,
           'color' => '#00B9FE'
         ]);
-        
+
         $statusFaltou = new ClassTypeStatus([
           'name' => 'Faltou',
           'charge_client' => TRUE,
@@ -109,9 +109,9 @@ class ClassTypesController extends Controller
           'pay_professional' => TRUE,
           'color' => '#685DFF'
         ]);
-      
+
         $statuses = collect([$statusOk, $statusDesmarcou, $statusReposicao, $statusFaltou]);
-        
+
         return $statuses;
     }
 

@@ -29,10 +29,11 @@ class ClassTypeRequest extends Request
             'duration' => 'required|numeric|min:1',
         ];
 
-        foreach($this->request->get('status') as $key => $val)
+        // Commented beacuse we are not allowing users to change status names now
+        /*foreach($this->request->get('status') as $key => $val)
         {
             $rules['status.' . $key . '.name'] = 'required';
-        }
+        }*/
 
         return $rules;
     }
