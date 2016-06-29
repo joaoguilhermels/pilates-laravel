@@ -231,51 +231,49 @@ class SchedulesController extends Controller
 
     public function createReposition()
     {
-        //$classTypes         = ClassType::where('free_trial', true)->with('professionals', 'rooms', 'statuses')->get();
+        $unscheduledStatusesIds = classTypeStatus::where('name', 'Desmarcou')->pluck('id');
 
-        $schedules = Schedule::whereHas('classTypeStatus', function ($query) {
-            $query->where('name', '=', 'Desmarcou');
+        // List only class which are unscheduled and were not rescheduled alterady
+        $clients            = Client::whereHas('schedules', function ($query) use($unscheduledStatusesIds) {
+            $query->whereIn('class_type_status_id', $unscheduledStatusesIds)->where('parent_id', '=', '0');
         })
-        ->where('id', '<>', 'parent_id')
-        ->with('client')
-        ->groupBy('client_id')
-        ->get();
-
-        dump($schedules);
-
-        // List only class which weren't already reescheduled
-        $clients            = Client::whereHas('schedules.classTypeStatus', function ($query) {
-            $query->where('name', '=', 'Desmarcou');
-        })
-        ->join('schedules', 'clients.id', '=', 'schedules.client_id')
-        ->where('schedules.id', '<>', 'schedules.parent_id')
         ->groupBy('clients.id')
-        ->count()
         ->get();
 
-        dd($clients);
+        $classTypes = ClassType::whereHas('schedules', function ($query) use($unscheduledStatusesIds) {
+            $query->whereIn('class_type_status_id', $unscheduledStatusesIds)->where('parent_id', '=', '0');
+        })
+        ->groupBy('class_types.id')
+        ->get();
 
         $rooms              = Room::all();
-        $classTypes         = ClassType::all();
         $professionals      = Professional::all();
-        //$classTypeStatuses  = ClassTypeStatus::lists('name', 'id');
 
         return view('schedules.reposition.create', compact('clients', 'classTypes', 'rooms', 'professionals'));
     }
 
     public function storeReposition(ScheduleRequest $request)
     {
+        $unscheduledStatusId = classTypeStatus::where('name', 'Desmarcou')->where('class_type_id', $request->class_type_id)->pluck('id');
+
+        $unscheduled = Schedule::where('client_id', $request->client_id)->whereIn('class_type_status_id', $unscheduledStatusId)->first();
+
         $request->request->add([
             'observation' => 'Reposition class.',
+            'parent_id' => $unscheduled->id,
+            'scheduable_id' => $unscheduled->scheduable_id,
+            'scheduable_type' => $unscheduled->scheduable_type
         ]);
 
-        $classTypeStatus = ClassTypeStatus::where('class_type_id', $request->class_type_id)->where('name', 'Reposição')->first();
+        $repositionStatus = ClassTypeStatus::where('name', 'Reposição')->where('class_type_id', $request->class_type_id)->first();
 
         $request->request->add([
-            'class_type_status_id' => $classTypeStatus->id
+            'class_type_status_id' => $repositionStatus->id
         ]);
-
+//dd($request->all());
         $schedule = Schedule::create($request->all());
+
+        Schedule::where('id', $unscheduled->id)->update(['parent_id' => $unscheduled->id]);
 
         return redirect('schedules');
     }
