@@ -16,8 +16,8 @@
 
           <div class="modal-body">
             <a href="schedules/trial/create" class="btn btn-info btn-block">Trial Class</a>
-            <a href="" class="btn btn-info btn-block">Extra Class</a>
-            <a href="" class="btn btn-info btn-block">Replacement</a>
+            <a href="schedules/reposition/create" class="btn btn-info btn-block">Replacement</a>
+            <a href="schedules/extra/create" class="btn btn-info btn-block">Extra Class</a>
             <a href="" class="btn btn-info btn-block">Practice (no professional)</a>
           </div>
 
@@ -56,7 +56,9 @@
       el: '#app',
       data: {
         showModal: false,
-        headerTitle: ''
+        headerTitle: '',
+        showExtraClassModal: false,
+        headerExtraClassTitle: ''
       },
       methods: {
         showModalNow: function (title) {

@@ -270,7 +270,7 @@ class SchedulesController extends Controller
         $request->request->add([
             'class_type_status_id' => $repositionStatus->id
         ]);
-//dd($request->all());
+
         $schedule = Schedule::create($request->all());
 
         Schedule::where('id', $unscheduled->id)->update(['parent_id' => $unscheduled->id]);
@@ -304,6 +304,33 @@ class SchedulesController extends Controller
             'trial' => true,
             'client_id' => $client->id,
             'class_type_status_id' => $classTypeStatus->id
+        ]);
+
+        $schedule = Schedule::create($request->all());
+
+        return redirect('schedules');
+    }
+
+    public function createExtraClass()
+    {
+        $rooms              = Room::all();
+        $clients            = Client::all();
+        $classTypes         = ClassType::all();
+        $professionals      = Professional::all();
+        $classTypeStatuses  = ClassTypeStatus::all();
+
+        return view('schedules.extra.create', compact('clients', 'plans', 'classTypes', 'rooms', 'professionals', 'classTypeStatuses'));
+    }
+
+    public function storeExtraClass(ScheduleRequest $request)
+    {
+        $classType = ClassType::findOrFail($request->class_type_id);
+        $classTypeStatus = ClassTypeStatus::where('class_type_id', $request->class_type_id)->where('name', 'OK')->first();
+
+        $request->request->add([
+            'class_type_status_id' => $classTypeStatus->id,
+            'observation' => 'Extra Class.',
+            'price' => $classType->extra_class_price
         ]);
 
         $schedule = Schedule::create($request->all());

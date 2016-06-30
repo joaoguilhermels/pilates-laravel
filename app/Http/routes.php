@@ -68,6 +68,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('schedules/trial/create', 'SchedulesController@storeTrialClass');
     Route::get('schedules/reposition/create', 'SchedulesController@createReposition');
     Route::post('schedules/reposition/create', 'SchedulesController@storeReposition');
+    Route::get('schedules/extra/create', 'SchedulesController@createExtraClass');
+    Route::post('schedules/extra/create', 'SchedulesController@storeExtraClass');
 
     Route::resource('payment-methods', 'PaymentMethodsController');
     Route::resource('bank-accounts', 'BankAccountsController');

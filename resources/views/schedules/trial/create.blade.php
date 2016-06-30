@@ -1,6 +1,5 @@
 @extends('layouts/app')
 
-
 @section('content')
   <div class="container">
   <h1>Create New Trial Class</h1>
@@ -20,27 +19,27 @@
       <input type="text" name="phone" class="form-control">
     </div>
     <div class="form-group">
-      <label for="name">Email:</label>
+      <label for="email">Email:</label>
       <input type="email" name="email" class="form-control">
     </div>
     <div class="form-group">
-      {!! Form::label('class_type_id', 'Class: ') !!}
+      <label for="class_type_id">Class:</label>
       {!! Form::select('class_type_id', $classTypes, null, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
-      {!! Form::label('professional_id', 'Professional: ') !!}
+      <label for="professional_id">Professional:</label>
       {!! Form::select('professional_id', $professionals, null, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
-      {!! Form::label('room_id', 'Room: ') !!}
+      <label for="room_id">Room:</label>
       {!! Form::select('room_id', $rooms, null, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
-      {!! Form::label('start_at', 'Start: ') !!}
+      <label for="start_at">Start:</label>
       {!! Form::text('start_at', null, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
-      {!! Form::label('end_at', 'End: ') !!}
+      <label for="end_at">End:</label>
       {!! Form::text('end_at', null, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
