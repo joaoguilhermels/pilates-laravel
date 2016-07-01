@@ -39,7 +39,8 @@ class SchedulesController extends Controller
               [
                 'color' => $schedule->classTypeStatus->color,
                 'url' => '/schedules/' . $schedule->id . '/edit',
-                'description' => $this->eventDescription($schedule)
+                'description' => $this->eventDescription($schedule),
+                'textColor' => '#0A0A0A'
               ]
             );
         }
