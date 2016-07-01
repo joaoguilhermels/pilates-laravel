@@ -58,7 +58,7 @@
                     <li class="{{ active('schedules') }}"><a href="{{ url('/schedules') }}">Schedules</a></li>
                     <li class="{{ active('calendar') }}"><a href="{{ url('/calendar') }}">Calendar</a></li>
                     <li class="{{ active('expenses') }}"><a href="{{ url('/expenses') }}">Expenses</a></li>
-                    <li class="dropdown">
+                    <li class="dropdown {{ active(['bank-accounts', 'payment-methods']) }}">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Config <span class="caret"></span></a>
                       <ul class="dropdown-menu">
                         <li class="{{ active('bank-accounts') }}"><a href="{{ url('/bank-accounts') }}">Bank Accounts</a></li>
