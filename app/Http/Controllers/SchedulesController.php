@@ -125,6 +125,10 @@ class SchedulesController extends Controller
                         '<strong>Professional:</strong> ' . $schedule->professional->name . '<br>' .
                         '<strong>Status:</strong> ' . $schedule->classTypeStatus->name;
 
+        if ($schedule->observation <> '') {
+            $description .= '<br><strong>Observation:</strong><br> ' . $schedule->observation;
+        }
+
         return $description;
     }
 

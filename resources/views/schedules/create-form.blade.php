@@ -1,37 +1,37 @@
 <div class="form-group">
-  {!! Form::label('client_id', 'Client: ') !!}
+  <label for="client_id">Client:</label>
   {!! Form::select('client_id', $clients, null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-  {!! Form::label('class_type_id', 'Class: ') !!}
+  <label for="class_type_id">Class:</label>
   {!! Form::select('class_type_id', $classTypes, null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-  {!! Form::label('plan_id', 'Plan: ') !!}
+  <label for="plan_id">Plan:</label>
   {!! Form::select('plan_id', $plans, null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-  {!! Form::label('class_type_status_id', 'Status: ') !!}
+  <label for="class_type_status_id">Status:</label>
   {!! Form::select('class_type_status_id', $classTypeStatuses, null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-  {!! Form::label('professional_id', 'Professional: ') !!}
+  <label for="professional_id">Professional:</label>
   {!! Form::select('professional_id', $professionals, null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-  {!! Form::label('room_id', 'Room: ') !!}
+  <label for="room_id">Room:</label>
   {!! Form::select('room_id', $rooms, null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-  {!! Form::label('price', 'Price: ') !!}
+  <label for="price">Price:</label>
   {!! Form::text('price', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-  {!! Form::label('start_at', 'Start: ') !!}
+  <label for="start_at">Start:</label>
   {!! Form::text('start_at', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-  {!! Form::label('end_at', 'End: ') !!}
+  <label for="end_at">End:</label>
   {!! Form::text('end_at', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
