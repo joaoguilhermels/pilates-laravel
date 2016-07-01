@@ -147,8 +147,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Illuminate\Html\HtmlServiceProvider::class,
-        MaddHatter\LaravelFullcalendar\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -158,6 +156,12 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * 3rd Party Service Providers...
+         */
+         Illuminate\Html\HtmlServiceProvider::class,
+         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
+         Watson\Active\ActiveServiceProvider::class,
     ],
 
     /*

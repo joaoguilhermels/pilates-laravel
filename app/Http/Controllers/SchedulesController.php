@@ -31,7 +31,7 @@ class SchedulesController extends Controller
 
         foreach($schedules as $schedule) {
             $events[] = \Calendar::event(
-              $schedule->client->name . ' - ' . $schedule->classType->name, //event title
+              $this->setEventTitle($schedule), //event title
               false, //full day event?
               $schedule->start_at, //start time (you can also use Carbon instead of DateTime)
               $schedule->end_at, //end time (you can also use Carbon instead of DateTime)
@@ -52,12 +52,13 @@ class SchedulesController extends Controller
             'weekends' => false, // Add custom option
             'businessHours' => array(
               'start' => '07:00',
-              'end' => '20:00',
+              'end' => '20:30',
               //'dow' => array(1, 2, 3, 4, 5)
             ),
             'nowIndicator' => true,
-            //'minTime' => '06:00:00',
-            //'maxTime' => '21:00:00',
+            'minTime' => '07:00:00',
+            'maxTime' => '21:00:00',
+            'contentHeight' => 'auto'
             //'lang' => 'pt-BR',
 
         ));
@@ -71,19 +72,14 @@ class SchedulesController extends Controller
                 $(this).css(\'border-color\', \'red\');
             }',
             'eventRender' => 'function(event, element) {
-                var ntoday = new Date().getTime();
-                var eventEnd = moment( event.end ).valueOf();
-                var eventStart = moment( event.start ).valueOf();
-                if (!event.end){
-                    if (eventStart < ntoday){
-                        element.addClass(\'past-event\');
-                        element.children().addClass(\'past-event\');
-                    }
-                } else {
-                    if (eventEnd < ntoday){
-                        element.addClass(\'past-event\');
-                    }
+                var ntoday = Math.round(new Date().getTime() / 1000),
+                    eventEnd = event.end.unix(),
+                    eventStart = event.start.unix();
+
+                if (eventEnd < ntoday){
+                    element.addClass(\'past-event\');
                 }
+
                 element.qtip({
                     prerender: true,
                     content: {
@@ -103,10 +99,22 @@ class SchedulesController extends Controller
                         classes: \'qtip-bootstrap qtip-shadow\'
                     }
                 });
+                element.find(\'div.fc-title\').html(element.find(\'div.fc-title\').text());
             }',
         ));
 
         return view('calendar.index', compact('calendar'));
+    }
+
+    public function setEventTitle(Schedule $schedule)
+    {
+        $badge = "";
+
+        if ($schedule->trial) {
+            $badge = "<span class=\"label label-warning\">AE</span>";
+        }
+
+        return $badge . ' ' . $schedule->client->name . ' - ' . $schedule->classType->name;
     }
 
     public function eventDescription(Schedule $schedule)
@@ -258,20 +266,23 @@ class SchedulesController extends Controller
 
         $unscheduled = Schedule::where('client_id', $request->client_id)->whereIn('class_type_status_id', $unscheduledStatusId)->first();
 
-        $request->request->add([
-            'observation' => 'Reposition class.',
-            'parent_id' => $unscheduled->id,
-            'scheduable_id' => $unscheduled->scheduable_id,
-            'scheduable_type' => $unscheduled->scheduable_type
-        ]);
-
         $repositionStatus = ClassTypeStatus::where('name', 'Reposição')->where('class_type_id', $request->class_type_id)->first();
 
-        $request->request->add([
-            'class_type_status_id' => $repositionStatus->id
-        ]);
+        $schedule = new Schedule;
 
-        $schedule = Schedule::create($request->all());
+        $schedule->end_at = $request->end_at;
+        $schedule->room_id = $request->room_id;
+        $schedule->start_at = $request->start_at;
+        $schedule->parent_id = $unscheduled->id;
+        $schedule->client_id = $request->client_id;
+        $schedule->observation = 'Reposition class.';
+        $schedule->class_type_id = $request->class_type_id;
+        $schedule->scheduable_id = $unscheduled->scheduable_id;
+        $schedule->professional_id = $request->professional_id;
+        $schedule->scheduable_type = $unscheduled->scheduable_type;
+        $schedule->class_type_status_id = $repositionStatus->id;
+
+        $schedule->save();
 
         Schedule::where('id', $unscheduled->id)->update(['parent_id' => $unscheduled->id]);
 
@@ -282,12 +293,11 @@ class SchedulesController extends Controller
     {
         //$classTypes         = ClassType::where('free_trial', true)->with('professionals', 'rooms', 'statuses')->get();
 
-        $rooms              = Room::lists('name', 'id');
-        $classTypes         = ClassType::lists('name', 'id');
-        $professionals      = Professional::lists('name', 'id');
-        $classTypeStatuses  = ClassTypeStatus::lists('name', 'id');
+        $rooms              = Room::all();
+        $classTypes         = ClassType::all();
+        $professionals      = Professional::all();
 
-        return view('schedules.trial.create', compact('plans', 'classTypes', 'rooms', 'professionals', 'classTypeStatuses'));
+        return view('schedules.trial.create', compact('plans', 'classTypes', 'rooms', 'professionals'));
     }
 
     public function storeTrialClass(ScheduleRequest $request)
@@ -317,9 +327,8 @@ class SchedulesController extends Controller
         $clients            = Client::all();
         $classTypes         = ClassType::all();
         $professionals      = Professional::all();
-        $classTypeStatuses  = ClassTypeStatus::all();
 
-        return view('schedules.extra.create', compact('clients', 'plans', 'classTypes', 'rooms', 'professionals', 'classTypeStatuses'));
+        return view('schedules.extra.create', compact('clients', 'plans', 'classTypes', 'rooms', 'professionals'));
     }
 
     public function storeExtraClass(ScheduleRequest $request)
@@ -340,6 +349,7 @@ class SchedulesController extends Controller
 
     public function edit(Schedule $schedule)
     {
+        $plan               = is_null($schedule->clientPlanDetail) ? "" : $schedule->clientPlanDetail->clientPlan->plan->name;
         $rooms              = $schedule->classType->rooms;
         $professionals      = $schedule->classType->professionals;
         $classTypeStatuses  = $schedule->classType->statuses;
@@ -347,7 +357,7 @@ class SchedulesController extends Controller
         $schedule->load('client')
                   ->load('scheduable');
 
-        return view('schedules.edit', compact('schedule', 'rooms', 'professionals', 'classTypeStatuses'));
+        return view('schedules.edit', compact('schedule', 'plan', 'rooms', 'professionals', 'classTypeStatuses'));
     }
 
     public function update(Schedule $schedule, ScheduleRequest $request)

@@ -2,10 +2,12 @@
   <label for="client">Client: </label>
   {{ $schedule->client->name }}
 </div>
+@if ($plan)
 <div class="form-group">
   <label for="plan_id">Plan: </label>
-  {{ $schedule->clientPlanDetail->clientPlan->plan->name }}
+  {{ $plan }}
 </div>
+@endif
 <div class="form-group">
   <label for="class_type_id">Class: </label>
   {{ $schedule->classType->name }}

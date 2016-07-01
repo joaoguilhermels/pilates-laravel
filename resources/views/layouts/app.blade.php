@@ -48,21 +48,21 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
-                    <li><a href="{{ url('/clients') }}">Clients</a></li>
-                    <li><a href="{{ url('/rooms') }}">Rooms</a></li>
-                    <li><a href="{{ url('/classes') }}">Classes</a></li>
-                    <li><a href="{{ url('/plans') }}">Plans</a></li>
-                    <li><a href="{{ url('/professionals') }}">Professionals</a></li>
-                    <li><a href="{{ url('/professionals/payments') }}">Pro Payments</a></li>
-                    <li><a href="{{ url('/schedules') }}">Schedules</a></li>
-                    <li><a href="{{ url('/calendar') }}">Calendar</a></li>
-                    <li><a href="{{ url('/expenses') }}">Expenses</a></li>
+                    <li class="{{ active('home') }}"><a href="{{ url('/home') }}">Home</a></li>
+                    <li class="{{ active('clients') }}"><a href="{{ url('/clients') }}">Clients</a></li>
+                    <li class="{{ active('rooms') }}"><a href="{{ url('/rooms') }}">Rooms</a></li>
+                    <li class="{{ active('classes') }}"><a href="{{ url('/classes') }}">Classes</a></li>
+                    <li class="{{ active('plans') }}"><a href="{{ url('/plans') }}">Plans</a></li>
+                    <li class="{{ active('professionals') }}"><a href="{{ url('/professionals') }}">Professionals</a></li>
+                    <li class="{{ active('professionals/payments') }}"><a href="{{ url('/professionals/payments') }}">Pro Payments</a></li>
+                    <li class="{{ active('schedules') }}"><a href="{{ url('/schedules') }}">Schedules</a></li>
+                    <li class="{{ active('calendar') }}"><a href="{{ url('/calendar') }}">Calendar</a></li>
+                    <li class="{{ active('expenses') }}"><a href="{{ url('/expenses') }}">Expenses</a></li>
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Config <span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        <li><a href="{{ url('/bank-accounts') }}">Bank Accounts</a></li>
-                        <li><a href="{{ url('/payment-methods') }}">Payment Methods</a></li>
+                        <li class="{{ active('bank-accounts') }}"><a href="{{ url('/bank-accounts') }}">Bank Accounts</a></li>
+                        <li class="{{ active('payment-methods') }}"><a href="{{ url('/payment-methods') }}">Payment Methods</a></li>
                       </ul>
                     </li>
                 </ul>
@@ -95,7 +95,7 @@
           <div class="alert alert-info">{{ Session::get('message') }}</div>
       @endif
     </div>
-  
+
     @yield('content')
 
     <!-- JavaScripts -->
@@ -103,7 +103,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.js"></script>
-    
+
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
     @yield('script_footer')
 </body>

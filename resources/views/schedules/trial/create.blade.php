@@ -24,16 +24,28 @@
     </div>
     <div class="form-group">
       <label for="class_type_id">Class:</label>
-      {!! Form::select('class_type_id', $classTypes, null, ['class' => 'form-control']) !!}
+      <select name="class_type_id" class="form-control">
+        @foreach($classTypes as $classType)
+          <option value="{{ $classType->id }}">{{ $classType->name }}</option>
+        @endforeach
+      </select>
     </div>
     <div class="form-group">
       <label for="professional_id">Professional:</label>
-      {!! Form::select('professional_id', $professionals, null, ['class' => 'form-control']) !!}
+      <select name="professional_id" class="form-control">
+        @foreach($professionals as $professional)
+          <option value="{{ $professional->id }}">{{ $professional->name }}</option>
+        @endforeach
+      </select>
     </div>
     <div class="form-group">
       <label for="room_id">Room:</label>
-      {!! Form::select('room_id', $rooms, null, ['class' => 'form-control']) !!}
-    </div>
+      <select name="room_id" class="form-control">
+        @foreach($rooms as $room)
+          <option value="{{ $room->id }}">{{ $room->name }}</option>
+        @endforeach
+      </select>
+    </div>  
     <div class="form-group">
       <label for="start_at">Start:</label>
       {!! Form::text('start_at', null, ['class' => 'form-control']) !!}

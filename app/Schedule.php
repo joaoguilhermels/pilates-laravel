@@ -9,8 +9,6 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
     protected $fillable = [
       'parent_id',
       'client_id',
-      'scheduable_id',
-      'scheduable_type',
       'class_type_id',
       'professional_id',
       'room_id',
