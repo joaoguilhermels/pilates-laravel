@@ -45,5 +45,9 @@
   <input type="text" name="end_at" class="form-control" value="{{ $schedule->end_at }}">
 </div>
 <div class="form-group">
+  <label for="email">Observation:</label>
+  <textarea name="observation" class="form-control">{{ $schedule->observation }}</textarea>
+</div>
+<div class="form-group">
   {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
 </div>

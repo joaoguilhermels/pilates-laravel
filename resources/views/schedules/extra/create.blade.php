@@ -51,6 +51,10 @@
       <input type="datetime" name="end_at" class="form-control">
     </div>
     <div class="form-group">
+      <label for="email">Observation:</label>
+      <textarea name="observation" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
       <input type="submit" value="Add Reposition Class" class="btn btn-primary form-control">
     </div>
 

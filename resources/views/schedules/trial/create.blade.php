@@ -45,14 +45,18 @@
           <option value="{{ $room->id }}">{{ $room->name }}</option>
         @endforeach
       </select>
-    </div>  
+    </div>
     <div class="form-group">
       <label for="start_at">Start:</label>
-      {!! Form::text('start_at', null, ['class' => 'form-control']) !!}
+      <input type="text" name="start_at" class="form-control">
     </div>
     <div class="form-group">
       <label for="end_at">End:</label>
-      {!! Form::text('end_at', null, ['class' => 'form-control']) !!}
+      <input type="text" name="end_at" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="email">Observation:</label>
+      <textarea name="observation" class="form-control"></textarea>
     </div>
     <div class="form-group">
       <input type="submit" value="Add Trial Class" class="btn btn-primary form-control">

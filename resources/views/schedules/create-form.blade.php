@@ -35,5 +35,9 @@
   {!! Form::text('end_at', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
+  <label for="email">Observation:</label>
+  <textarea name="observation" class="form-control"></textarea>
+</div>
+<div class="form-group">
   {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
 </div>
