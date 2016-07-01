@@ -114,6 +114,10 @@ class SchedulesController extends Controller
             $badge = "<span class=\"label label-warning\">AE</span>";
         }
 
+        if ($schedule->observation <> '') {
+            $badge .= " <i class=\"fa fa-comment\"></i>";
+        }
+
         return $badge . ' ' . $schedule->client->name . ' - ' . $schedule->classType->name;
     }
 
