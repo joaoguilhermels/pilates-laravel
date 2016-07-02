@@ -119,7 +119,7 @@ class ClientPlansController extends Controller
     {
         $clientPlan = new ClientPlan;
 
-        $clientPlan->class_type_id  = $request->class_type_id;
+        $clientPlan->class_type_id  = Plan::findOrFail($request->plan_id)->class_type_id;
         $clientPlan->start_at       = $request->start_at;
         $clientPlan->plan_id        = $request->plan_id;
 
@@ -128,16 +128,16 @@ class ClientPlansController extends Controller
         $groupedDates = $this->getGroupedDates($request);
 
         foreach($request->daysOfWeek as $dayOfWeek) {
-          $clientPlanDetail = new ClientPlanDetail;
+            $clientPlanDetail = new ClientPlanDetail;
 
-          $clientPlanDetail->professional_id = $dayOfWeek['professional_id'];
-          $clientPlanDetail->day_of_week = $dayOfWeek['day_of_week'];
-          $clientPlanDetail->room_id = $dayOfWeek['room_id'];
-          $clientPlanDetail->hour = $dayOfWeek['hour'] . ':00';
+            $clientPlanDetail->professional_id = $dayOfWeek['professional_id'];
+            $clientPlanDetail->day_of_week = $dayOfWeek['day_of_week'];
+            $clientPlanDetail->room_id = $dayOfWeek['room_id'];
+            $clientPlanDetail->hour = $dayOfWeek['hour'] . ':00';
 
-          $clientPlanDetail = $clientPlan->clientPlanDetails()->save($clientPlanDetail);
+            $clientPlanDetail = $clientPlan->clientPlanDetails()->save($clientPlanDetail);
 
-          $this->setSchedules($request, $client, $clientPlanDetail, $dayOfWeek, $groupedDates);
+            $this->setSchedules($request, $clientPlan->class_type_id, $client, $clientPlanDetail, $dayOfWeek, $groupedDates);
         }
 
         return redirect('clients');
@@ -200,20 +200,20 @@ class ClientPlansController extends Controller
         return $datesGrouped;
     }
 
-    public function setSchedules(ClientPlanRequest $request, Client $client, ClientPlanDetail $clientPlanDetail, $dayOfWeek, $groupedDates)
+    public function setSchedules(ClientPlanRequest $request, $classTypeId, Client $client, ClientPlanDetail $clientPlanDetail, $dayOfWeek, $groupedDates)
     {
         $classType = ClassType::with([
+            'plans' =>  function ($query) use ($request) {
+                          return $query->where('id', $request->plan_id);
+                      },
             'statuses' => function ($query) {
                               return $query->where('name', 'OK');
                           },
-            'plans' =>  function ($query) use ($request) {
-                            return $query->where('id', $request->plan_id);
-                        },
             'professionals' =>  function ($query) use ($clientPlanDetail) {
                                     return $query->where('professional_id', $clientPlanDetail->professional_id);
                                 }
         ])
-        ->findOrFail($request->class_type_id);
+        ->findOrFail($classTypeId);
 
         $clientPlanDetail->load('professional');
         $clientPlanDetail->professional->load('classTypes');
@@ -249,7 +249,7 @@ class ClientPlansController extends Controller
             $schedule->room_id                     = $clientPlanDetail->room_id;
             $schedule->start_at                    = $dateStart->format("Y-m-d H:i:s");
             $schedule->client_id                   = $client->id;
-            $schedule->class_type_id               = $request->class_type_id;
+            $schedule->class_type_id               = $classTypeId;
             $schedule->professional_id             = $clientPlanDetail->professional_id;
             $schedule->class_type_status_id        = $classTypeStatusOkId;
             $schedule->value_professional_receives = $this->setProfessionalValue($professionalClass, $classPrice);

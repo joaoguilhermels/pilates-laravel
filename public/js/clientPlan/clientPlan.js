@@ -7,11 +7,11 @@ Vue.component('plans', {
         return {
             selectedPlan: [],
             daysOfWeek: [
-              { number: 0, name: 'Monday' },
-              { number: 1, name: 'Tuesday' },
-              { number: 2, name: 'Wednesday' },
-              { number: 3, name: 'Thursday' },
-              { number: 4, name: 'Friday' },
+              { number: 1, name: 'Monday' },
+              { number: 2, name: 'Tuesday' },
+              { number: 3, name: 'Wednesday' },
+              { number: 4, name: 'Thursday' },
+              { number: 5, name: 'Friday' },
             ],
             times: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
         }
@@ -37,7 +37,7 @@ Vue.component('plans', {
             }
 
             return plan.filter(function(day) {
-                return day.number < times
+                return day.number <= times
             })
         }
     }
