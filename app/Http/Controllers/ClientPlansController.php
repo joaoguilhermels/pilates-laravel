@@ -38,13 +38,13 @@ class ClientPlansController extends Controller
     {
         $form = $this->prepareCreateForm();
 
-        $daysOfWeek = $form['daysOfWeek'];
+        //$daysOfWeek = $form['daysOfWeek'];
+        //$classTypes = $form['classTypes'];
         $rooms = $form['rooms'];
-        $classTypePlans = $form['classTypePlans'];
-        $classTypes = $form['classTypes'];
         $professionals = $form['professionals'];
+        $classTypePlans = $form['classTypePlans'];
 
-        return view('clientPlans.create', compact('client', 'daysOfWeek', 'rooms', 'classTypePlans', 'classTypes', 'professionals'));
+        return view('clientPlans.create', compact('client', 'rooms', 'classTypePlans', 'professionals'));
     }
 
     public function prepareCreateForm()

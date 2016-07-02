@@ -1,30 +1,20 @@
 <div id="app">
   <div class="form-group">
-    {!! Form::label('classType', 'Class: ') !!}
-    <select class="form-control" name="class_type_id">
-      <option value=""></option>
-      @foreach($classTypes as $id => $classType)
-        <option value="{{ $id }}">{{ $classType }}</option>
-      @endforeach
-    </select>
-  </div>
-
-  <div class="form-group">
     <label for="start_date">Start Date:</label>
     <input type="date" class="form-control" name="start_at">
   </div>
-  
+
   <plans list="{{ json_encode($classTypePlans) }}"></plans>
 
   <template id="plans-template">
     <div class="form-group">
-    <label for="plans">Plan: </label>
-    <select name="plan_id" class="form-control" v-model="selectedPlan">
-      <option value=""></option>
-        <optgroup label="@{{ class.name }}" v-for="class in list">
-          <option v-for="plan in class.plans" v-bind:value="plan.id">@{{ plan.name }}</option>
-        </optgroup>
-    </select>
+      <label for="plans">Plan: </label>
+      <select name="plan_id" class="form-control" v-model="selectedPlan">
+        <option value=""></option>
+          <optgroup label="@{{ class.name }}" v-for="class in list">
+            <option v-for="plan in class.plans" v-bind:value="plan.id">@{{ plan.name }}</option>
+          </optgroup>
+      </select>
     </div>
 
     <div id="details" class="panel panel-default">
@@ -38,18 +28,14 @@
               <label>Days of the week: </label>
               <select name="daysOfWeek[@{{ day }}][day_of_week]" class="form-control">
                 <option value=""></option>
-                @foreach($daysOfWeek as $key => $dayOfWeek)
-                  <option value="{!! $key !!}">{!! Form::label('daysOfWeek', $dayOfWeek) !!}</option>
-                @endforeach
+                <option v-for="(index, dayOfWeek) in daysOfWeek" value="@{{ dayOfWeek.number }}">@{{ dayOfWeek.name }}</option>
               </select>
             </td>
             <td class="col-md-3">
               <label>Time:</label>
               <select class="form-control" name="daysOfWeek[@{{ day }}][hour]">
                 <option value=""></option>
-                @for($time = 6; $time < 22; $time++)
-                  <option value="{{ $time }}">{{ $time }}:00</option>
-                @endfor
+                <option v-for="time in times" value="@{{ time }}">@{{ time }}:00</option>
               </select>
             </td>
             <td class="col-md-3">
