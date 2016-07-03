@@ -7,17 +7,17 @@
       &nbsp;&nbsp;&nbsp;
       <a href="{{ action('PaymentMethodsController@create') }}" class="btn btn-primary">Add New Payment Method</a>
     </h1>
-    
+
     <hr />
-  
+
     @if (count($paymentMethods) == 0)
-  
+
     <h2>There no Payment Methods yet. You can <a href="{{ action('PaymentMethodsController@create') }}">add one here.</a>
-  
+
     @else
-    
-    <div class="table-responsive">          
-    <table class="table">
+
+    <div class="table-responsive">
+    <table class="table table-striped table-hover">
       <thead>
         <tr>
           <th>Name</th>

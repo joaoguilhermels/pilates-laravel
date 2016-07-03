@@ -7,16 +7,16 @@
       &nbsp;&nbsp;&nbsp;
       <a href="{{ action('ClientsController@create') }}" class="btn btn-primary">Add New Client</a>
     </h1>
-    
+
     <hr />
 
     @if (count($clients) == 0)
-  
+
     <h2>There no clients yet. You can <a href="{{ action('ClientsController@create') }}">add one here.</a>
-  
+
     @else
-    <div class="table-responsive">          
-    <table class="table">
+    <div class="table-responsive">
+    <table class="table table-striped table-hover">
       <thead>
         <tr>
           <th>Name</th>
@@ -43,7 +43,7 @@
         @endforeach
       </tbody>
     </table>
-    
+
     <div class="text-center">
     {!! $clients->render() !!}
     </div>

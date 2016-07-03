@@ -7,17 +7,17 @@
       &nbsp;&nbsp;&nbsp;
       <a href="{{ action('BankAccountsController@create') }}" class="btn btn-primary">Add New Bank Account</a>
     </h1>
-    
+
     <hr />
-  
+
     @if (count($bankAccounts) == 0)
-  
+
     <h2>There no bank accounts yet. You can <a href="{{ action('BankAccountsController@create') }}">add one here.</a>
-  
+
     @else
 
     <div class="table-responsive">
-    <table class="table">
+    <table class="table table-striped table-hover">
       <thead>
         <tr>
           <th>Name</th>

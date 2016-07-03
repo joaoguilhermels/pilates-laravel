@@ -68,10 +68,6 @@ class SchedulesController extends Controller
             'dayClick' => 'function (date, jsEvent, view) {
                 vm.showModalNow(date.format());
             }',
-            'eventClick' => 'function (calEvent, jsEvent, view) {
-                // change the border color just for fun
-                $(this).css(\'border-color\', \'red\');
-            }',
             'eventRender' => 'function(event, element) {
                 var ntoday = Math.round(new Date().getTime() / 1000),
                     eventEnd = event.end.unix(),
@@ -101,6 +97,7 @@ class SchedulesController extends Controller
                     }
                 });
                 element.find(\'div.fc-title\').html(element.find(\'div.fc-title\').text());
+                element.find(\'span.fc-title\').html(element.find(\'span.fc-title\').text());
             }',
         ));
 

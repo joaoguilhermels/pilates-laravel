@@ -9,15 +9,15 @@
     </h1>
 
     <hr />
-  
+
     @if (count($plans) == 0)
-  
+
     <h2>There no plans yet. You can <a href="{{ action('PlansController@create') }}">add one here.</a>
-  
+
     @else
-  
-    <div class="table-responsive">          
-    <table class="table">
+
+    <div class="table-responsive">
+    <table class="table table-striped table-hover">
       <thead>
         <tr>
           <th>Class</th>

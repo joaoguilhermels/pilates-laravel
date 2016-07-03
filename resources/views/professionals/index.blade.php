@@ -7,17 +7,17 @@
       &nbsp;&nbsp;&nbsp;
       <a href="{{ action('ProfessionalsController@create') }}" class="btn btn-primary">Add New Professional</a>
     </h1>
-    
+
     <hr />
-  
+
     @if (count($professionals) == 0)
-  
+
     <h2>There no professionals yet. You can <a href="{{ action('ProfessionalsController@create') }}">add one here.</a>
-  
+
     @else
-    
-    <div class="table-responsive">          
-    <table class="table">
+
+    <div class="table-responsive">
+    <table class="table table-striped table-hover">
       <thead>
         <tr>
           <th>Name</th>

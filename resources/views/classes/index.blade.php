@@ -8,15 +8,15 @@
       <a href="{{ action('ClassTypesController@create') }}" class="btn btn-primary">Add New Class</a>
     </h1>
     <hr />
-  
+
     @if (count($classTypes) == 0)
-  
+
     <h2>There no classes yet. You can <a href="{{ action('ClassTypesController@create') }}">add one here.</a>
-  
+
     @else
-  
-    <div class="table-responsive">          
-    <table class="table">
+
+    <div class="table-responsive">
+    <table class="table table-striped table-hover">
       <thead>
         <tr>
           <th>Name</th>
@@ -37,7 +37,7 @@
         @endforeach
       </tbody>
     </table>
-    </div>    
+    </div>
     @endif
   </div>
 @stop

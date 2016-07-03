@@ -13,7 +13,7 @@
 
     <!-- Styles -->
     <!--link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"-->
-    <link href="https://bootswatch.com/spacelab/bootstrap.min.css" rel="stylesheet">
+    <link href="https://bootswatch.com/flatly/bootstrap.min.css" rel="stylesheet">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
     @yield('css')
 
@@ -58,7 +58,7 @@
                     <li class="{{ active('professionals/payments') }}"><a href="{{ url('/professionals/payments') }}">Pro Payments</a></li>
                     <li class="{{ active('schedules') }}"><a href="{{ url('/schedules') }}">Schedules</a></li>
                     <li class="{{ active('calendar') }}"><a href="{{ url('/calendar') }}">Calendar</a></li>
-                    <li class="{{ active('expenses') }}"><a href="{{ url('/expenses') }}">Expenses</a></li>
+                    {{-- <li class="{{ active('expenses') }}"><a href="{{ url('/expenses') }}">Expenses</a></li> --}}
                     <li class="dropdown {{ active(['bank-accounts', 'payment-methods']) }}">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Config <span class="caret"></span></a>
                       <ul class="dropdown-menu">
