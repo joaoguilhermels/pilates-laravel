@@ -25,21 +25,21 @@
         <table class="table table-striped">
           <tr v-for="day in daysOfWeek | selectPlan">
             <td class="col-md-3">
-              <label>Days of the week: </label>
-              <select name="daysOfWeek[@{{ day.number }}][day_of_week]" class="form-control">
+              <label for="daysOfWeek[@{{ day.number }}][day_of_week]">Days of the week: </label>
+              <select name="daysOfWeek[@{{ day.number }}][day_of_week]" class="form-control" v-on:change="selectDaysOfWeek">
                 <option value=""></option>
                 <option v-for="(index, dayOfWeek) in daysOfWeek" value="@{{ dayOfWeek.number }}">@{{ dayOfWeek.name }}</option>
               </select>
             </td>
             <td class="col-md-3">
-              <label>Time:</label>
+              <label for="daysOfWeek[@{{ day.number }}][hour]">Time:</label>
               <select class="form-control" name="daysOfWeek[@{{ day.number }}][hour]">
                 <option value=""></option>
                 <option v-for="time in times" value="@{{ time }}">@{{ time }}:00</option>
               </select>
             </td>
             <td class="col-md-3">
-              <label for="professional">Professional: </label>
+              <label for="daysOfWeek[@{{ day.number }}][professional_id]">Professional: </label>
               <select class="form-control" name="daysOfWeek[@{{ day.number }}][professional_id]">
                 <option value=""></option>
                 @foreach($professionals as $id => $professional)
@@ -48,7 +48,7 @@
               </select>
             </td>
             <td class="col-md-3">
-              <label for="room">Room: </label>
+              <label for="daysOfWeek[@{{ day.number }}][room_id]">Room: </label>
               <select class="form-control" name="daysOfWeek[@{{ day.number }}][room_id]">
                 <option value=""></option>
                 @foreach($rooms as $id => $room)
@@ -63,6 +63,6 @@
   </template>
 
   <div class="form-group">
-    {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
+    <input type="submit" class="btn btn-primary btn-block" value="{{ $submitButtonText }}">
   </div>
 </div>

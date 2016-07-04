@@ -6,6 +6,7 @@ Vue.component('plans', {
     data: function() {
         return {
             selectedPlan: [],
+            selectedDaysOfWeek: [],
             daysOfWeek: [
               { number: 1, name: 'Monday' },
               { number: 2, name: 'Tuesday' },

@@ -24,13 +24,26 @@ class ClientsController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        //$clients = Client::paginate(10);
+        $total = Client::count();
+        $clients = Client::paginate(10);
+        $name = "";
+        $phone = "";
+        $email = "";
 
+        return view('clients.index', compact('total', 'clients', 'name', 'phone', 'email'));
+    }
+
+    public function search(Request $request)
+    {
+        $total = Client::count();
         $clients = Client::filter($request->all())->paginate(10);
+        $name = $request->name;
+        $phone = $request->phone;
+        $email = $request->email;
 
-        return view('clients.index', compact('clients'));
+        return view('clients.index', compact('total', 'clients', 'name', 'phone', 'email'));
     }
 
     public function show(Client $client)

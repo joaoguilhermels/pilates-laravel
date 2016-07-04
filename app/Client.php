@@ -35,6 +35,11 @@ class Client extends Model
             $query->where('email', '=', trim($params['email']));
         }
 
+        if ( isset($params['phone']) && trim($params['phone']) !== '' )
+        {
+            $query->where('phone', '=', trim($params['phone']));
+        }
+
         return $query;
     }
 }

@@ -1,15 +1,15 @@
 <div class="form-group">
-  {!! Form::label('name', 'Name: ') !!}
-  {!! Form::text('name', null, ['class' => 'form-control']) !!}
+  <label for="name">Name:</label>
+  <input type="text" name="name" class="form-control">
 </div>
 <div class="form-group">
-  {!! Form::label('phone', 'Phone: ') !!}
-  {!! Form::text('phone', null, ['class' => 'form-control']) !!}
+  <label for="phone">Phone:</label>
+  <input type="text" name="phone" class="form-control">
 </div>
 <div class="form-group">
-  {!! Form::label('email', 'E-mail: ') !!}
-  {!! Form::email('email', null, ['class' => 'form-control']) !!}
+  <label for="email">Email:</label>
+  <input type="email" name="email" class="form-control">
 </div>
 <div class="form-group">
-  {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
+  <input type="submit" value="{{ $submitButtonText }}" class="btn btn-primary btn-block">
 </div>

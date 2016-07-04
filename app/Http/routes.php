@@ -73,8 +73,8 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::resource('payment-methods', 'PaymentMethodsController');
     Route::resource('bank-accounts', 'BankAccountsController');
+    Route::post('clients/search', 'ClientsController@search');
     Route::resource('clients', 'ClientsController');
-    Route::post('clients', 'ClientsController@index');
     Route::resource('professionals', 'ProfessionalsController');
     Route::resource('rooms', 'RoomsController');
     Route::resource('classes', 'ClassTypesController');
