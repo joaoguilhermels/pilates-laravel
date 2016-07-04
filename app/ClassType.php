@@ -8,7 +8,7 @@ class ClassType extends Model
 {
     //
     protected $fillable = [
-      //'name', // Do not let users change the status names for now. Review this later.
+      'name',
       'max_number_of_clients',
       'duration',
       'extra_class_price',
@@ -55,5 +55,15 @@ class ClassType extends Model
     public function clientPlans()
     {
         return $this->hasMany('App\ClientPlan');
+    }
+
+    public function scopeWithExtraClass($query)
+    {
+      return $query->where('extra_class', 1)->orderBy('name');
+    }
+
+    public function scopeWithTrial($query)
+    {
+      return $query->where('free_trial', 1)->orderBy('name');
     }
 }

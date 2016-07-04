@@ -1,18 +1,18 @@
-<div class="form-group">
-  {!! Form::label('name', 'Name: ') !!}
-  {!! Form::text('name', null, ['class' => 'form-control']) !!}
+<div class="form-group @if ($errors->has('name')) has-error @endif">
+  <label for="name">Name:</label>
+  <input type="text" name="name" value="{{ old('name', $classType->name) }}" class="form-control">
 </div>
-<div class="form-group">
-  {!! Form::label('max_number_of_clients', 'Max Number of Clients: ') !!}
-  {!! Form::text('max_number_of_clients', null, ['class' => 'form-control']) !!}
+<div class="form-group @if ($errors->has('max_number_of_clients')) has-error @endif">
+  <label for="max_number_of_clients">Max Number of Clients: </label>
+  <input type="number" min="0" max="100" name="max_number_of_clients" value="{{ old('max_number_of_clients', $classType->max_number_of_clients) }}" class="form-control">
 </div>
-<div class="form-group">
+<div class="form-group @if ($errors->has('duration')) has-error @endif">
   <label for="duration">Duration (Mins): </label>
-  {!! Form::text('duration', 60, ['class' => 'form-control']) !!}
+  <input type="number" name="duration" min="0" max="120" value="{{ old('duration', $classType->duration) }}" class="form-control">
 </div>
-<div class="form-group">
-  <label for="duration">Extra class price: </label>
-  {!! Form::text('extra_class_price', null, ['class' => 'form-control']) !!}
+<div class="form-group @if ($errors->has('extra_class_price')) has-error @endif">
+  <label for="extra_class_price">Extra class price: </label>
+  <input type="number" name="extra_class_price" min="0" value="{{ old('extra_class_price', $classType->extra_class_price) }}" class="form-control">
 </div>
 <div class="form-group">
   <label for="free_trial">Does this class offers a free trial? </label>
@@ -42,6 +42,7 @@
           <tr>
             <td>
               <input type="hidden" name="status[{{ $key }}][id]" value="{{ $status->id == null ? NULL : $status->id }}">
+              <input type="hidden" name="status[{{ $key }}][name]" value="{{ $status->name }}">
               {{ $status->name }}
             </td>
             <td>
@@ -63,7 +64,7 @@
               </div>
             </td>
             <td>
-              {!! Form::input('color', 'status[' . $key . '][color]', $status->color, null, ['class' => 'form-control', 'id' => 'color.' . $key]) !!}
+              <input type="color" name="status[{{ $key }}][color]" value="{{ $status->color }}" class="form-control" id="color.{{ $key }}">
             </td>
             <!--td>
               <button value="<?php print 'status.' . $status->id; ?>" id="<?php print 'btn.status.' . $status->id; ?>">delete</button>
