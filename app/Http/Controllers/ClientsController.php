@@ -24,9 +24,11 @@ class ClientsController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $clients = Client::paginate(10);
+        //$clients = Client::paginate(10);
+
+        $clients = Client::filter($request->all())->paginate(10);
 
         return view('clients.index', compact('clients'));
     }

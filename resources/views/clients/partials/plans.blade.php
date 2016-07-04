@@ -35,7 +35,11 @@
         @endforeach
       </td>
       <td>
-        {{ $clientPlan->start_at }}
+        @if ($clientPlan->financialTransactions->count() > 0)
+            Payment Added
+        @else
+            Missing Payment
+        @endif
       </td>
       <td>
         @if ($clientPlan->financialTransactions->count() == 0)

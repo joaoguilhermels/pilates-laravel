@@ -30,7 +30,7 @@ class ProfessionalsController extends Controller
     {
         $professionals = Professional::all();
 
-        return view('professionals.index')->with('professionals', $professionals);
+        return view('professionals.index', compact('professionals'));
     }
 
     public function indexPayments()

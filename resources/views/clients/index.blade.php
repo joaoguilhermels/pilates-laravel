@@ -15,6 +15,18 @@
     <h2>There no clients yet. You can <a href="{{ action('ClientsController@create') }}">add one here.</a>
 
     @else
+    <form action="{{ action('ClientsController@index') }}" method="POST" class="form-inline">
+      {{ csrf_field() }}
+      <div class="form-group">
+        <label class="sr-only" for="name">Name</label>
+        <input type="text" name="name" value="{{ old('name') }}" class="form-control" placeholder="Name">
+        <label class="sr-only" for="name">Name</label>
+        <input type="text" name="email" value="{{ old('email') }}" class="form-control" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <input type="submit" value="search" class="form-control">
+      </div>
+    </form>
     <div class="table-responsive">
     <table class="table table-striped table-hover">
       <thead>

@@ -19,9 +19,11 @@ class ExpensesController extends Controller
 
     public function index() {
       //$expenses = Expense::all();
-      $expenses = FinancialTransaction::all();
+      $expenses = Expense::all();
 
-      return view('expenses.index')->with('expenses', $expenses);
+      dd($expenses->financialTransactions());
+
+      return view('expenses.index', compact('expenses'));
     }
 
     public function show(Expense $expense)

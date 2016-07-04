@@ -51,17 +51,17 @@
                 <ul class="nav navbar-nav">
                     <li class="{{ active('home') }}"><a href="{{ url('/home') }}">Home</a></li>
                     <li class="{{ active('clients') }}"><a href="{{ url('/clients') }}">Clients</a></li>
+                    <li class="{{ active('professionals') }}"><a href="{{ url('/professionals') }}">Professionals</a></li>
                     <li class="{{ active('rooms') }}"><a href="{{ url('/rooms') }}">Rooms</a></li>
                     <li class="{{ active('classes') }}"><a href="{{ url('/classes') }}">Classes</a></li>
                     <li class="{{ active('plans') }}"><a href="{{ url('/plans') }}">Plans</a></li>
-                    <li class="{{ active('professionals') }}"><a href="{{ url('/professionals') }}">Professionals</a></li>
-                    <li class="{{ active('professionals/payments') }}"><a href="{{ url('/professionals/payments') }}">Pro Payments</a></li>
                     <li class="{{ active('schedules') }}"><a href="{{ url('/schedules') }}">Schedules</a></li>
                     <li class="{{ active('calendar') }}"><a href="{{ url('/calendar') }}">Calendar</a></li>
-                    {{-- <li class="{{ active('expenses') }}"><a href="{{ url('/expenses') }}">Expenses</a></li> --}}
                     <li class="dropdown {{ active(['bank-accounts', 'payment-methods']) }}">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Config <span class="caret"></span></a>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Financials <span class="caret"></span></a>
                       <ul class="dropdown-menu">
+                        <li class="{{ active('expenses') }}"><a href="{{ url('/expenses') }}">Expenses</a></li>
+                        <li class="{{ active('professionals/payments') }}"><a href="{{ url('/professionals/payments') }}">Pro Payments</a></li>
                         <li class="{{ active('bank-accounts') }}"><a href="{{ url('/bank-accounts') }}">Bank Accounts</a></li>
                         <li class="{{ active('payment-methods') }}"><a href="{{ url('/payment-methods') }}">Payment Methods</a></li>
                       </ul>

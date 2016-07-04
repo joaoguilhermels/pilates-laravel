@@ -22,4 +22,19 @@ class Client extends Model
     {
         return $this->hasMany('App\Schedule');
     }
+
+    public function scopeFilter($query, $params)
+    {
+        if ( isset($params['name']) && trim($params['name']) !== '' )
+        {
+            $query->where('name', 'LIKE', trim($params['name'] . '%'));
+        }
+
+        if ( isset($params['email']) && trim($params['email']) !== '' )
+        {
+            $query->where('email', '=', trim($params['email']));
+        }
+
+        return $query;
+    }
 }
