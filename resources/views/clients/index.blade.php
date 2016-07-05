@@ -41,7 +41,7 @@
           <th>Name</th>
           <th>Phone</th>
           <th>E-mail</th>
-          <th>Description</th>
+          <th>Observation</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -52,7 +52,7 @@
             <td><a href="{{ action('ClientsController@show', [$client->id]) }}">{{ $client->name }}</a></td>
             <td>{{ $client->phone }}</td>
             <td>{{ $client->email }}</td>
-            <td>{{ $client->description }}</td>
+            <td>{{ $client->observation }}</td>
             <td>
               <a href="{{ action('ClientsController@edit', [$client->id]) }}" class="btn pull-left">edit</a>
               {!! Form::open(['route' => ['clients.destroy', $client->id], 'method' => 'delete']) !!}

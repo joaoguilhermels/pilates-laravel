@@ -12,18 +12,18 @@ use App\Http\Controllers\Controller;
 
 class RoomsController extends Controller
 {
-    
+
     public function __construct()
     {
       $this->middleware('auth');
     }
-    
+
     public function index() {
       $rooms = room::all();
-      
+
       return view('rooms.index')->with('rooms', $rooms);
     }
-    
+
     public function show(Room $room)
     {
         return view('rooms.show', compact('room'));
@@ -31,33 +31,35 @@ class RoomsController extends Controller
 
     public function edit(Room $room)
     {
-        $classTypes = ClassType::lists('name', 'id');
+        $classTypes = ClassType::all();
+        $room->load('classTypes');
 
         return view('rooms.edit', compact('room', 'classTypes'));
     }
-    
+
     public function create()
     {
-        $classTypes = ClassType::lists('name', 'id');
+        $room = new Room;
+        $classTypes = ClassType::all();
 
-        return view('rooms.create', compact('classTypes'));
+        return view('rooms.create', compact('classTypes', 'room'));
     }
-    
+
     public function store(RoomRequest $request)
     {
-        $room = room::create($request->all());
+        $room = Room::create($request->all());
 
         if ($request->input('class_type_list') != NULL) {
             $room->classTypes()->sync($request->input('class_type_list'));
         }
-      
+
         return redirect('rooms');
     }
 
     public function update(Room $room, RoomRequest $request)
     {
         $room->update($request->all());
-        
+
         $room->classTypes()->sync($request->input('class_type_list'));
 
         return redirect('rooms');
@@ -65,7 +67,6 @@ class RoomsController extends Controller
 
     public function destroy(Room $room)
     {
-        //dd($room);
         $room->destroy($room->id);
 
         return redirect('rooms');

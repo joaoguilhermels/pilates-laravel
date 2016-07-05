@@ -86,9 +86,9 @@ class ClientsController extends Controller
         return view('clients.report_charge', compact('client', 'rows', 'total'));
     }
 
-    public function create()
+    public function create(Client $client)
     {
-        return view('clients.create');
+        return view('clients.create', compact('client'));
     }
 
     public function store(ClientRequest $request)

@@ -35,4 +35,11 @@ class Room extends Model
 
         return $this->name . ' (' . $classTypesList . ')';
     }
+
+    public function scopeWhereClassesAllowTrials($query)
+    {
+        return $query->join('class_type_room', 'rooms.id', '=', 'class_type_room.room_id')
+            ->join('class_types', 'class_types.id', '=', 'class_type_room.class_type_id')
+            ->where('class_types.free_trial', '=', true);
+    }
 }

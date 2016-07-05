@@ -13,4 +13,11 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.sass('app.scss');
+    mix.copy('node_modules/multiselect', 'public/vendor/multiselect');
+    /*mix.copy('node_modules/multiselect/css/multi-select.css', 'public/vendor/multiselect/css/multi-select.css');
+    mix.copy('node_modules/multiselect/css/multi-select.css', 'public/vendor/multiselect/css/multi-select.css');*/
+    /*mix.scripts([
+        'resources/assets/js/vendor/multiselect/jquery.multi-select.js'
+    ], 'public/js/vendor/vendor.js');*/
+
 });

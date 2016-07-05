@@ -85,17 +85,17 @@ class ProfessionalsController extends Controller
 
     public function generatePaymentReport(PaymentReportRequest $request)
     {
-        $startAt        = Carbon::parse($request->get('start_at'));
-        $professional   = Professional::findOrFail($request->get('professional'));
+        $startAt        = Carbon::parse($request->start_at);
+        $professional   = Professional::findOrFail($request->professional);
         $bankAccounts   = BankAccount::all();
         $paymentMethods = PaymentMethod::all();
 
-        $rows = Schedule::where('professional_id', $request->get('professional'))
+        $rows = Schedule::where('professional_id', $request->professional)
                           ->whereMonth('start_at', '=', $startAt->month)
                           ->whereYear('start_at', '=', $startAt->year)
                           ->get();
 
-        $total = Schedule::where('professional_id', $request->get('professional'))
+        $total = Schedule::where('professional_id', $request->professional)
                             ->whereMonth('start_at', '=', $startAt->month)
                             ->whereYear('start_at', '=', $startAt->year)
                             ->sum('price');

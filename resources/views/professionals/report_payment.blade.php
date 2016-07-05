@@ -69,7 +69,12 @@
                   @endif
                 </td>
                 <td>
-                  {{ $row->clientPlanDetail->clientPlan->plan->name }}
+                  {{-- TODO: Include logic to show extra class  --}}
+                  @if ($row->trial == true)
+                    Trial
+                  @else
+                    {{ $row->clientPlanDetail != null ? $row->clientPlanDetail->clientPlan->plan->name : "" }}
+                  @endif
                 </td>
               </tr>
             @endforeach
