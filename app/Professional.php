@@ -51,6 +51,7 @@ class Professional extends Model
     {
         return $query->join('class_type_professional', 'professionals.id', '=', 'class_type_professional.professional_id')
           ->join('class_types', 'class_types.id', '=', 'class_type_professional.class_type_id')
-          ->where('class_types.free_trial', '=', 'true');
+          ->where('class_types.trial', '=', true)
+          ->select('professionals.*');
     }
 }

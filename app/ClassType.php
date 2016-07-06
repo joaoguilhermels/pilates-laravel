@@ -12,7 +12,7 @@ class ClassType extends Model
       'max_number_of_clients',
       'duration',
       'extra_class_price',
-      'free_trial'
+      'trial'
     ];
 
     /**
@@ -20,7 +20,7 @@ class ClassType extends Model
      */
     public function professionals()
     {
-        return $this->belongsToMany('App\Professional')->withTimestamps();
+        return $this->belongsToMany('App\Professional')->withPivot('value', 'value_type')->withTimestamps();
     }
 
     /**
@@ -59,11 +59,11 @@ class ClassType extends Model
 
     public function scopeWithExtraClass($query)
     {
-      return $query->where('extra_class', 1)->orderBy('name');
+        return $query->where('extra_class', true)->orderBy('name');
     }
 
     public function scopeWithTrial($query)
     {
-      return $query->where('free_trial', 1)->orderBy('name');
+        return $query->where('trial', true)->orderBy('name');
     }
 }

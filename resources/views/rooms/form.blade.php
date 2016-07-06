@@ -10,7 +10,7 @@
   <label for="class_type_list">Classes given on this room:</label>
   <select multiple="multiple" name="class_type_list[]" class="form-control" id="class_type_list">
     @foreach($classTypes as $classType)
-      <option value="{{ $classType->id }}" @if(isset($room)) {{ $room->classTypes->where('id', $classType->id)->count() == 1 ? 'selected' : '' }} @endif>{{ $classType->name }}</option>
+      <option value="{{ $classType->id }}" @if($room->classTypes->contains($classType->id)) selected @endif>{{ $classType->name }}</option>
     @endforeach
   </select>
 </div>

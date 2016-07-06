@@ -60,7 +60,8 @@ class RoomsController extends Controller
     {
         $room->update($request->all());
 
-        $room->classTypes()->sync($request->input('class_type_list'));
+        // Using PHP7 null coalise operator ??
+        $room->classTypes()->sync($request->class_type_list ?? array());
 
         return redirect('rooms');
     }

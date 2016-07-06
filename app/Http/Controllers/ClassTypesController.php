@@ -41,11 +41,9 @@ class ClassTypesController extends Controller
         return view('classes.edit', compact('classType'));
     }
 
-    public function create()
+    public function create(ClassType $classType)
     {
         $statuses = $this->create_default_statuses();
-
-        $classType = new ClassType;
 
         $classType->statuses = $statuses;
 
@@ -56,14 +54,14 @@ class ClassTypesController extends Controller
     {
         $classType = ClassType::create($request->all());
 
-        foreach($request->get('status') as $status) {
+        foreach($request->status as $status) {
             $classType->statuses()->create($status);
         }
 
         return redirect('classes');
     }
 
-    public function update(ClassType $classType, ClassTypeStatus $classTypeStatus, ClassTypeRequest $request)
+    public function update(ClassType $classType, ClassTypeRequest $request)
     {
         $classType->update($request->all());
 

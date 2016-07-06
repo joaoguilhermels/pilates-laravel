@@ -64,16 +64,19 @@ class ProfessionalsController extends Controller
 
     public function edit(Professional $professional)
     {
-        $classTypes = ClassType::lists('name', 'id');
+        //$classTypes = ClassType::with('professionals')->wherePivot('professional_id', '=', $professional->id)->get();
+        $classTypes = ClassType::with(['professionals' => function ($query) use ($professional) {
+            $query->where('id', $professional->id);
+        }])->get();
 
         return view('professionals.edit', compact('professional', 'classTypes'));
     }
 
-    public function create()
+    public function create(Professional $professional)
     {
-        $classTypes = ClassType::lists('name', 'id');
+        $classTypes = ClassType::all();
 
-        return view('professionals.create', compact('classTypes'));
+        return view('professionals.create', compact('professional', 'classTypes'));
     }
 
     public function createProfessionalPayment()

@@ -297,8 +297,6 @@ class SchedulesController extends Controller
 
     public function createTrialClass()
     {
-        //$classTypes         = ClassType::where('free_trial', true)->with('professionals', 'rooms', 'statuses')->get();
-
         $classTypes = ClassType::WithTrial()->get();
         $rooms = Room::WhereClassesAllowTrials()->get();
         $professionals = Professional::GivingTrialClasses()->get();

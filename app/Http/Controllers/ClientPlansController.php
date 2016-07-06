@@ -37,9 +37,8 @@ class ClientPlansController extends Controller
     public function createClientPlan(Client $client)
     {
         $form = $this->prepareCreateForm();
+//dd($form);
 
-        //$daysOfWeek = $form['daysOfWeek'];
-        //$classTypes = $form['classTypes'];
         $rooms = $form['rooms'];
         $professionals = $form['professionals'];
         $classTypePlans = $form['classTypePlans'];
