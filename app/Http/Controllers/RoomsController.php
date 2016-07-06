@@ -49,9 +49,9 @@ class RoomsController extends Controller
     {
         $room = Room::create($request->all());
 
-        if ($request->input('class_type_list') != NULL) {
-            $room->classTypes()->sync($request->input('class_type_list'));
-        }
+        $room->classTypes()->sync($request->class_type_list ?? array());
+
+        Session::flash('message', 'Successfully added room ' . $room->name);
 
         return redirect('rooms');
     }
@@ -63,12 +63,16 @@ class RoomsController extends Controller
         // Using PHP7 null coalise operator ??
         $room->classTypes()->sync($request->class_type_list ?? array());
 
+        Session::flash('message', 'Successfully updated room ' . $room->name);
+
         return redirect('rooms');
     }
 
     public function destroy(Room $room)
     {
         $room->destroy($room->id);
+
+        Session::flash('message', 'Successfully deleted room ' . $room->name);
 
         return redirect('rooms');
     }

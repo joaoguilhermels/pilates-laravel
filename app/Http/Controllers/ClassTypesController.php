@@ -58,6 +58,8 @@ class ClassTypesController extends Controller
             $classType->statuses()->create($status);
         }
 
+        Session::flash('message', 'Successfully created class ' . $classType->name);
+
         return redirect('classes');
     }
 
@@ -69,12 +71,16 @@ class ClassTypesController extends Controller
             $classType->statuses()->find($status['id'])->update($status);
         }
 
+        Session::flash('message', 'Successfully updated class ' . $classType->name);
+
         return redirect('classes');
     }
 
     public function destroy(ClassType $classType)
     {
         $classType->delete();
+
+        Session::flash('message', 'Successfully deleted class ' . $classType->name);
 
         return redirect('classes');
     }

@@ -240,6 +240,8 @@ class SchedulesController extends Controller
     {
         $schedule = Schedule::create($request->all());
 
+        Session::flash('message', 'Successfully added schedule ' . $schedule->start_at);
+
         return redirect('schedules');
     }
 
@@ -292,6 +294,8 @@ class SchedulesController extends Controller
 
         Schedule::where('id', $unscheduled->id)->update(['parent_id' => $unscheduled->id]);
 
+        Session::flash('message', 'Successfully added reposition schedule ' . $schedule->start_at);
+
         return redirect('schedules');
     }
 
@@ -322,6 +326,8 @@ class SchedulesController extends Controller
 
         $schedule = Schedule::create($request->all());
 
+        Session::flash('message', 'Successfully added trial schedule ' . $schedule->start_at);
+
         return redirect('schedules');
     }
 
@@ -348,6 +354,8 @@ class SchedulesController extends Controller
 
         $schedule = Schedule::create($request->all());
 
+        Session::flash('message', 'Successfully added extra class schedule ' . $schedule->start_at);
+
         return redirect('schedules');
     }
 
@@ -368,12 +376,16 @@ class SchedulesController extends Controller
     {
         $schedule->update($request->all());
 
+        Session::flash('message', 'Successfully updated schedule ' . $schedule->start_at);
+
         return redirect('schedules');
     }
 
     public function destroy(Schedule $schedule)
     {
         $schedule->destroy($schedule->id);
+
+        Session::flash('message', 'Successfully deleted schedule ' . $schedule->start_at);
 
         return redirect('schedules');
     }

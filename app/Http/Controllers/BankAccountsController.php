@@ -24,7 +24,7 @@ class BankAccountsController extends Controller
     public function index()
     {
         $bankAccounts = BankAccount::all();
-        
+
         return view('bankAccounts.index', compact('bankAccounts'));
     }
 
@@ -33,9 +33,9 @@ class BankAccountsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(BankAccount $bankAccount)
     {
-        return view('bankAccounts.create');
+        return view('bankAccounts.create', compact('bankAccount'));
     }
 
     /**
@@ -47,7 +47,9 @@ class BankAccountsController extends Controller
     public function store(BankAccountRequest $request)
     {
         $bankAccount = BankAccount::create($request->all());
-      
+
+        Session::flash('message', 'Successfully created bank account ' . $bankAccount->name);
+
         return redirect('bank-accounts');
     }
 
@@ -84,6 +86,8 @@ class BankAccountsController extends Controller
     {
         $bankAccount->update($request->all());
 
+        Session::flash('message', 'Successfully updated bank account ' . $bankAccount->name);
+
         return redirect('bank-accounts');
     }
 
@@ -96,6 +100,8 @@ class BankAccountsController extends Controller
     public function destroy(BankAccount $bankAccount)
     {
         $bankAccount->delete();
+
+        Session::flash('message', 'Successfully deleted bank account ' . $bankAccount->name);
 
         return redirect('bank-accounts');
     }

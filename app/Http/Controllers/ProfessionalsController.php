@@ -118,6 +118,8 @@ class ProfessionalsController extends Controller
 
         $financialTransaction->financialTransactionDetails()->create($request->all());
 
+        Session::flash('message', 'Successfully added paymento to professional ' . $professional->name);
+
         return redirect('professionals/payments');
     }
 
@@ -136,6 +138,8 @@ class ProfessionalsController extends Controller
         $professional = Professional::create($request->all());
 
         $professional->classTypes()->sync($classTypeList);
+
+        Session::flash('message', 'Successfully added professional ' . $professional->name);
 
         return redirect('professionals');
     }
@@ -156,6 +160,8 @@ class ProfessionalsController extends Controller
 
         $professional->classTypes()->sync($classTypeList);
 
+        Session::flash('message', 'Successfully updated professional ' . $professional->name);
+
         return redirect('professionals');
     }
 
@@ -167,6 +173,8 @@ class ProfessionalsController extends Controller
     public function destroy(Professional $professional)
     {
         $professional->delete();
+
+        Session::flash('message', 'Successfully deleted professional ' . $professional->name);
 
         return redirect('professionals');
     }

@@ -24,7 +24,7 @@ class PaymentMethodsController extends Controller
     public function index()
     {
         $paymentMethods = PaymentMethod::all();
-        
+
         return view('paymentMethods.index')->with('paymentMethods', $paymentMethods);
     }
 
@@ -33,9 +33,9 @@ class PaymentMethodsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(PaymentMethod $paymentMethod)
     {
-        return view('paymentMethods.create');
+        return view('paymentMethods.create', compact('paymentMethod'));
     }
 
     /**
@@ -47,7 +47,9 @@ class PaymentMethodsController extends Controller
     public function store(PaymentMethodRequest $request)
     {
         $paymentMethod = PaymentMethod::create($request->all());
-      
+
+        Session::flash('message', 'Successfully added payment method ' . $paymentMethod->name);
+
         return redirect('payment-methods');
     }
 
@@ -84,6 +86,8 @@ class PaymentMethodsController extends Controller
     {
         $paymentMethod->update($request->all());
 
+        Session::flash('message', 'Successfully updated payment method ' . $paymentMethod->name);
+
         return redirect('payment-methods');
     }
 
@@ -96,6 +100,8 @@ class PaymentMethodsController extends Controller
     public function destroy(PaymentMethod $paymentMethod)
     {
         $paymentMethod->delete();
+
+        Session::flash('message', 'Successfully deleted payment method ' . $paymentMethod->name);
 
         return redirect('payment-methods');
     }

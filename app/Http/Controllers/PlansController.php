@@ -47,6 +47,8 @@ class PlansController extends Controller
     {
         $plan = plan::create($request->all());
 
+        Session::flash('message', 'Successfully added plan ' . $plan->name);
+
         return redirect('plans');
     }
 
@@ -54,12 +56,16 @@ class PlansController extends Controller
     {
         $plan->update($request->all());
 
+        Session::flash('message', 'Successfully updated plan ' . $plan->name);
+
         return redirect('plans');
     }
 
     public function destroy(plan $plan)
     {
         $plan->destroy($plan->id);
+
+        Session::flash('message', 'Successfully deleted plan ' . $plan->name);
 
         return redirect('plans');
     }

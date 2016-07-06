@@ -10,6 +10,12 @@
   <label for="email">Email:</label>
   <input type="email" name="email" class="form-control" value="{{ old('email', $client->email) }}">
 </div>
+<div class="form-group @if ($errors->has('observation')) has-error @endif">
+  <label for="observation">Observation:</label>
+  <textarea name="observation" class="form-control">
+    {{ old('observation', $client->observation) }}
+  </textarea>
+</div>
 <div class="form-group">
   <input type="submit" value="{{ $submitButtonText }}" class="btn btn-primary btn-block">
 </div>
