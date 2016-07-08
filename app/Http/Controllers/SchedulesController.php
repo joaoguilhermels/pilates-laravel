@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Session;
+use App\Room;
+use App\Plan;
 use App\Schedule;
 use App\Client;
 use App\ClassType;
 use App\ClassTypeStatus;
 use App\ClientPlanDetail;
-use App\Room;
-use App\Plan;
 use App\Professional;
 use App\Http\Requests;
 use App\Http\Requests\ScheduleRequest;
