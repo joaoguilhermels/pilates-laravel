@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Session;
 use App\Plan;
 use App\Room;
 use App\Client;
@@ -37,7 +38,6 @@ class ClientPlansController extends Controller
     public function createClientPlan(Client $client)
     {
         $form = $this->prepareCreateForm();
-//dd($form);
 
         $rooms = $form['rooms'];
         $professionals = $form['professionals'];
@@ -49,12 +49,12 @@ class ClientPlansController extends Controller
     public function prepareCreateForm()
     {
         $form['daysOfWeek'] = $this->daysOfWeek;
-        $form['rooms'] = Room::all()->lists('name_with_classes', 'id');
-        $form['classTypePlans'] = ClassType::with('plans')->get()->toArray();
+        $form['rooms'] = Room::all();
+        $form['classTypePlans'] = ClassType::with('plans')->with('professionals', 'rooms')->get()->toArray();
         //$plans = Plan::all()->lists('name_with_class', 'id');
-        $form['classTypes'] = ClassType::lists('name', 'id');
+        $form['classTypes'] = ClassType::all();
 
-        $form['professionals'] = Professional::all()->lists('name_with_classes', 'id');
+        $form['professionals'] = Professional::all();
 
         return $form;
     }
@@ -138,6 +138,8 @@ class ClientPlansController extends Controller
 
             $this->setSchedules($request, $clientPlan->class_type_id, $client, $clientPlanDetail, $dayOfWeek, $groupedDates);
         }
+
+        Session::flash('message', 'Successfully added a plan to ' . $client->name);
 
         return redirect('clients');
     }

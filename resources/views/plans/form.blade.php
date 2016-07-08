@@ -1,26 +1,40 @@
 <div class="form-group">
-  {!! Form::label('class_type_id', 'Class related to this plan: ') !!}
-  {!! Form::select('class_type_id', $classTypes, null, ['class' => 'form-control']) !!}
+  <label for="class_type_id">Class related to this plan:</label>
+  <select name="class_type_id" class="form-control">
+    <option value=""></option>
+    @foreach($classTypes as $classType)
+      <option value="{{ $classType->id }}" @if(old('class_type_id', isset($plan->classType->id) ? $plan->classType->id : "" ) == $classType->id) selected @endif>{{ $classType->name }}</option>
+    @endforeach
+  </select>
 </div>
 <div class="form-group">
-  {!! Form::label('name', 'Name: ') !!}
-  {!! Form::text('name', null, ['class' => 'form-control']) !!}
+  <label for="name">Name:</label>
+  <input type="text" name="name" class="form-control" value="{{ old('name', $plan->name) }}">
 </div>
 <div class="form-inline">
   <div class="form-group">
-    {!! Form::label('times', 'The client will go ') !!}
-    {!! Form::text('times', null, ['class' => 'form-control input-sm', 'size' => 5]) !!}
-    {!! Form::label('times_type', ' times per ') !!}
-    {!! Form::select('times_type', array('week' => 'week(s)', 'month' => 'month(s)'), 'week', ['class' => 'form-control input-sm']) !!}
-    {!! Form::label('duration', ', the plan will last for ') !!} {!! Form::text('duration', null, ['class' => 'form-control input-sm', 'size' => 5]) !!}
-    {!! Form::select('duration_type', array('week' => 'week(s)', 'month' => 'month(s)'), 'month', ['class' => 'form-control input-sm']) !!}
-    {!! Form::label('price', ' and the price is ') !!}
-    {!! Form::text('price', null, ['class' => 'form-control input-sm', 'size' => 5]) !!}
-    {!! Form::label('price', 'per ') !!}
-    {!! Form::select('price_type', array('class' => 'class', 'month' => 'month'), 'class', ['class' => 'form-control input-sm']) !!}
+    <label for="times">The client will go </label>
+    <input type="number" name="times" class="form-control input-sm" size="5" value="{{ old('time', $plan->times) }}">
+    <label for="times_type"> times per </label>
+    <select name="times_type" class="form-control input-sm">
+      <option value="week" @if(old('times_type', $plan->times_type) == "week") selected @endif>week</option>
+      <option value="month" @if(old('times_type', $plan->times_type) == "month") selected @endif>month</option>
+    </select>
+    <label for="duration"> , the plan will last for </label> <input type="number" name="duration" class="form-control input-sm" size="5" value="{{ old('duration', $plan->duration) }}">
+    <select name="duration_type" class="form-control input-sm">
+      <option value="month" @if(old('duration_type', $plan->duration_type) == "month") selected @endif>month(s)</option>
+      <option value="week" @if(old('duration_type', $plan->duration_type) == "week") selected @endif>week(s)</option>
+    </select>
+    <label for="price"> and the price is </label>
+    <input type="number" name="price" class="form-control input-sm" size="5" value="{{ old('time', $plan->price) }}">
+    <label for="price_type">per </label>
+    <select name="price_type" class="form-control input-sm">
+      <option value="class" @if(old('price_type', $plan->price_type) == "class") selected @endif>class</option>
+      <option value="month" @if(old('price_type', $plan->price_type) == "month") selected @endif>month</option>
+    </select>
   </div>
 </div>
 <div>&nbsp;</div>
 <div class="form-group">
-  {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
+  <input type="submit" value="{{ $submitButtonText }}" class="btn btn-primary btn-block">
 </div>

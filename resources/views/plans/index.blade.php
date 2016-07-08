@@ -20,8 +20,8 @@
     <table class="table table-striped table-hover">
       <thead>
         <tr>
-          <th>Class</th>
           <th>Name</th>
+          <th>Class</th>
           <th>Price</th>
           <th>Times</th>
           <th>Plan Duration</th>
@@ -31,8 +31,8 @@
       <tbody>
         @foreach ($plans as $plan)
         <tr>
-          <td><a href="{{ action('PlansController@show', [$plan->id]) }}">{{ $plan->classType->name }}</a></td>
           <td><a href="{{ action('PlansController@show', [$plan->id]) }}">{{ $plan->name }}</a></td>
+          <td><a href="{{ action('PlansController@show', [$plan->id]) }}">{{ $plan->classType->name }}</a></td>
           <td><a href="{{ action('PlansController@show', [$plan->id]) }}">{{ $plan->price }} per {{ $plan->price_type }}</a></td>
           <td><a href="{{ action('PlansController@show', [$plan->id]) }}">{{ $plan->times }} per {{ $plan->times_type }}</a></td>
           <td><a href="{{ action('PlansController@show', [$plan->id]) }}">{{ $plan->duration }} {{ $plan->duration_type }}</a></td>

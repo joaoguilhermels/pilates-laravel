@@ -81,7 +81,7 @@ class ProfessionalsController extends Controller
 
     public function createProfessionalPayment()
     {
-        $professionals = Professional::lists('name', 'id');
+        $professionals = Professional::all();
 
         return view('professionals.payments.create', compact('professionals'));
     }

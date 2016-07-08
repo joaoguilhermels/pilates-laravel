@@ -50,6 +50,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li class="{{ active('home') }}"><a href="{{ url('/home') }}">Home</a></li>
+                    @if (Auth::check())
                     <li class="{{ active('clients') }}"><a href="{{ url('/clients') }}">Clients</a></li>
                     <li class="{{ active('professionals') }}"><a href="{{ url('/professionals') }}">Professionals</a></li>
                     <li class="{{ active('rooms') }}"><a href="{{ url('/rooms') }}">Rooms</a></li>
@@ -66,6 +67,7 @@
                         <li class="{{ active('payment-methods') }}"><a href="{{ url('/payment-methods') }}">Payment Methods</a></li>
                       </ul>
                     </li>
+                    @endif 
                 </ul>
 
                 <!-- Right Side Of Navbar -->

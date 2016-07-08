@@ -29,7 +29,7 @@ Route::get('/', function () {
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
-    Route::get('/home', 'HomeController@index');
+    Route::get('/dashboard', 'HomeController@index');
 
     Route::get('/calendar', 'SchedulesController@calendar');
     Route::get('/calendar/group', 'SchedulesController@groupCalendar');

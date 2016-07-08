@@ -23,7 +23,7 @@
       </div>
       <div class="table-responsive">
         <table class="table table-striped">
-          <tr v-for="day in daysOfWeek | selectPlan">
+          <tr v-for="day in daysOfWeek | filterNumberOfDays">
             <td class="col-md-3">
               <label for="daysOfWeek[@{{ day.number }}][day_of_week]">Days of the week: </label>
               <select name="daysOfWeek[@{{ day.number }}][day_of_week]" class="form-control" v-on:change="selectDaysOfWeek">
@@ -40,10 +40,11 @@
             </td>
             <td class="col-md-3">
               <label for="daysOfWeek[@{{ day.number }}][professional_id]">Professional: </label>
+              @{{ class }}
               <select class="form-control" name="daysOfWeek[@{{ day.number }}][professional_id]">
                 <option value=""></option>
-                @foreach($professionals as $id => $professional)
-                  <option value="{{ $id }}">{{ $professional }}</option>
+                @foreach($professionals as $professional)
+                <option value="{{ $professional->id }}">{{ $professional->NameWithClasses }}</option>
                 @endforeach
               </select>
             </td>
@@ -51,8 +52,8 @@
               <label for="daysOfWeek[@{{ day.number }}][room_id]">Room: </label>
               <select class="form-control" name="daysOfWeek[@{{ day.number }}][room_id]">
                 <option value=""></option>
-                @foreach($rooms as $id => $room)
-                  <option value="{{ $id }}">{{ $room }}</option>
+                @foreach($rooms as $room)
+                  <option value="{{ $room->id }}">{{ $room->NameWithClasses }}</option>
                 @endforeach
               </select>
             </td>

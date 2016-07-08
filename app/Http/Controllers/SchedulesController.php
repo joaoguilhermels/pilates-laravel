@@ -90,7 +90,8 @@ class SchedulesController extends Controller
                   			adjust: {
                   				mouse: true,
                   				scroll: true
-                  			}
+                  			},
+                        method: \'none shift\'
                 		},
                 		style: {
                         classes: \'qtip-bootstrap qtip-shadow\'
@@ -102,6 +103,11 @@ class SchedulesController extends Controller
         ));
 
         return view('calendar.index', compact('calendar'));
+    }
+
+    public function setGroupTitle(Schedule $schedule)
+    {
+        return $schedule->classType->name . ' - ' . $schedule->professional->name;
     }
 
     public function setEventTitle(Schedule $schedule)
@@ -119,6 +125,27 @@ class SchedulesController extends Controller
         return $badge . ' ' . $schedule->client->name . ' - ' . $schedule->classType->name;
     }
 
+    public function groupDescription(Schedule $schedule)
+    {
+        $schedules   = Schedule::where('start_at', '=', $schedule->start_at)->where('room_id', '=', $schedule->room_id)->with('client', 'classTypeStatus')->get();
+
+        $description =  '<strong>Class:</strong> ' . $schedule->classType->name . '<br>' .
+                        '<strong>Professional:</strong> ' . $schedule->professional->name . '<br>' .
+                        '<strong>Date/Time:</strong> ' . $schedule->start_at->format("d/m/Y H:i") . ' to ' . $schedule->end_at->format("H:i") . '<br>' .
+                        '<strong>Clients:</strong><br>';
+
+        foreach($schedules as $schedule) {
+            $description .= $this->statusLabel($schedule->classTypeStatus) . ' ' . $schedule->client->name . '' . '<br>';
+        }
+
+        return $description;
+    }
+
+    public function statusLabel(classTypeStatus $classTypeStatus)
+    {
+        return '<span class="label" style="background-color: ' . $classTypeStatus->color . '">' . $classTypeStatus->name . '</span>';
+    }
+
     public function eventDescription(Schedule $schedule)
     {
         $description =  '<strong>Client:</strong> ' . $schedule->client->name . '<br>' .
@@ -134,22 +161,25 @@ class SchedulesController extends Controller
         return $description;
     }
 
-    /*public function groupCalendar() {
+    public function groupCalendar() {
         $events = [];
 
         //$schedules = Schedule::all();
-        $schedules = DB::table('schedules')
-                          ->groupBy('account_id')
-
-        //select class_type_id, group_concat(client_id) from schedules group by class_type_id, professional_id, room_id, date_format(start_At,'%Y-%m-%d %H:%i:00');
+        $schedules = Schedule::with(['ClassType', 'ClassTypeStatus', 'Professional'])->groupBy('start_at', 'room_id')->get();
 
         foreach($schedules as $schedule) {
             $events[] = \Calendar::event(
-              $schedule->client->name, //event title
+              $this->setGroupTitle($schedule), //event title
               false, //full day event?
               $schedule->start_at, //start time (you can also use Carbon instead of DateTime)
               $schedule->end_at, //end time (you can also use Carbon instead of DateTime)
-              $schedule->id //optionally, you can specify an event ID
+              $schedule->id, //optionally, you can specify an event ID
+              [
+                'color' => $schedule->classTypeStatus->color,
+                'url' => '/schedules/' . $schedule->id . '/edit',
+                'description' => $this->groupDescription($schedule),
+                'textColor' => '#0A0A0A'
+              ]
             );
         }
 
@@ -161,53 +191,57 @@ class SchedulesController extends Controller
             'weekends' => false, // Add custom option
             'businessHours' => array(
               'start' => '07:00',
-              'end' => '20:00',
+              'end' => '20:30',
               //'dow' => array(1, 2, 3, 4, 5)
             ),
             'nowIndicator' => true,
-            //'minTime' => '06:00:00',
-            //'maxTime' => '21:00:00',
+            'minTime' => '07:00:00',
+            'maxTime' => '21:00:00',
+            'contentHeight' => 'auto'
             //'lang' => 'pt-BR',
 
         ));
 
         $calendar = \Calendar::setCallbacks(array(
             'dayClick' => 'function (date, jsEvent, view) {
-                alert(\'Clicked on: \' + date.format());
-            }',
-            'eventClick' => 'function (calEvent, jsEvent, view) {
-                alert(\'Event: \' + calEvent.title);
-                alert(\'Coordinates: \' + jsEvent.pageX + \',\' + jsEvent.pageY);
-                alert(\'View: \' + view.name);
-
-                // change the border color just for fun
-                $(this).css(\'border-color\', \'red\');
+                vm.showModalNow(date.format());
             }',
             'eventRender' => 'function(event, element) {
+                var ntoday = Math.round(new Date().getTime() / 1000),
+                    eventEnd = event.end.unix(),
+                    eventStart = event.start.unix();
+
+                if (eventEnd < ntoday){
+                    element.addClass(\'past-event\');
+                }
+
                 element.qtip({
                     prerender: true,
                     content: {
-                        \'text\': event.title
+                        \'text\': event.description
                     },
                     position: {
-                  			at: \'top left\',
-                  			my: \'bottom right\',
-                  			target: \'mouse\',
-                  			viewport: $(\'#fullcalendar\'),
-                  			adjust: {
-                  				mouse: true,
-                  				scroll: true
-                  			}
-                		},
-                		style: {
+                        at: \'top left\',
+                        my: \'bottom right\',
+                        target: \'mouse\',
+                        viewport: $(\'#fullcalendar\'),
+                        adjust: {
+                          mouse: true,
+                          scroll: true,
+                          method: \'none shift\'
+                        }
+                    },
+                    style: {
                         classes: \'qtip-bootstrap qtip-shadow\'
                     }
                 });
+                element.find(\'div.fc-title\').html(element.find(\'div.fc-title\').text());
+                element.find(\'span.fc-title\').html(element.find(\'span.fc-title\').text());
             }',
         ));
 
         return view('calendar.index', compact('calendar'));
-    }*/
+    }
 
     public function index() {
         $schedules = Schedule::orderBy('start_at', 'asc')

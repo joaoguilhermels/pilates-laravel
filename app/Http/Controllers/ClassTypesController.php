@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use DB;
+use Session;
 use App\ClassType;
 use App\ClassTypeStatus;
 use App\Http\Requests;

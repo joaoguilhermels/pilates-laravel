@@ -23,7 +23,7 @@ Vue.component('plans', {
     },
 
     filters: {
-        selectPlan: function(plan) {
+        filterNumberOfDays: function(daysOfWeek) {
             var times = 0,
                 self = this
 
@@ -37,7 +37,7 @@ Vue.component('plans', {
                 })
             }
 
-            return plan.filter(function(day) {
+            return daysOfWeek.filter(function(day) {
                 return day.number <= times
             })
         }

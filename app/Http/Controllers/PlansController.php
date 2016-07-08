@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Session;
 use App\Plan;
 use App\ClassType;
 use App\ClientPlan;
@@ -31,16 +32,17 @@ class PlansController extends Controller
 
     public function edit(plan $plan)
     {
-        $classTypes = ClassType::lists('name', 'id');
+        $classTypes = ClassType::all();
+        $plan->load('classType');
 
         return view('plans.edit', compact('plan', 'classTypes'));
     }
 
-    public function create()
+    public function create(Plan $plan)
     {
-        $classTypes = ClassType::lists('name', 'id');
+        $classTypes = ClassType::all();
 
-        return view('plans.create', compact('classTypes'));
+        return view('plans.create', compact('classTypes', 'plan'));
     }
 
     public function store(planRequest $request)
