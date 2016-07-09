@@ -1,7 +1,8 @@
 @section('script_footer')
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.2/jquery.qtip.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/fullcalendar.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/fullcalendar.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/lang/pt-br.js"></script>
   {!! $calendar->script() !!}
   <!-- template for the modal component -->
   <script type="x/template" id="modal-template">

@@ -60,8 +60,10 @@ class SchedulesController extends Controller
             'nowIndicator' => true,
             'minTime' => '07:00:00',
             'maxTime' => '21:00:00',
-            'contentHeight' => 'auto'
-            //'lang' => 'pt-BR',
+            'contentHeight' => 'auto',
+            'slotEventOverlap' => false,
+            'lang' => 'pt-BR',
+            'eventLimit' => false
 
         ));
 
@@ -198,9 +200,10 @@ class SchedulesController extends Controller
             'nowIndicator' => true,
             'minTime' => '07:00:00',
             'maxTime' => '21:00:00',
-            'contentHeight' => 'auto'
-            //'lang' => 'pt-BR',
-
+            'contentHeight' => 'auto',
+            'slotEventOverlap' => false,
+            'lang' => 'pt-BR',
+            'eventLimit' => false
         ));
 
         $calendar = \Calendar::setCallbacks(array(
