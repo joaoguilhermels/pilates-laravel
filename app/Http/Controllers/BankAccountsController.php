@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Session;
 use App\BankAccount;
 use App\Http\Requests;
 use App\Http\Requests\BankAccountRequest;

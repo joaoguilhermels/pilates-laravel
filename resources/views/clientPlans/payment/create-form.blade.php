@@ -12,7 +12,7 @@
     <div class="form-group">
     <label for="total_number_of_payments">Number of Payments:</label>
     <select name="total_number_of_payments" class="form-control" v-model="numberOfPayments">
-      <option v-for="n in 13" v-bind:value="n">@{{ n }}</option>
+      <option v-for="n in 25" v-bind:value="n">@{{ n }}</option>
     </select>
     </div>
 

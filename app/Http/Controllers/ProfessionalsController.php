@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Session;
 use App\Schedule;
 use App\Professional;
 use App\ClassType;
@@ -111,7 +112,7 @@ class ProfessionalsController extends Controller
         $request->request->add([
             'type' => 'paid',
             'total_number_of_payments' => 1,
-            'oberservation' => ''
+            'oberservation' => 'Professional Payment'
         ]);
 
         $financialTransaction = $professional->financialTransactions()->create($request->all());
