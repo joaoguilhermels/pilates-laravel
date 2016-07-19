@@ -49,7 +49,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li class="{{ active('home') }}"><a href="{{ url('/home') }}">Home</a></li>
+                    <li class="{{ active('dashboard') }}"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
                     @if (Auth::check())
                     <li class="{{ active('clients') }}"><a href="{{ url('/clients') }}">Clients</a></li>
                     <li class="{{ active('professionals') }}"><a href="{{ url('/professionals') }}">Professionals</a></li>
