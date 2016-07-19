@@ -18,7 +18,7 @@ class FinancialTransactionsController extends Controller
 {
     public function __construct()
     {
-      $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function createPlanPayment(ClientPlan $clientPlan)
@@ -36,8 +36,7 @@ class FinancialTransactionsController extends Controller
     public function storePlanPayment(FinancialTransactionRequest $request, ClientPlan $clientPlan)
     {
         $request->request->add([
-            'name' => 'Plan payment',
-            'type' => 'received',
+            'name' => 'Plan payment'
         ]);
 
         $financialTransaction = $clientPlan->financialTransactions()->create($request->all());
@@ -45,15 +44,9 @@ class FinancialTransactionsController extends Controller
         $payments = collect($request->payments);
         $payments->map(function ($payment) use ($financialTransaction)
         {
+            $payment = array_add($payment, 'type', 'received');
             $financialTransaction->financialTransactionDetails()->create($payment);
         });
-
-        /*$clientPlan->clientPlanDetails->map(function ($clientPlanDetail) use ($financialTransaction)
-        {
-            Schedule::where('scheduable_type', ClientPlanDetail::class)
-                ->where('scheduable_id', $clientPlanDetail->id)
-                ->update(['client_payment_financial_transaction_id' => $financialTransaction->id]);
-        });*/
 
         \Session::flash('message', 'Successfully added Client Plan Payment');
 

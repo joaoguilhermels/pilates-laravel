@@ -12,6 +12,7 @@ class FinancialTransactionDetail extends Model
       'bank_account_id',
       'date',
       'value',
+      'type',
       'payment_number',
       'observation'
     ];

@@ -67,7 +67,13 @@
                         <li class="{{ active('payment-methods') }}"><a href="{{ url('/payment-methods') }}">Payment Methods</a></li>
                       </ul>
                     </li>
-                    @endif 
+                    <li class="dropdown {{ active(['reports/cash-journal']) }}">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li class="{{ active('reports/cash-journal') }}"><a href="{{ url('/reports/cash-journal') }}">Cash Journal</a></li>
+                      </ul>
+                    </li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->

@@ -24,7 +24,7 @@ class ProfessionalsController extends Controller
 
     public function __construct()
     {
-      $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function index()
@@ -110,23 +110,26 @@ class ProfessionalsController extends Controller
     public function storeProfessionalPayment(ProfessionalPaymentStoreRequest $request, Professional $professional)
     {
         $request->request->add([
-            'type' => 'paid',
             'total_number_of_payments' => 1,
-            'oberservation' => 'Professional Payment'
+            'name' => 'Professional Payment'
         ]);
 
         $financialTransaction = $professional->financialTransactions()->create($request->all());
 
+        $request->request->add([
+            'type' => 'paid'
+        ]);
+
         $financialTransaction->financialTransactionDetails()->create($request->all());
 
-        Session::flash('message', 'Successfully added paymento to professional ' . $professional->name);
+        Session::flash('message', 'Successfully added payment to professional ' . $professional->name);
 
         return redirect('professionals/payments');
     }
 
     public function store(ProfessionalRequest $request)
     {
-        $classTypeList = $request->input('class_type_list');
+        $classTypeList = $request->class_type_list;
 
         foreach($classTypeList as $key => $classType)
         {
@@ -149,7 +152,7 @@ class ProfessionalsController extends Controller
     {
         $professional->update($request->all());
 
-        $classTypeList = $request->input('class_type_list');
+        $classTypeList = $request->class_type_list;
 
         foreach($classTypeList as $key => $classType)
         {

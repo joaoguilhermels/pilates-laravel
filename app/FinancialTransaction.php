@@ -11,7 +11,6 @@ class FinancialTransaction extends Model
       'financiable_id',
       'financiable_type',
       'name',
-      'type',
       'total_number_of_payments',
       'observation'
     ];

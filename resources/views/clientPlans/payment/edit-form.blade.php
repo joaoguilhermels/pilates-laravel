@@ -1,4 +1,3 @@
-<?php dump(get_defined_vars()); ?>
 <div class="form-group">
   <label for="client">Client:</label> {{ $clientPlan->client->name }}<br>
   <label for="class">Class:</label> {{ $clientPlan->classType->name }}<br>
@@ -67,6 +66,6 @@
   </div>
 
   <div class="form-group">
-    {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
+    <input type="submit" class="btn btn-primary btn-block" value="{{ $submitButtonText }}">
   </div>
 </div>

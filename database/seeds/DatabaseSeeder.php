@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         'client_plans',
         'clients',
     ];
-  
+
     /**
      * Run the database seeds.
      *
@@ -26,12 +26,14 @@ class DatabaseSeeder extends Seeder
         foreach($this->toDelete as $table) {
             DB::table($table)->delete();
         }
-      
+
         $this->call(ClientsTableSeeder::class);
         $this->call(ClassTypesTableSeeder::class);
         $this->call(RoomsTableSeeder::class);
         $this->call(ProfessionalsTableSeeder::class);
         $this->call(PlansTableSeeder::class);
         $this->call(ClientPlansTableSeeder::class);
+        //$this->call(PaymentMethodSeeder::class);
+        //$this->call(BankAccountSeeder::class);
     }
 }
