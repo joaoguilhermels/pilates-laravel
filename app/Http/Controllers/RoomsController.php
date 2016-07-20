@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Session;
 use App\Room;
 use App\ClassType;
 use App\Http\Requests;
@@ -15,13 +16,13 @@ class RoomsController extends Controller
 
     public function __construct()
     {
-      $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function index() {
-      $rooms = room::all();
+        $rooms = room::all();
 
-      return view('rooms.index')->with('rooms', $rooms);
+        return view('rooms.index')->with('rooms', $rooms);
     }
 
     public function show(Room $room)

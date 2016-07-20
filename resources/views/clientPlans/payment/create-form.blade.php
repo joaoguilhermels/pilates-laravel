@@ -23,22 +23,13 @@
       <div class="table-responsive">
         <table class="table table-striped">
           <tr v-for="paymentNumber in numberOfPayments">
-            <td class="col-md-2">
+            <td class="col-md-3">
               <input type="hidden" name="payments[@{{ paymentNumber }}][payment_number]" value="@{{ paymentNumber + 1 }}">
               <label for="payments[@{{ paymentNumber }}][payment_method_id]">Payment Method: </label>
               <select name="payments[@{{ paymentNumber }}][payment_method_id]" class="form-control">
                 <option value=""></option>
                 @foreach($paymentMethods as $paymentMethod)
                   <option value="{{ $paymentMethod->id }}">{{ $paymentMethod->name }}</option>
-                @endforeach
-              </select>
-            </td>
-            <td class="col-md-3">
-              <label for="payments[@{{ paymentNumber }}][bank_account_id]">Bank Account:</label>
-              <select class="form-control" name="payments[@{{ paymentNumber }}][bank_account_id]">
-                <option value=""></option>
-                @foreach($bankAccounts as $bankAccount)
-                  <option value="{{ $bankAccount->id }}">{{ $bankAccount->name }}</option>
                 @endforeach
               </select>
             </td>
@@ -50,7 +41,7 @@
               <label for="room">Value: </label>
               <input type="float" name="payments[@{{ paymentNumber }}][value]" class="form-control" value="{{ $clientPlan->plan->price }}">
             </td>
-            <td class="col-md-3">
+            <td class="col-md-5">
               <label for="observation">Observation: </label>
               <input type="text" name="payments[@{{ paymentNumber }}][observation]" class="form-control">
             </td>
