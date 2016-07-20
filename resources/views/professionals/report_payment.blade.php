@@ -32,7 +32,7 @@
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
-                <td>total</td>
+                <td>{{ $professional_total }}</td>
                 <td>&nbsp;</td>
               </tr>
             </tfoot>
@@ -63,7 +63,7 @@
                 </td>
                 <td>
                   @if($row->classTypeStatus->pay_professional)
-                    {{ $row->price * ($professional->classTypes()->where('id', $row->class_type_id)->first()->pivot->value / 100) }}
+                    {{ $row->value_professional_receives }}
                   @else
                     0
                   @endif

@@ -90,23 +90,51 @@ class ProfessionalsController extends Controller
     public function generatePaymentReport(PaymentReportRequest $request)
     {
         $startAt        = Carbon::parse($request->start_at);
+        $endAt          = Carbon::parse($request->end_at);
         $professional   = Professional::findOrFail($request->professional);
         $bankAccounts   = BankAccount::all();
         $paymentMethods = PaymentMethod::all();
 
         $rows = Schedule::where('professional_id', $request->professional)
-                          ->whereMonth('start_at', '=', $startAt->month)
-                          ->whereYear('start_at', '=', $startAt->year)
+                          ->whereDay('start_at', '>=', $startAt->day)
+                          ->whereMonth('start_at', '>=', $startAt->month)
+                          ->whereYear('start_at', '>=', $startAt->year)
+                          ->whereDay('end_at', '<=', $endAt->day)
+                          ->whereMonth('end_at', '<=', $endAt->month)
+                          ->whereYear('end_at', '<=', $endAt->year)
+                          ->orderBy('start_at')
                           ->get();
 
         $total = Schedule::where('professional_id', $request->professional)
-                            ->whereMonth('start_at', '=', $startAt->month)
-                            ->whereYear('start_at', '=', $startAt->year)
-                            ->sum('price');
+                    ->whereDay('start_at', '>=', $startAt->day)
+                    ->whereMonth('start_at', '>=', $startAt->month)
+                    ->whereYear('start_at', '>=', $startAt->year)
+                    ->whereDay('end_at', '<=', $endAt->day)
+                    ->whereMonth('end_at', '<=', $endAt->month)
+                    ->whereYear('end_at', '<=', $endAt->year)
+                    ->sum('price');
 
-        return view('professionals.report_payment', compact('professional', 'bankAccounts', 'paymentMethods', 'rows', 'total'));
+        $professional_total = Schedule::where('professional_id', $request->professional)
+                                  ->whereDay('start_at', '>=', $startAt->day)
+                                  ->whereMonth('start_at', '>=', $startAt->month)
+                                  ->whereYear('start_at', '>=', $startAt->year)
+                                  ->whereDay('end_at', '<=', $endAt->day)
+                                  ->whereMonth('end_at', '<=', $endAt->month)
+                                  ->whereYear('end_at', '<=', $endAt->year)
+                                  ->sum('value_professional_receives');
+
+        return view('professionals.report_payment', compact('professional', 'bankAccounts', 'paymentMethods', 'rows', 'total', 'professional_total'));
     }
 
+    /**
+     * Stores Professional payment by creating a FinancialTransaction and a
+     * FinancialTransactionDetail. Once this is done the function also
+     * updates the schedules to make a relationship with the FinancialTransaction
+     *
+     * @param  ProfessionalPaymentStoreRequest $request      [description]
+     * @param  Professional                    $professional [The proessional to associate with the FinancialTransaction (payment)]
+     * @return redirect                                      [Redirects the user to the list of Professional Payments]
+     */
     public function storeProfessionalPayment(ProfessionalPaymentStoreRequest $request, Professional $professional)
     {
         $request->request->add([
@@ -183,6 +211,14 @@ class ProfessionalsController extends Controller
         return redirect('professionals');
     }
 
+    /**
+     * [getPricePerClass description]
+     * @param  Professional $professional [description]
+     * @param  ClassType    $classType    [description]
+     * @param  Plan         $plan         [description]
+     * @param  [type]       $classPrice   [description]
+     * @return [type]                     [description]
+     */
     public function getPricePerClass(Professional $professional, ClassType $classType, Plan $plan, $classPrice)
     {
         return null;

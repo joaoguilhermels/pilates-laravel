@@ -34,7 +34,7 @@
             <a href="{{ action('ProfessionalsController@edit', [$financialTransaction->id]) }}" class="btn pull-left">edit</a>
             {!! Form::open(['route' => ['professionals.destroy', $financialTransaction->id], 'method' => 'delete']) !!}
             <button type="submit" class="btn btn-link pull-left">delete</button>
-            {!! Form::close() !!}
+            </form>
           </td>
         </tr>
         @endforeach
