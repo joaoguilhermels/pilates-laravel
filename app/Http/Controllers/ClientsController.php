@@ -27,7 +27,7 @@ class ClientsController extends Controller
     public function index()
     {
         $total = Client::count();
-        $clients = Client::paginate(10);
+        $clients = Client::paginate(5);
         $name = "";
         $phone = "";
         $email = "";
@@ -38,7 +38,7 @@ class ClientsController extends Controller
     public function search(Request $request)
     {
         $total = Client::count();
-        $clients = Client::filter($request->all())->paginate(10);
+        $clients = Client::filter($request->all())->paginate(5);
         $name = $request->name;
         $phone = $request->phone;
         $email = $request->email;
