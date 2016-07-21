@@ -96,16 +96,18 @@ class ProfessionalsController extends Controller
         $paymentMethods = PaymentMethod::all();
 
         $rows = Schedule::where('professional_id', $request->professional)
-                          ->whereDay('start_at', '>=', $startAt->day)
-                          ->whereMonth('start_at', '>=', $startAt->month)
-                          ->whereYear('start_at', '>=', $startAt->year)
-                          ->whereDay('end_at', '<=', $endAt->day)
-                          ->whereMonth('end_at', '<=', $endAt->month)
-                          ->whereYear('end_at', '<=', $endAt->year)
-                          ->orderBy('start_at')
-                          ->get();
+                    ->where('professional_payment_financial_transaction_id', '=', 0)
+                    ->whereDay('start_at', '>=', $startAt->day)
+                    ->whereMonth('start_at', '>=', $startAt->month)
+                    ->whereYear('start_at', '>=', $startAt->year)
+                    ->whereDay('end_at', '<=', $endAt->day)
+                    ->whereMonth('end_at', '<=', $endAt->month)
+                    ->whereYear('end_at', '<=', $endAt->year)
+                    ->orderBy('start_at')
+                    ->get();
 
         $total = Schedule::where('professional_id', $request->professional)
+                    ->where('professional_payment_financial_transaction_id', '=', 0)
                     ->whereDay('start_at', '>=', $startAt->day)
                     ->whereMonth('start_at', '>=', $startAt->month)
                     ->whereYear('start_at', '>=', $startAt->year)
@@ -115,6 +117,7 @@ class ProfessionalsController extends Controller
                     ->sum('price');
 
         $professional_total = Schedule::where('professional_id', $request->professional)
+                                  ->where('professional_payment_financial_transaction_id', '=', 0)
                                   ->whereDay('start_at', '>=', $startAt->day)
                                   ->whereMonth('start_at', '>=', $startAt->month)
                                   ->whereYear('start_at', '>=', $startAt->year)
@@ -137,7 +140,8 @@ class ProfessionalsController extends Controller
      */
     public function storeProfessionalPayment(ProfessionalPaymentStoreRequest $request, Professional $professional)
     {
-        dd($request);
+        $startAt = Carbon::parse($request->startAt);
+        $endAt = Carbon::parse($request->endAt);
 
         $request->request->add([
             'total_number_of_payments' => 1,
@@ -152,6 +156,15 @@ class ProfessionalsController extends Controller
 
         $financialTransaction->financialTransactionDetails()->create($request->all());
 
+        $schedules = Schedule::where('professional_id', $professional->id)
+                        ->whereYear('start_at', '>=', $startAt->year)
+                        ->whereYear('end_at', '<=', $endAt->year)
+                        ->whereMonth('start_at', '>=', $startAt->month)
+                        ->whereMonth('end_at', '<=', $endAt->month)
+                        ->whereDay('start_at', '>=', $startAt->day)
+                        ->whereDay('end_at', '<=', $endAt->day)
+                        ->update(['professional_payment_financial_transaction_id' => $financialTransaction->id]);
+
         Session::flash('message', 'Successfully added payment to professional ' . $professional->name);
 
         return redirect('professionals/payments');
@@ -160,6 +173,10 @@ class ProfessionalsController extends Controller
     public function destroyProfessionalPayment(FinancialTransaction $financialTransaction)
     {
         Session::flash('message', 'Successfully deleted professional payment.');
+
+        // Check if we can't do this in the migration on something like onDelete('set 0') or something like that
+        Schedule::where('professional_payment_financial_transaction_id', $financialTransaction->id)
+                    ->update(['professional_payment_financial_transaction_id' => null]);
 
         $financialTransaction->financialTransactionDetails()->delete();
         $financialTransaction->delete();
