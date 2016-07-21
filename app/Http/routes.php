@@ -66,6 +66,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('professionals/payments/create', 'ProfessionalsController@createProfessionalPayment');
     Route::post('professionals/payments/review', 'ProfessionalsController@generatePaymentReport');
     Route::post('professionals/{professionals}/payments/store', 'ProfessionalsController@storeProfessionalPayment');
+    Route::delete('professionals/payments/{financial_transactions}/delete', 'ProfessionalsController@destroyProfessionalPayment');
+
 
     Route::get('schedules/trial/create', 'SchedulesController@createTrialClass');
     Route::post('schedules/trial/create', 'SchedulesController@storeTrialClass');

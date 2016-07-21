@@ -123,7 +123,7 @@ class ProfessionalsController extends Controller
                                   ->whereYear('end_at', '<=', $endAt->year)
                                   ->sum('value_professional_receives');
 
-        return view('professionals.report_payment', compact('professional', 'bankAccounts', 'paymentMethods', 'rows', 'total', 'professional_total'));
+        return view('professionals.report_payment', compact('professional', 'bankAccounts', 'paymentMethods', 'rows', 'total', 'professional_total', 'startAt', 'endAt'));
     }
 
     /**
@@ -137,6 +137,8 @@ class ProfessionalsController extends Controller
      */
     public function storeProfessionalPayment(ProfessionalPaymentStoreRequest $request, Professional $professional)
     {
+        dd($request);
+
         $request->request->add([
             'total_number_of_payments' => 1,
             'name' => 'Professional Payment'
@@ -151,6 +153,16 @@ class ProfessionalsController extends Controller
         $financialTransaction->financialTransactionDetails()->create($request->all());
 
         Session::flash('message', 'Successfully added payment to professional ' . $professional->name);
+
+        return redirect('professionals/payments');
+    }
+
+    public function destroyProfessionalPayment(FinancialTransaction $financialTransaction)
+    {
+        Session::flash('message', 'Successfully deleted professional payment.');
+
+        $financialTransaction->financialTransactionDetails()->delete();
+        $financialTransaction->delete();
 
         return redirect('professionals/payments');
     }

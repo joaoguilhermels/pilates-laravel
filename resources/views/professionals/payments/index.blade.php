@@ -32,7 +32,9 @@
           <td>{{ $financialTransaction->date }}</td>
           <td>
             <a href="{{ action('ProfessionalsController@edit', [$financialTransaction->id]) }}" class="btn pull-left">edit</a>
-            {!! Form::open(['route' => ['professionals.destroy', $financialTransaction->id], 'method' => 'delete']) !!}
+            <form action="{{ action('ProfessionalsController@destroyProfessionalPayment', [$financialTransaction->id]) }}" method="post">
+              {{ csrf_field() }}
+              {{ method_field('DELETE') }}
             <button type="submit" class="btn btn-link pull-left">delete</button>
             </form>
           </td>

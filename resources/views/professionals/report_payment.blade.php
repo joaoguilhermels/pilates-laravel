@@ -84,6 +84,8 @@
 
         <form action="/professionals/{{ $professional->id }}/payments/store" method="POST">
           {{ csrf_field() }}
+          <input type="hidden" name="startAt" value="{{ $startAt }}">
+          <input type="hidden" name="endAt" value="{{ $endAt }}">
           <div class="form-group">
             <label for="professional">Payment Method: </label>
             <select class="form-control" name="payment_method_id">
@@ -107,10 +109,6 @@
           <div class="form-group">
             <label for="name">Value: </label>
             <input class="form-control" name="value" type="number" value="{{ old('value') }}" id="end_at">
-          </div>
-
-          <div class="form-group">
-            <label for="name">Send copy by email ? </label>
           </div>
 
           <div class="form-group">

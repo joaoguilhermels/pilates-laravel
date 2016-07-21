@@ -9,14 +9,14 @@
     </h1>
 
     <hr />
-  
+
     @if (count($plans) == 0)
-  
+
     <h2>There no plans yet. You can <a href="{{ action('PlansController@create') }}">add one here.</a>
-  
+
     @else
-  
-    <div class="table-responsive">          
+
+    <div class="table-responsive">
     <table class="table">
       <thead>
         <tr>
@@ -38,9 +38,11 @@
           <td><a href="{{ action('PlansController@show', [$plan->id]) }}">{{ $plan->duration }} {{ $plan->duration_type }}</a></td>
           <td>
             <a href="{{ action('PlansController@edit', [$plan->id]) }}" class="btn pull-left">edit</a>
-            {!! Form::open(['route' => ['plans.destroy', $plan->id], 'method' => 'delete']) !!}
-            <button type="submit" class="btn btn-link pull-left">delete</button>
-            {!! Form::close() !!}
+            <form action="{{ action('PlansController@destroy', [$plan->id]) }}" method="post">
+              {{ csrf_field() }}
+              {{ method_field('DELETE') }}
+              <button type="submit" class="btn btn-link pull-left">delete</button>
+            </form>
           </td>
         </tr>
         @endforeach
