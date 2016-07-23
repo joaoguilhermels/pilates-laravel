@@ -46,6 +46,20 @@ class SchedulesController extends Controller
             );
         }
 
+        // The following lines can be used to block specific times on the calendar
+        /*$manual_event = \Calendar::event(
+          "event title", //event title
+          false, //full day event?
+          "2016-07-19 07:00:00", //start time (you can also use Carbon instead of DateTime)
+          "2016-07-19 12:00:00", //end time (you can also use Carbon instead of DateTime)
+          null, //optionally, you can specify an event ID
+          [
+            'rendering' => 'background'
+          ]
+        );
+
+        $events = array_add($events, 57, $manual_event);*/
+
         $calendar = \Calendar::addEvents($events);
 
         $calendar = \Calendar::setOptions(array(
@@ -69,7 +83,9 @@ class SchedulesController extends Controller
 
         $calendar = \Calendar::setCallbacks(array(
             'dayClick' => 'function (date, jsEvent, view) {
-                vm.showModalNow(date.format());
+                if (!jsEvent.target.classList.contains(\'fc-bgevent\')) {
+                    vm.showModalNow(date.format());
+                }
             }',
             'eventRender' => 'function(event, element) {
                 var ntoday = Math.round(new Date().getTime() / 1000),
