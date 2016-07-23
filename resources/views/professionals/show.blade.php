@@ -21,7 +21,7 @@
           <dt>Observation:</dt>
           <dd>{{ $professional->description }}</dd>
         </dl>
-        <a href="{{ action('ProfessionalsController@edit', [$professional->id]) }}" class="btn btn-block btn-primary">Edit This Professional</a>
+        <a href="{{ action('ProfessionalsController@edit', [$professional->id]) }}" class="btn btn-block btn-success">Edit This Professional</a>
       </div>
       <div class="col-md-4">
         @include('professionals.partials.classes-block')

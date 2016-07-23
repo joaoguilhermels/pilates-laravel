@@ -5,7 +5,7 @@
     <h1>
       Clients
       &nbsp;&nbsp;&nbsp;
-      <a href="{{ action('ClientsController@create') }}" class="btn btn-primary">Add New Client</a>
+      <a href="{{ action('ClientsController@create') }}" class="btn btn-success">Add New Client</a>
     </h1>
 
     <hr />

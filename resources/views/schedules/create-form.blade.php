@@ -39,5 +39,5 @@
   <textarea name="observation" class="form-control"></textarea>
 </div>
 <div class="form-group">
-  {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
+  {!! Form::submit($submitButtonText, ['class' => 'btn btn-success form-control']) !!}
 </div>

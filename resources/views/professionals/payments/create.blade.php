@@ -29,7 +29,7 @@
       <input class="form-control" name="end_at" type="date" value="{{ old('end_at') }}" id="end_at">
     </div>
     <div class="form-group">
-      <input class="btn btn-primary form-control" type="submit" value="Generate Payment Report">
+      <input class="btn btn-success form-control" type="submit" value="Generate Payment Report">
     </div>
   </form>
 @stop

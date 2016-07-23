@@ -14,7 +14,7 @@
 
     <div class="row">
       <div class="col-md-12">
-        <a href="{{ action('PlansController@edit', [$plan->id]) }}" class="btn btn-block btn-primary">Edit This Plan</a>
+        <a href="{{ action('PlansController@edit', [$plan->id]) }}" class="btn btn-block btn-success">Edit This Plan</a>
       </div>
     </div>
   </div>

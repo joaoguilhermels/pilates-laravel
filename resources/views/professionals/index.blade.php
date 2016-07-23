@@ -5,7 +5,7 @@
     <h1>
       Professionals
       &nbsp;&nbsp;&nbsp;
-      <a href="{{ action('ProfessionalsController@create') }}" class="btn btn-primary">Add New Professional</a>
+      <a href="{{ action('ProfessionalsController@create') }}" class="btn btn-success">Add New Professional</a>
     </h1>
 
     <hr />

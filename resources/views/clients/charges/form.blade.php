@@ -53,5 +53,5 @@
   </div>
 </div>
 <div class="form-group">
-  <input type="submit" class="btn btn-primary btn-block" value="{{ $submitButtonText }}">
+  <input type="submit" class="btn btn-success btn-block" value="{{ $submitButtonText }}">
 </div>

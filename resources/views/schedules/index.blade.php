@@ -5,7 +5,7 @@
     <h1>
       Schedules
       &nbsp;&nbsp;&nbsp;
-      <a href="{{ action('SchedulesController@create') }}" class="btn btn-primary">Add New Schedule</a>
+      <a href="{{ action('SchedulesController@create') }}" class="btn btn-success">Add New Schedule</a>
     </h1>
 
     <hr />

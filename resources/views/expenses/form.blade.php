@@ -11,5 +11,5 @@
   <input type="number" class="form-control" name="price" value="@if(isset($expense)){{ $expense->price }}@else{{ old('price') }}@endif">
 </div>
 <div class="form-group">
-  {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
+  {!! Form::submit($submitButtonText, ['class' => 'btn btn-success form-control']) !!}
 </div>

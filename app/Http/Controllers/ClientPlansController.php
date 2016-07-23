@@ -50,11 +50,14 @@ class ClientPlansController extends Controller
     {
         $form['daysOfWeek'] = $this->daysOfWeek;
         $form['rooms'] = Room::all();
-        $form['classTypePlans'] = ClassType::with('plans')->with('professionals', 'rooms')->get()->toArray();
+        $form['classTypePlans'] = ClassType::with(['plans' => function ($query)
+        {
+            $query->orderBy('name');
+        }, 'professionals', 'rooms'])->orderBy('name')->get()->toArray();
         //$plans = Plan::all()->lists('name_with_class', 'id');
-        $form['classTypes'] = ClassType::all();
+        $form['classTypes'] = ClassType::orderBy('name')->get();
 
-        $form['professionals'] = Professional::all();
+        $form['professionals'] = Professional::orderBy('name')->get();
 
         return $form;
     }

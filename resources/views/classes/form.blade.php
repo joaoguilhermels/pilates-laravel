@@ -81,5 +81,5 @@
 </div>
 
 <div class="form-group">
-  <input type="submit" value="{{ $submitButtonText }}" class="btn btn-primary">
+  <input type="submit" value="{{ $submitButtonText }}" class="btn btn-success">
 </div>

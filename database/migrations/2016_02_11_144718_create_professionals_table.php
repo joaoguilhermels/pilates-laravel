@@ -18,7 +18,7 @@ class CreateProfessionalsTable extends Migration
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->text('description')->nullable();
-            $table->softDeletes();
+            //$table->softDeletes();
             $table->timestamps();
         });
     }

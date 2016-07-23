@@ -5,7 +5,7 @@
     <h1>
       Classes
       &nbsp;&nbsp;&nbsp;
-      <a href="{{ action('ClassTypesController@create') }}" class="btn btn-primary">Add New Class</a>
+      <a href="{{ action('ClassTypesController@create') }}" class="btn btn-success">Add New Class</a>
     </h1>
     <hr />
 
@@ -31,7 +31,7 @@
             <a href="{{ action('ClassTypesController@edit', [$classType->id]) }}" class="btn pull-left">edit</a>
             {!! Form::open(['route' => ['classes.destroy', $classType->id], 'method' => 'delete']) !!}
             <button type="submit" class="btn btn-link pull-left">delete</button>
-            {!! Form::close() !!}
+            </form>
           </td>
         </tr>
         @endforeach

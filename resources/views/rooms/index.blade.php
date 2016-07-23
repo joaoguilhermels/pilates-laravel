@@ -5,7 +5,7 @@
     <h1>
       Rooms
       &nbsp;&nbsp;&nbsp;
-      <a href="{{ action('RoomsController@create') }}" class="btn btn-primary">Add New Room</a>
+      <a href="{{ action('RoomsController@create') }}" class="btn btn-success">Add New Room</a>
     </h1>
 
     <hr />

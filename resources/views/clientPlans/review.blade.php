@@ -44,7 +44,7 @@
     </div>
     
     <div class="form-group">
-      <input class="btn btn-primary form-control" type="submit" value="Add New Plan for this Client">
+      <input class="btn btn-success form-control" type="submit" value="Add New Plan for this Client">
     </div>
 
   {!! Form::close() !!}

@@ -17,7 +17,7 @@
           <dt>Price:</dt>
           <dd>{{ $expense->price }}</dd>
         </dl>
-        <a href="{{ action('ExpensesController@edit', [$expense->id]) }}" class="btn btn-block btn-primary">Edit This Expense</a>
+        <a href="{{ action('ExpensesController@edit', [$expense->id]) }}" class="btn btn-block btn-success">Edit This Expense</a>
       </div>
     </div>
   </div>

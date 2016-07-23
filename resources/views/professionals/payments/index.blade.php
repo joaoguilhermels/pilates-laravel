@@ -5,7 +5,7 @@
     <h1>
       Professionals Payments
       &nbsp;&nbsp;&nbsp;
-      <a href="{{ action('ProfessionalsController@createProfessionalPayment') }}" class="btn btn-primary">Add New Professional Payment</a>
+      <a href="{{ action('ProfessionalsController@createProfessionalPayment') }}" class="btn btn-success">Add New Professional Payment</a>
     </h1>
 
     <hr />

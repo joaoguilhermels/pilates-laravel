@@ -5,7 +5,7 @@
     <h1>
       Plans
       &nbsp;&nbsp;&nbsp;
-      <a href="{{ action('PlansController@create') }}" class="btn btn-primary">Add New Plan</a>
+      <a href="{{ action('PlansController@create') }}" class="btn btn-success">Add New Plan</a>
     </h1>
 
     <hr />

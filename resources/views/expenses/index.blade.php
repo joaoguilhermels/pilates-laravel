@@ -5,7 +5,7 @@
     <h1>
       Expenses
       &nbsp;&nbsp;&nbsp;
-      <a href="{{ action('ExpensesController@create') }}" class="btn btn-primary">Add New Expense</a>
+      <a href="{{ action('ExpensesController@create') }}" class="btn btn-success">Add New Expense</a>
     </h1>
 
     <hr />

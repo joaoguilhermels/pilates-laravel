@@ -5,7 +5,7 @@
     <h1>
       Charges
       &nbsp;&nbsp;&nbsp;
-      <a href="{{ action('ClientsController@createCharge') }}" class="btn btn-primary">Add New Charge</a>
+      <a href="{{ action('ClientsController@createCharge') }}" class="btn btn-success">Add New Charge</a>
     </h1>
 
     <hr />

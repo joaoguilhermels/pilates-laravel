@@ -25,7 +25,7 @@
           <dt>Balance:</dt>
           <dd>{{ $bankAccount->balance }}</dd>
         </dl>
-        <a href="{{ action('BankAccountsController@edit', [$bankAccount->id]) }}" class="btn btn-block btn-primary">Edit This Bank Account</a>
+        <a href="{{ action('BankAccountsController@edit', [$bankAccount->id]) }}" class="btn btn-block btn-success">Edit This Bank Account</a>
       </div>
     </div>
   </div>

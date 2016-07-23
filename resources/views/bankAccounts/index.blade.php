@@ -5,7 +5,7 @@
     <h1>
       Bank Accounts
       &nbsp;&nbsp;&nbsp;
-      <a href="{{ action('BankAccountsController@create') }}" class="btn btn-primary">Add New Bank Account</a>
+      <a href="{{ action('BankAccountsController@create') }}" class="btn btn-success">Add New Bank Account</a>
     </h1>
 
     <hr />

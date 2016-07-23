@@ -280,7 +280,7 @@ class SchedulesController extends Controller
 
         Session::flash('message', 'Successfully added schedule ' . $schedule->start_at);
 
-        return redirect('schedules');
+        return redirect('calendar');
     }
 
     public function createReposition()
@@ -334,7 +334,7 @@ class SchedulesController extends Controller
 
         Session::flash('message', 'Successfully added reposition schedule ' . $schedule->start_at);
 
-        return redirect('schedules');
+        return redirect('calendar');
     }
 
     public function createTrialClass()
@@ -366,7 +366,7 @@ class SchedulesController extends Controller
 
         Session::flash('message', 'Successfully added trial schedule ' . $schedule->start_at);
 
-        return redirect('schedules');
+        return redirect('calendar');
     }
 
     public function createExtraClass()
@@ -394,7 +394,7 @@ class SchedulesController extends Controller
 
         Session::flash('message', 'Successfully added extra class schedule ' . $schedule->start_at);
 
-        return redirect('schedules');
+        return redirect('calendar');
     }
 
     public function edit(Schedule $schedule)
@@ -416,7 +416,7 @@ class SchedulesController extends Controller
 
         Session::flash('message', 'Successfully updated schedule ' . $schedule->start_at);
 
-        return redirect('schedules');
+        return redirect('calendar');
     }
 
     public function destroy(Schedule $schedule)
@@ -425,6 +425,6 @@ class SchedulesController extends Controller
 
         Session::flash('message', 'Successfully deleted schedule ' . $schedule->start_at);
 
-        return redirect('schedules');
+        return redirect('calendar');
     }
 }

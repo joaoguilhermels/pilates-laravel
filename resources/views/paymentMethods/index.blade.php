@@ -5,7 +5,7 @@
     <h1>
       Payment Methods
       &nbsp;&nbsp;&nbsp;
-      <a href="{{ action('PaymentMethodsController@create') }}" class="btn btn-primary">Add New Payment Method</a>
+      <a href="{{ action('PaymentMethodsController@create') }}" class="btn btn-success">Add New Payment Method</a>
     </h1>
 
     <hr />

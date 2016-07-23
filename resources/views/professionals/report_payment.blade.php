@@ -3,7 +3,7 @@
 @section('content')
   <div class="container">
     <div class="row">
-      <div class="col-md-8 col-md-offset-2">
+      <div class="col-md-10 col-md-offset-1">
         <h1>{{ $professional->name }}</h1>
         <a href="{{ action('ProfessionalsController@index') }}">Back to Professionals List</a>
         <hr />
@@ -15,11 +15,10 @@
                 <th>Client</th>
                 <th>Date</th>
                 <th>Full Price</th>
+                <th>Professional Receives</th>
                 <th>Status</th>
                 <th>Room</th>
                 <th>Class</th>
-                <th>Relative</th>
-                <th>Professional Receives</th>
                 <th>Plan</th>
               </tr>
             </thead>
@@ -28,11 +27,10 @@
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>{{ $total }}</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
                 <td>{{ $professional_total }}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
                 <td>&nbsp;</td>
               </tr>
             </tfoot>
@@ -49,6 +47,23 @@
                   {{ $row->price }}
                 </td>
                 <td>
+                  @if($row->classTypeStatus->pay_professional)
+                    {{ $row->value_professional_receives }}
+                    @if ($row->value_professional_receives > 0)
+                      (=
+                      {{ $professional->classTypes()->where('id', $row->class_type_id)->first()->pivot->value }}
+                      @if($professional->classTypes()->where('id', $row->class_type_id)->first()->pivot->value_type == 'percentage')
+                        %
+                      @else
+                        {{ $professional->classTypes()->where('id', $row->class_type_id)->first()->pivot->value_type }}
+                      @endif
+                      )
+                    @endif
+                  @else
+                    0
+                  @endif
+                </td>
+                <td>
                   {{ $row->classTypeStatus->name }}
                 </td>
                 <td>
@@ -56,17 +71,6 @@
                 </td>
                 <td>
                   {{ $row->classType->name }}
-                </td>
-                <td>
-                  {{ $professional->classTypes()->where('id', $row->class_type_id)->first()->pivot->value }}
-                  {{ $professional->classTypes()->where('id', $row->class_type_id)->first()->pivot->value_type }}
-                </td>
-                <td>
-                  @if($row->classTypeStatus->pay_professional)
-                    {{ $row->value_professional_receives }}
-                  @else
-                    0
-                  @endif
                 </td>
                 <td>
                   {{-- TODO: Include logic to show extra class  --}}
@@ -108,11 +112,15 @@
           </div>
           <div class="form-group">
             <label for="name">Value: </label>
-            <input class="form-control" name="value" type="number" value="{{ old('value') }}" id="end_at">
+            <input class="form-control" name="value" type="number" min="0" step="any" value="{{ old('value') }}" id="end_at">
+          </div>
+          <div class="form-group">
+            <label for="name">Observation: </label>
+            <textarea name="observation" class="form-control" value="{{ old('observation  ') }}" rows="4"></textarea>
           </div>
 
           <div class="form-group">
-            <input class="btn btn-primary form-control" type="submit" value="Register Professional Payment">
+            <input class="btn btn-success form-control" type="submit" value="Register Professional Payment">
           </div>
         </form>
 

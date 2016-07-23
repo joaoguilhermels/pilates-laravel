@@ -59,7 +59,7 @@
       <textarea name="observation" class="form-control"></textarea>
     </div>
     <div class="form-group">
-      <input type="submit" value="Add Trial Class" class="btn btn-primary form-control">
+      <input type="submit" value="Add Trial Class" class="btn btn-success form-control">
     </div>
 
   </form>

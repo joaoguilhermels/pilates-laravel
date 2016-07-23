@@ -20,7 +20,7 @@
 
     <div class="row">
       <div class="col-md-12">
-        <a href="{{ action('SchedulesController@edit', [$schedule->id]) }}" class="btn btn-block btn-primary">Edit This Schedule</a>
+        <a href="{{ action('SchedulesController@edit', [$schedule->id]) }}" class="btn btn-block btn-success">Edit This Schedule</a>
       </div>
     </div>
   </div>

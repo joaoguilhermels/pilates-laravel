@@ -9,7 +9,7 @@
 
     <div class="row">
       <div class="col-md-12">
-        <a href="{{ action('RoomsController@edit', [$room->id]) }}" class="btn btn-block btn-primary">Edit This Room</a>
+        <a href="{{ action('RoomsController@edit', [$room->id]) }}" class="btn btn-block btn-success">Edit This Room</a>
       </div>
     </div>
   </div>

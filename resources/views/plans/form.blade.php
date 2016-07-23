@@ -14,19 +14,19 @@
 <div class="form-inline">
   <div class="form-group">
     <label for="times">The client will go </label>
-    <input type="number" name="times" class="form-control input-sm" size="5" value="{{ old('time', $plan->times) }}">
+    <input type="number" min="0" name="times" class="form-control input-sm" size="5" value="{{ old('time', $plan->times) }}">
     <label for="times_type"> times per </label>
     <select name="times_type" class="form-control input-sm">
       <option value="week" @if(old('times_type', $plan->times_type) == "week") selected @endif>week</option>
       <option value="month" @if(old('times_type', $plan->times_type) == "month") selected @endif>month</option>
     </select>
-    <label for="duration"> , the plan will last for </label> <input type="number" name="duration" class="form-control input-sm" size="5" value="{{ old('duration', $plan->duration) }}">
+    <label for="duration"> , the plan will last for </label> <input type="number" min="0" name="duration" class="form-control input-sm" size="5" value="{{ old('duration', $plan->duration) }}">
     <select name="duration_type" class="form-control input-sm">
       <option value="month" @if(old('duration_type', $plan->duration_type) == "month") selected @endif>month(s)</option>
       <option value="week" @if(old('duration_type', $plan->duration_type) == "week") selected @endif>week(s)</option>
     </select>
     <label for="price"> and the price is </label>
-    <input type="number" name="price" class="form-control input-sm" size="5" value="{{ old('time', $plan->price) }}">
+    <input type="number" min="0" name="price" class="form-control input-sm" size="5" value="{{ old('time', $plan->price) }}">
     <label for="price_type">per </label>
     <select name="price_type" class="form-control input-sm">
       <option value="class" @if(old('price_type', $plan->price_type) == "class") selected @endif>class</option>
@@ -36,5 +36,5 @@
 </div>
 <div>&nbsp;</div>
 <div class="form-group">
-  <input type="submit" value="{{ $submitButtonText }}" class="btn btn-primary btn-block">
+  <input type="submit" value="{{ $submitButtonText }}" class="btn btn-success btn-block">
 </div>

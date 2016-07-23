@@ -27,7 +27,7 @@ class ClientsController extends Controller
     public function index()
     {
         $total = Client::count();
-        $clients = Client::paginate(5);
+        $clients = Client::orderBy('name')->paginate(5);
         $name = "";
         $phone = "";
         $email = "";
@@ -38,7 +38,7 @@ class ClientsController extends Controller
     public function search(Request $request)
     {
         $total = Client::count();
-        $clients = Client::filter($request->all())->paginate(5);
+        $clients = Client::filter($request->all())->orderBy('name')->paginate(5);
         $name = $request->name;
         $phone = $request->phone;
         $email = $request->email;
@@ -60,12 +60,12 @@ class ClientsController extends Controller
 
     public function reportCharge(Client $client) {
         $rows = Schedule::with('professional', 'room')
-          ->where('client_id', $client->id)
-          ->orderBy('start_at', 'asc')
-          ->get()
-          ->groupBy(function ($item, $key) {
-            return date_create($item->start_at)->format("F Y");
-        });
+            ->where('client_id', $client->id)
+            ->orderBy('start_at', 'asc')
+            ->get()
+            ->groupBy(function ($item, $key) {
+              return date_create($item->start_at)->format("F Y");
+            });
 
 
         //$rows = Schedule::with('professional', 'room')->where('client_id', $client->id)

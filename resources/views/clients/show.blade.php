@@ -29,7 +29,7 @@
               <dt>Observation:</dt>
               <dd>{{ $client->description }}</dd>
             </dl>        
-            <a href="{{ action('ClientsController@edit', [$client->id]) }}" class="btn btn-block btn-primary">Edit This Client</a>
+            <a href="{{ action('ClientsController@edit', [$client->id]) }}" class="btn btn-block btn-success">Edit This Client</a>
           </div>
         </div>
 

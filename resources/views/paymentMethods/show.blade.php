@@ -14,7 +14,7 @@
           <dt>Enabled:</dt>
           <dd>{{ $paymentMethod->enabled }}</dd>
         </dl>
-        <a href="{{ action('PaymentMethodsController@edit', [$paymentMethod->id]) }}" class="btn btn-block btn-primary">Edit This Payment Method</a>
+        <a href="{{ action('PaymentMethodsController@edit', [$paymentMethod->id]) }}" class="btn btn-block btn-success">Edit This Payment Method</a>
       </div>
     </div>
   </div>
