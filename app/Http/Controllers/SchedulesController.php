@@ -60,6 +60,20 @@ class SchedulesController extends Controller
 
         $events = array_add($events, 57, $manual_event);*/
 
+        // The following lines can be used to add recurring events on the calendar
+        /*$manual_event = \Calendar::event(
+          "recurring event title", //event title
+          false, //full day event?
+          "07:00:00", //start time (you can also use Carbon instead of DateTime)
+          "08:00:00", //end time (you can also use Carbon instead of DateTime)
+          null, //optionally, you can specify an event ID
+          [
+            'dow' => array(1, 4)
+          ]
+        );
+
+        $events = array_add($events, 57, $manual_event);*/
+
         $calendar = \Calendar::addEvents($events);
 
         $calendar = \Calendar::setOptions(array(
