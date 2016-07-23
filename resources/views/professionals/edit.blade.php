@@ -5,12 +5,14 @@
   <h1>Edit {{ $professional->name }}</h1>
   <a href="{{ action('ProfessionalsController@index') }}">Back to Professionals List</a>
   <hr />
-  
+
   @include('errors.list')
 
-  {!! Form::model($professional, ['method' => 'PATCH', 'action' => ['ProfessionalsController@update', $professional->id]]) !!}
-    @include('professionals.form', ['submitButtonText' => 'Update Professional'])
+  <form action="{{ action('ProfessionalsController@update', [$professional->id]) }}" method="post">
+    {{ csrf_field() }}
+    {{ method_field('PATCH') }}
+    @include('professionals.form', [$professional, 'submitButtonText' => 'Update Professional'])
 
-  {!! Form::close() !!}  
+  </form>
   </div>
 @stop

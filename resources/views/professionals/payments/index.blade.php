@@ -17,31 +17,33 @@
     @else
 
     <div class="table-responsive">
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th>Professional</th>
-          <th>Date</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach ($financialTransactions as $financialTransaction)
-        <tr>
-          <td>{{ $financialTransaction->financiable->name }}</td>
-          <td>{{ $financialTransaction->date }}</td>
-          <td>
-            <a href="{{ action('ProfessionalsController@edit', [$financialTransaction->id]) }}" class="btn pull-left">edit</a>
-            <form action="{{ action('ProfessionalsController@destroyProfessionalPayment', [$financialTransaction->id]) }}" method="post">
-              {{ csrf_field() }}
-              {{ method_field('DELETE') }}
-            <button type="submit" class="btn btn-link pull-left">delete</button>
-            </form>
-          </td>
-        </tr>
-        @endforeach
-      </tbody>
-    </table>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Professional</th>
+            <th>Payment Date</th>
+            <th>Ammount Paid</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($financialTransactions as $financialTransaction)
+          <tr>
+            <td>{{ $financialTransaction->financiable->name }}</td>
+            <td>{{ $financialTransaction->FinancialTransactionDetails()->first()->date }}</td>
+            <td>{{ $financialTransaction->FinancialTransactionDetails()->first()->value }}</td>
+            <td>
+              <a href="{{ action('ProfessionalsController@edit', [$financialTransaction->id]) }}" class="btn pull-left">edit</a>
+              <form action="{{ action('ProfessionalsController@destroyProfessionalPayment', [$financialTransaction->id]) }}" method="post">
+                {{ csrf_field() }}
+                {{ method_field('DELETE') }}
+              <button type="submit" class="btn btn-link pull-left">delete</button>
+              </form>
+            </td>
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
     </div>
     @endif
   </div>

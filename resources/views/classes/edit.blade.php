@@ -9,16 +9,11 @@
     @include('errors.list')
 
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-12">
       {!! Form::model($classType, ['method' => 'PATCH', 'action' => ['ClassTypesController@update', $classType->id]]) !!}
         @include('classes.form', ['submitButtonText' => 'Update Class'])
 
         </form>
-      </div>
-      <div class="col-md-4">
-        @include('classes.partials.professionals-block')
-
-        @include('classes.partials.rooms-block')
       </div>
     </div>
   </div>

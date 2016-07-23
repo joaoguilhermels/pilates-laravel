@@ -37,6 +37,7 @@ class ProfessionalsController extends Controller
     public function indexPayments()
     {
         $financialTransactions = FinancialTransaction::where('financiable_type', 'App\Professional')
+                                      ->with('financialTransactionDetails')
                                       ->get();
 
         return view('professionals.payments.index', compact('financialTransactions'));
@@ -45,15 +46,9 @@ class ProfessionalsController extends Controller
     public function reportPayment(Professional $professional) {
         $rows = Schedule::where('professional_id', $professional->id)
                         ->get();
-//                        ->whereMonth('start_at', '=', 3)
-//                        ->whereYear('start_at', '=', 2016)
 
         $total = Schedule::where('professional_id', $professional->id)
                           ->sum('price');
-//                          ->whereMonth('start_at', '=', 3)
-//                          ->whereYear('start_at', '=', 2016)
-
-        //{{ $row->price * ($professional->classTypes()->where('id', $row->class_type_id)->first()->pivot->value / 100) }}
 
         return view('professionals.report_payment', compact('professional', 'rows', 'total'));
     }
@@ -65,7 +60,6 @@ class ProfessionalsController extends Controller
 
     public function edit(Professional $professional)
     {
-        //$classTypes = ClassType::with('professionals')->wherePivot('professional_id', '=', $professional->id)->get();
         $classTypes = ClassType::with(['professionals' => function ($query) use ($professional) {
             $query->where('id', $professional->id);
         }])->get();

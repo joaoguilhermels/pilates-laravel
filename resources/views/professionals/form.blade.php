@@ -34,7 +34,7 @@
             </div>
           </td>
           <td>
-            <input type="number" name="class_type_list[{{ $classType->id }}][value]" class="form-control" value="{{ $classType->professionals->first() == null ? '' : $classType->professionals->first()->pivot->value }}">
+            <input type="number" min="0" step="any" name="class_type_list[{{ $classType->id }}][value]" class="form-control" value="@if ($professional->classTypes()->find($classType->id) !== null){{ $professional->classTypes()->find($classType->id)->pivot->value }}@endif">
           </td>
           <td>
             <select name="class_type_list[{{ $classType->id }}][value_type]" class="form-control">
