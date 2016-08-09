@@ -62,11 +62,11 @@ Route::group(['middleware' => 'web'], function () {
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     //Route::get('professionals/{professionals}/payments/report', 'ProfessionalsController@reportPayment');
-    Route::get('professionals/payments', 'ProfessionalsController@indexPayments');
-    Route::get('professionals/payments/create', 'ProfessionalsController@createProfessionalPayment');
-    Route::post('professionals/payments/review', 'ProfessionalsController@generatePaymentReport');
-    Route::post('professionals/{professionals}/payments/store', 'ProfessionalsController@storeProfessionalPayment');
-    Route::delete('professionals/payments/{financial_transactions}/delete', 'ProfessionalsController@destroyProfessionalPayment');
+    Route::get('professionals/payments', 'ProfessionalsPaymentsController@index');
+    Route::get('professionals/payments/create', 'ProfessionalsPaymentsController@create');
+    Route::post('professionals/payments/review', 'ProfessionalsPaymentsController@generatePaymentReport');
+    Route::post('professionals/{professionals}/payments/store', 'ProfessionalsPaymentsController@store');
+    Route::delete('professionals/payments/{financial_transactions}/delete', 'ProfessionalsPaymentsController@destroy');
 
 
     Route::get('schedules/trial/create', 'SchedulesController@createTrialClass');

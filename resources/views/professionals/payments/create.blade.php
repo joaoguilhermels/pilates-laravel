@@ -4,7 +4,7 @@
 @section('content')
   <div class="container">
   <h1>Create New Professional Payment</h1>
-  <a href="{{ action('ProfessionalsController@indexPayments') }}">Back to Professional Payments List</a>
+  <a href="{{ action('ProfessionalsPaymentsController@index') }}">Back to Professional Payments List</a>
   <hr />
 
   @include('errors.list')
