@@ -1,4 +1,4 @@
-@extends('layouts/app')
+@extends('layouts/app')
 
 @section('content')
   <div class="container">
@@ -16,6 +16,6 @@
 @stop
 
 @section('script_footer')
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
   <script src="/js/clientPlanPayment/clientPlanPayment.js"></script>
 @stop

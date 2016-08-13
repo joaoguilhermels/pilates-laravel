@@ -27,23 +27,19 @@ class ClientsController extends Controller
     public function index()
     {
         $total = Client::count();
-        $clients = Client::orderBy('name')->paginate(5);
+        $clients = Client::orderBy('name')->paginate(20);
         $name = "";
-        $phone = "";
-        $email = "";
 
-        return view('clients.index', compact('total', 'clients', 'name', 'phone', 'email'));
+        return view('clients.index', compact('total', 'clients', 'name'));
     }
 
     public function search(Request $request)
     {
         $total = Client::count();
-        $clients = Client::filter($request->all())->orderBy('name')->paginate(5);
+        $clients = Client::filter($request->all())->orderBy('name')->paginate(20);
         $name = $request->name;
-        $phone = $request->phone;
-        $email = $request->email;
 
-        return view('clients.index', compact('total', 'clients', 'name', 'phone', 'email'));
+        return view('clients.index', compact('total', 'clients', 'name'));
     }
 
     public function show(Client $client)
@@ -56,33 +52,6 @@ class ClientsController extends Controller
     public function edit(Client $client)
     {
         return view('clients.edit', compact('client'));
-    }
-
-    public function reportCharge(Client $client) {
-        $rows = Schedule::with('professional', 'room')
-            ->where('client_id', $client->id)
-            ->orderBy('start_at', 'asc')
-            ->get()
-            ->groupBy(function ($item, $key) {
-              return date_create($item->start_at)->format("F Y");
-            });
-
-
-        //$rows = Schedule::with('professional', 'room')->where('client_id', $client->id)
-                        //->get();
-                        //->whereMonth('start_at', '=', 3)
-                        //->whereYear('start_at', '=', 2016)
-
-        $total = Schedule::where('client_id', $client->id)
-                          ->sum('price');
-                          //->whereMonth('start_at', '=', 3)
-                          //->whereYear('start_at', '=', 2016)
-
-        //{{ $row->price * ($professional->classTypes()->where('id', $row->class_type_id)->first()->pivot->value / 100) }}
-
-        //$rows = ClientPlan::where('client_id', $client->id)->get();
-
-        return view('clients.report_charge', compact('client', 'rows', 'total'));
     }
 
     public function create(Client $client)
@@ -118,7 +87,7 @@ class ClientsController extends Controller
     }
 
     /////////////////////////////////////////////////////////////////////////////////
-    public function indexCharges()
+    /*public function indexCharges()
     {
         $charges = FinancialTransaction::where('financiable_type', 'App\ClientPlan')->paginate(10);
 
@@ -174,5 +143,32 @@ class ClientsController extends Controller
         $charge->delete();
 
         return redirect('clients/charges');
-    }
+    }*/
+
+/*public function reportCharge(Client $client) {
+        $rows = Schedule::with('professional', 'room')
+            ->where('client_id', $client->id)
+            ->orderBy('start_at', 'asc')
+            ->get()
+            ->groupBy(function ($item, $key) {
+              return date_create($item->start_at)->format("F Y");
+            });
+
+
+        //$rows = Schedule::with('professional', 'room')->where('client_id', $client->id)
+                        //->get();
+                        //->whereMonth('start_at', '=', 3)
+                        //->whereYear('start_at', '=', 2016)
+
+        $total = Schedule::where('client_id', $client->id)
+                          ->sum('price');
+                          //->whereMonth('start_at', '=', 3)
+                          //->whereYear('start_at', '=', 2016)
+
+        //{{ $row->price * ($professional->classTypes()->where('id', $row->class_type_id)->first()->pivot->value / 100) }}
+
+        //$rows = ClientPlan::where('client_id', $client->id)->get();
+
+        return view('clients.report_charge', compact('client', 'rows', 'total'));
+    }*/
 }

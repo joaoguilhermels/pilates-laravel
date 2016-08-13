@@ -7,6 +7,7 @@ Vue.component('plans', {
         return {
             selectedPlan: [],
             selectedDaysOfWeek: [],
+            selectedClass: '',
             daysOfWeek: [
               { number: 1, name: 'Monday' },
               { number: 2, name: 'Tuesday' },
@@ -31,6 +32,7 @@ Vue.component('plans', {
                 self.list.forEach(function(classType) {
                     classType.plans.forEach(function(classTypePlan) {
                         if (classTypePlan.id == self.selectedPlan) {
+                            self.selectedClass = classType;
                             times = classTypePlan.times
                         }
                     })

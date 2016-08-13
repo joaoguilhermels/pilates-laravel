@@ -20,7 +20,9 @@ class ClassType extends Model
      */
     public function professionals()
     {
-        return $this->belongsToMany('App\Professional')->withPivot('value', 'value_type')->withTimestamps();
+        return $this->belongsToMany('App\Professional')
+                    ->withPivot('value', 'value_type')
+                    ->withTimestamps();
     }
 
     /**
@@ -28,7 +30,8 @@ class ClassType extends Model
      */
     public function rooms()
     {
-        return $this->belongsToMany('App\Room')->withTimestamps();
+        return $this->belongsToMany('App\Room')
+                    ->withTimestamps();
     }
 
     /**

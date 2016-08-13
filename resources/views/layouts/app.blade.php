@@ -49,28 +49,28 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li class="{{ active('dashboard') }}"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
                     @if (Auth::check())
-                    <li class="{{ active('clients') }}"><a href="{{ url('/clients') }}">Clients</a></li>
-                    <li class="{{ active('professionals') }}"><a href="{{ url('/professionals') }}">Professionals</a></li>
-                    <li class="{{ active('rooms') }}"><a href="{{ url('/rooms') }}">Rooms</a></li>
-                    <li class="{{ active('classes') }}"><a href="{{ url('/classes') }}">Classes</a></li>
-                    <li class="{{ active('plans') }}"><a href="{{ url('/plans') }}">Plans</a></li>
-                    <li class="{{ active('schedules') }}"><a href="{{ url('/schedules') }}">Schedules</a></li>
-                    <li class="{{ active('calendar') }}"><a href="{{ url('/calendar') }}">Calendar</a></li>
+                    <li class="{{ active('dashboard') }}"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+                    <li class="{{ active('clients') }}"><a href="{{ url('/clients') }}">{{ trans('menu.clients') }}</a></li>
+                    <li class="{{ active('professionals') }}"><a href="{{ url('/professionals') }}">{{ trans('menu.professionals') }}</a></li>
+                    <li class="{{ active('rooms') }}"><a href="{{ url('/rooms') }}">{{ trans('menu.rooms') }}</a></li>
+                    <li class="{{ active('classes') }}"><a href="{{ url('/classes') }}">{{ trans('menu.classes') }}</a></li>
+                    <li class="{{ active('plans') }}"><a href="{{ url('/plans') }}">{{ trans('menu.plans') }}</a></li>
+                    <li class="{{ active('schedules') }} hidden-sm"><a href="{{ url('/schedules') }}">{{ trans('menu.schedules') }}</a></li>
+                    <li class="{{ active('calendar') }}"><a href="{{ url('/calendar/group') }}" data-turbolinks="false">{{ trans('menu.calendar') }}</a></li>
                     <li class="dropdown {{ active(['bank-accounts', 'payment-methods']) }}">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Financials <span class="caret"></span></a>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ trans('menu.financials') }} <span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        <li class="{{ active('expenses') }}"><a href="{{ url('/expenses') }}">Expenses</a></li>
-                        <li class="{{ active('professionals/payments') }}"><a href="{{ url('/professionals/payments') }}">Pro Payments</a></li>
-                        <li class="{{ active('bank-accounts') }}"><a href="{{ url('/bank-accounts') }}">Bank Accounts</a></li>
-                        <li class="{{ active('payment-methods') }}"><a href="{{ url('/payment-methods') }}">Payment Methods</a></li>
+                        <li class="{{ active('expenses') }}"><a href="{{ url('/expenses') }}">{{ trans('menu.expenses') }}</a></li>
+                        <li class="{{ active('professionals/payments') }}"><a href="{{ url('/professionals/payments') }}">{{ trans('menu.pro_payments') }}</a></li>
+                        <li class="{{ active('bank-accounts') }}"><a href="{{ url('/bank-accounts') }}">{{ trans('menu.bank_accounts') }}</a></li>
+                        <li class="{{ active('payment-methods') }}"><a href="{{ url('/payment-methods') }}">{{ trans('menu.payment_methods') }}</a></li>
                       </ul>
                     </li>
                     <li class="dropdown {{ active(['reports/cash-journal']) }}">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports <span class="caret"></span></a>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ trans('menu.reports') }} <span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        <li class="{{ active('reports/cash-journal') }}"><a href="{{ url('/reports/cash-journal') }}">Cash Journal</a></li>
+                        <li class="{{ active('reports/cash-journal') }}"><a href="{{ url('/reports/cash-journal') }}">{{ trans('menu.cash_journal') }}</a></li>
                       </ul>
                     </li>
                     @endif
@@ -81,7 +81,7 @@
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
+                        <li><a href="{{ url('/register') }}">{{ trans('menu.register') }}</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -89,7 +89,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>{{ trans('menu.logout') }}</a></li>
                             </ul>
                         </li>
                     @endif
@@ -117,6 +117,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.js"></script>
 
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    <script src="/js/app.js"></script>
     @yield('script_footer')
 </body>
 </html>

@@ -31,13 +31,13 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/dashboard', 'HomeController@index');
 
-    Route::get('/calendar', 'SchedulesController@calendar');
-    Route::get('/calendar/group', 'SchedulesController@groupCalendar');
+    Route::get('/calendar', 'CalendarController@calendar');
+    Route::get('/calendar/group', 'CalendarController@groupCalendar');
 
     Route::get('reports/cash-journal', 'ReportsController@cashJournal');
     Route::post('reports/cash-journal', 'ReportsController@showCashJournal');
 
-    Route::get('clients/{clients}/plans/create', 'ClientPlansController@createClientPlan');
+    Route::get('clients/{clients}/plans/create', 'ClientPlansController@create');
     Route::post('clients/{clients}/plans/create', 'ClientPlansController@reviewClientPlan');
     Route::post('clients/{clients}/plans/review', 'ClientPlansController@store');
 

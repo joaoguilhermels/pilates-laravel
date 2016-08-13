@@ -3,15 +3,15 @@
 
 @section('content')
   <div class="container">
-  <h1>Associate a New Plan for {{ $client->name }}</h1>
-  <hr />
-  
-  @include('errors.list')
+	  <h1>Associate a New Plan for {{ $client->name }}</h1>
+	  <hr />
+	  
+	  @include('errors.list')
 
-  {!! Form::open(array('action' => array('ClientPlansController@store', $client->id))) !!}
-    @include('clientPlans.form', ['submitButtonText' => 'Add New Plan for this Client'])
-
-  {!! Form::close() !!}
+	  <form action="{{ action(ClientPlansController@store, [$client->id]) }}" method="POST">
+	  	{{ csrf_field() }}
+	    @include('clientPlans.form', ['submitButtonText' => 'Add New Plan for this Client'])
+  	</form>
   </div>
 @stop
 

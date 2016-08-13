@@ -23,7 +23,7 @@
         </select>
       </div>
       <div class="form-group">
-        <input type="submit" class="btn btn-default btn-block" value="Generate Report">
+        <input type="submit" class="btn btn-success btn-block" value="Generate Report">
       </div>
     </form>
   </div>

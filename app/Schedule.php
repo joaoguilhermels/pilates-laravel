@@ -14,6 +14,7 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
       'room_id',
       'class_type_status_id',
       'trial',
+      'price',
       'start_at',
       'end_at',
       'observation'

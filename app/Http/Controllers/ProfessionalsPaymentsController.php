@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Session;
 use Carbon\Carbon;
 
 use App\Http\Requests;
@@ -14,6 +15,7 @@ use App\Schedule;
 use App\Professional;
 
 use App\Http\Requests\PaymentReportRequest;
+use App\Http\Requests\ProfessionalPaymentStoreRequest;
 
 class ProfessionalsPaymentsController extends Controller
 {

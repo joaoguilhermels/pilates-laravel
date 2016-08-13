@@ -1,8 +1,8 @@
 @section('script_footer')
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.2/jquery.qtip.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/fullcalendar.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/lang/pt-br.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/lang/pt-br.js"></script>
   {!! $calendar->script() !!}
   <!-- template for the modal component -->
   <script type="x/template" id="modal-template">
@@ -16,9 +16,9 @@
           </div>
 
           <div class="modal-body">
-            <a href="schedules/trial/create" class="btn btn-info btn-block">Trial Class</a>
-            <a href="schedules/reposition/create" class="btn btn-info btn-block">Replacement</a>
-            <a href="schedules/extra/create" class="btn btn-info btn-block">Extra Class</a>
+            <a href="/schedules/trial/create" class="btn btn-info btn-block">Trial Class</a>
+            <a href="/schedules/reposition/create" class="btn btn-info btn-block">Replacement</a>
+            <a href="/schedules/extra/create" class="btn btn-info btn-block">Extra Class</a>
             <a href="" class="btn btn-info btn-block">Practice (no professional)</a>
           </div>
 

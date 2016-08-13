@@ -1,5 +1,5 @@
 <div id="planos" class="tab-pane fade">
-  <h3>Planos &nbsp; &nbsp; <a href="/clients/{{ $client->id }}/plans/create" class="btn btn-success">Add a New Plan</a></h3>
+  <h3>Planos &nbsp; &nbsp; <a href="/clients/{{ $client->id }}/plans/create" class="btn btn-success" data-turbolinks="false">Add a New Plan</a></h3>
 
   <table class="table table-stripped">
     <thead>

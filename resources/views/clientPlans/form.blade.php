@@ -26,7 +26,7 @@
           <tr v-for="day in daysOfWeek | filterNumberOfDays">
             <td class="col-md-3">
               <label for="daysOfWeek[@{{ day.number }}][day_of_week]">Days of the week: </label>
-              <select name="daysOfWeek[@{{ day.number }}][day_of_week]" class="form-control" v-on:change="selectDaysOfWeek">
+              <select name="daysOfWeek[@{{ day.number }}][day_of_week]" class="form-control">
                 <option value=""></option>
                 <option v-for="(index, dayOfWeek) in daysOfWeek" value="@{{ dayOfWeek.number }}">@{{ dayOfWeek.name }}</option>
               </select>
@@ -40,22 +40,25 @@
             </td>
             <td class="col-md-3">
               <label for="daysOfWeek[@{{ day.number }}][professional_id]">Professional: </label>
-              @{{ class }}
-              <select class="form-control" name="daysOfWeek[@{{ day.number }}][professional_id]">
+              <select class="form-control" name="daysOfWeek[@{{ day.number }}][professional_id]" v-if="selectedClass.professionals.length > 1">
                 <option value=""></option>
-                @foreach($professionals as $professional)
-                <option value="{{ $professional->id }}">{{ $professional->NameWithClasses }}</option>
-                @endforeach
+                <option v-for="professional in selectedClass.professionals" v-bind:value="professional.id">@{{ professional.name }}</option>
               </select>
+              <div v-else>
+                @{{ selectedClass.professionals[0].name }}
+                <input type="hidden" name="daysOfWeek[@{{ day.number }}][professional_id]" v-bind:value="selectedClass.professionals[0].id">
+              </div>
             </td>
             <td class="col-md-3">
               <label for="daysOfWeek[@{{ day.number }}][room_id]">Room: </label>
-              <select class="form-control" name="daysOfWeek[@{{ day.number }}][room_id]">
+              <select class="form-control" name="daysOfWeek[@{{ day.number }}][room_id]" v-if="selectedClass.rooms.length > 1">
                 <option value=""></option>
-                @foreach($rooms as $room)
-                  <option value="{{ $room->id }}">{{ $room->NameWithClasses }}</option>
-                @endforeach
+                <option v-for="room in selectedClass.rooms" v-bind:value="room.id">@{{ room.name }}</option>
               </select>
+              <div v-else>
+                @{{ selectedClass.rooms[0].name }}
+                <input type="hidden" name="daysOfWeek[@{{ day.number }}][room_id]" v-bind:value="selectedClass.rooms[0].id">
+              </div>
             </td>
           </tr>
         </table>

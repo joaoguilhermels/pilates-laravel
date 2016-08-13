@@ -35,7 +35,7 @@ class ClientPlansController extends Controller
         $this->middleware('auth');
     }
 
-    public function createClientPlan(Client $client)
+    public function create(Client $client)
     {
         $form = $this->prepareCreateForm();
 
@@ -49,12 +49,12 @@ class ClientPlansController extends Controller
     public function prepareCreateForm()
     {
         $form['daysOfWeek'] = $this->daysOfWeek;
-        $form['rooms'] = Room::all();
+        $form['rooms'] = Room::orderBy('name')->get();
         $form['classTypePlans'] = ClassType::with(['plans' => function ($query)
         {
             $query->orderBy('name');
         }, 'professionals', 'rooms'])->orderBy('name')->get()->toArray();
-        //$plans = Plan::all()->lists('name_with_class', 'id');
+
         $form['classTypes'] = ClassType::orderBy('name')->get();
 
         $form['professionals'] = Professional::orderBy('name')->get();
@@ -262,7 +262,7 @@ class ClientPlansController extends Controller
         }
     }
 
-    public function setPrice (Plan $plan, $date, $groupedDates)
+    public function setPrice(Plan $plan, $date, $groupedDates)
     {
         if ($plan->price_type == 'class')
         {

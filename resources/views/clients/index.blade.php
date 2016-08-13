@@ -5,7 +5,7 @@
     <h1>
       Clients
       &nbsp;&nbsp;&nbsp;
-      <a href="{{ action('ClientsController@create') }}" class="btn btn-success">Add New Client</a>
+      <a href="{{ action('ClientsController@create') }}" class="btn btn-success"><i class="fa fa-plus"></i> Add New Client</a>
     </h1>
 
     <hr />
@@ -15,21 +15,16 @@
     <h2>There no clients yet. You can <a href="{{ action('ClientsController@create') }}">add one here.</a>
 
     @else
-    <div class="well">
+    <div class="well well-sm">
       <form action="{{ action('ClientsController@search') }}" method="POST" class="form-inline">
         <fieldset>
-          <legend>Search</legend>
           {{ csrf_field() }}
           <div class="form-group">
             <label class="sr-only" for="name">Name</label>
             <input type="text" name="name" value="{{ $name }}" class="form-control" placeholder="Name">
-            <label class="sr-only" for="name">Phone</label>
-            <input type="text" name="phone" value="{{ $phone }}" class="form-control" placeholder="Phone">
-            <label class="sr-only" for="name">Email</label>
-            <input type="text" name="email" value="{{ $email }}" class="form-control" placeholder="Email">
           </div>
           <div class="form-group">
-            <input type="submit" value="search" class="btn btn-default">
+            <button type="submit" value="search" class="btn btn-default"><i class="fa fa-search"></i></button>
           </div>
         </fieldset>
       </form>
@@ -41,7 +36,6 @@
           <th>Name</th>
           <th>Phone</th>
           <th>E-mail</th>
-          <th>Observation</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -52,11 +46,15 @@
             <td><a href="{{ action('ClientsController@show', [$client->id]) }}">{{ $client->name }}</a></td>
             <td>{{ $client->phone }}</td>
             <td>{{ $client->email }}</td>
-            <td>{{ $client->observation }}</td>
             <td>
-              <a href="{{ action('ClientsController@edit', [$client->id]) }}" class="btn pull-left">edit</a>
-              {!! Form::open(['route' => ['clients.destroy', $client->id], 'method' => 'delete']) !!}
-              <button type="submit" class="btn btn-link pull-left">delete</button>
+              <a href="{{ action('ClientPlansController@create', [$client->id]) }}" class="pull-left">Create Plan</a>
+              <a href="{{ action('ClientsController@edit', [$client->id]) }}" class="btn btn-sm btn-primary pull-left">
+                <i class="fa fa-pencil"></i>
+              </a>
+              <form action="{{ action('ClientsController@destroy', [$client->id]) }}" method="POST">
+                {{ csrf_field() }}
+                {{ method_field('DELETE') }}
+                <button type="submit" class="btn btn-sm btn-danger pull-left"><i class="fa fa-remove"></i></button>
               </form>
             </td>
           </tr>

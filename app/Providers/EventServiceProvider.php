@@ -13,9 +13,12 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\ClientPlanWasAdded' => [
-            'App\Listeners\CreateSchedules',
-            'App\Listeners\CreateFinantialTransactions',
+        'App\Events\ClientPlanCreated' => [
+            CreateSchedules::class,
+            CreateFinantialTransactions::class,
+        ],
+        'App\Events\ScheduleCreated' => [
+            CreateSchedule::class,
         ],
     ];
 
