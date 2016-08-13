@@ -12,6 +12,10 @@ Vue.component('class-professional-room', {
 
     created () {
         this.classes = JSON.parse(this.classes);
+
+        if (this.classes.length == 1) {
+            this.selectedClass = this.classes[0];
+        }
     },
 
     methods: {

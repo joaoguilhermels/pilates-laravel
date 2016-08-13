@@ -103,8 +103,9 @@ class SchedulesController extends Controller
         $unscheduledStatusesIds = classTypeStatus::where('name', 'Desmarcou')->pluck('id');
 
         // List only class which are unscheduled and were not rescheduled alterady
-        $clients            = Client::whereHas('schedules', function ($query) use($unscheduledStatusesIds) {
-            $query->whereIn('class_type_status_id', $unscheduledStatusesIds)->where('parent_id', '=', '0');
+        $clients = Client::whereHas('schedules', function ($query) use($unscheduledStatusesIds) {
+            $query->whereIn('class_type_status_id', $unscheduledStatusesIds)
+                ->where('parent_id', '=', '0');
         })
         ->groupBy('clients.id')
         ->get();
@@ -112,13 +113,11 @@ class SchedulesController extends Controller
         $classTypes = ClassType::whereHas('schedules', function ($query) use($unscheduledStatusesIds) {
             $query->whereIn('class_type_status_id', $unscheduledStatusesIds)->where('parent_id', '=', '0');
         })
+        ->with('professionals', 'rooms')
         ->groupBy('class_types.id')
         ->get();
 
-        $rooms              = Room::all();
-        $professionals      = Professional::all();
-
-        return view('schedules.reposition.create', compact('clients', 'classTypes', 'rooms', 'professionals'));
+        return view('schedules.reposition.create', compact('clients', 'classTypes'));
     }
 
     public function storeReposition(ScheduleRequest $request)
@@ -160,9 +159,7 @@ class SchedulesController extends Controller
 
     public function createTrialClass()
     {
-        //$rooms = Room::WhereClassesAllowTrials()->get();
         $classTypes = ClassType::WithTrial()->with('professionals', 'rooms')->get();
-        //$professionals = Professional::GivingTrialClasses()->get();
 
         return view('schedules.trial.create', compact('classTypes'));
     }
@@ -194,12 +191,10 @@ class SchedulesController extends Controller
 
     public function createExtraClass()
     {
-        $rooms              = Room::all();
-        $clients            = Client::all();
-        $classTypes         = ClassType::all();
-        $professionals      = Professional::all();
+        $clients    = Client::all();
+        $classTypes = ClassType::with('professionals', 'rooms')->get();
 
-        return view('schedules.extra.create', compact('clients', 'plans', 'classTypes', 'rooms', 'professionals'));
+        return view('schedules.extra.create', compact('clients', 'classTypes'));
     }
 
     public function storeExtraClass(ScheduleRequest $request)
