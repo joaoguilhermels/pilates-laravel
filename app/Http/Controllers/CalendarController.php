@@ -1,0 +1,271 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+
+use App\Schedule;
+use App\ClassTypeStatus;
+
+class CalendarController extends Controller
+{
+    public function calendar() {
+        $events = [];
+
+        //$schedules = Schedule::all();
+        $schedules = Schedule::with(['ClassType', 'ClassTypeStatus', 'Professional'])->get();
+
+        foreach($schedules as $schedule) {
+            $events[] = \Calendar::event(
+              $this->setEventTitle($schedule), //event title
+              false, //full day event?
+              $schedule->start_at, //start time (you can also use Carbon instead of DateTime)
+              $schedule->end_at, //end time (you can also use Carbon instead of DateTime)
+              $schedule->id, //optionally, you can specify an event ID
+              [
+                'color' => $schedule->classTypeStatus->color,
+                'url' => '/schedules/' . $schedule->id . '/edit',
+                'description' => $this->eventDescription($schedule),
+                'textColor' => '#0A0A0A'
+              ]
+            );
+        }
+
+        // The following lines can be used to block specific times on the calendar
+        /*$manual_event = \Calendar::event(
+          "event title", //event title
+          false, //full day event?
+          "2016-07-19 07:00:00", //start time (you can also use Carbon instead of DateTime)
+          "2016-07-19 12:00:00", //end time (you can also use Carbon instead of DateTime)
+          null, //optionally, you can specify an event ID
+          [
+            'rendering' => 'background'
+          ]
+        );
+
+        $events = array_add($events, 57, $manual_event);*/
+
+        // The following lines can be used to add recurring events on the calendar
+        /*$manual_event = \Calendar::event(
+          "recurring event title", //event title
+          false, //full day event?
+          "07:00:00", //start time (you can also use Carbon instead of DateTime)
+          "08:00:00", //end time (you can also use Carbon instead of DateTime)
+          null, //optionally, you can specify an event ID
+          [
+            'dow' => array(1, 4)
+          ]
+        );
+
+        $events = array_add($events, 57, $manual_event);*/
+
+        $calendar = \Calendar::addEvents($events);
+
+        $calendar = \Calendar::setOptions(array(
+            'allDaySlot' => false,
+            'defaultView' => 'agendaWeek', // Add custom option
+            'weekends' => false, // Add custom option
+            'businessHours' => array(
+              'start' => '07:00',
+              'end' => '20:30',
+              //'dow' => array(1, 2, 3, 4, 5)
+            ),
+            'nowIndicator' => true,
+            'minTime' => '07:00:00',
+            'maxTime' => '21:00:00',
+            'contentHeight' => 'auto',
+            'slotEventOverlap' => false,
+            'lang' => 'pt-BR',
+            'eventLimit' => false
+        ));
+
+        $calendar = \Calendar::setCallbacks(array(
+            'click' => 'function () {
+                alert(\'clicked the custom button!\');
+            }',
+            'dayClick' => 'function (date, jsEvent, view) {
+                if (!jsEvent.target.classList.contains(\'fc-bgevent\')) {
+                    vm.showModalNow(date.format());
+                }
+            }',
+            'eventRender' => 'function(event, element) {
+                var ntoday = Math.round(new Date().getTime() / 1000),
+                    eventEnd = event.end.unix(),
+                    eventStart = event.start.unix();
+
+                if (eventEnd < ntoday){
+                    element.addClass(\'past-event\');
+                }
+
+                element.qtip({
+                    prerender: true,
+                    content: {
+                        \'text\': event.description
+                    },
+                    position: {
+                  			at: \'top left\',
+                  			my: \'bottom right\',
+                  			target: \'mouse\',
+                  			viewport: $(\'#fullcalendar\'),
+                  			adjust: {
+                  				mouse: true,
+                  				scroll: true
+                  			},
+                        method: \'none shift\'
+                		},
+                		style: {
+                        classes: \'qtip-bootstrap qtip-shadow\'
+                    }
+                });
+                element.find(\'div.fc-title\').html(element.find(\'div.fc-title\').text());
+                element.find(\'span.fc-title\').html(element.find(\'span.fc-title\').text());
+            }',
+        ));
+
+        return view('calendar.index', compact('calendar'));
+    }
+
+    public function setGroupTitle(Schedule $schedule)
+    {
+        return $schedule->classType->name . ' - ' . $schedule->professional->name;
+    }
+
+    public function setEventTitle(Schedule $schedule)
+    {
+        $badge = "";
+
+        if ($schedule->trial) {
+            $badge = "<span class=\"label label-warning\">AE</span>";
+        }
+
+        if ($schedule->observation <> '') {
+            $badge .= " <i class=\"fa fa-comment\"></i>";
+        }
+
+        return $badge . ' ' . $schedule->client->name . ' - ' . $schedule->classType->name;
+    }
+
+    public function groupDescription(Schedule $schedule)
+    {
+        $schedules   = Schedule::where('start_at', '=', $schedule->start_at)
+                          ->where('room_id', '=', $schedule->room_id)
+                          ->with('client', 'classTypeStatus')
+                          ->get();
+
+        $description =  '<strong>Class:</strong> ' . $schedule->classType->name . '<br>' .
+                        '<strong>Professional:</strong> ' . $schedule->professional->name . '<br>' .
+                        '<strong>Date/Time:</strong> ' . $schedule->start_at->format("d/m/Y H:i") . ' to ' . $schedule->end_at->format("H:i") . '<br>' .
+                        '<strong>Clients:</strong><br>';
+
+        foreach($schedules as $schedule) {
+            $description .= $this->statusLabel($schedule->classTypeStatus) . ' ' . $schedule->client->name . '' . '<br>';
+        }
+
+        return $description;
+    }
+
+    public function statusLabel(classTypeStatus $classTypeStatus)
+    {
+        return '<span class="label" style="background-color: ' . $classTypeStatus->color . '">' . $classTypeStatus->name . '</span>';
+    }
+
+    public function eventDescription(Schedule $schedule)
+    {
+        $description =  '<strong>Client:</strong> ' . $schedule->client->name . '<br>' .
+                        '<strong>Class:</strong> ' . $schedule->classType->name . '<br>' .
+                        '<strong>Date/Time:</strong> ' . $schedule->start_at->format("d/m/Y H:i") . ' to ' . $schedule->end_at->format("H:i") . '<br>' .
+                        '<strong>Professional:</strong> ' . $schedule->professional->name . '<br>' .
+                        '<strong>Status:</strong> ' . $schedule->classTypeStatus->name;
+
+        if ($schedule->observation <> '') {
+            $description .= '<br><strong>Observation:</strong><br> ' . $schedule->observation;
+        }
+
+        return $description;
+    }
+
+    public function groupCalendar() {
+        $events = [];
+
+        //$schedules = Schedule::all();
+        $schedules = Schedule::with(['ClassType', 'ClassTypeStatus', 'Professional'])->groupBy('start_at', 'room_id')->get();
+
+        foreach($schedules as $schedule) {
+            $events[] = \Calendar::event(
+              $this->setGroupTitle($schedule), //event title
+              false, //full day event?
+              $schedule->start_at, //start time (you can also use Carbon instead of DateTime)
+              $schedule->end_at, //end time (you can also use Carbon instead of DateTime)
+              $schedule->id, //optionally, you can specify an event ID
+              [
+                'color' => $schedule->classTypeStatus->color,
+                'url' => '/schedules/' . $schedule->id . '/edit',
+                'description' => $this->groupDescription($schedule),
+                'textColor' => '#0A0A0A'
+              ]
+            );
+        }
+
+        $calendar = \Calendar::addEvents($events);
+
+        $calendar = \Calendar::setOptions(array(
+            'allDaySlot' => false,
+            'defaultView' => 'agendaWeek', // Add custom option
+            'weekends' => false, // Add custom option
+            'businessHours' => array(
+              'start' => '07:00',
+              'end' => '20:30',
+              //'dow' => array(1, 2, 3, 4, 5)
+            ),
+            'nowIndicator' => true,
+            'minTime' => '07:00:00',
+            'maxTime' => '21:00:00',
+            'contentHeight' => 'auto',
+            'slotEventOverlap' => false,
+            'lang' => 'pt-BR',
+            'eventLimit' => false
+        ));
+
+        $calendar = \Calendar::setCallbacks(array(
+            'dayClick' => 'function (date, jsEvent, view) {
+                vm.showModalNow(date.format());
+            }',
+            'eventRender' => 'function(event, element) {
+                var ntoday = Math.round(new Date().getTime() / 1000),
+                    eventEnd = event.end.unix(),
+                    eventStart = event.start.unix();
+
+                if (eventEnd < ntoday){
+                    element.addClass(\'past-event\');
+                }
+
+                element.qtip({
+                    prerender: true,
+                    content: {
+                        \'text\': event.description
+                    },
+                    position: {
+                        at: \'top left\',
+                        my: \'bottom right\',
+                        target: \'mouse\',
+                        viewport: $(\'#fullcalendar\'),
+                        adjust: {
+                          mouse: true,
+                          scroll: true,
+                          method: \'none shift\'
+                        }
+                    },
+                    style: {
+                        classes: \'qtip-bootstrap qtip-shadow\'
+                    }
+                });
+                element.find(\'div.fc-title\').html(element.find(\'div.fc-title\').text());
+                element.find(\'span.fc-title\').html(element.find(\'span.fc-title\').text());
+            }',
+        ));
+
+        return view('calendar.index', compact('calendar'));
+    }
+}
