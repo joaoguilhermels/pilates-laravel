@@ -1,19 +1,19 @@
-@extends('layouts/app')
+@extends('layouts/app')
 
 
 @section('content')
   <div class="container">
-  <h1>
-    Create New Bank Account
-  </h1>
-  <a href="{{ action('BankAccountsController@index') }}">Back to Bank Accounts List</a>
-  <hr />
+    <h1>
+      Create New Bank Account
+    </h1>
+    <a href="{{ action('BankAccountsController@index') }}">Back to Bank Accounts List</a>
+    <hr />
 
-  @include('errors.list')
+    @include('errors.list')
 
-  {!! Form::open(['url' => 'bank-accounts']) !!}
-    @include('bankAccounts.form', ['submitButtonText' => 'Add New Bank Account'])
-
+    <form action="{{ action('BankAccountsController@store') }}">
+      {{ csrf_field() }}
+      @include('bankAccounts.form', ['submitButtonText' => 'Add New Bank Account'])
     </form>
   </div>
 @stop

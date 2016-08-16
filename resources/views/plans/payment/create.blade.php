@@ -1,17 +1,17 @@
-@extends('layouts/app')
+@extends('layouts/app')
 
 
 @section('content')
   <div class="container">
-  <h1>Create New Plan Payment</h1>
-  <a href="{{ back() }}">Back</a>
-  <hr />
+    <h1>Create New Plan Payment</h1>
+    <a href="{{ back() }}">Back</a>
+    <hr />
 
-  @include('errors.list')
+    @include('errors.list')
 
-  <form action="/plans/{{ $professional->id }}/payments/store" method="POST">
-    @include('plans.payment.form', ['submitButtonText' => 'Add New Plan'])
-
-  </form>
+    <form action="{{ action('ProfessionalsPaymentsController@store', [$professional->id]) }}" method="POST">
+      {{ csrf_field() }}
+      @include('plans.payment.form', ['submitButtonText' => 'Add New Plan'])
+    </form>
   </div>
 @stop

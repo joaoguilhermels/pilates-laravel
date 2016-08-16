@@ -11,7 +11,6 @@
 
   <form action="{{ url('professionals/payments/review') }}" method="POST" class="form-horizontal">
     {{ csrf_field() }}
-
     <div class="form-group">
       <label for="professional">Professional: </label>
       <select class="form-control" name="professional">

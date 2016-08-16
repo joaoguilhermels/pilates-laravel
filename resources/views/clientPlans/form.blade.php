@@ -11,8 +11,8 @@
       <label for="plans">Plan: </label>
       <select name="plan_id" class="form-control" v-model="selectedPlan">
         <option value=""></option>
-          <optgroup label="@{{ class.name }}" v-for="class in list">
-            <option v-for="plan in class.plans" v-bind:value="plan.id">@{{ plan.name }}</option>
+          <optgroup v-bind:label="class.name" v-for="class in list">
+            <option v-for="plan in class.plans" v-bind:value="plan.id">@{{ plan.name }} (@{{ plan.times }}/@{{ plan.times_type }})</option>
           </optgroup>
       </select>
     </div>

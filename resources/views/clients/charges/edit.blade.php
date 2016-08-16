@@ -2,16 +2,16 @@
 
 @section('content')
   <div class="container">
-  <h1>Edit {{ $charge->name }}</h1>
-  <a href="{{ action('ClientsController@indexCharges') }}">Back to Charges List</a>
-  <hr />
+    <h1>Edit {{ $charge->name }}</h1>
+    <a href="{{ action('ClientsController@indexCharges') }}">Back to Charges List</a>
+    <hr />
 
-  @include('errors.list')
+    @include('errors.list')
 
-  {!! Form::model($charge, ['method' => 'PATCH', 'action' => ['ClientsController@updateCharge', $charge->id]]) !!}
-    {{ csrf_field() }}
-    @include('clients.charges.form', ['submitButtonText' => 'Update Charge'])
-
-  {!! Form::close() !!}
+    <form action="{{ action('ClientsController@update', [$charge->id]) }}" method="POST">
+      {{ csrf_field() }}
+      {{ method_field("PATCH") }}
+      @include('clients.charges.form', ['submitButtonText' => 'Update Charge'])
+    </form>
   </div>
 @stop

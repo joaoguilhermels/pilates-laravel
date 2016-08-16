@@ -2,15 +2,17 @@
 
 @section('content')
   <div class="container">
-  <h1>Edit {{ $room->name }}</h1>
-  <a href="{{ action('RoomsController@index') }}">Back to Rooms List</a>
-  <hr />
-  
-  @include('errors.list')
-  
-  {!! Form::model($room, ['method' => 'PATCH', 'action' => ['RoomsController@update', $room->id]]) !!}
-    @include('rooms.form', ['submitButtonText' => 'Update Room'])
+	  <h1>Edit {{ $room->name }}</h1>
+	  <a href="{{ action('RoomsController@index') }}">Back to Rooms List</a>
+	  <hr />
+	  
+	  @include('errors.list')
 
-  {!! Form::close() !!}  
+	  <form action="{{ action('RoomsController@update', [$room->id]) }}" method="POST">
+	  	{{ csrf_field() }}
+	  	{{ method_field('PATCH') }}
+	    @include('rooms.form', ['submitButtonText' => 'Update Room'])
+
+	  </form>
   </div>
 @stop

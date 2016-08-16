@@ -48,12 +48,16 @@ class ClientPlansController extends Controller
 
     public function prepareCreateForm()
     {
-        $form['daysOfWeek'] = $this->daysOfWeek;
         $form['rooms'] = Room::orderBy('name')->get();
+        $form['daysOfWeek'] = $this->daysOfWeek;
         $form['classTypePlans'] = ClassType::with(['plans' => function ($query)
-        {
-            $query->orderBy('name');
-        }, 'professionals', 'rooms'])->orderBy('name')->get()->toArray();
+                                    {
+                                        $query->orderBy('name');
+                                    }, 'professionals', 'rooms'])
+                                    ->has('plans')
+                                    ->orderBy('name')
+                                    ->get()
+                                    ->toArray();
 
         $form['classTypes'] = ClassType::orderBy('name')->get();
 

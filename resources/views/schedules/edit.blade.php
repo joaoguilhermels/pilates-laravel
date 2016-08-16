@@ -2,15 +2,17 @@
 
 @section('content')
   <div class="container">
-  <h1>Edit {{ $schedule->name }}</h1>
-  <a href="{{ action('SchedulesController@index') }}">Back to Schedules List</a>
-  <hr />
+	  <h1>Edit {{ $schedule->name }}</h1>
+	  <a href="{{ action('SchedulesController@index') }}">Back to Schedules List</a>
+	  <hr />
 
-  @include('errors.list')
+	  @include('errors.list')
 
-  {!! Form::model($schedule, ['method' => 'PATCH', 'action' => ['SchedulesController@update', $schedule->id]]) !!}
-    @include('schedules.edit-form', ['submitButtonText' => 'Update Schedule'])
+	  <form action="{{ action('SchedulesController@update', [$schedule->id]) }}">
+	  	{{ csrf_field() }}
+	  	{{ method_field('PATCH') }}
+	    @include('schedules.edit-form', ['submitButtonText' => 'Update Schedule'])
 
-  {!! Form::close() !!}
+	  </form>
   </div>
 @stop

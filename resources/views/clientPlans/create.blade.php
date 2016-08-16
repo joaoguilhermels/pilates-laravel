@@ -8,7 +8,7 @@
 	  
 	  @include('errors.list')
 
-	  <form action="{{ action(ClientPlansController@store, [$client->id]) }}" method="POST">
+	  <form action="{{ action('ClientPlansController@store', [$client->id]) }}" method="POST">
 	  	{{ csrf_field() }}
 	    @include('clientPlans.form', ['submitButtonText' => 'Add New Plan for this Client'])
   	</form>

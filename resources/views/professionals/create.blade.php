@@ -11,7 +11,7 @@
 
     @include('errors.list')
 
-    <form action="{{ action('ProfessionalsController@store', [$professional->id]) }}" method="post">
+    <form action="{{ action('ProfessionalsController@store') }}" method="post">
       {{ csrf_field() }}
       @include('professionals.form', ['submitButtonText' => 'Add New Professional'])
     </form>

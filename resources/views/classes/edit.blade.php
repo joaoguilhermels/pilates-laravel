@@ -10,9 +10,10 @@
 
     <div class="row">
       <div class="col-md-12">
-      {!! Form::model($classType, ['method' => 'PATCH', 'action' => ['ClassTypesController@update', $classType->id]]) !!}
-        @include('classes.form', ['submitButtonText' => 'Update Class'])
-
+        <form action="{{ action('ClassTypesController@update', [$classType->id]) }}" method="POST">
+          {{ csrf_field() }}
+          {{ method_field("PATCH") }}
+          @include('classes.form', ['submitButtonText' => 'Update Class'])
         </form>
       </div>
     </div>
