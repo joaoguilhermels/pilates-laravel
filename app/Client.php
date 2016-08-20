@@ -24,6 +24,15 @@ class Client extends Model
         return $this->hasMany('App\Schedule');
     }
 
+    /*public function scopePendingRepositions($query)
+    {
+        return $query->join('schedules', 'schedules.client_id', '=', 'clients.id', 'left outer')
+                ->join('class_type_statuses', 'schedules.class_type_status_id', '=', 'class_type_statuses.id', 'left outer')
+                ->where('class_type_statuses.name', '=', 'Desmarcou')
+                ->where('schedules.parent_id', '=', 0)
+                ->select('schedules.*');
+    }*/
+
     public function scopeFilter($query, $params)
     {
         if ( isset($params['name']) && trim($params['name']) !== '' )

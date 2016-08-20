@@ -44,7 +44,7 @@
               @endif
             </td>
             <td>
-              ...
+              {{ $financialTransactionDetail->saldo }}
             </td>
           </tr>
         @endforeach

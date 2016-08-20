@@ -24,7 +24,7 @@
             <input type="text" name="name" value="{{ $name }}" class="form-control" placeholder="Name">
           </div>
           <div class="form-group">
-            <button type="submit" value="search" class="btn btn-default"><i class="fa fa-search"></i></button>
+            <button type="submit" value="search" class="btn btn-default"><i class="fa fa-search"></i> Search</button>
           </div>
         </fieldset>
       </form>
@@ -36,7 +36,10 @@
           <th>Name</th>
           <th>Phone</th>
           <th>E-mail</th>
-          <th>Actions</th>
+          <th>Reposições Pendentes</th>
+          <th></th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -47,14 +50,30 @@
             <td>{{ $client->phone }}</td>
             <td>{{ $client->email }}</td>
             <td>
-              <a href="{{ action('ClientPlansController@create', [$client->id]) }}" class="pull-left">Create Plan</a>
-              <a href="{{ action('ClientsController@edit', [$client->id]) }}" class="btn btn-sm btn-primary pull-left">
-                <i class="fa fa-pencil"></i>
+              @if($client->schedules->count() > 0)
+                {{ $client->schedules->count() }} aula(s) desmarcada(s)
+                <ul class="list">
+                @foreach($client->schedules as $schedule)
+                  <li><a href="{{ action('SchedulesController@edit', [$schedule->id]) }}">{{ $schedule->start_at }}</a></li>
+                @endforeach
+                </ul>
+              @else
+                Nenhuma aula pendente
+              @endif
+            </td>
+            <td>
+              <a href="{{ action('ClientPlansController@create', [$client->id]) }}" class="btn btn-default">Create Plan</a>
+            </td>
+            <td>
+              <a href="{{ action('ClientsController@edit', [$client->id]) }}" class="btn btn-primary">
+                <i class="fa fa-pencil"></i> Edit
               </a>
+            </td>
+            <td>
               <form action="{{ action('ClientsController@destroy', [$client->id]) }}" method="POST">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
-                <button type="submit" class="btn btn-sm btn-danger pull-left"><i class="fa fa-remove"></i></button>
+                <button type="submit" class="btn btn-danger"><i class="fa fa-remove"></i> Delete</button>
               </form>
             </td>
           </tr>

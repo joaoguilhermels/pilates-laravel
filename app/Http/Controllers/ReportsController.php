@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+
 use Illuminate\Http\Request;
 use App\FinancialTransaction;
 use App\FinancialTransactionDetail;
@@ -25,6 +27,8 @@ class ReportsController extends Controller
             ->whereMonth('date', '=', $yearMonth->month)
             ->with('financialTransaction')
             ->get();
+
+        $financialTransactionDetailsNew = DB::select("SELECT *, ROUND(IF(ftd.type = 'paid', @runtot :=  @runtot - ftd.value, @runtot :=  ftd.value + @runtot), 2) AS saldo FROM financial_transaction_details ftd, financial_transactions ft, (SELECT @runtot := 0) c WHERE ftd.financial_transaction_id = ft.id");
 
         $creditSum = FinancialTransactionDetail::whereYear('date', '=', $yearMonth->year)
             ->whereMonth('date', '=', $yearMonth->month)

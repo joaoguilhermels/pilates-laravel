@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Session;
+
 use App\Plan;
 use App\Room;
 use App\Client;
@@ -14,8 +15,10 @@ use App\ClassType;
 use App\ClassTypeStatus;
 use App\Professional;
 use App\Schedule;
+
 use App\Http\Requests;
 use App\Http\Requests\ClientPlanRequest;
+
 use App\Http\Controllers\Controller;
 
 class ClientPlansController extends Controller
@@ -134,16 +137,7 @@ class ClientPlansController extends Controller
         $groupedDates = $this->getGroupedDates($request);
 
         foreach($request->daysOfWeek as $dayOfWeek) {
-            $clientPlanDetail = new ClientPlanDetail;
-
-            $clientPlanDetail->professional_id = $dayOfWeek['professional_id'];
-            $clientPlanDetail->day_of_week = $dayOfWeek['day_of_week'];
-            $clientPlanDetail->room_id = $dayOfWeek['room_id'];
-            $clientPlanDetail->hour = $dayOfWeek['hour'] . ':00';
-
-            $clientPlanDetail = $clientPlan->clientPlanDetails()->save($clientPlanDetail);
-
-            $this->setSchedules($request, $clientPlan->class_type_id, $client, $clientPlanDetail, $dayOfWeek, $groupedDates);
+            $this->setSchedules($request, $clientPlan->class_type_id, $client, $dayOfWeek, $groupedDates);
         }
 
         Session::flash('message', 'Successfully added a plan to ' . $client->name);
@@ -208,12 +202,21 @@ class ClientPlansController extends Controller
         return $datesGrouped;
     }
 
-    public function setSchedules(ClientPlanRequest $request, $classTypeId, Client $client, ClientPlanDetail $clientPlanDetail, $dayOfWeek, $groupedDates)
+    public function setSchedules(ClientPlanRequest $request, $classTypeId, Client $client, $dayOfWeek, $groupedDates)
     {
+        $clientPlanDetail = new ClientPlanDetail;
+
+        $clientPlanDetail->hour = $dayOfWeek['hour'] . ':00';
+        $clientPlanDetail->room_id = $dayOfWeek['room_id'];
+        $clientPlanDetail->day_of_week = $dayOfWeek['day_of_week'];
+        $clientPlanDetail->professional_id = $dayOfWeek['professional_id'];
+
+        $clientPlanDetail = $clientPlan->clientPlanDetails()->save($clientPlanDetail);
+        
         $classType = ClassType::with([
             'plans' =>  function ($query) use ($request) {
-                          return $query->where('id', $request->plan_id);
-                      },
+                            return $query->where('id', $request->plan_id);
+                        },
             'statuses' => function ($query) {
                               return $query->where('name', 'OK');
                           },

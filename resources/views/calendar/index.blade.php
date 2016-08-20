@@ -4,34 +4,8 @@
 
 @section('content')
 
-  <div class="container" id="app">
+  <div class="container-fluid" id="app">
     <h1>Agenda</h1>
-
-    <form class="form-inline" action="" method="post">
-      <div class="form-group">
-        <label for="professional_id">Professional: </label>
-        <select class="form-control" name="professional_id">
-          <option value="all">All</option>
-          <option value="option">Bruna</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="professional_id">Class: </label>
-        <select class="form-control" name="professional_id">
-          <option value="all">All</option>
-          <option value="option">Bruna</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="professional_id">Room: </label>
-        <select class="form-control" name="professional_id">
-          <option value="all">All</option>
-          <option value="option">Bruna</option>
-        </select>
-      </div>
-    </form>
 
     {!! $calendar->calendar() !!}
     <!-- use the modal component, pass in the prop -->

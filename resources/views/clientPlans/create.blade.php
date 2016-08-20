@@ -1,5 +1,4 @@
-@extends('layouts/app')
-
+@extends('layouts/app')
 
 @section('content')
   <div class="container">
@@ -16,5 +15,5 @@
 @stop
 
 @section('script_footer')
-    <script src="/js/clientPlan/clientPlan.js"></script>
+	<script src="/js/clientPlan/clientPlan.js"></script>
 @stop

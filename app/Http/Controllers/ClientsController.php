@@ -27,7 +27,12 @@ class ClientsController extends Controller
     public function index()
     {
         $total = Client::count();
-        $clients = Client::orderBy('name')->paginate(20);
+        $clients = Client::with(['schedules' => function ($query) {
+                                    $query->join('class_type_statuses', 'schedules.class_type_status_id', '=', 'class_type_statuses.id')
+                                            ->where('class_type_statuses.name', '=', 'Desmarcou')
+                                            ->where('schedules.parent_id', '=', 0)
+                                            ->select('schedules.*');
+                                }])->orderBy('name')->paginate(20);
         $name = "";
 
         return view('clients.index', compact('total', 'clients', 'name'));
