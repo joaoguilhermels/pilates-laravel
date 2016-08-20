@@ -23,7 +23,7 @@ use App\Http\Controllers\Controller;
 
 class ClientPlansController extends Controller
 {
-    protected $daysOfWeek = array(
+    protected $daysOfWeek = [
                   0 => 'Sunday',
                   1 => 'Monday',
                   2 => 'Tuesday',
@@ -31,7 +31,7 @@ class ClientPlansController extends Controller
                   4 => 'Thursday',
                   5 => 'Friday',
                   6 => 'Saturday'
-              );
+              ];
 
     public function __construct()
     {
@@ -83,7 +83,7 @@ class ClientPlansController extends Controller
         $startDateMonth = $startDate->formatLocalized('%B');
         $startDateYear = $startDate->formatLocalized('%Y');
 
-        $dates = array();
+        $dates = [];
 
         foreach ($request->daysOfWeek as $dayOfWeek) {
             $nameOfDayOfWeek = array_get($this->daysOfWeek, $dayOfWeek['dayOfWeek']);
@@ -100,9 +100,9 @@ class ClientPlansController extends Controller
         }
 
         // Sort dates
-        usort($dates, array($this, 'date_compare'));
+        usort($dates, [$this, 'date_compare']);
 
-        $datesGrouped = array();
+        $datesGrouped = [];
 
         foreach ($dates as $date) {
             $dateObj = date_create($date);
@@ -165,7 +165,7 @@ class ClientPlansController extends Controller
                 \Carbon\Carbon::parse($startDate . " last " . $nameOfDayOfWeek . " + " . $plan->duration . " " . $plan->duration_type)
             );*/
 
-            $dates = array();
+            $dates = [];
 
             // To have the month of starting date plus X months remove the "- 1"
             $month = $endDate->format("n");
@@ -189,11 +189,11 @@ class ClientPlansController extends Controller
         })
         ->flatten()
         ->map(function ($item) {
-            $item = array(
+            $item = [
                 "month_year" => $item->format("m-Y"),
                 "day_of_week" => $item->format("l"),
                 "date" => $item
-            );
+            ];
 
             return $item;
         });

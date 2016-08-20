@@ -64,15 +64,15 @@ class CalendarController extends Controller
 
         $calendar = \Calendar::addEvents($events);
 
-        $calendar = \Calendar::setOptions(array(
+        $calendar = \Calendar::setOptions([
             'allDaySlot' => false,
             'defaultView' => 'agendaWeek', // Add custom option
             'weekends' => false, // Add custom option
-            'businessHours' => array(
+            'businessHours' => [
               'start' => '07:00',
               'end' => '20:30',
               //'dow' => array(1, 2, 3, 4, 5)
-            ),
+            ],
             'nowIndicator' => true,
             'minTime' => '07:00:00',
             'maxTime' => '21:00:00',
@@ -80,9 +80,9 @@ class CalendarController extends Controller
             'slotEventOverlap' => false,
             'lang' => 'pt-BR',
             'eventLimit' => false
-        ));
+        ]);
 
-        $calendar = \Calendar::setCallbacks(array(
+        $calendar = \Calendar::setCallbacks([
             'click' => 'function () {
                 alert(\'clicked the custom button!\');
             }',
@@ -123,7 +123,7 @@ class CalendarController extends Controller
                 element.find(\'div.fc-title\').html(element.find(\'div.fc-title\').text());
                 element.find(\'span.fc-title\').html(element.find(\'span.fc-title\').text());
             }',
-        ));
+        ]);
 
         return view('calendar.index', compact('calendar'));
     }
@@ -212,15 +212,15 @@ class CalendarController extends Controller
 
         $calendar = \Calendar::addEvents($events);
 
-        $calendar = \Calendar::setOptions(array(
+        $calendar = \Calendar::setOptions([
             'allDaySlot' => false,
             'defaultView' => 'agendaWeek', // Add custom option
             'weekends' => false, // Add custom option
-            'businessHours' => array(
+            'businessHours' => [
               'start' => '07:00',
               'end' => '20:30',
               //'dow' => array(1, 2, 3, 4, 5)
-            ),
+            ],
             'nowIndicator' => true,
             'minTime' => '07:00:00',
             'maxTime' => '21:00:00',
@@ -228,9 +228,9 @@ class CalendarController extends Controller
             'slotEventOverlap' => false,
             'lang' => 'pt-BR',
             'eventLimit' => false
-        ));
+        ]);
 
-        $calendar = \Calendar::setCallbacks(array(
+        $calendar = \Calendar::setCallbacks([
             'dayClick' => 'function (date, jsEvent, view) {
                 vm.showModalNow(date.format());
             }',
@@ -266,7 +266,7 @@ class CalendarController extends Controller
                 element.find(\'div.fc-title\').html(element.find(\'div.fc-title\').text());
                 element.find(\'span.fc-title\').html(element.find(\'span.fc-title\').text());
             }',
-        ));
+        ]);
 
         return view('calendar.index', compact('calendar'));
     }
