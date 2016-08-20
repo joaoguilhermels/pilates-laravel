@@ -28,7 +28,7 @@ class Plan extends Model
 
 
     public function getNameWithClassAttribute()
-    { 
+    {
         return $this->classType->name . ' - ' . $this->name . ' - ' . $this->times . ' per ' . $this->times_type;
     }
 }

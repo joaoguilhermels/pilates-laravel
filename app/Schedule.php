@@ -59,7 +59,8 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
         return $this->belongsTo('App\ClientPlanDetail', 'scheduable_id');
     }
 
-    public function financialTransactions() {
+    public function financialTransactions()
+    {
         return $this->morphMany('App\FinancialTransaction', 'financiable');
     }
 
@@ -68,7 +69,8 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
      *
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 

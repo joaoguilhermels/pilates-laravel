@@ -19,7 +19,8 @@ class RoomsController extends Controller
         $this->middleware('auth');
     }
 
-    public function index() {
+    public function index()
+    {
         $rooms = room::all();
 
         return view('rooms.index')->with('rooms', $rooms);

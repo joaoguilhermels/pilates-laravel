@@ -11,25 +11,26 @@ use App\ClassTypeStatus;
 
 class CalendarController extends Controller
 {
-    public function calendar() {
+    public function calendar()
+    {
         $events = [];
 
         //$schedules = Schedule::all();
         $schedules = Schedule::with(['ClassType', 'ClassTypeStatus', 'Professional'])->get();
 
-        foreach($schedules as $schedule) {
+        foreach ($schedules as $schedule) {
             $events[] = \Calendar::event(
-              $this->setEventTitle($schedule), //event title
-              false, //full day event?
-              $schedule->start_at, //start time (you can also use Carbon instead of DateTime)
-              $schedule->end_at, //end time (you can also use Carbon instead of DateTime)
-              $schedule->id, //optionally, you can specify an event ID
-              [
+                $this->setEventTitle($schedule), //event title
+                false, //full day event?
+                $schedule->start_at, //start time (you can also use Carbon instead of DateTime)
+                $schedule->end_at, //end time (you can also use Carbon instead of DateTime)
+                $schedule->id, //optionally, you can specify an event ID
+                [
                 'color' => $schedule->classTypeStatus->color,
                 'url' => '/schedules/' . $schedule->id . '/edit',
                 'description' => $this->eventDescription($schedule),
                 'textColor' => '#0A0A0A'
-              ]
+                ]
             );
         }
 
@@ -159,7 +160,7 @@ class CalendarController extends Controller
                         '<strong>Date/Time:</strong> ' . $schedule->start_at->format("d/m/Y H:i") . ' to ' . $schedule->end_at->format("H:i") . '<br>' .
                         '<strong>Clients:</strong><br>';
 
-        foreach($schedules as $schedule) {
+        foreach ($schedules as $schedule) {
             $description .= $this->statusLabel($schedule->classTypeStatus) . ' ' . $schedule->client->name . '' . '<br>';
         }
 
@@ -186,25 +187,26 @@ class CalendarController extends Controller
         return $description;
     }
 
-    public function groupCalendar() {
+    public function groupCalendar()
+    {
         $events = [];
 
         //$schedules = Schedule::all();
         $schedules = Schedule::with(['ClassType', 'ClassTypeStatus', 'Professional'])->groupBy('start_at', 'room_id')->get();
 
-        foreach($schedules as $schedule) {
+        foreach ($schedules as $schedule) {
             $events[] = \Calendar::event(
-              $this->setGroupTitle($schedule), //event title
-              false, //full day event?
-              $schedule->start_at, //start time (you can also use Carbon instead of DateTime)
-              $schedule->end_at, //end time (you can also use Carbon instead of DateTime)
-              $schedule->id, //optionally, you can specify an event ID
-              [
+                $this->setGroupTitle($schedule), //event title
+                false, //full day event?
+                $schedule->start_at, //start time (you can also use Carbon instead of DateTime)
+                $schedule->end_at, //end time (you can also use Carbon instead of DateTime)
+                $schedule->id, //optionally, you can specify an event ID
+                [
                 'color' => $schedule->classTypeStatus->color,
                 'url' => '/schedules/' . $schedule->id . '/edit',
                 'description' => $this->groupDescription($schedule),
                 'textColor' => '#0A0A0A'
-              ]
+                ]
             );
         }
 

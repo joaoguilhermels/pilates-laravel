@@ -13,7 +13,7 @@ class ClientPlanRequest extends Request
      */
     public function authorize()
     {
-        return True;
+        return true;
     }
 
     /**

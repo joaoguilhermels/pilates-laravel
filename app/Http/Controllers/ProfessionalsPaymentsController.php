@@ -28,7 +28,7 @@ class ProfessionalsPaymentsController extends Controller
         return view('professionals.payments.index', compact('financialTransactions'));
     }
 
-	public function create()
+    public function create()
     {
         $professionals = Professional::all();
 
@@ -132,7 +132,8 @@ class ProfessionalsPaymentsController extends Controller
         return view('professionals.report_payment', compact('professional', 'bankAccounts', 'paymentMethods', 'rows', 'total', 'professional_total', 'startAt', 'endAt'));
     }
 
-    public function reportPayment(Professional $professional) {
+    public function reportPayment(Professional $professional)
+    {
         $rows = Schedule::where('professional_id', $professional->id)
                         ->get();
 
