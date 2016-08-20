@@ -69,12 +69,12 @@ Route::group(['middleware' => 'web'], function () {
     Route::delete('professionals/payments/{financial_transactions}/delete', 'ProfessionalsPaymentsController@destroy');
 
 
-    Route::get('schedules/trial/create', 'SchedulesController@createTrialClass');
-    Route::post('schedules/trial/create', 'SchedulesController@storeTrialClass');
-    Route::get('schedules/reposition/create', 'SchedulesController@createReposition');
-    Route::post('schedules/reposition/create', 'SchedulesController@storeReposition');
-    Route::get('schedules/extra/create', 'SchedulesController@createExtraClass');
-    Route::post('schedules/extra/create', 'SchedulesController@storeExtraClass');
+    Route::get('schedules/trial/create', 'TrialSchedulesController@create');
+    Route::post('schedules/trial/create', 'TrialSchedulesController@store');
+    Route::get('schedules/reposition/create', 'RepositionSchedulesController@create');
+    Route::post('schedules/reposition/create', 'RepositionSchedulesController@store');
+    Route::get('schedules/extra/create', 'ExtraClassSchedulesController@create');
+    Route::post('schedules/extra/create', 'ExtraClassSchedulesController@store');
 
     Route::resource('payment-methods', 'PaymentMethodsController');
     Route::resource('bank-accounts', 'BankAccountsController');
