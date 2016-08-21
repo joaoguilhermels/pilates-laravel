@@ -23,8 +23,7 @@ class FinancialTransaction extends Model
         return $this->morphTo();
     }
 
-    public function financialTransactionDetails()
-    {
+    public function financialTransactionDetails() {
         return $this->hasMany('App\FinancialTransactionDetail');
     }
 }

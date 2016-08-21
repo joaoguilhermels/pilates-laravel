@@ -11,26 +11,25 @@ use App\ClassTypeStatus;
 
 class CalendarController extends Controller
 {
-    public function calendar()
-    {
+    public function calendar() {
         $events = [];
 
         //$schedules = Schedule::all();
         $schedules = Schedule::with(['ClassType', 'ClassTypeStatus', 'Professional'])->get();
 
-        foreach ($schedules as $schedule) {
+        foreach($schedules as $schedule) {
             $events[] = \Calendar::event(
-                $this->setEventTitle($schedule), //event title
-                false, //full day event?
-                $schedule->start_at, //start time (you can also use Carbon instead of DateTime)
-                $schedule->end_at, //end time (you can also use Carbon instead of DateTime)
-                $schedule->id, //optionally, you can specify an event ID
-                [
+              $this->setEventTitle($schedule), //event title
+              false, //full day event?
+              $schedule->start_at, //start time (you can also use Carbon instead of DateTime)
+              $schedule->end_at, //end time (you can also use Carbon instead of DateTime)
+              $schedule->id, //optionally, you can specify an event ID
+              [
                 'color' => $schedule->classTypeStatus->color,
                 'url' => '/schedules/' . $schedule->id . '/edit',
                 'description' => $this->eventDescription($schedule),
                 'textColor' => '#0A0A0A'
-                ]
+              ]
             );
         }
 
@@ -64,15 +63,15 @@ class CalendarController extends Controller
 
         $calendar = \Calendar::addEvents($events);
 
-        $calendar = \Calendar::setOptions([
+        $calendar = \Calendar::setOptions(array(
             'allDaySlot' => false,
             'defaultView' => 'agendaWeek', // Add custom option
             'weekends' => false, // Add custom option
-            'businessHours' => [
+            'businessHours' => array(
               'start' => '07:00',
               'end' => '20:30',
               //'dow' => array(1, 2, 3, 4, 5)
-            ],
+            ),
             'nowIndicator' => true,
             'minTime' => '07:00:00',
             'maxTime' => '21:00:00',
@@ -80,9 +79,9 @@ class CalendarController extends Controller
             'slotEventOverlap' => false,
             'lang' => 'pt-BR',
             'eventLimit' => false
-        ]);
+        ));
 
-        $calendar = \Calendar::setCallbacks([
+        $calendar = \Calendar::setCallbacks(array(
             'click' => 'function () {
                 alert(\'clicked the custom button!\');
             }',
@@ -123,7 +122,7 @@ class CalendarController extends Controller
                 element.find(\'div.fc-title\').html(element.find(\'div.fc-title\').text());
                 element.find(\'span.fc-title\').html(element.find(\'span.fc-title\').text());
             }',
-        ]);
+        ));
 
         return view('calendar.index', compact('calendar'));
     }
@@ -160,7 +159,7 @@ class CalendarController extends Controller
                         '<strong>Date/Time:</strong> ' . $schedule->start_at->format("d/m/Y H:i") . ' to ' . $schedule->end_at->format("H:i") . '<br>' .
                         '<strong>Clients:</strong><br>';
 
-        foreach ($schedules as $schedule) {
+        foreach($schedules as $schedule) {
             $description .= $this->statusLabel($schedule->classTypeStatus) . ' ' . $schedule->client->name . '' . '<br>';
         }
 
@@ -187,40 +186,39 @@ class CalendarController extends Controller
         return $description;
     }
 
-    public function groupCalendar()
-    {
+    public function groupCalendar() {
         $events = [];
 
         //$schedules = Schedule::all();
         $schedules = Schedule::with(['ClassType', 'ClassTypeStatus', 'Professional'])->groupBy('start_at', 'room_id')->get();
 
-        foreach ($schedules as $schedule) {
+        foreach($schedules as $schedule) {
             $events[] = \Calendar::event(
-                $this->setGroupTitle($schedule), //event title
-                false, //full day event?
-                $schedule->start_at, //start time (you can also use Carbon instead of DateTime)
-                $schedule->end_at, //end time (you can also use Carbon instead of DateTime)
-                $schedule->id, //optionally, you can specify an event ID
-                [
+              $this->setGroupTitle($schedule), //event title
+              false, //full day event?
+              $schedule->start_at, //start time (you can also use Carbon instead of DateTime)
+              $schedule->end_at, //end time (you can also use Carbon instead of DateTime)
+              $schedule->id, //optionally, you can specify an event ID
+              [
                 'color' => $schedule->classTypeStatus->color,
                 'url' => '/schedules/' . $schedule->id . '/edit',
                 'description' => $this->groupDescription($schedule),
                 'textColor' => '#0A0A0A'
-                ]
+              ]
             );
         }
 
         $calendar = \Calendar::addEvents($events);
 
-        $calendar = \Calendar::setOptions([
+        $calendar = \Calendar::setOptions(array(
             'allDaySlot' => false,
             'defaultView' => 'agendaWeek', // Add custom option
             'weekends' => false, // Add custom option
-            'businessHours' => [
+            'businessHours' => array(
               'start' => '07:00',
               'end' => '20:30',
               //'dow' => array(1, 2, 3, 4, 5)
-            ],
+            ),
             'nowIndicator' => true,
             'minTime' => '07:00:00',
             'maxTime' => '21:00:00',
@@ -228,9 +226,9 @@ class CalendarController extends Controller
             'slotEventOverlap' => false,
             'lang' => 'pt-BR',
             'eventLimit' => false
-        ]);
+        ));
 
-        $calendar = \Calendar::setCallbacks([
+        $calendar = \Calendar::setCallbacks(array(
             'dayClick' => 'function (date, jsEvent, view) {
                 vm.showModalNow(date.format());
             }',
@@ -266,7 +264,7 @@ class CalendarController extends Controller
                 element.find(\'div.fc-title\').html(element.find(\'div.fc-title\').text());
                 element.find(\'span.fc-title\').html(element.find(\'span.fc-title\').text());
             }',
-        ]);
+        ));
 
         return view('calendar.index', compact('calendar'));
     }

@@ -16,13 +16,11 @@ class ReportsController extends Controller
         $this->middleware('auth');
     }
 
-    public function cashJournal()
-    {
+    public function cashJournal() {
         return view('reports.cashJournal.form');
     }
 
-    public function showCashJournal(Request $request)
-    {
+    public function showCashJournal(Request $request) {
         $yearMonth = \Carbon\Carbon::parse($request->{"year-month"});
 
         $financialTransactionDetails = FinancialTransactionDetail::whereYear('date', '=', $yearMonth->year)

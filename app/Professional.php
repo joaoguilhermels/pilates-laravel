@@ -13,8 +13,7 @@ class Professional extends Model
       'email',
     ];
 
-    public function financialTransactions()
-    {
+    public function financialTransactions() {
         return $this->morphMany('App\FinancialTransaction', 'financiable');
     }
 
@@ -41,7 +40,7 @@ class Professional extends Model
         $classTypes = $this->classTypes->all();
         $classTypesList = '';
 
-        foreach ($classTypes as $classType) {
+        foreach($classTypes as $classType) {
             $classTypesList .= $classTypesList == '' ? $classType->name : ', ' . $classType->name;
         }
 

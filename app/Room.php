@@ -29,7 +29,7 @@ class Room extends Model
         $classTypes = $this->classTypes->all();
         $classTypesList = '';
 
-        foreach ($classTypes as $classType) {
+        foreach($classTypes as $classType) {
             $classTypesList .= $classTypesList == '' ? $classType->name : ', ' . $classType->name;
         }
 

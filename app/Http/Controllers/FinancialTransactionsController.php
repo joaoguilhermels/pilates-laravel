@@ -42,7 +42,8 @@ class FinancialTransactionsController extends Controller
         $financialTransaction = $clientPlan->financialTransactions()->create($request->all());
 
         $payments = collect($request->payments);
-        $payments->map(function ($payment) use ($financialTransaction) {
+        $payments->map(function ($payment) use ($financialTransaction)
+        {
             $payment = array_add($payment, 'type', 'received');
             $financialTransaction->financialTransactionDetails()->create($payment);
         });
@@ -73,7 +74,8 @@ class FinancialTransactionsController extends Controller
         $financialTransaction->update($request->all());
 
         $payments = collect($request->payments);
-        $payments->map(function ($payment) use ($financialTransaction) {
+        $payments->map(function ($payment) use ($financialTransaction)
+        {
             $financialTransaction->financialTransactionDetails()->where('id', $payment['id'])->update($payment);
         });
 

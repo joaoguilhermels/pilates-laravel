@@ -19,8 +19,7 @@ class RoomsController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
-    {
+    public function index() {
         $rooms = room::all();
 
         return view('rooms.index')->with('rooms', $rooms);
@@ -51,7 +50,7 @@ class RoomsController extends Controller
     {
         $room = Room::create($request->all());
 
-        $room->classTypes()->sync($request->class_type_list ?? []);
+        $room->classTypes()->sync($request->class_type_list ?? array());
 
         Session::flash('message', 'Successfully added room ' . $room->name);
 
@@ -63,7 +62,7 @@ class RoomsController extends Controller
         $room->update($request->all());
 
         // Using PHP7 null coalise operator ??
-        $room->classTypes()->sync($request->class_type_list ?? []);
+        $room->classTypes()->sync($request->class_type_list ?? array());
 
         Session::flash('message', 'Successfully updated room ' . $room->name);
 

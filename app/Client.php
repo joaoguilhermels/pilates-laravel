@@ -35,15 +35,18 @@ class Client extends Model
 
     public function scopeFilter($query, $params)
     {
-        if (isset($params['name']) && trim($params['name']) !== '') {
+        if ( isset($params['name']) && trim($params['name']) !== '' )
+        {
             $query->where('name', 'LIKE', trim($params['name'] . '%'));
         }
 
-        if (isset($params['email']) && trim($params['email']) !== '') {
+        if ( isset($params['email']) && trim($params['email']) !== '' )
+        {
             $query->where('email', '=', trim($params['email']));
         }
 
-        if (isset($params['phone']) && trim($params['phone']) !== '') {
+        if ( isset($params['phone']) && trim($params['phone']) !== '' )
+        {
             $query->where('phone', '=', trim($params['phone']));
         }
 

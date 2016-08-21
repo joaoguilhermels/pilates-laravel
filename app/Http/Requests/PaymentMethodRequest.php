@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Requests;
-
 use App\PaymentMethod;
 use App\Http\Requests\Request;
 

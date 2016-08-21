@@ -15,4 +15,5 @@ class PaymentMethod extends Model
     {
         return $value == 1 ? 'Yes' : 'No';
     }
+
 }

@@ -32,8 +32,7 @@ class ClientPlan extends Model
         return $this->hasMany('App\ClientPlanDetail');
     }
 
-    public function financialTransactions()
-    {
+    public function financialTransactions() {
         return $this->morphMany('App\FinancialTransaction', 'financiable');
     }
 }

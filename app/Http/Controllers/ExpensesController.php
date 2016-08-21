@@ -14,17 +14,16 @@ class ExpensesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+      $this->middleware('auth');
     }
 
-    public function index()
-    {
+    public function index() {
       //$expenses = Expense::all();
-        $expenses = Expense::all();
+      $expenses = Expense::all();
 
-        dd($expenses->financialTransactions());
+      dd($expenses->financialTransactions());
 
-        return view('expenses.index', compact('expenses'));
+      return view('expenses.index', compact('expenses'));
     }
 
     public function show(Expense $expense)

@@ -39,14 +39,14 @@ return [
             'driver' => 'database',
             'table'  => 'jobs',
             'queue'  => 'default',
-            'retry_after' => 60,
+            'expire' => 60,
         ],
 
         'beanstalkd' => [
             'driver' => 'beanstalkd',
             'host'   => 'localhost',
             'queue'  => 'default',
-            'retry_after'    => 60,
+            'ttr'    => 60,
         ],
 
         'sqs' => [
@@ -62,7 +62,7 @@ return [
             'driver'     => 'redis',
             'connection' => 'default',
             'queue'      => 'default',
-            'retry_after'     => 60,
+            'expire'     => 60,
         ],
 
     ],
