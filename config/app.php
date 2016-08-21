@@ -159,7 +159,6 @@ return [
         /*
          * 3rd Party Service Providers...
          */
-         Illuminate\Html\HtmlServiceProvider::class,
          MaddHatter\LaravelFullcalendar\ServiceProvider::class,
          Watson\Active\ActiveServiceProvider::class,
     ],
