@@ -32,7 +32,7 @@ class ProfessionalsController extends Controller
         $professionals = Professional::all();
 
         return view('professionals.index', compact('professionals'));
-    }   
+    }
 
     public function show(Professional $professional)
     {
@@ -59,10 +59,8 @@ class ProfessionalsController extends Controller
     {
         $classTypeList = $request->class_type_list;
 
-        foreach($classTypeList as $key => $classType)
-        {
-            if (!isset($classType['class_type_id']))
-            {
+        foreach ($classTypeList as $key => $classType) {
+            if (!isset($classType['class_type_id'])) {
                 unset($classTypeList[$key]);
             }
         }
@@ -82,10 +80,8 @@ class ProfessionalsController extends Controller
 
         $classTypeList = $request->class_type_list;
 
-        foreach($classTypeList as $key => $classType)
-        {
-            if (!isset($classType['class_type_id']))
-            {
+        foreach ($classTypeList as $key => $classType) {
+            if (!isset($classType['class_type_id'])) {
                 unset($classTypeList[$key]);
             }
         }

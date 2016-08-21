@@ -20,7 +20,7 @@ class CreateFinancialTransactionDetailsTable extends Migration
             $table->integer('bank_account_id')->references('id')->on('bank_account')->nullable; //pagamento em dinheiro não precisa de banco
             $table->date('date');
             $table->float('value');
-            $table->enum('type', array('received', 'paid'));
+            $table->enum('type', ['received', 'paid']);
             $table->integer('payment_number')->unsigned()->default(1);
 
             $table->string('observation')->nullable;

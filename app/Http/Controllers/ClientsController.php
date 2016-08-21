@@ -32,7 +32,7 @@ class ClientsController extends Controller
                                             ->where('class_type_statuses.name', '=', 'Desmarcou')
                                             ->where('schedules.parent_id', '=', 0)
                                             ->select('schedules.*');
-                                }])->orderBy('name')->paginate(20);
+        }])->orderBy('name')->paginate(20);
         $name = "";
 
         return view('clients.index', compact('total', 'clients', 'name'));

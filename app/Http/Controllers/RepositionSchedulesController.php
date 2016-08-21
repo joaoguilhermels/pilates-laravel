@@ -21,14 +21,14 @@ class RepositionSchedulesController extends Controller
         $unscheduledStatusesIds = classTypeStatus::where('name', 'Desmarcou')->pluck('id');
 
         // List only class which are unscheduled and were not rescheduled alterady
-        $clients = Client::whereHas('schedules', function ($query) use($unscheduledStatusesIds) {
+        $clients = Client::whereHas('schedules', function ($query) use ($unscheduledStatusesIds) {
             $query->whereIn('class_type_status_id', $unscheduledStatusesIds)
                 ->where('parent_id', '=', '0');
         })
         ->groupBy('clients.id')
         ->get();
 
-        $classTypes = ClassType::whereHas('schedules', function ($query) use($unscheduledStatusesIds) {
+        $classTypes = ClassType::whereHas('schedules', function ($query) use ($unscheduledStatusesIds) {
             $query->whereIn('class_type_status_id', $unscheduledStatusesIds)->where('parent_id', '=', '0');
         })
         ->with('professionals', 'rooms')

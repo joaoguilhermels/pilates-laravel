@@ -17,15 +17,18 @@ class FinancialTransactionDetail extends Model
       'observation'
     ];
 
-    public function financialTransaction() {
+    public function financialTransaction()
+    {
         return $this->belongsTo('App\FinancialTransaction');
     }
 
-    public function paymentMethod() {
+    public function paymentMethod()
+    {
         return $this->belongsTo('App\PaymentMethod');
     }
 
-    public function bankAccount() {
+    public function bankAccount()
+    {
         return $this->belongsTo('App\BankAccount');
     }
 }

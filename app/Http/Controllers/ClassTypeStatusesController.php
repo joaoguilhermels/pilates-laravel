@@ -11,8 +11,8 @@ class ClassTypeStatusesController extends Controller
 {
     public function __construct()
     {
-      $this->middleware('auth');
-    }  
+        $this->middleware('auth');
+    }
 
     // TODO: List only statuses of the current class
     /*public function index() {

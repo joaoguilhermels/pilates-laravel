@@ -16,13 +16,14 @@ class PlansController extends Controller
 {
     public function __construct()
     {
-      $this->middleware('auth');
+        $this->middleware('auth');
     }
 
-    public function index() {
-      $plans = Plan::all();
+    public function index()
+    {
+        $plans = Plan::all();
 
-      return view('plans.index')->with('plans', $plans);
+        return view('plans.index')->with('plans', $plans);
     }
 
     public function show(plan $plan)

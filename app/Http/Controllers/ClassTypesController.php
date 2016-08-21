@@ -21,7 +21,8 @@ class ClassTypesController extends Controller
         $this->middleware('auth');
     }
 
-    public function index() {
+    public function index()
+    {
         $classTypes = ClassType::all();
 
         return view('classes.index', compact('classTypes'));
@@ -55,7 +56,7 @@ class ClassTypesController extends Controller
     {
         $classType = ClassType::create($request->all());
 
-        foreach($request->status as $status) {
+        foreach ($request->status as $status) {
             $classType->statuses()->create($status);
         }
 
@@ -68,7 +69,7 @@ class ClassTypesController extends Controller
     {
         $classType->update($request->all());
 
-        foreach($request->status as $status) {
+        foreach ($request->status as $status) {
             $classType->statuses()->find($status['id'])->update($status);
         }
 
@@ -86,32 +87,33 @@ class ClassTypesController extends Controller
         return redirect('classes');
     }
 
-    public function create_default_statuses() {
+    public function create_default_statuses()
+    {
         $statusOk = new ClassTypeStatus([
           'name' => 'OK',
-          'charge_client' => TRUE,
-          'pay_professional' => TRUE,
+          'charge_client' => true,
+          'pay_professional' => true,
           'color' => '#6FCB6D'
         ]);
 
         $statusDesmarcou = new ClassTypeStatus([
           'name' => 'Desmarcou',
-          'charge_client' => NULL,
-          'pay_professional' => NULL,
+          'charge_client' => null,
+          'pay_professional' => null,
           'color' => '#00B9FE'
         ]);
 
         $statusFaltou = new ClassTypeStatus([
           'name' => 'Faltou',
-          'charge_client' => TRUE,
-          'pay_professional' => NULL,
+          'charge_client' => true,
+          'pay_professional' => null,
           'color' => '#FF1E00'
         ]);
 
         $statusReposicao = new ClassTypeStatus([
           'name' => 'Reposição',
-          'charge_client' => TRUE,
-          'pay_professional' => TRUE,
+          'charge_client' => true,
+          'pay_professional' => true,
           'color' => '#685DFF'
         ]);
 
@@ -119,5 +121,4 @@ class ClassTypesController extends Controller
 
         return $statuses;
     }
-
 }
