@@ -23,7 +23,7 @@ use App\Http\Controllers\Controller;
 
 class ClientPlansController extends Controller
 {
-    protected $daysOfWeek = array(
+    protected $daysOfWeek = [
                   0 => 'Sunday',
                   1 => 'Monday',
                   2 => 'Tuesday',
@@ -31,7 +31,7 @@ class ClientPlansController extends Controller
                   4 => 'Thursday',
                   5 => 'Friday',
                   6 => 'Saturday'
-              );
+              ];
 
     public function __construct()
     {
@@ -53,10 +53,9 @@ class ClientPlansController extends Controller
     {
         $form['rooms'] = Room::orderBy('name')->get();
         $form['daysOfWeek'] = $this->daysOfWeek;
-        $form['classTypePlans'] = ClassType::with(['plans' => function ($query)
-                                    {
-                                        $query->orderBy('name');
-                                    }, 'professionals', 'rooms'])
+        $form['classTypePlans'] = ClassType::with(['plans' => function ($query) {
+                                    $query->orderBy('name');
+        }, 'professionals', 'rooms'])
                                     ->has('plans')
                                     ->orderBy('name')
                                     ->get()
@@ -72,7 +71,7 @@ class ClientPlansController extends Controller
     public function reviewClientPlan(ClientPlanRequest $request, Client $client)
     {
         $classType = ClassType::with(['statuses', 'plans' => function ($query) use ($request) {
-          return $query->where('id', $request->plan_id);
+            return $query->where('id', $request->plan_id);
         }])->findOrFail($request->class_type_id);
 
         $plan = $classType->plans->first();
@@ -84,32 +83,32 @@ class ClientPlansController extends Controller
         $startDateMonth = $startDate->formatLocalized('%B');
         $startDateYear = $startDate->formatLocalized('%Y');
 
-        $dates = array();
+        $dates = [];
 
-        foreach($request->daysOfWeek as $dayOfWeek) {
-          $nameOfDayOfWeek = array_get($this->daysOfWeek, $dayOfWeek['dayOfWeek']);
+        foreach ($request->daysOfWeek as $dayOfWeek) {
+            $nameOfDayOfWeek = array_get($this->daysOfWeek, $dayOfWeek['dayOfWeek']);
 
-          $values = new \DatePeriod(
-              \Carbon\Carbon::parse("first " . $nameOfDayOfWeek . " of " . $startDateMonth . " " . $startDateYear),
-              \Carbon\CarbonInterval::week(),
-              \Carbon\Carbon::parse("first " . $nameOfDayOfWeek . " of " . $startDateMonth . " " . $startDateYear . " + " . $plan->duration . " " . $plan->duration_type)
-          );
+            $values = new \DatePeriod(
+                \Carbon\Carbon::parse("first " . $nameOfDayOfWeek . " of " . $startDateMonth . " " . $startDateYear),
+                \Carbon\CarbonInterval::week(),
+                \Carbon\Carbon::parse("first " . $nameOfDayOfWeek . " of " . $startDateMonth . " " . $startDateYear . " + " . $plan->duration . " " . $plan->duration_type)
+            );
 
-          foreach($values as $date) {
-            $dates[] = $date->format("d-m-Y");
-          }
+            foreach ($values as $date) {
+                $dates[] = $date->format("d-m-Y");
+            }
         }
 
         // Sort dates
-        usort($dates, array($this, 'date_compare'));
+        usort($dates, [$this, 'date_compare']);
 
-        $datesGrouped = array();
+        $datesGrouped = [];
 
-        foreach($dates as $date) {
-          $dateObj = date_create($date);
-          list($year, $month) = explode(" ", $dateObj->format("F Y"));
+        foreach ($dates as $date) {
+            $dateObj = date_create($date);
+            list($year, $month) = explode(" ", $dateObj->format("F Y"));
 
-          $datesGrouped[$year . " " . $month][] = $dateObj->format("d-m-Y");
+            $datesGrouped[$year . " " . $month][] = $dateObj->format("d-m-Y");
         }
 
         return view('clientPlans.review', compact('datesGrouped', 'request', 'client', 'classType', 'plan'));
@@ -136,7 +135,7 @@ class ClientPlansController extends Controller
 
         $groupedDates = $this->getGroupedDates($request);
 
-        foreach($request->daysOfWeek as $dayOfWeek) {
+        foreach ($request->daysOfWeek as $dayOfWeek) {
             $this->setSchedules($request, $clientPlan->class_type_id, $client, $dayOfWeek, $groupedDates);
         }
 
@@ -166,7 +165,7 @@ class ClientPlansController extends Controller
                 \Carbon\Carbon::parse($startDate . " last " . $nameOfDayOfWeek . " + " . $plan->duration . " " . $plan->duration_type)
             );*/
 
-            $dates = array();
+            $dates = [];
 
             // To have the month of starting date plus X months remove the "- 1"
             $month = $endDate->format("n");
@@ -176,7 +175,7 @@ class ClientPlansController extends Controller
             $endDate = strtotime("last day of " . $year . "-" . $month);
 
             for ($date = strtotime($nameOfDayOfWeek, $beginDate); $date <= $endDate; $date = strtotime('+1 week', $date)) {
-              $dates[] = new \Carbon\Carbon(date('Y-m-d', $date));
+                $dates[] = new \Carbon\Carbon(date('Y-m-d', $date));
             }
 
             /*$dates = new \DatePeriod(
@@ -190,11 +189,11 @@ class ClientPlansController extends Controller
         })
         ->flatten()
         ->map(function ($item) {
-            $item = array(
+            $item = [
                 "month_year" => $item->format("m-Y"),
                 "day_of_week" => $item->format("l"),
                 "date" => $item
-            );
+            ];
 
             return $item;
         });
@@ -216,13 +215,13 @@ class ClientPlansController extends Controller
         $classType = ClassType::with([
             'plans' =>  function ($query) use ($request) {
                             return $query->where('id', $request->plan_id);
-                        },
+            },
             'statuses' => function ($query) {
                               return $query->where('name', 'OK');
-                          },
+            },
             'professionals' =>  function ($query) use ($clientPlanDetail) {
                                     return $query->where('professional_id', $clientPlanDetail->professional_id);
-                                }
+            }
         ])
         ->findOrFail($classTypeId);
 
@@ -271,11 +270,9 @@ class ClientPlansController extends Controller
 
     public function setPrice(Plan $plan, $date, $groupedDates)
     {
-        if ($plan->price_type == 'class')
-        {
+        if ($plan->price_type == 'class') {
             return $plan->price;
-        }
-        else // per month
+        } else // per month
         {
             $daysCount = $groupedDates->where('month_year', $date->format("m-Y"))->count();
             return round($plan->price / $daysCount, 2);
@@ -294,7 +291,7 @@ class ClientPlansController extends Controller
     {
         // Move this to a professional controller
         if ($professional->value_type == 'percentage') {
-          return round($price * ($professional->value / 100), 2);
+            return round($price * ($professional->value / 100), 2);
         }
     }
 

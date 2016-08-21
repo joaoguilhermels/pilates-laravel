@@ -74,12 +74,12 @@ $factory->define(App\Plan::class, function (Faker\Generator $faker) {
     return [
         'name'          => 'Plan ' . $faker->name,
         'class_type_id' => $faker->randomElement($classTypes),
-        'times'         => $faker->randomElement(array(1, 3)),
-        'times_type'    => $faker->randomElement(array('week', 'month')),
-        'duration'      => $faker->randomElement(array(1, 3, 6, 12)),
-        'duration_type' => $faker->randomElement(array('week', 'month')),
+        'times'         => $faker->randomElement([1, 3]),
+        'times_type'    => $faker->randomElement(['week', 'month']),
+        'duration'      => $faker->randomElement([1, 3, 6, 12]),
+        'duration_type' => $faker->randomElement(['week', 'month']),
         'price'         => $faker->randomFloat(0, 340, 400),
-        'price_type'    => $faker->randomElement(array('class', 'month'))
+        'price_type'    => $faker->randomElement(['class', 'month'])
     ];
 });
 
