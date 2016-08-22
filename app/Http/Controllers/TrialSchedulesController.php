@@ -16,6 +16,11 @@ use App\ClassTypeStatus;
 
 class TrialSchedulesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function create()
     {
         $classTypes = ClassType::WithTrial()->with('professionals', 'rooms')->get();

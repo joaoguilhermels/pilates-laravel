@@ -20,7 +20,7 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
       'observation'
     ];
 
-    protected $with = ['clientPlanDetail.clientPlan.plan', 'professional'];
+    protected $with = ['clientPlanDetail.clientPlan.plan', 'professional', 'client', 'room', 'classType', 'classTypeStatus'];
 
     protected $dates = ['start_at', 'end_at', 'created_at', 'updated_at'];
 

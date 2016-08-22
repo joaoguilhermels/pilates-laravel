@@ -50,9 +50,11 @@
             <td><a href="{{ action('SchedulesController@show', [$schedule->id]) }}">{{ $schedule->end_at }}</a></td>
             <td>
               <a href="{{ action('SchedulesController@edit', [$schedule->id]) }}" class="btn pull-left">edit</a>
-              {!! Form::open(['route' => ['schedules.destroy', $schedule->id], 'method' => 'delete']) !!}
+              <form action="{{ action('SchedulesController@destroy', [$schedule->id]) }}">
+              {{ csrf_field() }}
+              {{ method_field("DELETE") }}
               <button type="submit" class="btn btn-link pull-left">delete</button>
-              {!! Form::close() !!}
+              </form>
             </td>
           </tr>
           @endforeach

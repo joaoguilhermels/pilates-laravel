@@ -1,14 +1,14 @@
 @extends('layouts/app')
 
 @section('content')
-
+<?php //dd($schedule); ?>
   <div class="container">
-    <h1>{{ $schedule->name }}</h1>
+    <h1></h1>
     <a href="{{ action('ClientsController@index') }}">Back to Schedules List</a>
     <hr />
 
     <div>{{ $schedule->client->name }}</div>
-    <div>{{ $schedule->plan->name }}</div>
+    <div>{{ $schedule->clientPlanDetail->clientPlan->plan->name }}</div>
     <div>{{ $schedule->classType->name }}</div>
     <div>{{ $schedule->professional->name }}</div>
     <div>{{ $schedule->room->name }}</div>

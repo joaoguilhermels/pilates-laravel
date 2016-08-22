@@ -70,7 +70,8 @@ class SchedulesController extends Controller
 
     public function edit(Schedule $schedule)
     {
-        $plan               = is_null($schedule->clientPlanDetail) ? "" : $schedule->clientPlanDetail->clientPlan->plan->name;
+        //$plan               = is_null($schedule->clientPlanDetail) ? "" : $schedule->clientPlanDetail->clientPlan->plan->name;
+        $plan               = $schedule->clientPlanDetail->clientPlan->plan->name ?? "";
         $rooms              = $schedule->classType->rooms;
         $professionals      = $schedule->classType->professionals;
         $classTypeStatuses  = $schedule->classType->statuses;

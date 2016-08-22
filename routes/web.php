@@ -26,7 +26,7 @@ Route::get('/', function () {
 |
 */
 
-Route::group(['middleware' => 'web'], function () {
+//Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('/dashboard', 'HomeController@index');
@@ -76,14 +76,20 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('schedules/extra/create', 'ExtraClassSchedulesController@create');
     Route::post('schedules/extra/create', 'ExtraClassSchedulesController@store');
 
-    Route::resource('payment-methods', 'PaymentMethodsController');
-    Route::resource('bank-accounts', 'BankAccountsController');
+    Route::resource('payment-methods', 'PaymentMethodsController', ['parameters' => [
+        'payment-methods' => 'paymentMethod'
+    ]]);
+    Route::resource('bank-accounts', 'BankAccountsController', ['parameters' => [
+        'bank-accounts' => 'bankAccount'
+    ]]);
     Route::post('clients/search', 'ClientsController@search');
     Route::resource('clients', 'ClientsController');
     Route::resource('professionals', 'ProfessionalsController');
     Route::resource('rooms', 'RoomsController');
-    Route::resource('classes', 'ClassTypesController');
+    Route::resource('classes', 'ClassTypesController', ['parameters' => [
+        'classes' => 'classType'
+    ]]);
     Route::resource('plans', 'PlansController');
     Route::resource('schedules', 'SchedulesController');
     Route::resource('expenses', 'ExpensesController');
-});
+//});

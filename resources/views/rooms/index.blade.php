@@ -30,9 +30,11 @@
           <td><a href="{{ action('RoomsController@show', [$room->id]) }}">{{ $room->name }}</a></td>
           <td>
             <a href="{{ action('RoomsController@edit', [$room->id]) }}" class="btn pull-left">edit</a>
-            {!! Form::open(['route' => ['rooms.destroy', $room->id], 'method' => 'delete']) !!}
+            <form action="{{ action('RoomsController@destroy', [$room->id]) }}" method="POST">
+            {{ csrf_field() }}
+            {{ method_field("DELETE") }}
             <button type="submit" class="btn btn-link pull-left">delete</button>
-            {!! Form::close() !!}
+            </form>
           </td>
         </tr>
         @endforeach

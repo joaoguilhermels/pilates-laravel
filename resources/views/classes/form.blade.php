@@ -49,7 +49,7 @@
               <div class="checkbox">
                 <label>
                   <input type="hidden" name="status[{{ $key }}][charge_client]" value="0">
-                  {!! Form::checkbox('status[' . $key . '][charge_client]', $status->charge_client == false ? NULL : 'on', $status->charge_client, ['id' => 'charge_client.' . $key]) !!}
+                  <input type="checkbox" name="status[{{ $key }}][charge_client]" id="{{ 'charge_client.' . $key }}" {{ $status->charge_client == false ? NULL : 'checked' }}>
                   Yes
                 </label>
               </div>
@@ -58,7 +58,7 @@
               <div class="checkbox">
                 <label>
                   <input type="hidden" name="status[{{ $key }}][pay_professional]" value="0">
-                  {!! Form::checkbox('status[' . $key . '][pay_professional]', $status->pay_professional == false ? NULL : 'on', $status->pay_professional, ['id' => 'pay_professional.' . $key]) !!}
+                  <input type="checkbox" name="status[{{ $key }}][pay_professional]" id="{{ 'pay_professional.' . $key }}" {{ $status->pay_professional == false ? NULL : 'checked' }}>
                   Yes
                 </label>
               </div>

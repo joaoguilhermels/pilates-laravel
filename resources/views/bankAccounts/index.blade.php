@@ -38,9 +38,11 @@
           <td>{{ $bankAccount->balance }}</td>
           <td>
             <a href="{{ action('BankAccountsController@edit', [$bankAccount->id]) }}" class="btn pull-left">edit</a>
-            {!! Form::open(['route' => ['bank-accounts.destroy', $bankAccount->id], 'method' => 'delete']) !!}
+            <form action="{{ action('BankAccountsController@destroy', [$bankAccount->id]) }}" method="post">
+            {{ csrf_field() }}
+            {{ method_field("DELETE") }}
             <button type="submit" class="btn btn-link pull-left">delete</button>
-            {!! Form::close() !!}
+            </form>
           </td>
         </tr>
         @endforeach

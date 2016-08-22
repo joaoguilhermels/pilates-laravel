@@ -29,7 +29,9 @@
           <td><a href="{{ action('ClassTypesController@show', [$classType->id]) }}">{{ $classType->name }}</a></td>
           <td>
             <a href="{{ action('ClassTypesController@edit', [$classType->id]) }}" class="btn pull-left">edit</a>
-            {!! Form::open(['route' => ['classes.destroy', $classType->id], 'method' => 'delete']) !!}
+            <form action="{{ action('ClassTypesController@destroy', [$classType->id]) }}" method="POST">
+            {{ csrf_field() }}
+            {{ method_field("DELETE") }}
             <button type="submit" class="btn btn-link pull-left">delete</button>
             </form>
           </td>

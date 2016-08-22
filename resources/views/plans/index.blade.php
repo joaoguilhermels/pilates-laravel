@@ -38,9 +38,11 @@
           <td><a href="{{ action('PlansController@show', [$plan->id]) }}">{{ $plan->duration }} {{ $plan->duration_type }}</a></td>
           <td>
             <a href="{{ action('PlansController@edit', [$plan->id]) }}" class="btn pull-left">edit</a>
-            {!! Form::open(['route' => ['plans.destroy', $plan->id], 'method' => 'delete']) !!}
+            <form action="{{ action('PlansController@destroy', [$plan->id]) }}" method="post">
+            {{ csrf_field() }}
+            {{ method_field("DELETE") }}
             <button type="submit" class="btn btn-link pull-left">delete</button>
-            {!! Form::close() !!}
+            </form>
           </td>
         </tr>
         @endforeach

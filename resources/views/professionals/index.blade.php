@@ -36,9 +36,11 @@
           <td>{{ $professional->description }}</td>
           <td>
             <a href="{{ action('ProfessionalsController@edit', [$professional->id]) }}" class="btn pull-left">edit</a>
-            {!! Form::open(['route' => ['professionals.destroy', $professional->id], 'method' => 'delete']) !!}
+            <form action="{{ action('ProfessionalsController@destroy', [$professional->id]) }}" method="POST">
+            {{ csrf_field() }}
+            {{ method_field("DELETE") }}
             <button type="submit" class="btn btn-link pull-left">delete</button>
-            {!! Form::close() !!}
+            </form>
           </td>
         </tr>
         @endforeach

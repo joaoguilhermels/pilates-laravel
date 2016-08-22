@@ -16,7 +16,12 @@ use App\ClassTypeStatus;
 
 class ExtraClassSchedulesController extends Controller
 {
-    public function createExtraClass()
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function create()
     {
         $clients    = Client::all();
         $classTypes = ClassType::with('professionals', 'rooms')->get();
@@ -24,7 +29,7 @@ class ExtraClassSchedulesController extends Controller
         return view('schedules.extra.create', compact('clients', 'classTypes'));
     }
 
-    public function storeExtraClass(ScheduleRequest $request)
+    public function store(ScheduleRequest $request)
     {
         $classType = ClassType::findOrFail($request->class_type_id);
         $classTypeStatus = ClassTypeStatus::where('class_type_id', $request->class_type_id)

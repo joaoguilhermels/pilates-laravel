@@ -49,5 +49,5 @@
   <textarea name="observation" class="form-control">{{ $schedule->observation }}</textarea>
 </div>
 <div class="form-group">
-  {!! Form::submit($submitButtonText, ['class' => 'btn btn-success form-control']) !!}
+  <input type="submit" value="{{ $submitButtonText }}" class="btn btn-success">
 </div>
