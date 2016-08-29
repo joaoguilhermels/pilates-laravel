@@ -14,7 +14,7 @@ return [
     'clients'   => 'Clientes',
     'professionals'   => 'Profissionais',
     'rooms'   => 'Salas',
-    'classes'   => 'Aulas',
+    'classes'   => 'Atendimentos',
     'plans'   => 'Planos',
     'schedules'   => 'Agendamentos',
     'calendar'   => 'Agenda',

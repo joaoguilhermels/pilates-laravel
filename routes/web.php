@@ -68,7 +68,6 @@ Route::get('/', function () {
     Route::post('professionals/{professionals}/payments/store', 'ProfessionalsPaymentsController@store');
     Route::delete('professionals/payments/{financial_transactions}/delete', 'ProfessionalsPaymentsController@destroy');
 
-
     Route::get('schedules/trial/create', 'TrialSchedulesController@create');
     Route::post('schedules/trial/create', 'TrialSchedulesController@store');
     Route::get('schedules/reposition/create', 'RepositionSchedulesController@create');
@@ -76,13 +75,14 @@ Route::get('/', function () {
     Route::get('schedules/extra/create', 'ExtraClassSchedulesController@create');
     Route::post('schedules/extra/create', 'ExtraClassSchedulesController@store');
 
+    Route::get('schedules/class/{classType}/professional/{professionals}/room/{rooms}/date/{date}/time/{time}', 'GroupSchedulesController@edit');
+
     Route::resource('payment-methods', 'PaymentMethodsController', ['parameters' => [
         'payment-methods' => 'paymentMethod'
     ]]);
     Route::resource('bank-accounts', 'BankAccountsController', ['parameters' => [
         'bank-accounts' => 'bankAccount'
     ]]);
-    Route::post('clients/search', 'ClientsController@search');
     Route::resource('clients', 'ClientsController');
     Route::resource('professionals', 'ProfessionalsController');
     Route::resource('rooms', 'RoomsController');

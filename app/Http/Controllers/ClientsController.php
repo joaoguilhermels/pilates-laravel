@@ -24,7 +24,7 @@ class ClientsController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $total = Client::count();
         $clients = Client::with(['schedules' => function ($query) {
@@ -32,13 +32,13 @@ class ClientsController extends Controller
                                             ->where('class_type_statuses.name', '=', 'Desmarcou')
                                             ->where('schedules.parent_id', '=', 0)
                                             ->select('schedules.*');
-        }])->orderBy('name')->paginate(20);
-        $name = "";
+        }])->filter($request->all())->orderBy('name')->paginate(20);
+        $name = $request->name;
 
         return view('clients.index', compact('total', 'clients', 'name'));
     }
 
-    public function search(Request $request)
+    public function search()
     {
         $total = Client::count();
         $clients = Client::filter($request->all())->orderBy('name')->paginate(20);

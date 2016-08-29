@@ -16,7 +16,7 @@
 
     @else
     <div class="well well-sm">
-      <form action="{{ action('ClientsController@search') }}" method="POST" class="form-inline">
+      <form action="{{ action('ClientsController@index') }}" method="GET" class="form-inline">
         <fieldset>
           {{ csrf_field() }}
           <div class="form-group">

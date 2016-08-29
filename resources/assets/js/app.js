@@ -14,6 +14,7 @@ require('./bootstrap');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('classProfessionalRoom', require('./components/classProfessionalRoom.vue'));
 
 const app = new Vue({
     el: 'body'

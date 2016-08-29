@@ -1,6 +1,6 @@
 @section('css')
-<link rel="stylesheet" type="text/css" href="http://jonthornton.github.io/jquery-timepicker/jquery.timepicker.css" />
-<link rel="stylesheet" type="text/css" href="http://jonthornton.github.io/jquery-timepicker/lib/bootstrap-datepicker.css" />
+<link rel="stylesheet" type="text/css" href="//jonthornton.github.io/jquery-timepicker/jquery.timepicker.css" />
+<link rel="stylesheet" type="text/css" href="//jonthornton.github.io/jquery-timepicker/lib/bootstrap-datepicker.css" />
 @stop
 
 <div class="form-group">
@@ -74,10 +74,10 @@
 </div>
 
 @section('script_footer')
-<script src="http://jonthornton.github.io/jquery-timepicker/jquery.timepicker.js"></script>
-<script src="http://jonthornton.github.io/jquery-timepicker/lib/bootstrap-datepicker.js"></script>
-<script src="http://jonthornton.github.io/Datepair.js/dist/datepair.js"></script>
-<script src="http://jonthornton.github.io/Datepair.js/dist/jquery.datepair.js"></script>
+<script src="//jonthornton.github.io/jquery-timepicker/jquery.timepicker.js"></script>
+<script src="//jonthornton.github.io/jquery-timepicker/lib/bootstrap-datepicker.js"></script>
+<script src="//jonthornton.github.io/Datepair.js/dist/datepair.js"></script>
+<script src="//jonthornton.github.io/Datepair.js/dist/jquery.datepair.js"></script>
 <script>
     // initialize input widgets first
     $('#datepairExample .time').timepicker({
