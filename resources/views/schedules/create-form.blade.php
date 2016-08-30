@@ -1,8 +1,3 @@
-@section('css')
-<link rel="stylesheet" type="text/css" href="//jonthornton.github.io/jquery-timepicker/jquery.timepicker.css" />
-<link rel="stylesheet" type="text/css" href="//jonthornton.github.io/jquery-timepicker/lib/bootstrap-datepicker.css" />
-@stop
-
 <div class="form-group">
   <label for="client_id">Client:</label>
   <select name="client_id" class="form-control">
@@ -56,14 +51,9 @@
   <label for="price">Price:</label>
   <input type="text" name="price" class="form-control">
 </div>
-<div id="datepairExample" class="form-inline form-group">
-  <label for="start_at">Date:</label>
-  <input type="text" name="date_start_at" class="form-control date start">
-  <label for="start_at">Time:</label>
-  <input type="text" name="time_start_at" class="form-control time start">
-  <label for="start_at">until:</label>
-  <input type="hidden" name="date_end_at" class="form-control date end">
-  <input type="text" name="time_end_at" class="form-control time end">
+<div class="form-group">
+  <label for="price">Date:</label>
+  <input id="datetimepicker" name="start_at" type="text" class="form-control">
 </div>
 <div class="form-group">
   <label for="email">Observation:</label>
@@ -74,23 +64,8 @@
 </div>
 
 @section('script_footer')
-<script src="//jonthornton.github.io/jquery-timepicker/jquery.timepicker.js"></script>
-<script src="//jonthornton.github.io/jquery-timepicker/lib/bootstrap-datepicker.js"></script>
-<script src="//jonthornton.github.io/Datepair.js/dist/datepair.js"></script>
-<script src="//jonthornton.github.io/Datepair.js/dist/jquery.datepair.js"></script>
 <script>
-    // initialize input widgets first
-    $('#datepairExample .time').timepicker({
-        'showDuration': true,
-        'timeFormat': 'g:ia'
-    });
-
-    $('#datepairExample .date').datepicker({
-        'format': 'dd-mm-yyyy',
-        'autoclose': true
-    });
-
-    // initialize datepair
-    $('#datepairExample').datepair();
+  $('#datetimepicker').datetimepicker();
+  $.datetimepicker.setLocale('pt-BR');
 </script>
 @stop

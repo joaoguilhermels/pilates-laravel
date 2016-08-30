@@ -209,8 +209,8 @@ class CalendarController extends Controller
                 $schedule->id, //optionally, you can specify an event ID
                 [
                 'color' => $schedule->classTypeStatus->color,
-                //'url' => '/schedules/' . $schedule->id . '/edit',
-                'url' => 'schedules/class/' . $schedule->classType->id . '/professional/' . $schedule->professional->id . '/room/' . $schedule->room->id . '/date/' . {date} . '/time/' . {time},
+                'url' => '/schedules/' . $schedule->id . '/edit',
+                //'url' => 'schedules/class/' . $schedule->classType->id . '/professional/' . $schedule->professional->id . '/room/' . $schedule->room->id . '/date/' . {date} . '/time/' . {time},
                 'description' => $this->groupDescription($schedule),
                 'textColor' => '#0A0A0A'
                 ]

@@ -14,7 +14,8 @@ require('laravel-elixir-vue');
  */
 
 elixir(mix => {
-    mix.sass('app.scss')
-    	.copy('node_modules/multiselect', 'public/vendor/multiselect')
-       .webpack('app.js');
+	mix.sass('app.scss')
+		.styles(['./node_modules/jquery-datetimepicker/jquery.datetimepicker.css'])
+		.copy('node_modules/multiselect', 'public/vendor/multiselect')
+		.webpack('app.js');
 });
