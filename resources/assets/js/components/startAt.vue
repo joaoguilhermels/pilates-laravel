@@ -10,7 +10,12 @@
 			$('#datetimepicker').datetimepicker({
 				format:'Y-m-d H:i:s',
 				startDate: new Date(),
-				inline: true
+				inline: true,
+				dayOfWeekStart: 1,
+				onGenerate: function(ct) {
+					$(this).find('.xdsoft_date.xdsoft_weekend').remove();
+					$('.xdsoft_calendar table thead tr th').filter(':nth-child(6), :nth-child(7)').remove();
+				}
 			});
 			$.datetimepicker.setLocale('pt-BR');
         },
