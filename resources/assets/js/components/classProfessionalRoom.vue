@@ -3,7 +3,7 @@
     <label for="class_type_id">Class: </label>
     <select name="class_type_id" class="form-control" v-model="selectedClassId" v-on:change="selectClass" v-if="classes.length > 1">
       <option value=""></option>
-      <option v-for="(index, class) in classes" v-bind:value="class.id">{{ class.name }}</option>
+      <option v-for="classType in classes" v-bind:value="classType.id">{{ classType.name }}</option>
     </select>
     <div v-else>
       {{ classes[0].name }}

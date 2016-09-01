@@ -51,10 +51,7 @@
   <label for="price">Price:</label>
   <input type="text" name="price" class="form-control">
 </div>
-<div class="form-group">
-  <label for="price">Date:</label>
-  <input id="datetimepicker" name="start_at" type="text" class="form-control">
-</div>
+<start-at></start-at>
 <div class="form-group">
   <label for="email">Observation:</label>
   <textarea name="observation" class="form-control"></textarea>
@@ -62,10 +59,3 @@
 <div class="form-group">
   <input type="submit" value="{{ $submitButtonText }}" class="btn btn-success">
 </div>
-
-@section('script_footer')
-<script>
-  $('#datetimepicker').datetimepicker();
-  $.datetimepicker.setLocale('pt-BR');
-</script>
-@stop
