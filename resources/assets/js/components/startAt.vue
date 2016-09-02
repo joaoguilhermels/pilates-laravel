@@ -7,9 +7,19 @@
 <script>
     export default {
         ready () {
+			var newDate = new Date();
+			var dateString =
+			  newDate.getFullYear() +"/"+
+			  ("0" + (newDate.getMonth()+1)).slice(-2) +"/"+
+			  ("0" + newDate.getDate()).slice(-2) + " " +
+			  ("0" + newDate.getHours()).slice(-2) + ":" +
+			  ("0" + newDate.getMinutes()).slice(-2) + ":" +
+			  "00";
+			$('#datetimepicker').val(dateString);
+
 			$('#datetimepicker').datetimepicker({
-				format:'Y-m-d H:i:s',
-				startDate: new Date(),
+				format: 'Y-m-d H:i:s',
+				startDate: newDate,
 				inline: true,
 				dayOfWeekStart: 1,
 				onGenerate: function(ct) {

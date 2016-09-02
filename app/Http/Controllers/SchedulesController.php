@@ -56,9 +56,10 @@ class SchedulesController extends Controller
 
     public function store(scheduleRequest $request)
     {
+        $classType = ClassType::find($request->class_type_id);
+        
         $request->request->add([
-            'start_at' => Carbon::parse($request->date_start_at . ' ' . $request->time_start_at),
-            'end_at' => Carbon::parse($request->date_end_at . ' ' . $request->time_end_at)
+            'end_at' => Carbon::parse($request->start_at)->addMinutes($classType->duration)
         ]);
 
         $schedule = Schedule::create($request->all());
