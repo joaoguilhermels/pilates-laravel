@@ -95,8 +95,8 @@ class ProfessionalsPaymentsController extends Controller
         $startAt        = Carbon::parse($request->start_at);
         $endAt          = Carbon::parse($request->end_at);
         $professional   = Professional::findOrFail($request->professional);
-        $bankAccounts   = BankAccount::all();
-        $paymentMethods = PaymentMethod::all();
+        $bankAccounts   = BankAccount::orderBy('name')->get();
+        $paymentMethods = PaymentMethod::orderBy('name')->get();
 
         $rows = Schedule::where('professional_id', $request->professional)
                     ->where('professional_payment_financial_transaction_id', '=', 0)

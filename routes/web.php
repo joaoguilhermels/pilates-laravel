@@ -54,11 +54,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('clients/{clients}/charges/report', 'ClientsController@reportCharge');*/
 
-    Route::get('client-plans/{client_plans}/payment', 'FinancialTransactionsController@createPlanPayment');
-    Route::post('client-plans/{client_plans}/payment', 'FinancialTransactionsController@storePlanPayment');
-    Route::post('client-plans/{client_plans}/delete', 'ClientPlansController@destroy');
-    Route::get('payment/{financial_transactions}', 'FinancialTransactionsController@editPlanPayment');
-    Route::put('payment/{financial_transactions}', 'FinancialTransactionsController@updatePlanPayment');
+    Route::get('client-plans/{client_plan}/payment', 'FinancialTransactionsController@createPlanPayment');
+    Route::post('client-plans/{client_plan}/payment', 'FinancialTransactionsController@storePlanPayment');
+    Route::post('client-plans/{client_plan}/delete', 'ClientPlansController@destroy');
+    Route::get('payment/{financial_transaction}', 'FinancialTransactionsController@editPlanPayment');
+    Route::put('payment/{financial_transaction}', 'FinancialTransactionsController@updatePlanPayment');
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -66,8 +66,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('professionals/payments', 'ProfessionalsPaymentsController@index');
     Route::get('professionals/payments/create', 'ProfessionalsPaymentsController@create');
     Route::post('professionals/payments/review', 'ProfessionalsPaymentsController@generatePaymentReport');
-    Route::post('professionals/{professionals}/payments/store', 'ProfessionalsPaymentsController@store');
-    Route::delete('professionals/payments/{financial_transactions}/delete', 'ProfessionalsPaymentsController@destroy');
+    Route::post('professionals/{professional}/payments/store', 'ProfessionalsPaymentsController@store');
+    Route::delete('professionals/payments/{financial_transaction}/delete', 'ProfessionalsPaymentsController@destroy');
 
     Route::get('schedules/trial/create', 'TrialSchedulesController@create');
     Route::post('schedules/trial/create', 'TrialSchedulesController@store');
