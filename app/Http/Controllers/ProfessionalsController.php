@@ -21,12 +21,6 @@ use Carbon\Carbon;
 
 class ProfessionalsController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
         $professionals = Professional::all();

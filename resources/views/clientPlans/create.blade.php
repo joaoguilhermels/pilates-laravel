@@ -13,7 +13,3 @@
   	</form>
   </div>
 @stop
-
-@section('script_footer')
-	<script src="/js/clientPlan/clientPlan.js"></script>
-@stop

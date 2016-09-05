@@ -10,7 +10,7 @@
 
     <hr />
 
-    @if ($total == 0)
+    @if ($clients->total() == 0)
 
     <h2>There no clients yet. You can <a href="{{ action('ClientsController@create') }}">add one here.</a>
 
@@ -18,7 +18,6 @@
     <div class="well well-sm">
       <form action="{{ action('ClientsController@index') }}" method="GET" class="form-inline">
         <fieldset>
-          {{ csrf_field() }}
           <div class="form-group">
             <label class="sr-only" for="name">Name</label>
             <input type="text" name="name" value="{{ $name }}" class="form-control" placeholder="Name">

@@ -90,7 +90,12 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>{{ trans('menu.logout') }}</a></li>
+                                <li>
+                                    <form action="{{ action('Auth\LoginController@logout') }}" method="POST">
+                                        {{ csrf_field() }}
+                                        <button class="btn btn-link"><i class="fa fa-btn fa-sign-out"></i>{{ trans('menu.logout') }}</button>
+                                    </form>
+                                </li>
                             </ul>
                         </li>
                     @endif

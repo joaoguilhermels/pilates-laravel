@@ -9,7 +9,7 @@
 	  
 	  @include('errors.list')
 
-	  <form action="{{ action('ClientsController@store') }}">
+	  <form action="{{ action('ClientsController@store') }}" method="POST">
   		{{ csrf_field() }}
 	    @include('clients.form', ['submitButtonText' => 'Add New Client'])
 	  </form>

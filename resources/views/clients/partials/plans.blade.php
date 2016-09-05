@@ -47,9 +47,11 @@
         @else
         <a href="{{ action('FinancialTransactionsController@editPlanPayment', [$clientPlan->financialTransactions->first()->id]) }}" class="btn btn-info btn-sm">Edit Payment</a>
         @endif
-        {!! Form::open(['route' => ['plans.destroy', $clientPlan->id], 'method' => 'delete']) !!}
-        <button type="submit" class="btn btn-link pull-left">delete</button>
-        {!! Form::close() !!}
+        <form action="{{ action('ClientPlansController@destroy', [$clientPlan->id]) }}" method="POST">
+          {{ csrf_field() }}
+          {{ method_field("DELETE") }}
+          <button type="submit" class="btn btn-link pull-left">delete</button>
+        </form>
       </td>
   @endforeach
   </table>

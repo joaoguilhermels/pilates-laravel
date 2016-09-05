@@ -25,9 +25,9 @@ Route::get('/', function () {
 | kernel and includes session state, CSRF protection, and more.
 |
 */
+Route::auth();
 
-//Route::group(['middleware' => 'web'], function () {
-    Route::auth();
+Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/dashboard', 'HomeController@index');
 
@@ -37,9 +37,9 @@ Route::get('/', function () {
     Route::get('reports/cash-journal', 'ReportsController@cashJournal');
     Route::post('reports/cash-journal', 'ReportsController@showCashJournal');
 
-    Route::get('clients/{clients}/plans/create', 'ClientPlansController@create');
-    Route::post('clients/{clients}/plans/create', 'ClientPlansController@reviewClientPlan');
-    Route::post('clients/{clients}/plans/review', 'ClientPlansController@store');
+    Route::get('clients/{client}/plans/create', 'ClientPlansController@create');
+    Route::post('clients/{client}/plans/create', 'ClientPlansController@reviewClientPlan');
+    Route::post('clients/{client}/plans/review', 'ClientPlansController@store');
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     /*Route::get('clients/charges', 'ClientsController@indexCharges');
@@ -56,6 +56,7 @@ Route::get('/', function () {
 
     Route::get('client-plans/{client_plans}/payment', 'FinancialTransactionsController@createPlanPayment');
     Route::post('client-plans/{client_plans}/payment', 'FinancialTransactionsController@storePlanPayment');
+    Route::post('client-plans/{client_plans}/delete', 'ClientPlansController@destroy');
     Route::get('payment/{financial_transactions}', 'FinancialTransactionsController@editPlanPayment');
     Route::put('payment/{financial_transactions}', 'FinancialTransactionsController@updatePlanPayment');
 
@@ -76,20 +77,22 @@ Route::get('/', function () {
     Route::post('schedules/extra/create', 'ExtraClassSchedulesController@store');
 
     Route::get('schedules/class/{classType}/professional/{professionals}/room/{rooms}/date/{date}/time/{time}', 'GroupSchedulesController@edit');
-
-    Route::resource('payment-methods', 'PaymentMethodsController', ['parameters' => [
-        'payment-methods' => 'paymentMethod'
+    
+    Route::resource('rooms', 'RoomsController');
+    Route::resource('plans', 'PlansController');
+    Route::resource('clients', 'ClientsController');
+    Route::resource('expenses', 'ExpensesController');
+    Route::resource('schedules', 'SchedulesController');
+    Route::resource('professionals', 'ProfessionalsController');
+    
+    Route::resource('classes', 'ClassTypesController', ['parameters' => [
+        'classes' => 'classType'
     ]]);
     Route::resource('bank-accounts', 'BankAccountsController', ['parameters' => [
         'bank-accounts' => 'bankAccount'
     ]]);
-    Route::resource('clients', 'ClientsController');
-    Route::resource('professionals', 'ProfessionalsController');
-    Route::resource('rooms', 'RoomsController');
-    Route::resource('classes', 'ClassTypesController', ['parameters' => [
-        'classes' => 'classType'
+    Route::resource('payment-methods', 'PaymentMethodsController', ['parameters' => [
+        'payment-methods' => 'paymentMethod'
     ]]);
-    Route::resource('plans', 'PlansController');
-    Route::resource('schedules', 'SchedulesController');
-    Route::resource('expenses', 'ExpensesController');
-//});
+    
+});

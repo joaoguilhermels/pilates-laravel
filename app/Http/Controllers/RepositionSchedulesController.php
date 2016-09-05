@@ -16,11 +16,6 @@ use App\ClassTypeStatus;
 
 class RepositionSchedulesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function create()
     {
         $unscheduledStatusesIds = classTypeStatus::where('name', 'Desmarcou')->pluck('id');

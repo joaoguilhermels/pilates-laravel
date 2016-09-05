@@ -19,11 +19,6 @@ use App\Http\Requests\ProfessionalPaymentStoreRequest;
 
 class ProfessionalsPaymentsController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
         $financialTransactions = FinancialTransaction::where('financiable_type', 'App\Professional')

@@ -11,11 +11,6 @@ use App\Http\Requests;
 
 class ReportsController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function cashJournal()
     {
         return view('reports.cashJournal.form');

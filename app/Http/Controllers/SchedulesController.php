@@ -21,11 +21,6 @@ use Carbon\Carbon;
 
 class SchedulesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
         $schedules = Schedule::orderBy('start_at', 'asc')
@@ -61,7 +56,7 @@ class SchedulesController extends Controller
         $request->request->add([
             'end_at' => Carbon::parse($request->start_at)->addMinutes($classType->duration)
         ]);
-
+dd($request->all());
         $schedule = Schedule::create($request->all());
 
         Session::flash('message', 'Successfully added schedule ' . $schedule->start_at);

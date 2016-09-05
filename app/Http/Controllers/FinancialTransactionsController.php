@@ -16,11 +16,6 @@ use App\Http\Requests\FinancialTransactionRequest;
 
 class FinancialTransactionsController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function createPlanPayment(ClientPlan $clientPlan)
     {
         $paymentMethods = PaymentMethod::all();

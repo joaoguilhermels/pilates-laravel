@@ -16,11 +16,6 @@ use App\ClassTypeStatus;
 
 class ExtraClassSchedulesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function create()
     {
         $clients    = Client::all();

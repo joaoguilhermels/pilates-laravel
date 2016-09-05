@@ -15,7 +15,9 @@ require('jquery-datetimepicker');
  */
  
 Vue.component('classProfessionalRoom', require('./components/classProfessionalRoom.vue'));
+Vue.component('planPayment', require('./components/planPayment.vue'));
 Vue.component('startAt', require('./components/startAt.vue'));
+Vue.component('plans', require('./components/plans.vue'));
 
 const app = new Vue({
     el: 'body'

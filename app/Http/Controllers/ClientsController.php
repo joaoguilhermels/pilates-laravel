@@ -18,33 +18,21 @@ use App\Http\Controllers\Controller;
 
 class ClientsController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index(Request $request)
     {
-        $total = Client::count();
         $clients = Client::with(['schedules' => function ($query) {
                                     $query->join('class_type_statuses', 'schedules.class_type_status_id', '=', 'class_type_statuses.id')
                                             ->where('class_type_statuses.name', '=', 'Desmarcou')
                                             ->where('schedules.parent_id', '=', 0)
                                             ->select('schedules.*');
-        }])->filter($request->all())->orderBy('name')->paginate(20);
+                                }])
+                                ->filter($request->all())
+                                ->orderBy('name')
+                                ->paginate(20);
+
         $name = $request->name;
 
-        return view('clients.index', compact('total', 'clients', 'name'));
-    }
-
-    public function search()
-    {
-        $total = Client::count();
-        $clients = Client::filter($request->all())->orderBy('name')->paginate(20);
-        $name = $request->name;
-
-        return view('clients.index', compact('total', 'clients', 'name'));
+        return view('clients.index', compact('clients', 'name'));
     }
 
     public function show(Client $client)

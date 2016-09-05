@@ -15,12 +15,6 @@ use App\Http\Controllers\Controller;
 
 class ClassTypesController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
         $classTypes = ClassType::all();

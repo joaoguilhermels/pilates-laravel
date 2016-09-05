@@ -8,18 +8,38 @@
     export default {
         ready () {
 			var newDate = new Date();
+
+			var day = newDate.getDay();
+			var isWeekend = (day == 6) || (day == 0);    // 6 = Saturday, 0 = Sunday
+
+			if (isWeekend) {
+				newDate.setDate(newDate.getDate() + 1);
+				newDate.setHours(newDate.getHours());
+			}
+
+			var day = newDate.getDay();
+			var isWeekend = (day == 6) || (day == 0);    // 6 = Saturday, 0 = Sunday
+
+			if (isWeekend) {
+				newDate.setDate(newDate.getDate() + 1);
+				newDate.setHours(newDate.getHours());
+			}
+
 			var dateString =
-			  newDate.getFullYear() +"/"+
-			  ("0" + (newDate.getMonth()+1)).slice(-2) +"/"+
+			  newDate.getFullYear() + "/" +
+			  ("0" + (newDate.getMonth()+1)).slice(-2) + "/" +
 			  ("0" + newDate.getDate()).slice(-2) + " " +
 			  ("0" + newDate.getHours()).slice(-2) + ":" +
-			  ("0" + newDate.getMinutes()).slice(-2) + ":" +
 			  "00";
+
 			$('#datetimepicker').val(dateString);
 
 			$('#datetimepicker').datetimepicker({
-				format: 'Y-m-d H:i:s',
-				startDate: newDate,
+				format: 'Y/m/d H:i',
+				startDate: dateString,
+				defaultTime: newDate.getHours() + ":00",
+				formatTime: 'H:i',
+				step: 15,
 				inline: true,
 				dayOfWeekStart: 1,
 				onGenerate: function(ct) {
@@ -27,6 +47,7 @@
 					$('.xdsoft_calendar table thead tr th').filter(':nth-child(6), :nth-child(7)').remove();
 				}
 			});
+
 			$.datetimepicker.setLocale('pt-BR');
         },
     }
