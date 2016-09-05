@@ -15,7 +15,7 @@ class ProfessionalsTableSeeder extends Seeder
         factory('App\Professional', 2)->create()->each(function($professional) {
             $faker = Faker::create();
 
-            $classTypes = App\ClassType::all()->lists('id')->toArray();
+            $classTypes = App\ClassType::select(['id'])->pluck('id')->toArray();
             
             $professional->classTypes()->attach($faker->randomElement($classTypes), [
               'value' => '45',

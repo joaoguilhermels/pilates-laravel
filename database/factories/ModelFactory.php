@@ -69,7 +69,7 @@ $factory->define(App\Professional::class, function (Faker\Generator $faker) {
 
 
 $factory->define(App\Plan::class, function (Faker\Generator $faker) {
-    $classTypes = App\ClassType::all()->lists('id')->toArray();
+    $classTypes = App\ClassType::select(['id'])->pluck('id')->toArray();
 
     return [
         'name'          => 'Plan ' . $faker->name,
@@ -84,9 +84,9 @@ $factory->define(App\Plan::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\ClientPlan::class, function (Faker\Generator $faker) {
-    $clients = App\Client::all()->lists('id')->toArray();
-    $classes = App\ClassType::all()->lists('id')->toArray();
-    $plans = App\Plan::all()->lists('id')->toArray();
+    $clients = App\Client::select(['id'])->pluck('id')->toArray();
+    $classes = App\ClassType::select(['id'])->pluck('id')->toArray();
+    $plans = App\Plan::select(['id'])->pluck('id')->toArray();
 
     return [
         'client_id' => $faker->randomElement($clients),

@@ -15,7 +15,7 @@ class RoomsTableSeeder extends Seeder
         factory(App\Room::class, 2)->create()->each(function($room) {
             $faker = Faker::create();
 
-            $classTypes = App\ClassType::all()->lists('id')->toArray();
+            $classTypes = App\ClassType::select(['id'])->pluck('id')->toArray();
             
             $room->classTypes()->sync($faker->randomElements($classTypes, 2));
         });
