@@ -54,9 +54,9 @@ class SchedulesController extends Controller
         $classType = ClassType::find($request->class_type_id);
         
         $request->request->add([
-            'end_at' => Carbon::parse($request->start_at)->addMinutes($classType->duration)
+            'end_at' => Carbon::parse($request->start_at)->addMinutes($classType->duration)->toDateTimeString()
         ]);
-dd($request->all());
+
         $schedule = Schedule::create($request->all());
 
         Session::flash('message', 'Successfully added schedule ' . $schedule->start_at);

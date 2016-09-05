@@ -26,18 +26,18 @@
 			}
 
 			var dateString =
-			  newDate.getFullYear() + "/" +
-			  ("0" + (newDate.getMonth()+1)).slice(-2) + "/" +
+			  newDate.getFullYear() + "-" +
+			  ("0" + (newDate.getMonth()+1)).slice(-2) + "-" +
 			  ("0" + newDate.getDate()).slice(-2) + " " +
 			  ("0" + newDate.getHours()).slice(-2) + ":" +
-			  "00";
+			  "00:00";
 
 			$('#datetimepicker').val(dateString);
 
 			$('#datetimepicker').datetimepicker({
-				format: 'Y/m/d H:i',
+				format: 'Y-m-d H:i:s',
 				startDate: dateString,
-				defaultTime: newDate.getHours() + ":00",
+				defaultTime: newDate.getHours() + ":00:00",
 				formatTime: 'H:i',
 				step: 15,
 				inline: true,

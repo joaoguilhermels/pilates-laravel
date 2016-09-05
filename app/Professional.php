@@ -26,7 +26,7 @@ class Professional extends Model
         return $this->belongsToMany('App\ClassType')->withPivot('value', 'value_type')->withTimestamps();
     }
 
-    public function scheudles()
+    public function schedules()
     {
         return $this->hasMany('App\Schedules')->withTimestamps();
     }

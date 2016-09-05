@@ -16,7 +16,7 @@ class FinancialTransaction extends Model
     ];
 
     /**
-     * Get all of the owning imageable models.
+     * Get all of the owning financiable models.
      */
     public function financiable()
     {

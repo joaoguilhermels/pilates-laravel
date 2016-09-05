@@ -32,9 +32,11 @@
           <td>{{ $paymentMethod->enabled == 1 ? 'Yes' : 'No' }}</td>
           <td>
             <a href="{{ action('PaymentMethodsController@edit', [$paymentMethod->id]) }}" class="btn pull-left">edit</a>
-            {!! Form::open(['route' => ['payment-methods.destroy', $paymentMethod->id], 'method' => 'delete']) !!}
-            <button type="submit" class="btn btn-link pull-left">delete</button>
-            {!! Form::close() !!}
+            <form action="{{ action('PaymentMethodsController@destroy', [$paymentMethod->id]) }}" method="POST">
+              {{ csrf_field() }}
+              {{ method_field("DELETE") }}
+              <button type="submit" class="btn btn-link pull-left">delete</button>
+            </form>
           </td>
         </tr>
         @endforeach

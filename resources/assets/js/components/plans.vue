@@ -27,7 +27,7 @@
             <label for="daysOfWeek[{{ day.number }}][hour]">Time:</label>
             <select class="form-control" name="daysOfWeek[{{ day.number }}][hour]">
               <option value=""></option>
-              <option v-for="time in times" value="@{{ time }}">{{ time }}:00</option>
+              <option v-for="time in times" value="{{ time }}">{{ time }}:00</option>
             </select>
           </td>
           <td class="col-md-3">

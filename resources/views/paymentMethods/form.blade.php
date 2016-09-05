@@ -1,5 +1,5 @@
 <div class="form-group">
-  {!! Form::label('name', 'Name: ') !!}
+  <label for="name">Name:</label>
   <input type="text" class="form-control" name="name" value="@if(isset($paymentMethod)){{ $paymentMethod->name }}@else{{ old('name') }}@endif">
 </div>
 <div class="form-group">
@@ -9,5 +9,5 @@
   </div>
 </div>
 <div class="form-group">
-  {!! Form::submit($submitButtonText, ['class' => 'btn btn-success form-control']) !!}
+  <input type="submit" name="{{ $submitButtonText }}" class="btn btn-success" id="submit">
 </div>

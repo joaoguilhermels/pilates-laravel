@@ -11,7 +11,7 @@
 
     @include('errors.list')
 
-    <form action="{{ action('BankAccountsController@store') }}">
+    <form action="{{ action('BankAccountsController@store') }}" method="POST">
       {{ csrf_field() }}
       @include('bankAccounts.form', ['submitButtonText' => 'Add New Bank Account'])
     </form>
