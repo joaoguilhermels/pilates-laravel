@@ -23,10 +23,10 @@
               </select>
 
               <label for="name">do dia </label>
-              <input class="form-control" name="start_at" type="date" value="{{ old('start_at') }}" id="start_at">
+              <input class="form-control" name="start_at" type="date" value="{{ old('start_at', \Carbon\Carbon::now()->firstOfMonth()->format('Y-m-d')) }}" id="start_at">
 
               <label for="name"> até </label>
-              <input class="form-control" name="end_at" type="date" value="{{ old('end_at') }}" id="end_at">
+              <input class="form-control" name="end_at" type="date" value="{{ old('end_at', \Carbon\Carbon::now()->lastOfMonth()->format('Y-m-d')) }}" id="end_at">
             </div>
             <div class="form-group">
               <input class="btn btn-success form-control" type="submit" value="Generate Payment Report">

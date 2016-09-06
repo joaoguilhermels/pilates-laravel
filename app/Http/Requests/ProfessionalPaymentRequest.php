@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 
-class ProfessionalPaymentStoreRequest extends Request
+class ProfessionalPaymentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class ProfessionalPaymentStoreRequest extends Request
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**

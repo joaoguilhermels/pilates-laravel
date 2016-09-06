@@ -15,7 +15,7 @@ use App\Schedule;
 use App\Professional;
 
 use App\Http\Requests\PaymentReportRequest;
-use App\Http\Requests\ProfessionalPaymentStoreRequest;
+use App\Http\Requests\ProfessionalPaymentRequest;
 
 class ProfessionalsPaymentsController extends Controller
 {
@@ -40,11 +40,11 @@ class ProfessionalsPaymentsController extends Controller
      * FinancialTransactionDetail. Once this is done the function also
      * updates the schedules to make a relationship with the FinancialTransaction
      *
-     * @param  ProfessionalPaymentStoreRequest $request      [description]
-     * @param  Professional                    $professional [The proessional to associate with the FinancialTransaction (payment)]
-     * @return redirect                                      [Redirects the user to the list of Professional Payments]
+     * @param  ProfessionalPaymentRequest $request      [description]
+     * @param  Professional               $professional [The proessional to associate with the FinancialTransaction (payment)]
+     * @return redirect                   [Redirects the user to the list of Professional Payments]
      */
-    public function store(ProfessionalPaymentStoreRequest $request, Professional $professional)
+    public function store(ProfessionalPaymentRequest $request, Professional $professional)
     {
         $startAt = Carbon::parse($request->startAt);
         $endAt = Carbon::parse($request->endAt);
@@ -74,6 +74,16 @@ class ProfessionalsPaymentsController extends Controller
         Session::flash('message', 'Successfully added payment to professional ' . $professional->name);
 
         return redirect('professionals/payments');
+    }
+
+    public function edit(Professional $professional, FinancialTransaction $financialTransaction)
+    {
+        
+    }
+
+    public function update(ProfessionalPaymentRequest $request, Professional $professional)
+    {
+        # code...
     }
 
     public function destroy(FinancialTransaction $financialTransaction)
@@ -129,7 +139,7 @@ class ProfessionalsPaymentsController extends Controller
                                   ->whereYear('end_at', '<=', $endAt->year)
                                   ->sum('value_professional_receives');
 
-        return view('professionals.report_payment', compact('professional', 'bankAccounts', 'paymentMethods', 'rows', 'total', 'professional_total', 'startAt', 'endAt'));
+        return view('professionals.payments.review', compact('professional', 'bankAccounts', 'paymentMethods', 'rows', 'total', 'professional_total', 'startAt', 'endAt'));
     }
 
     public function reportPayment(Professional $professional)
@@ -140,6 +150,6 @@ class ProfessionalsPaymentsController extends Controller
         $total = Schedule::where('professional_id', $professional->id)
                           ->sum('price');
 
-        return view('professionals.report_payment', compact('professional', 'rows', 'total'));
+        return view('professionals.payments.review', compact('professional', 'rows', 'total'));
     }
 }

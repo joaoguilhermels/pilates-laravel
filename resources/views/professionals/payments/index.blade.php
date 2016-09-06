@@ -33,7 +33,7 @@
             <td>{{ $financialTransaction->FinancialTransactionDetails()->first()->date }}</td>
             <td>{{ $financialTransaction->FinancialTransactionDetails()->first()->value }}</td>
             <td>
-              <a href="{{ action('ProfessionalsController@edit', [$financialTransaction->id]) }}" class="btn pull-left">edit</a>
+              <a href="{{ action('ProfessionalsPaymentsController@edit', [$financialTransaction->id]) }}" class="btn pull-left">edit</a>
               <form action="{{ action('ProfessionalsPaymentsController@destroy', [$financialTransaction->id]) }}" method="post">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
