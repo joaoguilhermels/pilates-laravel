@@ -29,7 +29,7 @@ Route::auth();
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/dashboard', 'HomeController@index');
+    Route::get('/home', 'HomeController@index');
 
     Route::get('/calendar', 'CalendarController@calendar');
     Route::get('/calendar/group', 'CalendarController@groupCalendar');
@@ -54,11 +54,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('clients/{clients}/charges/report', 'ClientsController@reportCharge');*/
 
-    Route::get('client-plans/{client_plan}/payment', 'FinancialTransactionsController@createPlanPayment');
-    Route::post('client-plans/{client_plan}/payment', 'FinancialTransactionsController@storePlanPayment');
-    Route::post('client-plans/{client_plan}/delete', 'ClientPlansController@destroy');
-    Route::get('payment/{financial_transaction}', 'FinancialTransactionsController@editPlanPayment');
-    Route::put('payment/{financial_transaction}', 'FinancialTransactionsController@updatePlanPayment');
+    Route::get('client-plans/{clientPlan}/payment', 'FinancialTransactionsController@createPlanPayment');
+    Route::post('client-plans/{clientPlan}/payment', 'FinancialTransactionsController@storePlanPayment');
+    Route::post('client-plans/{clientPlan}/delete', 'ClientPlansController@destroy');
+    Route::get('payment/{financialTransaction}', 'FinancialTransactionsController@editPlanPayment');
+    Route::put('payment/{financialTransaction}', 'FinancialTransactionsController@updatePlanPayment');
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -67,7 +67,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('professionals/payments/create', 'ProfessionalsPaymentsController@create');
     Route::post('professionals/payments/review', 'ProfessionalsPaymentsController@generatePaymentReport');
     Route::post('professionals/{professional}/payments/store', 'ProfessionalsPaymentsController@store');
-    Route::delete('professionals/payments/{financial_transaction}/delete', 'ProfessionalsPaymentsController@destroy');
+    Route::get('professionals/payments/{financialTransaction}/edit', 'ProfessionalsPaymentsController@edit');
+    Route::patch('professionals/payments/{financialTransaction}/update', 'ProfessionalsPaymentsController@update');
+    Route::delete('professionals/payments/{financialTransaction}/delete', 'ProfessionalsPaymentsController@destroy');
 
     Route::get('schedules/trial/create', 'TrialSchedulesController@create');
     Route::post('schedules/trial/create', 'TrialSchedulesController@store');

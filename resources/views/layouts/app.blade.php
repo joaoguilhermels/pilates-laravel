@@ -52,7 +52,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     @if (Auth::check())
-                    <li class="{{ active('dashboard') }}"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+                    <li class="{{ active('home') }}"><a href="{{ url('/home') }}">Home</a></li>
                     <li class="{{ active('classes') }}"><a href="{{ url('/classes') }}">{{ trans('menu.classes') }}</a></li>
                     <li class="{{ active('rooms') }}"><a href="{{ url('/rooms') }}">{{ trans('menu.rooms') }}</a></li>
                     <li class="{{ active('professionals') }}"><a href="{{ url('/professionals') }}">{{ trans('menu.professionals') }}</a></li>

@@ -86,7 +86,11 @@
             </tbody>
           </table>
         </div>
-
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h2>Registrar Pagamento</h2>
         <form action="/professionals/{{ $professional->id }}/payments/store" method="POST">
           {{ csrf_field() }}
           <input type="hidden" name="startAt" value="{{ $startAt }}">
@@ -124,7 +128,6 @@
             <input class="btn btn-success form-control" type="submit" value="Register Professional Payment">
           </div>
         </form>
-        <br>
       </div>
     </div>
   </div>

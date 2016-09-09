@@ -26,6 +26,8 @@ class CreateRoomsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::drop('rooms');
+        Schema::enableForeignKeyConstraints();
     }
 }

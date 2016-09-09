@@ -14,10 +14,13 @@ class CreateFinancialTransactionDetailsTable extends Migration
     {
         Schema::create('financial_transaction_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('financial_transaction_id')->references('id')->on('financial_transaction')->unsigned();
 
-            $table->integer('payment_method_id')->references('id')->on('payment_method');
-            $table->integer('bank_account_id')->references('id')->on('bank_account')->nullable; //pagamento em dinheiro não precisa de banco
+            $table->integer('financial_transaction_id')->unsigned()->index();
+
+            $table->integer('payment_method_id')->unsigned()->index();
+
+            $table->integer('bank_account_id')->unsigned()->index()->nullable(); //pagamento em dinheiro não precisa de banco
+            
             $table->date('date');
             $table->float('value');
             $table->enum('type', ['received', 'paid']);

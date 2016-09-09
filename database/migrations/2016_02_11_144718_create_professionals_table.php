@@ -30,6 +30,8 @@ class CreateProfessionalsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::drop('professionals');
+        Schema::enableForeignKeyConstraints();
     }
 }

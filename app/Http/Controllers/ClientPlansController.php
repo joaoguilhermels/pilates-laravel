@@ -122,7 +122,7 @@ class ClientPlansController extends Controller
     {
         $clientPlan = new ClientPlan;
 
-        $clientPlan->class_type_id  = Plan::findOrFail($request->plan_id)->class_type_id;
+        //$clientPlan->class_type_id  = Plan::findOrFail($request->plan_id)->class_type_id;
         $clientPlan->start_at       = $request->start_at;
         $clientPlan->plan_id        = $request->plan_id;
 
@@ -206,7 +206,7 @@ class ClientPlansController extends Controller
         $clientPlanDetail->professional_id = $dayOfWeek['professional_id'];
 
         $clientPlanDetail = $clientPlan->clientPlanDetails()->save($clientPlanDetail);
-        
+
         $classType = ClassType::with([
             'plans' =>  function ($query) use ($request) {
                             return $query->where('id', $request->plan_id);
@@ -218,7 +218,7 @@ class ClientPlansController extends Controller
                                     return $query->where('professional_id', $clientPlanDetail->professional_id);
             }
         ])
-        ->findOrFail($clientPlan->class_type_id);
+        ->findOrFail($clientPlan->plan->class_type_id);
 
         $clientPlanDetail->load('professional');
         $clientPlanDetail->professional->load('classTypes');
@@ -254,7 +254,7 @@ class ClientPlansController extends Controller
             $schedule->room_id                     = $clientPlanDetail->room_id;
             $schedule->start_at                    = $dateStart->format("Y-m-d H:i:s");
             $schedule->client_id                   = $client->id;
-            $schedule->class_type_id               = $clientPlan->class_type_id;
+            $schedule->class_type_id               = $clientPlan->plan->class_type_id;
             $schedule->professional_id             = $clientPlanDetail->professional_id;
             $schedule->class_type_status_id        = $classTypeStatusOkId;
             $schedule->value_professional_receives = $this->setProfessionalValue($professionalClass, $classPrice);

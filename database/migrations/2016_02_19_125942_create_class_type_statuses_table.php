@@ -33,6 +33,8 @@ class CreateClassTypeStatusesTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::drop('class_type_statuses');
+        Schema::enableForeignKeyConstraints();
     }
 }

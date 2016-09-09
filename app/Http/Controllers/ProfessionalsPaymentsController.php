@@ -30,7 +30,7 @@ class ProfessionalsPaymentsController extends Controller
 
     public function create()
     {
-        $professionals = Professional::all();
+        $professionals = Professional::orderBy('name')->get();
 
         return view('professionals.payments.create', compact('professionals'));
     }
@@ -63,12 +63,8 @@ class ProfessionalsPaymentsController extends Controller
         $financialTransaction->financialTransactionDetails()->create($request->all());
 
         $schedules = Schedule::where('professional_id', $professional->id)
-                        ->whereYear('start_at', '>=', $startAt->year)
-                        ->whereYear('end_at', '<=', $endAt->year)
-                        ->whereMonth('start_at', '>=', $startAt->month)
-                        ->whereMonth('end_at', '<=', $endAt->month)
-                        ->whereDay('start_at', '>=', $startAt->day)
-                        ->whereDay('end_at', '<=', $endAt->day)
+                        ->whereDate('start_at', '>=', $startAt)
+                        ->whereDate('end_at', '<=', $endAt)
                         ->update(['professional_payment_financial_transaction_id' => $financialTransaction->id]);
 
         Session::flash('message', 'Successfully added payment to professional ' . $professional->name);
@@ -78,7 +74,14 @@ class ProfessionalsPaymentsController extends Controller
 
     public function edit(Professional $professional, FinancialTransaction $financialTransaction)
     {
-        
+        dd($financialTransaction);
+        $rows = Schedule::where('professional_payment_financial_transaction_id', $financialTransaction->id)->get();
+        $bankAccounts   = BankAccount::orderBy('name')->get();
+        $paymentMethods = PaymentMethod::orderBy('name')->get();
+
+        //compact('professional', 'bankAccounts', 'paymentMethods', 'rows', 'total', 'professional_total', 'startAt', 'endAt')
+
+        return view('professionals.payments.review', compact('professional', 'financialTransaction', 'rows'));
     }
 
     public function update(ProfessionalPaymentRequest $request, Professional $professional)
@@ -94,8 +97,7 @@ class ProfessionalsPaymentsController extends Controller
         Schedule::where('professional_payment_financial_transaction_id', $financialTransaction->id)
                     ->update(['professional_payment_financial_transaction_id' => null]);
 
-        $financialTransaction->financialTransactionDetails()->delete();
-        $financialTransaction->delete();
+        $financialTransaction->delete(); // Delete cascades Financial Transaction Details
 
         return redirect('professionals/payments');
     }
@@ -109,40 +111,19 @@ class ProfessionalsPaymentsController extends Controller
         $paymentMethods = PaymentMethod::orderBy('name')->get();
 
         $rows = Schedule::where('professional_id', $request->professional)
-                    ->where('professional_payment_financial_transaction_id', '=', 0)
-                    ->whereDay('start_at', '>=', $startAt->day)
-                    ->whereMonth('start_at', '>=', $startAt->month)
-                    ->whereYear('start_at', '>=', $startAt->year)
-                    ->whereDay('end_at', '<=', $endAt->day)
-                    ->whereMonth('end_at', '<=', $endAt->month)
-                    ->whereYear('end_at', '<=', $endAt->year)
-                    ->orderBy('start_at')
-                    ->get();
+                        ->whereNull('professional_payment_financial_transaction_id')
+                        ->whereDate('start_at', '>=', $startAt)
+                        ->whereDate('end_at', '<=', $endAt)
+                        ->orderBy('start_at')
+                        ->get();
 
-        $total = Schedule::where('professional_id', $request->professional)
-                    ->where('professional_payment_financial_transaction_id', '=', 0)
-                    ->whereDay('start_at', '>=', $startAt->day)
-                    ->whereMonth('start_at', '>=', $startAt->month)
-                    ->whereYear('start_at', '>=', $startAt->year)
-                    ->whereDay('end_at', '<=', $endAt->day)
-                    ->whereMonth('end_at', '<=', $endAt->month)
-                    ->whereYear('end_at', '<=', $endAt->year)
-                    ->sum('price');
-
-        $professional_total = Schedule::where('professional_id', $request->professional)
-                                  ->where('professional_payment_financial_transaction_id', '=', 0)
-                                  ->whereDay('start_at', '>=', $startAt->day)
-                                  ->whereMonth('start_at', '>=', $startAt->month)
-                                  ->whereYear('start_at', '>=', $startAt->year)
-                                  ->whereDay('end_at', '<=', $endAt->day)
-                                  ->whereMonth('end_at', '<=', $endAt->month)
-                                  ->whereYear('end_at', '<=', $endAt->year)
-                                  ->sum('value_professional_receives');
+        $total = $rows->sum('price');
+        $professional_total = $rows->sum('value_professional_receives');
 
         return view('professionals.payments.review', compact('professional', 'bankAccounts', 'paymentMethods', 'rows', 'total', 'professional_total', 'startAt', 'endAt'));
     }
 
-    public function reportPayment(Professional $professional)
+    /*public function reportPayment(Professional $professional)
     {
         $rows = Schedule::where('professional_id', $professional->id)
                         ->get();
@@ -151,5 +132,5 @@ class ProfessionalsPaymentsController extends Controller
                           ->sum('price');
 
         return view('professionals.payments.review', compact('professional', 'rows', 'total'));
-    }
+    }*/
 }

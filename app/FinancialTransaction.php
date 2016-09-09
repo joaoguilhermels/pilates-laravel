@@ -15,6 +15,8 @@ class FinancialTransaction extends Model
       'observation'
     ];
 
+    protected $with = ['FinancialTransactionDetails'];
+
     /**
      * Get all of the owning financiable models.
      */
@@ -26,5 +28,10 @@ class FinancialTransaction extends Model
     public function financialTransactionDetails()
     {
         return $this->hasMany('App\FinancialTransactionDetail');
+    }
+
+    public function schedules()
+    {
+        return $this->hasMany('App\Schedule');
     }
 }
