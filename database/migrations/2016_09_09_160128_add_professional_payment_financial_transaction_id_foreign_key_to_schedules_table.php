@@ -14,7 +14,7 @@ class AddProfessionalPaymentFinancialTransactionIdForeignKeyToSchedulesTable ext
     public function up()
     {
         Schema::table('schedules', function (Blueprint $table) {
-            $table->foreign('professional_payment_financial_transaction_id')->references('id')->on('financial_transactions');
+            $table->foreign('professional_payment_financial_transaction_id')->references('id')->on('financial_transactions')->onDelete('set null');
         });
     }
 

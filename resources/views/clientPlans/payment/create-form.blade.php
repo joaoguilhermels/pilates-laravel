@@ -1,7 +1,6 @@
-<?php dd($clientPlan); ?>
 <div class="form-group">
   <label for="client">Client:</label> {{ $clientPlan->client->name }}<br>
-  <label for="class">Class:</label> {{ $clientPlan->classType->name }}<br>
+  <label for="class">Class:</label> {{ $clientPlan->plan->classType->name }}<br>
   <label for="plan">Plan:</label> {{ $clientPlan->plan->name }}<br>
   <label for="price">Price:</label> {{ $clientPlan->plan->price }}/{{ $clientPlan->plan->price_type }}<br>
   <label for="plan">Duration:</label> {{ $clientPlan->plan->duration }} {{ $clientPlan->plan->duration_type }}
@@ -15,6 +14,6 @@
   </div>
 
   <div class="form-group">
-    {!! Form::submit($submitButtonText, ['class' => 'btn btn-success form-control']) !!}
+    <input type="submit" name="" value="{{ $submitButtonText }}" class="btn btn-success">
   </div>
 </div>

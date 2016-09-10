@@ -72,16 +72,23 @@ class ProfessionalsPaymentsController extends Controller
         return redirect('professionals/payments');
     }
 
-    public function edit(Professional $professional, FinancialTransaction $financialTransaction)
+    public function edit(FinancialTransaction $financialTransaction)
     {
-        dd($financialTransaction);
-        $rows = Schedule::where('professional_payment_financial_transaction_id', $financialTransaction->id)->get();
+        $rows = Schedule::where('professional_payment_financial_transaction_id', $financialTransaction->id)
+                        ->orderBy('start_at')
+                        ->get();
+        
+        $total = $rows->sum('price');
+        $endAt = $rows->max('start_at');
+        $startAt = $rows->min('start_at');
+        $professional = $financialTransaction->financiable;
+
         $bankAccounts   = BankAccount::orderBy('name')->get();
         $paymentMethods = PaymentMethod::orderBy('name')->get();
+        $financialTransactionDetail = $financialTransaction->financialTransactionDetails->first();
+        $professional_total = $financialTransactionDetail->value;
 
-        //compact('professional', 'bankAccounts', 'paymentMethods', 'rows', 'total', 'professional_total', 'startAt', 'endAt')
-
-        return view('professionals.payments.review', compact('professional', 'financialTransaction', 'rows'));
+        return view('professionals.payments.review', compact('professional', 'bankAccounts', 'paymentMethods', 'rows', 'total', 'professional_total', 'startAt', 'endAt', 'financialTransactionDetail'));
     }
 
     public function update(ProfessionalPaymentRequest $request, Professional $professional)
@@ -93,16 +100,14 @@ class ProfessionalsPaymentsController extends Controller
     {
         Session::flash('message', 'Successfully deleted professional payment.');
 
-        // Check if we can't do this in the migration on something like onDelete('set 0') or something like that
-        Schedule::where('professional_payment_financial_transaction_id', $financialTransaction->id)
-                    ->update(['professional_payment_financial_transaction_id' => null]);
-
-        $financialTransaction->delete(); // Delete cascades Financial Transaction Details
+        // Delete cascades Financial Transaction Details
+        // And onDelete set null on schedules
+        $financialTransaction->delete(); 
 
         return redirect('professionals/payments');
     }
 
-    public function generatePaymentReport(PaymentReportRequest $request)
+    public function generatePaymentReport(PaymentReportRequest $request, FinancialTransaction $financialTransaction)
     {
         $startAt        = Carbon::parse($request->start_at);
         $endAt          = Carbon::parse($request->end_at);
@@ -119,18 +124,8 @@ class ProfessionalsPaymentsController extends Controller
 
         $total = $rows->sum('price');
         $professional_total = $rows->sum('value_professional_receives');
+        $financialTransactionDetail = $financialTransaction->financialTransactionDetails->first();
 
-        return view('professionals.payments.review', compact('professional', 'bankAccounts', 'paymentMethods', 'rows', 'total', 'professional_total', 'startAt', 'endAt'));
+        return view('professionals.payments.review', compact('professional', 'bankAccounts', 'paymentMethods', 'rows', 'total', 'professional_total', 'startAt', 'endAt', 'financialTransactionDetail'));
     }
-
-    /*public function reportPayment(Professional $professional)
-    {
-        $rows = Schedule::where('professional_id', $professional->id)
-                        ->get();
-
-        $total = Schedule::where('professional_id', $professional->id)
-                          ->sum('price');
-
-        return view('professionals.payments.review', compact('professional', 'rows', 'total'));
-    }*/
 }

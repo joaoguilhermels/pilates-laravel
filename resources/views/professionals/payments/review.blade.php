@@ -21,6 +21,7 @@
                 <th>Room</th>
                 <th>Class</th>
                 <th>Plan</th>
+                <th></th>
               </tr>
             </thead>
             <tfoot>
@@ -29,6 +30,7 @@
                 <td>&nbsp;</td>
                 <td>{{ $total }}</td>
                 <td>{{ $professional_total }}</td>
+                <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
@@ -81,6 +83,9 @@
                     {{ $row->clientPlanDetail != null ? $row->clientPlanDetail->clientPlan->plan->name : "" }}
                   @endif
                 </td>
+                <td>
+                  Edit
+                </td>
               </tr>
             @endforeach
             </tbody>
@@ -99,7 +104,7 @@
             <label for="professional">Payment Method: </label>
             <select class="form-control" name="payment_method_id">
               @foreach($paymentMethods as $paymentMethod)
-              <option value="{{ $paymentMethod->id }}" {{ (old('paymentMethod') == $paymentMethod->id ? "selected" : "") }}>{{ $paymentMethod->name }}</option>
+              <option value="{{ $paymentMethod->id }}" {{ (old('paymentMethod', $financialTransactionDetail->payment_method_id) == $paymentMethod->id ? "selected" : "") }}>{{ $paymentMethod->name }}</option>
               @endforeach
             </select>
           </div>
@@ -107,13 +112,13 @@
             <label for="name">Bank Account: </label>
             <select class="form-control" name="bank_account_id">
               @foreach($bankAccounts as $bankAccount)
-              <option value="{{ $bankAccount->id }}" {{ (old('bankAccount') == $bankAccount->id ? "selected" : "") }}>{{ $bankAccount->name }}</option>
+              <option value="{{ $bankAccount->id }}" {{ (old('bankAccount', $financialTransactionDetail->bank_account_id) == $bankAccount->id ? "selected" : "") }}>{{ $bankAccount->name }}</option>
               @endforeach
             </select>
           </div>
           <div class="form-group">
             <label for="name">Payment Date: </label>
-            <input class="form-control" name="date" type="date" value="{{ old('date') }}" id="end_at">
+            <input class="form-control" name="date" type="date" value="{{ old('date', $financialTransactionDetail->date) }}" id="end_at">
           </div>
           <div class="form-group">
             <label for="name">Value to pay the professional: </label>
@@ -121,9 +126,8 @@
           </div>
           <div class="form-group">
             <label for="name">Observation: </label>
-            <textarea name="observation" class="form-control" value="{{ old('observation  ') }}" rows="4"></textarea>
+            <textarea name="observation" class="form-control" rows="4">{{ old('observation', $financialTransactionDetail->observation) }}</textarea>
           </div>
-
           <div class="form-group">
             <input class="btn btn-success form-control" type="submit" value="Register Professional Payment">
           </div>

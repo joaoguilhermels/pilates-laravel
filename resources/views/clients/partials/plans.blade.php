@@ -26,7 +26,7 @@
     </thead>
   @foreach($client->clientPlans as $clientPlan)
     <tr>
-      <td>{{ $clientPlan->classType->name }}</td>
+      <td>{{ $clientPlan->plan->classType->name }}</td>
       <td>{{ $clientPlan->plan->name }}</td>
       <td>{{ $clientPlan->start_at }}</td>
       <td>

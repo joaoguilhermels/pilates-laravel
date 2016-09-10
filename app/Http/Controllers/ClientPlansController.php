@@ -49,8 +49,8 @@ class ClientPlansController extends Controller
         $form['rooms'] = Room::orderBy('name')->get();
         $form['daysOfWeek'] = $this->daysOfWeek;
         $form['classTypePlans'] = ClassType::with(['plans' => function ($query) {
-                                    $query->orderBy('name');
-        }, 'professionals', 'rooms'])
+                                        $query->orderBy('name');
+                                    }, 'professionals', 'rooms'])
                                     ->has('plans')
                                     ->orderBy('name')
                                     ->get()
