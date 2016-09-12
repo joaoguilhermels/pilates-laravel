@@ -292,9 +292,12 @@ class ClientPlansController extends Controller
 
     public function destroy(ClientPlan $clientPlan)
     {
-        Session::flash('message', 'Successfully deleted client ' . $client->name);
+        Session::flash('message', 'Successfully deleted client plan ' . $clientPlan->name);
 
-        $clientPlan->clientPlanDetails()->schedules()->delete();
+        $clientPlan->financialTransactions->financialTransactionDetails()->delete();
+        $clientPlan->financialTransactions()->delete();
+
+        $clientPlan->clientPlanDetails->schedules()->delete();
         $clientPlan->clientPlanDetails()->delete();
         $clientPlan->delete();
 
