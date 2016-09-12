@@ -6,7 +6,7 @@
   <label for="plan">Duration:</label> {{ $clientPlan->plan->duration }} {{ $clientPlan->plan->duration_type }}
 </div>
 <div id="app">
-  <plan-payment plan-duration="{{ $clientPlan->plan->duration }}" payment-methods="{{ $paymentMethods }}" bank-accounts="{{ $bankAccounts }}" selected-values=""></plan-payment>
+  <plan-payment plan-duration="{{ $clientPlan->plan->duration }}" payment-methods="{{ $paymentMethods }}" bank-accounts="{{ $bankAccounts }}" selected-values="" price="{{ $clientPlan->plan->price }}"></plan-payment>
 
   <div class="form-group">
     <label for="observation">Observation:</label>

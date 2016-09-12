@@ -16,20 +16,22 @@
           <td class="col-md-3">
             <input type="hidden" name="payments[{{ paymentNumber }}][payment_number]" value="{{ paymentNumber + 1 }}">
             <label for="payments[{{ paymentNumber }}][payment_method_id]">Payment Method: </label>
-            <select name="payments[{{ paymentNumber }}][payment_method_id]" class="form-control">
+            <select name="payments[{{ paymentNumber }}][payment_method_id]" class="form-control" v-if="paymentMethodsObjs.length > 1">
               <option value=""></option>
-              @foreach($paymentMethods as $paymentMethod)
-                <option value="{{ $paymentMethod->id }}">{{ $paymentMethod->name }}</option>
-              @endforeach
+              <option v-for="paymentMethod in paymentMethodsObjs" v-bind:value="paymentMethod.id">{{ paymentMethod.name }}</option>
             </select>
+            <div v-else>
+              {{ paymentMethodsObjs[0].name }}
+              <input type="hidden" name="payments[{{ paymentNumber }}][payment_method_id]" v-bind:value="paymentMethodsObjs[0].id">
+            </div>
           </td>
           <td class="col-md-2">
             <label for="date">Date: </label>
-            <input type="date" name="payments[{{ paymentNumber }}][date]" value="{{ old('date') }}" class="form-control">
+            <input type="date" name="payments[{{ paymentNumber }}][date]" value="" class="form-control">
           </td>
           <td class="col-md-2">
             <label for="room">Value: </label>
-            <input type="float" name="payments[{{ paymentNumber }}][value]" class="form-control" value="{{ $clientPlan->plan->price }}">
+            <input type="float" name="payments[{{ paymentNumber }}][value]" v-bind:value="price" class="form-control">
           </td>
           <td class="col-md-5">
             <label for="observation">Observation: </label>
@@ -40,3 +42,18 @@
     </div>
   </div>
 </template>
+
+<script>
+  export default {
+    props: ['plan-duration', 'selected-values', 'payment-methods', 'bank-accounts', 'price'],
+
+    data: function() {
+      return {
+          numberOfPayments: parseInt(this.planDuration) || 1,
+          paymentMethodsObjs: JSON.parse(this.paymentMethods),
+          bankAccountsObjs: JSON.parse(this.bankAccounts),
+          payments: this.selectedValues == "" ? "" : JSON.parse(this.selectedValues)
+      }
+    }
+  }
+</script>
