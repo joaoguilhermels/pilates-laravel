@@ -26,10 +26,10 @@ class CalendarController extends Controller
                 $schedule->end_at, //end time (you can also use Carbon instead of DateTime)
                 $schedule->id, //optionally, you can specify an event ID
                 [
-                'color' => $schedule->classTypeStatus->color,
-                'url' => '/schedules/' . $schedule->id . '/edit',
-                'description' => $this->eventDescription($schedule),
-                'textColor' => '#0A0A0A'
+                    'color' => $schedule->classTypeStatus->color,
+                    'url' => '/schedules/' . $schedule->id . '/edit',
+                    'description' => $this->eventDescription($schedule),
+                    'textColor' => '#0A0A0A'
                 ]
             );
         }
@@ -78,8 +78,14 @@ class CalendarController extends Controller
             'maxTime' => '21:00:00',
             'contentHeight' => 'auto',
             'slotEventOverlap' => false,
-            'lang' => 'pt-BR',
-            'eventLimit' => false
+            'locale' => 'pt-BR',
+            'eventLimit' => false,
+            'navLinks' => true,
+            'header' => [
+                'left' => 'prev,next today',
+                'center' => 'title',
+                'right' => 'month,agendaWeek,agendaDay,listYear',
+            ],
         ]);
 
         $calendar = \Calendar::setCallbacks([
@@ -203,11 +209,11 @@ class CalendarController extends Controller
                 $schedule->end_at, //end time (you can also use Carbon instead of DateTime)
                 $schedule->id, //optionally, you can specify an event ID
                 [
-                'color' => $schedule->classTypeStatus->color,
-                'url' => '/schedules/' . $schedule->id . '/edit',
-                //'url' => 'schedules/class/' . $schedule->classType->id . '/professional/' . $schedule->professional->id . '/room/' . $schedule->room->id . '/date/' . {date} . '/time/' . {time},
-                'description' => $this->groupDescription($schedule),
-                'textColor' => '#0A0A0A'
+                    'color' => $schedule->classTypeStatus->color,
+                    'url' => '/schedules/' . $schedule->id . '/edit',
+                    //'url' => 'schedules/class/' . $schedule->classType->id . '/professional/' . $schedule->professional->id . '/room/' . $schedule->room->id . '/date/' . {date} . '/time/' . {time},
+                    'description' => $this->groupDescription($schedule),
+                    'textColor' => '#0A0A0A'
                 ]
             );
         }
@@ -228,8 +234,14 @@ class CalendarController extends Controller
             'maxTime' => '21:00:00',
             'contentHeight' => 'auto',
             'slotEventOverlap' => false,
-            'lang' => 'pt-BR',
-            'eventLimit' => false
+            'locale' => 'pt-BR',
+            'eventLimit' => false,
+            'navLinks' => true,
+            'header' => [
+                'left' => 'prev,next today',
+                'center' => 'title',
+                'right' => 'month,agendaWeek,agendaDay,listWeek',
+            ],
         ]);
 
         $calendar = \Calendar::setCallbacks([

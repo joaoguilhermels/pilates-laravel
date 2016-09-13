@@ -36,7 +36,7 @@
     @endforeach
   </select>
 </div>
-<start-at></start-at>
+<start-at date="{{ $schedule->start_at->toDateString() }}" time="{{ $schedule->start_at->format('h:i') }}"></start-at>
 <div class="form-group">
   <label for="start_at">Start: </label>
   <input type="text" name="start_at" class="form-control" value="{{ $schedule->start_at }}">
