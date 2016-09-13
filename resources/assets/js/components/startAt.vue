@@ -6,6 +6,7 @@
 </template>
 <script>
     export default {
+    	props: ['date', 'time'],
         ready () {
 			var newDate = new Date();
 
@@ -35,10 +36,11 @@
 			$('#datetimepicker').val(dateString);
 
 			$('#datetimepicker').datetimepicker({
-				format: 'Y-m-d H:i:s',
-				startDate: dateString,
-				defaultTime: newDate.getHours() + ":00:00",
+				format: 'Y-m-d H:i',
+				formatDate: 'Y-m-d',
+				defaultDate: this.date || newDate.getDate(),
 				formatTime: 'H:i',
+				defaultTime: this.time || newDate.getHours() + ":00",
 				step: 15,
 				inline: true,
 				dayOfWeekStart: 1,
