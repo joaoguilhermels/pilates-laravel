@@ -35,7 +35,7 @@
           <th>Name</th>
           <th>Phone</th>
           <th>E-mail</th>
-          <th>Reposições Pendentes</th>
+          <th class="text-center">Reposições</th>
           <th></th>
           <th></th>
           <th></th>
@@ -48,7 +48,7 @@
             <td><a href="{{ action('ClientsController@show', [$client->id]) }}">{{ $client->name }}</a></td>
             <td>{{ $client->phone }}</td>
             <td>{{ $client->email }}</td>
-            <td>
+            <td class="text-center">
               @if($client->schedules->count() > 0)
                 {{ $client->schedules->count() }} aula(s) desmarcada(s)
                 <ul class="list">
@@ -57,7 +57,7 @@
                 @endforeach
                 </ul>
               @else
-                Nenhuma aula pendente
+                0
               @endif
             </td>
             <td>

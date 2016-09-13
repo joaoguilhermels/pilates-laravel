@@ -294,11 +294,24 @@ class ClientPlansController extends Controller
     {
         Session::flash('message', 'Successfully deleted client plan ' . $clientPlan->name);
 
-        $clientPlan->financialTransactions->financialTransactionDetails()->delete();
-        $clientPlan->financialTransactions()->delete();
+        // Check if all items can be deleted
 
-        $clientPlan->clientPlanDetails->schedules()->delete();
-        $clientPlan->clientPlanDetails()->delete();
+        // Move this to the migration to cascade delete ?
+        $clientPlan->financialTransactions->map(function($financialTransaction) {
+            $financialTransaction->financialTransactionDetails->map(function($financialTransactionDetail) {
+                $financialTransactionDetail->delete();
+            });
+            $financialTransaction->delete();
+        });
+
+        // Move this to the migration to cascade delete ?
+        $clientPlan->clientPlanDetails->map(function($clientPlanDetail) {
+            $clientPlanDetail->schedules->map(function($schedule) {
+                $schedule->delete();
+            });
+            $clientPlanDetail->delete();
+        });
+
         $clientPlan->delete();
 
         return redirect('clients');
