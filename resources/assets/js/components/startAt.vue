@@ -26,21 +26,26 @@
 				newDate.setHours(newDate.getHours());
 			}
 
-			var dateString =
-			  newDate.getFullYear() + "-" +
-			  ("0" + (newDate.getMonth()+1)).slice(-2) + "-" +
-			  ("0" + newDate.getDate()).slice(-2) + " " +
-			  ("0" + newDate.getHours()).slice(-2) + ":" +
-			  "00:00";
+			if (this.date !== undefined && this.time !== undefined) {
+				var dateString = this.date + " " + this.time;
+			}
+			else {
+				var dateString =
+				  newDate.getFullYear() + "-" +
+				  ("0" + (newDate.getMonth()+1)).slice(-2) + "-" +
+				  ("0" + newDate.getDate()).slice(-2) + " " +
+				  ("0" + newDate.getHours()).slice(-2) + ":" +
+				  "00:00";
+			}
 
 			$('#datetimepicker').val(dateString);
 
 			$('#datetimepicker').datetimepicker({
-				format: 'Y-m-d H:i',
+				format: 'Y-m-d H:i:00',
 				formatDate: 'Y-m-d',
 				defaultDate: this.date || newDate.getDate(),
-				formatTime: 'H:i',
-				defaultTime: this.time || newDate.getHours() + ":00",
+				formatTime: 'H:i:00',
+				defaultTime: this.time || newDate.getHours() + ":00:00",
 				step: 15,
 				inline: true,
 				dayOfWeekStart: 1,

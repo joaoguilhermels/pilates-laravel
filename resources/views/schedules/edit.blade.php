@@ -8,7 +8,7 @@
 
 	  @include('errors.list')
 
-	  <form action="{{ action('SchedulesController@update', [$schedule->id]) }}">
+	  <form action="{{ action('SchedulesController@update', [$schedule->id]) }}" method="POST">
 	  	{{ csrf_field() }}
 	  	{{ method_field('PATCH') }}
 	    @include('schedules.edit-form', ['submitButtonText' => 'Update Schedule'])

@@ -1,15 +1,18 @@
 <div class="form-group">
   <label for="client">Client: </label>
   {{ $schedule->client->name }}
+  <input type="hidden" name="client_id" value="{{ $schedule->client_id }}">
 </div>
 @if ($plan)
 <div class="form-group">
   <label for="plan_id">Plan: </label>
+  <input type="hidden" name="plan_id" value="{{ $schedule->clientPlanDetail->clientPlan->plan->id }}">
   {{ $plan }}
 </div>
 @endif
 <div class="form-group">
   <label for="class_type_id">Class: </label>
+  <input type="hidden" name="class_type_id" value="{{ $schedule->class_type_id }}">
   {{ $schedule->classType->name }}
 </div>
 <div class="form-group">
@@ -36,17 +39,9 @@
     @endforeach
   </select>
 </div>
-<start-at date="{{ $schedule->start_at->toDateString() }}" time="{{ $schedule->start_at->format('h:i') }}"></start-at>
+<start-at date="{{ $schedule->start_at->toDateString() }}" time="{{ $schedule->start_at->format('h:i:s') }}"></start-at>
 <div class="form-group">
-  <label for="start_at">Start: </label>
-  <input type="text" name="start_at" class="form-control" value="{{ $schedule->start_at }}">
-</div>
-<div class="form-group">
-  <label for="end_at">End: </label>
-  <input type="text" name="end_at" class="form-control" value="{{ $schedule->end_at }}">
-</div>
-<div class="form-group">
-  <label for="email">Observation:</label>
+  <label for="observation">Observation:</label>
   <textarea name="observation" class="form-control">{{ $schedule->observation }}</textarea>
 </div>
 <div class="form-group">
