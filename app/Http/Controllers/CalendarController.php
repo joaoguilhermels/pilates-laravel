@@ -15,7 +15,6 @@ class CalendarController extends Controller
     {
         $events = [];
 
-        //$schedules = Schedule::all();
         $schedules = Schedule::with(['ClassType', 'ClassTypeStatus', 'Professional'])->get();
 
         foreach ($schedules as $schedule) {
@@ -198,7 +197,6 @@ class CalendarController extends Controller
     {
         $events = [];
 
-        //$schedules = Schedule::all();
         $schedules = Schedule::with(['ClassType', 'ClassTypeStatus', 'Professional'])->groupBy('start_at', 'room_id')->get();
 
         foreach ($schedules as $schedule) {
@@ -210,10 +208,13 @@ class CalendarController extends Controller
                 $schedule->id, //optionally, you can specify an event ID
                 [
                     'color' => $schedule->classTypeStatus->color,
-                    'url' => '/schedules/' . $schedule->id . '/edit',
+                    //'url' => '/schedules/' . $schedule->id . '/edit',
                     //'url' => 'schedules/class/' . $schedule->classType->id . '/professional/' . $schedule->professional->id . '/room/' . $schedule->room->id . '/date/' . {date} . '/time/' . {time},
                     'description' => $this->groupDescription($schedule),
-                    'textColor' => '#0A0A0A'
+                    'textColor' => '#0A0A0A',
+                    'class_type_id' => $schedule->class_type_id,
+                    'professional_id' => $schedule->professional_id,
+                    'room_id' => $schedule->room_id
                 ]
             );
         }
@@ -246,14 +247,13 @@ class CalendarController extends Controller
 
         $calendar = \Calendar::setCallbacks([
             'dayClick' => 'function (date, jsEvent, view) {
-                //Vue.showModalNow(date.format());
                 $(\'#modal-options\').modal(\'show\');
             }',
             'eventClick' => 'function(calEvent, jsEvent, view) {
                 console.log(calEvent);
                 console.log(calEvent.start._i);
 
-                return false;
+                $(\'#group\').modal(\'show\');
             }',
             'eventRender' => 'function(event, element) {
                 var ntoday = Math.round(new Date().getTime() / 1000),
