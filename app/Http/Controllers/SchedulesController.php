@@ -66,7 +66,6 @@ class SchedulesController extends Controller
 
     public function edit(Schedule $schedule)
     {
-        //$plan               = is_null($schedule->clientPlanDetail) ? "" : $schedule->clientPlanDetail->clientPlan->plan->name;
         $plan               = $schedule->clientPlanDetail->clientPlan->plan->name ?? "";
         $rooms              = $schedule->classType->rooms;
         $professionals      = $schedule->classType->professionals;
@@ -80,6 +79,12 @@ class SchedulesController extends Controller
 
     public function update(Schedule $schedule, ScheduleRequest $request)
     {
+        $classType = ClassType::find($request->class_type_id);
+
+        $request->request->add([
+            'end_at' => Carbon::parse($request->start_at)->addMinutes($classType->duration)->toDateTimeString()
+        ]);
+
         $schedule->update($request->all());
 
         Session::flash('message', 'Successfully updated schedule ' . $schedule->start_at);

@@ -83,7 +83,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('rooms', 'RoomsController');
     Route::resource('plans', 'PlansController');
     Route::resource('clients', 'ClientsController');
-    Route::resource('expenses', 'ExpensesController');
     Route::resource('schedules', 'SchedulesController');
     Route::resource('professionals', 'ProfessionalsController');
     
