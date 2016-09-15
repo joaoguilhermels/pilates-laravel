@@ -9,6 +9,7 @@ use Carbon\Carbon;
 
 use App\Http\Requests;
 use App\FinancialTransaction;
+use App\FinancialTransactionDetail;
 use App\BankAccount;
 use App\PaymentMethod;
 use App\Schedule;
@@ -124,7 +125,7 @@ class ProfessionalsPaymentsController extends Controller
 
         $total = $rows->sum('price');
         $professional_total = $rows->sum('value_professional_receives');
-        $financialTransactionDetail = $financialTransaction->financialTransactionDetails->first();
+        $financialTransactionDetail = $financialTransaction->financialTransactionDetails->first() ?? new FinancialTransactionDetail();
 
         return view('professionals.payments.review', compact('professional', 'bankAccounts', 'paymentMethods', 'rows', 'total', 'professional_total', 'startAt', 'endAt', 'financialTransactionDetail'));
     }
