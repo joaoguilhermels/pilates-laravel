@@ -251,7 +251,16 @@ class CalendarController extends Controller
             }',
             'eventClick' => 'function(calEvent, jsEvent, view) {
                 console.log(calEvent);
-                console.log(calEvent.start._i);
+
+                $(\'#group\').on(\'show.bs.modal\', function (event) {
+                    var modal = $(this);
+                    modal.find(\'.modal-title\').text(calEvent.title);
+                    modal.find(\'.modal-body\').html(calEvent.description + 
+                        "<br>Professional: " + calEvent.professional_id +
+                        "<br>Room: " + calEvent.room_id +
+                        "<br>Class Type: " + calEvent.class_type_id
+                    );
+                });
 
                 $(\'#group\').modal(\'show\');
             }',

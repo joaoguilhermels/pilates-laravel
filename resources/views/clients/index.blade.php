@@ -69,7 +69,7 @@
               </a>
             </td>
             <td>
-              <form action="{{ action('ClientsController@destroy', [$client->id]) }}" method="POST">
+              <form action="{{ action('ClientsController@destroy', [$client->id]) }}" method="POST" v-ajax complete="Usuário apagado">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
                 <button type="submit" class="btn btn-danger"><i class="fa fa-remove"></i> Delete</button>
