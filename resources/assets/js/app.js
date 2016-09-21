@@ -6,7 +6,9 @@
  */
 
 require('./bootstrap');
+require('sweetalert2');
 require('jquery-datetimepicker');
+require('multiselect');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -20,6 +22,7 @@ Vue.component('planPayment', require('./components/planPayment.vue'));
 Vue.component('startAt', require('./components/startAt.vue'));
 Vue.component('plans', require('./components/plans.vue'));
 
+Vue.directive('confirm', require('./directives/confirm.vue'));
 Vue.directive('ajax', require('./directives/ajaxForm.vue'));
 
 const app = new Vue({

@@ -1,7 +1,3 @@
-@section('css')
-    <link href="/vendor/multiselect/css/multi-select.css" rel="stylesheet">
-@stop
-
 <div class="form-group">
   <label for="name">Name:</label>
   <input type="text" name="name" class="form-control" value="{{ old('name', $room->name) }}">
@@ -18,7 +14,6 @@
 </div>
 
 @section('script_footer')
-    <script src="/vendor/multiselect/js/jquery.multi-select.js"></script>
     <script type="text/javascript">
       $('#class_type_list').multiSelect({
           selectableHeader: "<div class='custom-header'>Classes</div>",

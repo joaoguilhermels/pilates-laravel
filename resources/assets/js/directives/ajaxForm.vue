@@ -20,14 +20,16 @@ export default {
     },
 
     onComplete: function () {
-        if (this.params.complete) {
-            console.log(this);
+        if (this.params.complete !== undefined) {
             alert(this.params.complete); // Use pretty flash message instead.
         }
     },
 
     onError: function (response) {
-        alert(response.data.message); // Use pretty flash message instead.
+        swal('error',
+              'An error occurred',
+              'error'
+            );
     },
 
     getRequestType: function () {
