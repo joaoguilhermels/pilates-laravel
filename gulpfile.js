@@ -20,5 +20,6 @@ elixir(mix => {
 			'./node_modules/sweetalert2/dist/sweetalert2.css',
 			'./node_modules/multiselect/css/multi-select.css'
 		])
+		.copy('./node_modules/multiselect/img/switch.png', 'public/img/switch.png')
 		.webpack('app.js');
 });
