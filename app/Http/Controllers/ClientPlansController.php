@@ -288,6 +288,15 @@ class ClientPlansController extends Controller
         if ($professional->value_type == 'percentage') {
             return round($price * ($professional->value / 100), 2);
         }
+
+        switch ($professional->value_type) {
+            case 'percentage':
+                return round($price * ($professional->value / 100), 2);
+                break;
+            case 'value_per_client':
+                return $professional->value;
+                break;
+        }
     }
 
     public function destroy(ClientPlan $clientPlan)

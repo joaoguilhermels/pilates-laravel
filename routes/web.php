@@ -27,6 +27,7 @@ Route::get('/', function () {
 */
 Route::auth();
 
+//Route::group(['middleware' => 'auth', 'domain' => '{account}.pilates-laravel.dev'], function () {
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/home', 'HomeController@index');

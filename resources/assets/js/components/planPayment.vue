@@ -27,7 +27,7 @@
           </td>
           <td class="col-md-2">
             <label for="date">Date: </label>
-            <input type="date" name="payments[{{ paymentNumber }}][date]" value="" class="form-control">
+            <input type="date" name="payments[{{ paymentNumber }}][date]" v-bind:value="startAt" class="form-control">
           </td>
           <td class="col-md-2">
             <label for="room">Value: </label>
@@ -45,14 +45,15 @@
 
 <script>
   export default {
-    props: ['plan-duration', 'selected-values', 'payment-methods', 'bank-accounts', 'price'],
+    props: ['plan-duration', 'selected-values', 'payment-methods', 'bank-accounts', 'price', 'start-at'],
 
     data: function() {
       return {
           numberOfPayments: parseInt(this.planDuration) || 1,
           paymentMethodsObjs: JSON.parse(this.paymentMethods),
           bankAccountsObjs: JSON.parse(this.bankAccounts),
-          payments: this.selectedValues == "" ? "" : JSON.parse(this.selectedValues)
+          payments: this.selectedValues == "" ? "" : JSON.parse(this.selectedValues),
+          startAt: this.startAt
       }
     }
   }
