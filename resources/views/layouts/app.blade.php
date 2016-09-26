@@ -56,8 +56,8 @@
                     <li class="{{ active('classes') }}"><a href="{{ url('/classes') }}">{{ trans('menu.classes') }}</a></li>
                     <li class="{{ active('rooms') }}"><a href="{{ url('/rooms') }}">{{ trans('menu.rooms') }}</a></li>
                     <li class="{{ active('professionals') }}"><a href="{{ url('/professionals') }}">{{ trans('menu.professionals') }}</a></li>
-                    <li class="{{ active('clients') }}"><a href="{{ url('/clients') }}">{{ trans('menu.clients') }}</a></li>
                     <li class="{{ active('plans') }}"><a href="{{ url('/plans') }}">{{ trans('menu.plans') }}</a></li>
+                    <li class="{{ active('clients') }}"><a href="{{ url('/clients') }}">{{ trans('menu.clients') }}</a></li>
                     <li class="{{ active('schedules') }} hidden-sm"><a href="{{ url('/schedules') }}">{{ trans('menu.schedules') }}</a></li>
                     <li class="{{ active('calendar') }}"><a href="{{ url('/calendar/group') }}" data-turbolinks="false">{{ trans('menu.calendar') }}</a></li>
                     <li class="dropdown {{ active(['bank-accounts', 'payment-methods']) }}">
