@@ -58,7 +58,7 @@
                     <li class="{{ active('professionals') }}"><a href="{{ url('/professionals') }}">{{ trans('menu.professionals') }}</a></li>
                     <li class="{{ active('plans') }}"><a href="{{ url('/plans') }}">{{ trans('menu.plans') }}</a></li>
                     <li class="{{ active('clients') }}"><a href="{{ url('/clients') }}">{{ trans('menu.clients') }}</a></li>
-                    <li class="{{ active('schedules') }} hidden-sm"><a href="{{ url('/schedules') }}">{{ trans('menu.schedules') }}</a></li>
+                    <!--li class="{{ active('schedules') }} hidden-sm"><a href="{{ url('/schedules') }}">{{ trans('menu.schedules') }}</a></li-->
                     <li class="{{ active('calendar') }}"><a href="{{ url('/calendar/group') }}" data-turbolinks="false">{{ trans('menu.calendar') }}</a></li>
                     <li class="dropdown {{ active(['bank-accounts', 'payment-methods']) }}">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ trans('menu.financials') }} <span class="caret"></span></a>

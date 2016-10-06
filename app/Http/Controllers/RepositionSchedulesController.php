@@ -23,7 +23,7 @@ class RepositionSchedulesController extends Controller
         // List only class which are unscheduled and were not rescheduled alterady
         $clients = Client::whereHas('schedules', function ($query) use ($unscheduledStatusesIds) {
             $query->whereIn('class_type_status_id', $unscheduledStatusesIds)
-                ->where('parent_id', '=', '0');
+                ->whereNull('parent_id');
         })
         ->groupBy('clients.id')
         ->get();

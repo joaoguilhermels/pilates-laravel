@@ -1,7 +1,7 @@
 <div id="app">
   <div class="form-group">
     <label for="start_date">Start Date:</label>
-    <input type="date" class="form-control" name="start_at">
+    <start-at date="{{ \Carbon\Carbon::Now() }}" time="" v-bind:timepicker="false"></start-at>
   </div>
 
   <plans list="{{ json_encode($classTypePlans) }}"></plans>

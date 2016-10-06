@@ -1,12 +1,11 @@
 <template id="start-at">
 	<div class="form-group">
-		<label for="start_at">Date:</label>
 		<input id="datetimepicker" name="start_at" type="text">
 	</div>
 </template>
 <script>
     export default {
-    	props: ['date', 'time'],
+    	props: ['date', 'time', 'timepicker'],
         ready () {
 			var newDate = new Date();
 
@@ -49,6 +48,7 @@
 				step: 15,
 				inline: true,
 				dayOfWeekStart: 1,
+				timepicker: this.timepicker && true,
 				onGenerate: function(ct) {
 					$(this).find('.xdsoft_date.xdsoft_weekend').remove();
 					$('.xdsoft_calendar table thead tr th').filter(':nth-child(6), :nth-child(7)').remove();
