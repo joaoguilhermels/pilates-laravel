@@ -33,8 +33,14 @@ class RepositionSchedulesController extends Controller
         $classTypes = ClassType::whereHas('schedules', function ($query) use ($unscheduledStatusesIds) {
             $query->whereIn('class_type_status_id', $unscheduledStatusesIds)->whereNull('parent_id');
         })
-        ->with('professionals', 'rooms')
+        ->with(['professionals' => function ($query) {
+            $query->orderBy('name');
+        }, 
+        'rooms' => function ($query) {
+            $query->orderBy('name');
+        }])
         ->groupBy('class_types.id')
+        ->orderBy('class_types.name')
         ->get();
 
         return view('schedules.reposition.create', compact('clients', 'classTypes'));
