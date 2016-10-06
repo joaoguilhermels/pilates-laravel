@@ -29,7 +29,7 @@ class RepositionSchedulesController extends Controller
         ->get();
 
         $classTypes = ClassType::whereHas('schedules', function ($query) use ($unscheduledStatusesIds) {
-            $query->whereIn('class_type_status_id', $unscheduledStatusesIds)->where('parent_id', '=', '0');
+            $query->whereIn('class_type_status_id', $unscheduledStatusesIds)->whereNull('parent_id');
         })
         ->with('professionals', 'rooms')
         ->groupBy('class_types.id')
