@@ -14,6 +14,8 @@ use App\Schedule;
 use App\ClassType;
 use App\ClassTypeStatus;
 
+use \Carbon\Carbon;
+
 class RepositionSchedulesController extends Controller
 {
     public function create()
@@ -51,6 +53,12 @@ class RepositionSchedulesController extends Controller
         $repositionStatus = ClassTypeStatus::where('name', 'Reposição')
                                 ->where('class_type_id', $request->class_type_id)
                                 ->first();
+
+        $classType = ClassType::FindOrFail($request->class_type_id);
+
+        $request->request->add([
+            'end_at' => Carbon::parse($request->start_at)->addMinutes($classType->duration)->toDateTimeString()
+        ]);
 
         $schedule = new Schedule;
 
