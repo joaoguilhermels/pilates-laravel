@@ -17,8 +17,10 @@
     "vue-resource": "^0.9.3"
   },
   "dependencies": {
+    "bootswatch": "^3.3.7",
+    "font-awesome": "^4.6.3",
     "jquery-datetimepicker": "^2.5.4",
-    "sweetalert2": "^5.0.0",
-    "multiselect": "^0.9.12"
+    "multiselect": "^0.9.12",
+    "sweetalert2": "^5.0.0"
   }
 }

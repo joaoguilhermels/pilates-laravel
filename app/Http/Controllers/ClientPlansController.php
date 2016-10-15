@@ -41,7 +41,7 @@ class ClientPlansController extends Controller
         $professionals = $form['professionals'];
         $classTypePlans = $form['classTypePlans'];
 
-        return view('clientPlans.create', compact('client', 'rooms', 'classTypePlans', 'professionals'));
+        return view('clientPlans.create', compact('client', 'rooms', 'classTypePlans', 'professionals', 'discounts'));
     }
 
     public function prepareCreateForm()

@@ -23,7 +23,7 @@ class ClientsController extends Controller
         $clients = Client::with(['schedules' => function ($query) {
                                     $query->join('class_type_statuses', 'schedules.class_type_status_id', '=', 'class_type_statuses.id')
                                             ->where('class_type_statuses.name', '=', 'Desmarcou')
-                                            ->where('schedules.parent_id', '=', 0)
+                                            ->whereNull('schedules.parent_id')
                                             ->select('schedules.*');
                                 }])
                                 ->filter($request->all())
@@ -72,9 +72,9 @@ class ClientsController extends Controller
 
     public function destroy(Client $client)
     {
-        Session::flash('message', 'Successfully deleted client ' . $client->name);
-
         $client->delete();
+
+        Session::flash('message', 'Successfully deleted client ' . $client->name);
 
         return redirect('clients');
     }

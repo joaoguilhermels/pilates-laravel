@@ -8,14 +8,14 @@ class Plan extends Model
 {
     // Permitted mass assingment fields
     protected $fillable = [
-      'name',
-      'class_type_id',
-      'times',
-      'times_type',
-      'duration',
-      'duration_type',
-      'price',
-      'price_type'
+        'name',
+        'class_type_id',
+        'times',
+        'times_type',
+        'duration',
+        'duration_type',
+        'price',
+        'price_type'
     ];
     
     /**
