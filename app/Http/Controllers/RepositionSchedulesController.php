@@ -54,7 +54,8 @@ class RepositionSchedulesController extends Controller
 
         $unscheduled = Schedule::where('client_id', $request->client_id)
                                 ->where('class_type_status_id', $unscheduledStatusId)
-                                ->last();
+                                ->orderBy('start_at', 'desc')
+                                ->first();
 
         $repositionStatus = ClassTypeStatus::where('name', 'Reposição')
                                 ->where('class_type_id', $request->class_type_id)

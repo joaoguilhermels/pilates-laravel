@@ -9,6 +9,7 @@ use Session;
 use App\Plan;
 use App\Room;
 use App\Client;
+use App\Discount;
 use App\ClientPlan;
 use App\ClientPlanDetail;
 use App\ClassType;
@@ -38,6 +39,7 @@ class ClientPlansController extends Controller
         $form = $this->prepareCreateForm();
 
         $rooms = $form['rooms'];
+        $discounts = $form['discounts'];
         $professionals = $form['professionals'];
         $classTypePlans = $form['classTypePlans'];
 
@@ -50,11 +52,12 @@ class ClientPlansController extends Controller
         $form['daysOfWeek'] = $this->daysOfWeek;
         $form['classTypePlans'] = ClassType::with(['plans' => function ($query) {
                                         $query->orderBy('name');
-                                    }, 'professionals', 'rooms'])
+                                    }, 'professionals', 'rooms', 'discounts'])
                                     ->has('plans')
                                     ->orderBy('name')
-                                    ->get()
-                                    ->toArray();
+                                    ->get();
+
+        $form['discounts'] = Discount::with('classTypes', 'plans.classType')->get();
 
         $form['classTypes'] = ClassType::orderBy('name')->get();
 

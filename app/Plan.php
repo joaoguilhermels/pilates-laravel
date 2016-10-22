@@ -26,6 +26,13 @@ class Plan extends Model
         return $this->belongsTo('App\ClassType');
     }
 
+    /**
+     * Discounts associated with this Plan.
+     */
+    public function plans()
+    {
+        return $this->morphToMany('App\Plan', 'discountable');
+    }
 
     public function getNameWithClassAttribute()
     {
