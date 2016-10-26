@@ -9,6 +9,7 @@ use Session;
 use App\Plan;
 use App\Room;
 use App\Client;
+use App\Discount;
 use App\ClientPlan;
 use App\ClientPlanDetail;
 use App\ClassType;
@@ -38,10 +39,11 @@ class ClientPlansController extends Controller
         $form = $this->prepareCreateForm();
 
         $rooms = $form['rooms'];
+        $discounts = $form['discounts'];
         $professionals = $form['professionals'];
         $classTypePlans = $form['classTypePlans'];
 
-        return view('clientPlans.create', compact('client', 'rooms', 'classTypePlans', 'professionals'));
+        return view('clientPlans.create', compact('client', 'rooms', 'classTypePlans', 'professionals', 'discounts'));
     }
 
     public function prepareCreateForm()
@@ -50,11 +52,12 @@ class ClientPlansController extends Controller
         $form['daysOfWeek'] = $this->daysOfWeek;
         $form['classTypePlans'] = ClassType::with(['plans' => function ($query) {
                                         $query->orderBy('name');
-                                    }, 'professionals', 'rooms'])
+                                    }, 'professionals', 'rooms', 'discounts'])
                                     ->has('plans')
                                     ->orderBy('name')
-                                    ->get()
-                                    ->toArray();
+                                    ->get();
+
+        $form['discounts'] = Discount::with('classTypes', 'plans.classType')->get();
 
         $form['classTypes'] = ClassType::orderBy('name')->get();
 
@@ -122,7 +125,6 @@ class ClientPlansController extends Controller
     {
         $clientPlan = new ClientPlan;
 
-        //$clientPlan->class_type_id  = Plan::findOrFail($request->plan_id)->class_type_id;
         $clientPlan->start_at       = $request->start_at;
         $clientPlan->plan_id        = $request->plan_id;
 
@@ -210,13 +212,13 @@ class ClientPlansController extends Controller
         $classType = ClassType::with([
             'plans' =>  function ($query) use ($request) {
                             return $query->where('id', $request->plan_id);
-            },
-            'statuses' => function ($query) {
-                              return $query->where('name', 'OK');
-            },
+                        },
+            'statuses' =>   function ($query) {
+                                return $query->where('name', 'OK');
+                            },
             'professionals' =>  function ($query) use ($clientPlanDetail) {
                                     return $query->where('professional_id', $clientPlanDetail->professional_id);
-            }
+                                }
         ])
         ->findOrFail($clientPlan->plan->class_type_id);
 
@@ -267,7 +269,8 @@ class ClientPlansController extends Controller
     {
         if ($plan->price_type == 'class') {
             return $plan->price;
-        } else // per month
+        }
+        else // per month
         {
             $daysCount = $groupedDates->where('month_year', $date->format("m-Y"))->count();
             return round($plan->price / $daysCount, 2);
@@ -287,6 +290,15 @@ class ClientPlansController extends Controller
         // Move this to a professional controller
         if ($professional->value_type == 'percentage') {
             return round($price * ($professional->value / 100), 2);
+        }
+
+        switch ($professional->value_type) {
+            case 'percentage':
+                return round($price * ($professional->value / 100), 2);
+                break;
+            case 'value_per_client':
+                return $professional->value;
+                break;
         }
     }
 

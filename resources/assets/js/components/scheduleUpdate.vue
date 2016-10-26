@@ -25,7 +25,7 @@
 <script>
     export default {
         ready () {
-            alert('asdf');
+            //alert('asdf');
         }
     }
 </script>

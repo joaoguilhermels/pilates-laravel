@@ -94,7 +94,7 @@ class ClassTypesController extends Controller
           'name' => 'Desmarcou',
           'charge_client' => null,
           'pay_professional' => null,
-          'color' => '#00B9FE'
+          'color' => '#685DFF'
         ]);
 
         $statusFaltou = new ClassTypeStatus([
@@ -108,7 +108,7 @@ class ClassTypesController extends Controller
           'name' => 'Reposição',
           'charge_client' => true,
           'pay_professional' => true,
-          'color' => '#685DFF'
+          'color' => '#00B9FE'
         ]);
 
         $statuses = collect([$statusOk, $statusDesmarcou, $statusReposicao, $statusFaltou]);

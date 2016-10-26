@@ -21,14 +21,7 @@
 
     <class-professional-room classes="{{ json_encode($classTypes) }}"></class-professional-room>
 
-    <div class="form-group">
-      <label for="start_at">Start:</label>
-      <input type="datetime" name="start_at" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="end_at">End:</label>
-      <input type="datetime" name="end_at" class="form-control">
-    </div>
+    <start-at></start-at>
     <div class="form-group">
       <label for="email">Observation:</label>
       <textarea name="observation" class="form-control"></textarea>

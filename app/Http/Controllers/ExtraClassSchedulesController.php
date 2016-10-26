@@ -14,12 +14,14 @@ use App\Schedule;
 use App\ClassType;
 use App\ClassTypeStatus;
 
+use \Carbon\Carbon;
+
 class ExtraClassSchedulesController extends Controller
 {
     public function create()
     {
-        $clients    = Client::all();
-        $classTypes = ClassType::with('professionals', 'rooms')->get();
+        $clients    = Client::orderBy('name')->get();
+        $classTypes = ClassType::with('professionals', 'rooms')->orderBy('name')->get();
 
         return view('schedules.extra.create', compact('clients', 'classTypes'));
     }
@@ -35,6 +37,10 @@ class ExtraClassSchedulesController extends Controller
             'class_type_status_id' => $classTypeStatus->id,
             'observation' => 'Extra Class.',
             'price' => $classType->extra_class_price
+        ]);
+
+        $request->request->add([
+            'end_at' => Carbon::parse($request->start_at)->addMinutes($classType->duration)->toDateTimeString()
         ]);
 
         $schedule = Schedule::create($request->all());

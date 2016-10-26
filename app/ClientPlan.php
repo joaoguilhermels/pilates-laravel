@@ -35,4 +35,9 @@ class ClientPlan extends Model
     {
         return $this->morphMany('App\FinancialTransaction', 'financiable');
     }
+
+    /*public function discounts()
+    {
+        return $this->morphMany('App\Discount', 'discountable');
+    }*/
 }

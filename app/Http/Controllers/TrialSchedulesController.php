@@ -14,6 +14,8 @@ use App\Schedule;
 use App\ClassType;
 use App\ClassTypeStatus;
 
+use \Carbon\Carbon;
+
 class TrialSchedulesController extends Controller
 {
     public function create()
@@ -35,8 +37,11 @@ class TrialSchedulesController extends Controller
                                 ->where('name', 'OK')
                                 ->first();
 
+        $classType = ClassType::FindOrFail($request->class_type_id);
+
         $request->request->add([
             'trial' => true,
+            'end_at' => Carbon::parse($request->start_at)->addMinutes($classType->duration)->toDateTimeString(),
             'client_id' => $client->id,
             'class_type_status_id' => $classTypeStatus->id
         ]);

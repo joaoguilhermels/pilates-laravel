@@ -4,10 +4,18 @@
     <select name="plan_id" class="form-control" v-model="selectedPlan">
       <option value=""></option>
         <optgroup v-bind:label="class.name" v-for="class in list">
-          <option v-for="plan in class.plans" v-bind:value="plan.id">{{ plan.name }} ({{ plan.times }}/{{ plan.times_type }})</option>
+          <option v-for="(index, plan) in class.plans" v-bind:value="plan.id">{{ plan.name }} ({{ plan.times }}/{{ plan.times_type }})</option>
         </optgroup>
     </select>
   </div>
+
+  <!--div class="form-group">
+    <label for="discounts">Discount: </label>
+    <select name="discount_id" class="form-control">
+      <option value=""></option>
+      <option v-for="discount in discounts | filterByClassType | filterByPlan" v-bind:value="discount.id">{{ discount.name }} ({{ discount.value }}/{{ discount.value_type }})</option>
+    </select>
+  </div-->
 
   <div id="details" class="panel panel-default">
     <div class="panel-heading">
@@ -59,7 +67,7 @@
 </template>
 <script>
   export default {
-    props: ['list'],
+    props: ['list', 'discounts'],
 
     data: function() {
         return {
@@ -79,6 +87,7 @@
 
     created () {
         this.list = JSON.parse(this.list);
+        this.discounts = JSON.parse(this.discounts);
     },
 
     filters: {
@@ -100,6 +109,28 @@
             return daysOfWeek.filter(function(day) {
                 return day.number <= times
             })
+        },
+        filterByClassType: function(discounts) {
+            var self = this;
+
+            if (typeof self.selectedPlan !== 'object' && discount.class_types.length > 0) {
+                return discounts.filter(function(discount) {
+                    return discount.class_types.filter(function(class_type) {
+                        return class_type.id == self.selectedClass.id;
+                    });
+                });
+            }
+        },
+        filterByPlan: function(discounts) {
+            var self = this;
+
+            if (typeof self.selectedPlan !== 'object' && discount.plans.length > 0) {
+                return discounts.filter(function(discount) {
+                    return discount.plans.filter(function(plan) {
+                        return plan.id == self.selectedPlan;
+                    });
+                });
+            }
         }
     }
   }

@@ -15,9 +15,7 @@
 </div>
 <div class="form-group @if ($errors->has('observation')) has-error @endif">
   <label for="observation">Observation:</label>
-  <textarea name="observation" class="form-control">
-    {{ old('observation', $client->observation) }}
-  </textarea>
+  <textarea name="observation" class="form-control">{{ old('observation', $client->observation) }}</textarea>
   <small class="text-danger">{{ $errors->first('observation') }}</small>
 </div>
 <div class="form-group">

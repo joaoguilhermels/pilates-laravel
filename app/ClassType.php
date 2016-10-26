@@ -26,6 +26,14 @@ class ClassType extends Model
     }
 
     /**
+     * Discounts associated with this Class.
+     */
+    public function discounts()
+    {
+        return $this->morphToMany('App\Discount', 'discountable');
+    }
+
+    /**
      * The rooms where this class can be given.
      */
     public function rooms()

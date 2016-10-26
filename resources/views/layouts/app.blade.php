@@ -11,19 +11,17 @@
     <title>Laravel</title>
 
     <!-- Fonts -->
-    <!--link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'-->
-    <!--link href="//fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'-->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+    <!-- link href="//fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css' -->
 
     <!-- Styles -->
     <!--link href="/css/app.css" rel="stylesheet"-->
     <link href="/css/all.css" rel="stylesheet">
-    <!--link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"-->
-    <link href="//bootswatch.com/cerulean/bootstrap.min.css" rel="stylesheet">
-    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
+    <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
     @yield('css')
 
     <!-- Scripts -->
-    <script>
+    <script defer>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
         ]); ?>
@@ -56,9 +54,9 @@
                     <li class="{{ active('classes') }}"><a href="{{ url('/classes') }}">{{ trans('menu.classes') }}</a></li>
                     <li class="{{ active('rooms') }}"><a href="{{ url('/rooms') }}">{{ trans('menu.rooms') }}</a></li>
                     <li class="{{ active('professionals') }}"><a href="{{ url('/professionals') }}">{{ trans('menu.professionals') }}</a></li>
-                    <li class="{{ active('clients') }}"><a href="{{ url('/clients') }}">{{ trans('menu.clients') }}</a></li>
                     <li class="{{ active('plans') }}"><a href="{{ url('/plans') }}">{{ trans('menu.plans') }}</a></li>
-                    <li class="{{ active('schedules') }} hidden-sm"><a href="{{ url('/schedules') }}">{{ trans('menu.schedules') }}</a></li>
+                    <li class="{{ active('clients') }}"><a href="{{ url('/clients') }}">{{ trans('menu.clients') }}</a></li>
+                    <!--li class="{{ active('schedules') }} hidden-sm"><a href="{{ url('/schedules') }}">{{ trans('menu.schedules') }}</a></li-->
                     <li class="{{ active('calendar') }}"><a href="{{ url('/calendar/group') }}" data-turbolinks="false">{{ trans('menu.calendar') }}</a></li>
                     <li class="dropdown {{ active(['bank-accounts', 'payment-methods']) }}">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ trans('menu.financials') }} <span class="caret"></span></a>
@@ -116,8 +114,8 @@
 
     @yield('content')
 
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
-    <script src="/js/app.js"></script>
+    <script src="{{ elixir('js/app.js') }}"></script>
+    {{-- <script src="/js/app.js"></script> --}}
     @yield('script_footer')
 </body>
 </html>

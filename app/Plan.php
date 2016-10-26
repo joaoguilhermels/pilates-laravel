@@ -8,14 +8,14 @@ class Plan extends Model
 {
     // Permitted mass assingment fields
     protected $fillable = [
-      'name',
-      'class_type_id',
-      'times',
-      'times_type',
-      'duration',
-      'duration_type',
-      'price',
-      'price_type'
+        'name',
+        'class_type_id',
+        'times',
+        'times_type',
+        'duration',
+        'duration_type',
+        'price',
+        'price_type'
     ];
     
     /**
@@ -26,6 +26,13 @@ class Plan extends Model
         return $this->belongsTo('App\ClassType');
     }
 
+    /**
+     * Discounts associated with this Plan.
+     */
+    public function plans()
+    {
+        return $this->morphToMany('App\Plan', 'discountable');
+    }
 
     public function getNameWithClassAttribute()
     {

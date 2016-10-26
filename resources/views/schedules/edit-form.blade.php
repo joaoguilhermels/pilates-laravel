@@ -39,7 +39,7 @@
     @endforeach
   </select>
 </div>
-<start-at date="{{ $schedule->start_at->toDateString() }}" time="{{ $schedule->start_at->format('h:i:s') }}"></start-at>
+<start-at date="{{ $schedule->start_at->toDateString() }}" time="{{ $schedule->start_at->format('H:i:s') }}"></start-at>
 <div class="form-group">
   <label for="observation">Observation:</label>
   <textarea name="observation" class="form-control">{{ $schedule->observation }}</textarea>

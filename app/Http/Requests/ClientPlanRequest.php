@@ -23,10 +23,9 @@ class ClientPlanRequest extends Request
      */
     public function rules()
     {
-/*        return [
-            'classType' => 'required',
-            'plan' => 'required',
-            'start_date' => 'required'
+        /*return [
+            'start_date' => 'required',
+            'plan' => 'required'
         ];*/
         return [];
     }

@@ -14,6 +14,8 @@ use App\Schedule;
 use App\ClassType;
 use App\ClassTypeStatus;
 
+use \Carbon\Carbon;
+
 class RepositionSchedulesController extends Controller
 {
     public function create()
@@ -23,16 +25,22 @@ class RepositionSchedulesController extends Controller
         // List only class which are unscheduled and were not rescheduled alterady
         $clients = Client::whereHas('schedules', function ($query) use ($unscheduledStatusesIds) {
             $query->whereIn('class_type_status_id', $unscheduledStatusesIds)
-                ->where('parent_id', '=', '0');
+                ->whereNull('parent_id');
         })
         ->groupBy('clients.id')
         ->get();
 
         $classTypes = ClassType::whereHas('schedules', function ($query) use ($unscheduledStatusesIds) {
-            $query->whereIn('class_type_status_id', $unscheduledStatusesIds)->where('parent_id', '=', '0');
+            $query->whereIn('class_type_status_id', $unscheduledStatusesIds)->whereNull('parent_id');
         })
-        ->with('professionals', 'rooms')
+        ->with(['professionals' => function ($query) {
+            $query->orderBy('name');
+        }, 
+        'rooms' => function ($query) {
+            $query->orderBy('name');
+        }])
         ->groupBy('class_types.id')
+        ->orderBy('class_types.name')
         ->get();
 
         return view('schedules.reposition.create', compact('clients', 'classTypes'));
@@ -45,12 +53,19 @@ class RepositionSchedulesController extends Controller
                                     ->pluck('id');
 
         $unscheduled = Schedule::where('client_id', $request->client_id)
-                            ->whereIn('class_type_status_id', $unscheduledStatusId)
-                            ->first();
+                                ->where('class_type_status_id', $unscheduledStatusId)
+                                ->orderBy('start_at', 'desc')
+                                ->first();
 
         $repositionStatus = ClassTypeStatus::where('name', 'Reposição')
                                 ->where('class_type_id', $request->class_type_id)
                                 ->first();
+
+        $classType = ClassType::FindOrFail($request->class_type_id);
+
+        $request->request->add([
+            'end_at' => Carbon::parse($request->start_at)->addMinutes($classType->duration)->toDateTimeString()
+        ]);
 
         $schedule = new Schedule;
 
