@@ -8,6 +8,7 @@
     <h1>Agenda</h1>
 
     {!! $calendar->calendar() !!}
+    <br><br>
     <!-- Access Token Modal -->
     <div class="modal fade" id="modal-options" tabindex="-1" role="dialog">
         <div class="modal-dialog">
