@@ -73,13 +73,13 @@
                 </div>
             @else
                 <div class="top-right links">
-                    <a href="/dashboard">{{ Auth::user()->name }}</a>
+                    <a href="/home">{{ Auth::user()->name }}</a>
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Base
                 </div>
 
                 <div class="links">

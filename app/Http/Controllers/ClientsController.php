@@ -22,10 +22,11 @@ class ClientsController extends Controller
     {
         $clients = Client::with(['schedules' => function ($query) {
                                     $query->join('class_type_statuses', 'schedules.class_type_status_id', '=', 'class_type_statuses.id')
-                                            ->where('class_type_statuses.name', '=', 'Desmarcou')
+                                            ->where('class_type_statuses.name', '=', 'Desmarcou') // Usar State Pattern
                                             ->whereNull('schedules.parent_id')
                                             ->select('schedules.*');
-                                }])
+                                },
+                                'clientPlans'])
                                 ->filter($request->all())
                                 ->orderBy('name')
                                 ->paginate(20);
@@ -37,7 +38,7 @@ class ClientsController extends Controller
 
     public function show(Client $client)
     {
-        $client->load('clientPlans', 'clientPlans.clientPlanDetails', 'clientPlans.classType', 'clientPlans.financialTransactions');
+        $client->load('schedules', 'clientPlans', 'clientPlans.clientPlanDetails', 'clientPlans.classType', 'clientPlans.financialTransactions');
 
         return view('clients.show', compact('client'));
     }

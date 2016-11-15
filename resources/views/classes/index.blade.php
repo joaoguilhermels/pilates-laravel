@@ -5,7 +5,7 @@
     <h1>
       Classes
       &nbsp;&nbsp;&nbsp;
-      <a href="{{ action('ClassTypesController@create') }}" class="btn btn-success">Add New Class</a>
+      <a href="{{ action('ClassTypesController@create') }}" class="btn btn-success"><i class="fa fa-plus"></i> Add New Class</a>
     </h1>
     <hr />
 
@@ -28,11 +28,11 @@
         <tr>
           <td><a href="{{ action('ClassTypesController@show', [$classType->id]) }}">{{ $classType->name }}</a></td>
           <td>
-            <a href="{{ action('ClassTypesController@edit', [$classType->id]) }}" class="btn pull-left">edit</a>
+            <a href="{{ action('ClassTypesController@edit', [$classType->id]) }}" class="btn pull-left"><i class="fa fa-pencil"></i> edit</a>
             <form action="{{ action('ClassTypesController@destroy', [$classType->id]) }}" method="POST">
             {{ csrf_field() }}
             {{ method_field("DELETE") }}
-            <button type="submit" class="btn btn-link pull-left">delete</button>
+            <button type="submit" class="btn btn-link pull-left"><i class="fa fa-times"></i> delete</button>
             </form>
           </td>
         </tr>

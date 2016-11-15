@@ -39,14 +39,18 @@ class ProfessionalsController extends Controller
             $query->where('id', $professional->id);
         }])->get();
 
-        return view('professionals.edit', compact('professional', 'classTypes'));
+        $professionalClassTypes = $professional->classTypes->all();
+
+        return view('professionals.edit', compact('professional', 'classTypes', 'professionalClassTypes'));
     }
 
     public function create(Professional $professional)
     {
         $classTypes = ClassType::all();
 
-        return view('professionals.create', compact('professional', 'classTypes'));
+        $professionalClassTypes = $professional->classTypes->all();
+
+        return view('professionals.create', compact('professional', 'classTypes', 'professionalClassTypes'));
     }
 
     public function store(ProfessionalRequest $request)

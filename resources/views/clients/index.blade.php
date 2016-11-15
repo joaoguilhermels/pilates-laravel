@@ -44,6 +44,7 @@
       <tbody>
         @if (count($clients) > 0)
           @foreach ($clients as $client)
+          <?php dump($client->clientPlans); ?>
           <tr>
             <td><a href="{{ action('ClientsController@show', [$client->id]) }}">{{ $client->name }}</a></td>
             <td>{{ $client->phone }}</td>
@@ -61,10 +62,10 @@
               @endif
             </td>
             <td>
-              <a href="{{ action('ClientPlansController@create', [$client->id]) }}" class="btn btn-default">Create Plan</a>
+              <a href="{{ action('ClientPlansController@create', [$client->id]) }}">Create Plan</a>
             </td>
             <td>
-              <a href="{{ action('ClientsController@edit', [$client->id]) }}" class="btn btn-primary">
+              <a href="{{ action('ClientsController@edit', [$client->id]) }}">
                 <i class="fa fa-pencil"></i> Edit
               </a>
             </td>
@@ -72,7 +73,7 @@
               <form action="{{ action('ClientsController@destroy', [$client->id]) }}" method="POST" v-ajax complete="Usuário apagado">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
-                <button type="submit" class="btn btn-danger"><i class="fa fa-remove"></i> Delete</button>
+                <button type="submit" class="btn-link"><i class="fa fa-remove"></i> Delete</button>
               </form>
             </td>
           </tr>

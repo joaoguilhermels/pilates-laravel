@@ -3,12 +3,20 @@
 // @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
 
 // Variables
-@import "variables";
+//@import "variables";
 
 // Bootstrap
+//@import "node_modules/bootswatch/cerulean/_variables.scss";
+//@import "node_modules/bootswatch/cerulean/_bootswatch.scss";
+@import "bootswatch/lumen/variables";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-@import "node_modules/bootswatch/cerulean/variables";
-@import "node_modules/bootswatch/cerulean/bootswatch";
+@import "bootswatch/lumen/bootswatch";
+
 
 // Font Awesome
 //@import "node_modules/font-awesome/scss/font-awesome";
+
+
+.flash {
+  background: #f66422;
+}

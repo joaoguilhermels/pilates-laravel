@@ -11,6 +11,7 @@ class Professional extends Model
       'name',
       'phone',
       'email',
+      'salary'
     ];
 
     public function financialTransactions()

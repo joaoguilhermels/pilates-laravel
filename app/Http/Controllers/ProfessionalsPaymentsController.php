@@ -112,7 +112,7 @@ class ProfessionalsPaymentsController extends Controller
     {
         $startAt        = Carbon::parse($request->start_at);
         $endAt          = Carbon::parse($request->end_at);
-        $professional   = Professional::findOrFail($request->professional);
+        $professional   = Professional::findOrFail($request->professional); // ! Route Model Bind !
         $bankAccounts   = BankAccount::orderBy('name')->get();
         $paymentMethods = PaymentMethod::orderBy('name')->get();
 
@@ -125,8 +125,9 @@ class ProfessionalsPaymentsController extends Controller
 
         $total = $rows->sum('price');
         $professional_total = $rows->sum('value_professional_receives');
+        $professional_total_with_salary = $rows->sum('value_professional_receives') + $professional->salary;
         $financialTransactionDetail = $financialTransaction->financialTransactionDetails->first() ?? new FinancialTransactionDetail();
 
-        return view('professionals.payments.review', compact('professional', 'bankAccounts', 'paymentMethods', 'rows', 'total', 'professional_total', 'startAt', 'endAt', 'financialTransactionDetail'));
+        return view('professionals.payments.review', compact('professional', 'bankAccounts', 'paymentMethods', 'rows', 'total', 'professional_total', 'professional_total_with_salary', 'startAt', 'endAt', 'financialTransactionDetail'));
     }
 }

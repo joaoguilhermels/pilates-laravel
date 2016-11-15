@@ -28,8 +28,30 @@
               <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
-                <td>{{ $total }}</td>
-                <td>{{ $professional_total }}</td>
+                <td>{{ number_format($total, 2) }}</td>
+                <td>{{ number_format($professional_total, 2) }}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>Salary:</td>
+                <td>{{ number_format($professional->salary, 2) }}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>Total:</td>
+                <td>{{ number_format($professional_total_with_salary, 2) }}</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
@@ -122,7 +144,7 @@
           </div>
           <div class="form-group">
             <label for="name">Value to pay the professional: </label>
-            <input class="form-control" name="value" type="number" min="0" step="any" value="{{ old('value', $professional_total) }}" id="end_at">
+            <input class="form-control" name="value" type="number" min="0" step="any" value="{{ old('value', $professional_total_with_salary) }}" id="end_at">
           </div>
           <div class="form-group">
             <label for="name">Observation: </label>

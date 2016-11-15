@@ -5,7 +5,7 @@
     <h1>
       Payment Methods
       &nbsp;&nbsp;&nbsp;
-      <a href="{{ action('PaymentMethodsController@create') }}" class="btn btn-success">Add New Payment Method</a>
+      <a href="{{ action('PaymentMethodsController@create') }}" class="btn btn-success"><i class="fa fa-plus"></i> Add New Payment Method</a>
     </h1>
 
     <hr />
@@ -31,11 +31,11 @@
           <td><a href="{{ action('PaymentMethodsController@show', [$paymentMethod->id]) }}">{{ $paymentMethod->name }}</a></td>
           <td>{{ $paymentMethod->enabled == 1 ? 'Yes' : 'No' }}</td>
           <td>
-            <a href="{{ action('PaymentMethodsController@edit', [$paymentMethod->id]) }}" class="btn pull-left">edit</a>
+            <a href="{{ action('PaymentMethodsController@edit', [$paymentMethod->id]) }}" class="btn pull-left"><i class="fa fa-pencil"></i> edit</a>
             <form action="{{ action('PaymentMethodsController@destroy', [$paymentMethod->id]) }}" method="POST">
               {{ csrf_field() }}
               {{ method_field("DELETE") }}
-              <button type="submit" class="btn btn-link pull-left">delete</button>
+              <button type="submit" class="btn btn-link pull-left"><i class="fa fa-times"></i> delete</button>
             </form>
           </td>
         </tr>

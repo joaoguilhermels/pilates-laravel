@@ -43,6 +43,8 @@ class ClientPlansController extends Controller
         $professionals = $form['professionals'];
         $classTypePlans = $form['classTypePlans'];
 
+        dump($discounts);
+
         return view('clientPlans.create', compact('client', 'rooms', 'classTypePlans', 'professionals', 'discounts'));
     }
 
@@ -57,10 +59,8 @@ class ClientPlansController extends Controller
                                     ->orderBy('name')
                                     ->get();
 
-        $form['discounts'] = Discount::with('classTypes', 'plans.classType')->get();
-
+        $form['discounts'] = Discount::get();
         $form['classTypes'] = ClassType::orderBy('name')->get();
-
         $form['professionals'] = Professional::orderBy('name')->get();
 
         return $form;

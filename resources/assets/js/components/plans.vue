@@ -9,13 +9,13 @@
     </select>
   </div>
 
-  <!--div class="form-group">
+  <div class="form-group">
     <label for="discounts">Discount: </label>
     <select name="discount_id" class="form-control">
       <option value=""></option>
-      <option v-for="discount in discounts | filterByClassType | filterByPlan" v-bind:value="discount.id">{{ discount.name }} ({{ discount.value }}/{{ discount.value_type }})</option>
+      <option v-for="discount in discounts" v-bind:value="discount.id">{{ discount.name }} ({{ discount.value }}/{{ discount.value_type }})</option>
     </select>
-  </div-->
+  </div>
 
   <div id="details" class="panel panel-default">
     <div class="panel-heading">

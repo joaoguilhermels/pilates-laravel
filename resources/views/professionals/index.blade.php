@@ -5,7 +5,7 @@
     <h1>
       Professionals
       &nbsp;&nbsp;&nbsp;
-      <a href="{{ action('ProfessionalsController@create') }}" class="btn btn-success">Add New Professional</a>
+      <a href="{{ action('ProfessionalsController@create') }}" class="btn btn-success"><i class="fa fa-plus"></i> Add New Professional</a>
     </h1>
 
     <hr />
@@ -35,11 +35,11 @@
           <td>{{ $professional->email }}</td>
           <td>{{ $professional->description }}</td>
           <td>
-            <a href="{{ action('ProfessionalsController@edit', [$professional->id]) }}" class="btn pull-left">edit</a>
+            <a href="{{ action('ProfessionalsController@edit', [$professional->id]) }}" class="btn pull-left"><i class="fa fa-pencil"></i> edit</a>
             <form action="{{ action('ProfessionalsController@destroy', [$professional->id]) }}" method="POST">
             {{ csrf_field() }}
             {{ method_field("DELETE") }}
-            <button type="submit" class="btn btn-link pull-left">delete</button>
+            <button type="submit" class="btn btn-link pull-left"><i class="fa fa-times"></i> delete</button>
             </form>
           </td>
         </tr>

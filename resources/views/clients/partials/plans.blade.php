@@ -20,6 +20,9 @@
           Status
         </th>
         <th>
+          Payment Status
+        </th>
+        <th>
           Actions
         </th>
       </tr>
@@ -33,6 +36,9 @@
         @foreach($clientPlan->clientPlanDetails as $clientPlanDetail)
           {{ $clientPlanDetail->day_of_week }} - {{ $clientPlanDetail->hour }} - {{ $clientPlanDetail->professional->name }} - {{ $clientPlanDetail->room->name }}<br>
         @endforeach
+      </td>
+      <td>
+        {{ $client->schedules->last()->start_at }}
       </td>
       <td>
         @if ($clientPlan->financialTransactions->count() > 0)

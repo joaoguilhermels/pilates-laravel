@@ -15,7 +15,8 @@ require('multiselect');
  * the body of the page. From here, you may begin adding components to
  * the application, or feel free to tweak this setup for your needs.
  */
- 
+
+Vue.component('professionalClassesPercentageValue', require('./components/professionalClassesPercentageValue.vue')); 
 Vue.component('classProfessionalRoom', require('./components/classProfessionalRoom.vue'));
 Vue.component('scheduleUpdate', require('./components/scheduleUpdate.vue'));
 Vue.component('planPayment', require('./components/planPayment.vue'));

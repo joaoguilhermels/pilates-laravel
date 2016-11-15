@@ -1,0 +1,32 @@
+MELHORIAS
+=========
+- Esconder os campos de percentual no cadastro de profissional e só exibir se o tipo de atendimento for selecionado
+- Colocar quantidade de vezes por semana dentro do plano ?
+- Não permitir cadastrar um plano caso não haja um profissional e uma sala associados àquele atendimento
+
+NOVO
+====
+OK - Pagamento fixo mensal do profissional
+- Adicionar horários de atendimento do profissional (https://packagist.org/packages/spatie/opening-hours)
+- Renovar planos automaticamente
+WORKING ON IT - Descontos (parcerias etc)
+	Cases where we apply discount only when client pays, like pay everything at once
+	Cases where discount applies only for X first or last months (lolla hair)
+- Por padrão considerar que os pagamentos dos clientes foram feitos e permitir editar
+
+======================
+
+Forma de excluir aula da agenda (softdelete)
+Mostrar se o plano terminou
+
+OK - Julia Vieira mudar plano para segunda 18:00 e quinta 17:00 - Começou em setembro
+OK - Nicole mudar plano para 8 da manhã - Quando começou ? Mensal
+OK - Carolina Nishi plano mensal foi cadastrado errado como se tivesse começado no sábado - Mensal
+OK - Tatiana Zanini segunda 19:00 quinta 19:00 - Começou em Agosto
+OK - Cristina Chern Pinheiro mudar plano para segunda e quarta as 19:00 - Quando começou ?
+
+OK - Espaço no final da agenda
+OK - Extra class add xdan
+OK - Extra class order by client name
+OK - #685dff - ex reposição - novo desmarcou
+OK - #00b9fe - ex desmarcou - nova reposição
