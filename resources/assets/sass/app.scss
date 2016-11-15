@@ -20,3 +20,15 @@
 .flash {
   background: #f66422;
 }
+
+table:not(.table-bordered) > tbody > tr > td.fc-widget-content {
+    border-color: #ddd;
+}
+
+.fc-view .fc-time-grid table {
+    border: initial;
+}
+
+.fc-view .fc-row:first-child table {
+    border-top: initial;
+}
