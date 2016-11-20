@@ -127,7 +127,7 @@ desired effect
   @yield('script_footer')
 
   <!-- AdminLTE App -->
-  <script src="{{ asset("/bower_components/AdminLte/dist/js/app.min.js") }}"></script>
+  <script src="{{ asset("/bower_components/AdminLTE/dist/js/app.min.js") }}"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
