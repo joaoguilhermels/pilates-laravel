@@ -1,8 +1,7 @@
-@extends('layouts/app')
+@extends('layouts/admin/admin')
 
 @section('content')
-
-  <div class="container">
+  {{-- <div class="container"> --}}
     <h1>{{ $paymentMethod->name }}</h1>
     <a href="{{ action('PaymentMethodsController@index') }}">Back to Payment Methods List</a>
 
@@ -17,6 +16,5 @@
         <a href="{{ action('PaymentMethodsController@edit', [$paymentMethod->id]) }}" class="btn btn-block btn-success">Edit This Payment Method</a>
       </div>
     </div>
-  </div>
-
+  {{-- </div> --}}
 @stop

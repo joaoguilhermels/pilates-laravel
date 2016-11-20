@@ -1,7 +1,7 @@
-@extends('layouts/app')
+@extends('layouts/admin/admin')
 
 @section('content')
-  <div class="container">
+  {{-- <div class="container"> --}}
 	  <h1>Edit {{ $schedule->name }}</h1>
 	  <a href="{{ action('SchedulesController@index') }}">Back to Schedules List</a>
 	  <hr />
@@ -14,5 +14,5 @@
 	    @include('schedules.edit-form', ['submitButtonText' => 'Update Schedule'])
 
 	  </form>
-  </div>
+  {{-- </div> --}}
 @stop

@@ -1,8 +1,8 @@
-@extends('layouts/app')
+@extends('layouts/admin/admin')
 
 
 @section('content')
-  <div class="container">
+  {{-- <div class="container"> --}}
     <h1>
       Create New Professional
     </h1>
@@ -15,5 +15,5 @@
       {{ csrf_field() }}
       @include('professionals.form', ['submitButtonText' => 'Add New Professional'])
     </form>
-  </div>
+  {{-- </div> --}}
 @stop

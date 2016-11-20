@@ -1,8 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.admin.admin')
 
 @section('content')
-<div class="container">
-    <h1>Dashboard</h1>
+{{-- <div class="container"> --}}
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
@@ -14,5 +13,5 @@
             </div>
         </div>
     </div>
-</div>
+{{-- </div> --}}
 @endsection

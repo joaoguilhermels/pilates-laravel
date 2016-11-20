@@ -1,7 +1,7 @@
-@extends('layouts/app')
+@extends('layouts/admin/admin')
 
 @section('content')
-  <div class="container">
+  {{-- <div class="container"> --}}
     <h1>Edit Plan Payment</h1>
     <a href="{{ action('PlansController@index') }}">Back to Plans List</a>
     <hr />
@@ -13,7 +13,7 @@
       {{ method_field('PUT') }}
       @include('clientPlans.payment.edit-form', ['submitButtonText' => 'Update Plan Payment'])
     </form>
-  </div>
+  {{-- </div> --}}
 @stop
 
 @section('script_footer')

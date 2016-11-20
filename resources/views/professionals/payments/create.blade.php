@@ -1,7 +1,7 @@
-@extends('layouts/app')
+@extends('layouts/admin/admin')
 
 @section('content')
-  <div class="container">
+  {{-- <div class="container"> --}}
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
         <h1>Create New Professional Payment</h1>
@@ -35,5 +35,5 @@
         </form>
       </div>
     </div>
-  </div>
+  {{-- </div> --}}
 @stop

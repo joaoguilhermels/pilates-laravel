@@ -23,6 +23,8 @@ class ProfessionalsController extends Controller
 {
     public function index()
     {
+        $page_title = 'Professionals';
+
         $professionals = Professional::all();
 
         return view('professionals.index', compact('professionals'));
@@ -30,6 +32,8 @@ class ProfessionalsController extends Controller
 
     public function show(Professional $professional)
     {
+        $page_title = 'Professionals';
+        
         return view('professionals.show', compact('professional'));
     }
 
