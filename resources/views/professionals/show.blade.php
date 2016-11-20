@@ -1,8 +1,7 @@
-@extends('layouts/app')
+@extends('layouts/admin/admin')
 
 @section('content')
-
-  <div class="container">
+  {{-- <div class="container"> --}}
     <h1>{{ $professional->name }}</h1>
     <a href="{{ action('ProfessionalsController@index') }}">Back to Professionals List</a>
     <hr />
@@ -21,12 +20,11 @@
           <dt>Observation:</dt>
           <dd>{{ $professional->description }}</dd>
         </dl>
-        <a href="{{ action('ProfessionalsController@edit', [$professional->id]) }}" class="btn btn-block btn-success">Edit This Professional</a>
+        <a href="{{ action('ProfessionalsController@edit', [$professional->id]) }}" class="btn btn-block btn-success">Edit {{ $professional->name }}</a>
       </div>
       <div class="col-md-4">
         @include('professionals.partials.classes-block')
       </div>
     </div>
-  </div>
-
+  {{-- </div> --}}
 @stop

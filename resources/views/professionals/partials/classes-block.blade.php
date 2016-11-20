@@ -1,9 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Classes</h3>
-  </div>
-  <div class="panel-body">
-    Classes given by this professional.
+    <h3 class="panel-title">Classes given by {{ $professional->name }}</h3>
   </div>
   <div class="list-group">
   @foreach ($professional->classTypes as $classType)

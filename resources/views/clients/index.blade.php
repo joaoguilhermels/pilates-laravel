@@ -1,7 +1,7 @@
-@extends('layouts/app')
+@extends('layouts/admin/admin')
 
 @section('content')
-  <div class="container">
+  {{-- <div class="container"> --}}
     <h1>
       Clients
       &nbsp;&nbsp;&nbsp;
@@ -44,7 +44,7 @@
       <tbody>
         @if (count($clients) > 0)
           @foreach ($clients as $client)
-          <?php dump($client->clientPlans); ?>
+          <?php //dump($client->clientPlans); ?>
           <tr>
             <td><a href="{{ action('ClientsController@show', [$client->id]) }}">{{ $client->name }}</a></td>
             <td>{{ $client->phone }}</td>
@@ -91,5 +91,5 @@
     </div>
     </div>
     @endif
-  </div>
+  {{-- </div> --}}
 @stop

@@ -1,7 +1,7 @@
-@extends('layouts/app')
+@extends('layouts/admin/admin')
 
 @section('content')
-  <div class="container">
+  {{-- <div class="container"> --}}
     <h1>Plan Payment</h1>
     <a href="{{ action('PlansController@index') }}">Back to Plans List</a>
     <hr />
@@ -12,7 +12,7 @@
       {{ csrf_field() }}
       @include('clientPlans.payment.create-form', ['submitButtonText' => 'Add Plan Payment'])
     </form>
-  </div>
+  {{-- </div> --}}
 @stop
 
 @section('script_footer')

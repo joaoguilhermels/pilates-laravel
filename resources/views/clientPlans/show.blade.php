@@ -1,8 +1,7 @@
-@extends('layouts/app')
+@extends('layouts/admin/admin')
 
 @section('content')
-
-  <div class="container">
+  {{-- <div class="container"> --}}
     <h1>{{ $plan->name }}</h1>
     <a href="{{ action('PlansController@index') }}">Back to Plans List</a>
     <hr />
@@ -17,6 +16,5 @@
         <a href="{{ action('PlansController@edit', [$plan->id]) }}" class="btn btn-block btn-success">Edit This Plan</a>
       </div>
     </div>
-  </div>
-
+  {{-- </div> --}}
 @stop

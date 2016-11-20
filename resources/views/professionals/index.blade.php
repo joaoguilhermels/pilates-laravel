@@ -1,7 +1,7 @@
-@extends('layouts/app')
+@extends('layouts/admin/admin')
 
 @section('content')
-  <div class="container">
+  {{-- <div class="container"> --}}
     <h1>
       Professionals
       &nbsp;&nbsp;&nbsp;
@@ -24,7 +24,8 @@
           <th>Phone</th>
           <th>E-mail</th>
           <th>Description</th>
-          <th>Actions</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -36,6 +37,8 @@
           <td>{{ $professional->description }}</td>
           <td>
             <a href="{{ action('ProfessionalsController@edit', [$professional->id]) }}" class="btn pull-left"><i class="fa fa-pencil"></i> edit</a>
+          </td>
+          <td>
             <form action="{{ action('ProfessionalsController@destroy', [$professional->id]) }}" method="POST">
             {{ csrf_field() }}
             {{ method_field("DELETE") }}
@@ -48,5 +51,5 @@
     </table>
     </div>
     @endif
-  </div>
+  {{-- </div> --}}
 @stop

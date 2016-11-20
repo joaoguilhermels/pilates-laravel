@@ -1,8 +1,7 @@
-@extends('layouts/app')
-
+@extends('layouts/admin/admin')
 
 @section('content')
-  <div class="container">
+  {{-- <div class="container"> --}}
     <h1>
       Create New Bank Account
     </h1>
@@ -15,5 +14,5 @@
       {{ csrf_field() }}
       @include('bankAccounts.form', ['submitButtonText' => 'Add New Bank Account'])
     </form>
-  </div>
+  {{-- </div> --}}
 @stop
