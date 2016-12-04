@@ -59,11 +59,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('clients/{clients}/charges/report', 'ClientsController@reportCharge');*/
 
-    Route::get('client-plans/{clientPlan}/payment', 'FinancialTransactionsController@createPlanPayment');
-    Route::post('client-plans/{clientPlan}/payment', 'FinancialTransactionsController@storePlanPayment');
-    Route::delete('client-plans/{clientPlan}/delete', 'ClientPlansController@destroy');
-    Route::get('payment/{financialTransaction}', 'FinancialTransactionsController@editPlanPayment');
-    Route::patch('payment/{financialTransaction}', 'FinancialTransactionsController@updatePlanPayment');
+    Route::get('client-plans/{clientPlan}/payment', 'ClientPlanPaymentsController@create');
+    Route::post('client-plans/{clientPlan}/payment', 'ClientPlanPaymentsController@store');
+    Route::delete('client-plans/{clientPlan}/delete', 'ClientPlanPaymentsController@destroy');
+    Route::get('payment/{financialTransaction}', 'ClientPlanPaymentsController@edit');
+    Route::patch('payment/{financialTransaction}', 'ClientPlanPaymentsController@update');
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
