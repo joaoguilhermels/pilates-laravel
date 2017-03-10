@@ -103,7 +103,7 @@ class ProfessionalsPaymentsController extends Controller
 
         // Delete cascades Financial Transaction Details
         // And onDelete set null on schedules
-        $financialTransaction->delete(); 
+        $financialTransaction->delete();
 
         return redirect('professionals/payments');
     }

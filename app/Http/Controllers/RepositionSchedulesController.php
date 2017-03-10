@@ -35,7 +35,7 @@ class RepositionSchedulesController extends Controller
         })
         ->with(['professionals' => function ($query) {
             $query->orderBy('name');
-        }, 
+        },
         'rooms' => function ($query) {
             $query->orderBy('name');
         }])

@@ -77,7 +77,7 @@ class ClientPlanPaymentsController extends Controller
         return redirect('clients');
     }
 
-    public function destroy(FinancialTransaction)
+    public function destroy()
     {
         # code...
     }

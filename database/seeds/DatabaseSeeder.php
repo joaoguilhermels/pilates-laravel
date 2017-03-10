@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        foreach($this->toDelete as $table) {
+        foreach ($this->toDelete as $table) {
             DB::table($table)->delete();
         }
 

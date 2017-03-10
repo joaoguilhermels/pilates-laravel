@@ -54,7 +54,7 @@ class ClientPlansController extends Controller
         $form['daysOfWeek'] = $this->daysOfWeek;
         $form['classTypePlans'] = ClassType::with(['plans' => function ($query) {
                                         $query->orderBy('name');
-                                    }, 'professionals', 'rooms', 'discounts'])
+        }, 'professionals', 'rooms', 'discounts'])
                                     ->has('plans')
                                     ->orderBy('name')
                                     ->get();
@@ -212,13 +212,13 @@ class ClientPlansController extends Controller
         $classType = ClassType::with([
             'plans' =>  function ($query) use ($request) {
                             return $query->where('id', $request->plan_id);
-                        },
+            },
             'statuses' =>   function ($query) {
                                 return $query->where('name', 'OK');
-                            },
+            },
             'professionals' =>  function ($query) use ($clientPlanDetail) {
                                     return $query->where('professional_id', $clientPlanDetail->professional_id);
-                                }
+            }
         ])
         ->findOrFail($clientPlan->plan->class_type_id);
 
@@ -269,8 +269,7 @@ class ClientPlansController extends Controller
     {
         if ($plan->price_type == 'class') {
             return $plan->price;
-        }
-        else // per month
+        } else // per month
         {
             $daysCount = $groupedDates->where('month_year', $date->format("m-Y"))->count();
             return round($plan->price / $daysCount, 2);
@@ -309,16 +308,16 @@ class ClientPlansController extends Controller
         // Check if all items can be deleted
 
         // Move this to the migration to cascade delete ?
-        $clientPlan->financialTransactions->map(function($financialTransaction) {
-            $financialTransaction->financialTransactionDetails->map(function($financialTransactionDetail) {
+        $clientPlan->financialTransactions->map(function ($financialTransaction) {
+            $financialTransaction->financialTransactionDetails->map(function ($financialTransactionDetail) {
                 $financialTransactionDetail->delete();
             });
             $financialTransaction->delete();
         });
 
         // Move this to the migration to cascade delete ?
-        $clientPlan->clientPlanDetails->map(function($clientPlanDetail) {
-            $clientPlanDetail->schedules->map(function($schedule) {
+        $clientPlan->clientPlanDetails->map(function ($clientPlanDetail) {
+            $clientPlanDetail->schedules->map(function ($schedule) {
                 $schedule->delete();
             });
             $clientPlanDetail->delete();

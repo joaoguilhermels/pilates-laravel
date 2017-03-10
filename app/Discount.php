@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Discount extends Model
 {
-	/**
+    /**
      * Get all of the classes that are assigned this discount.
      */
     public function classTypes()
@@ -14,10 +14,10 @@ class Discount extends Model
         return $this->morphedByMany('App\ClassType', 'discountable');
     }
 
-	/**
+    /**
      * Get all of the plans that are assigned this discount.
      */
-	public function plans()
+    public function plans()
     {
         return $this->morphedByMany('App\Plan', 'discountable');
     }
