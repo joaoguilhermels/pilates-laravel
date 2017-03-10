@@ -247,22 +247,21 @@ class CalendarController extends Controller
 
         $calendar = \Calendar::setCallbacks([
             'dayClick' => 'function (date, jsEvent, view) {
-                $(\'#modal-options\').modal(\'show\');
+                $(\'#modal\').modal(\'show\');
             }',
             'eventClick' => 'function(calEvent, jsEvent, view) {
-                console.log(calEvent);
-
-                $(\'#group\').on(\'show.bs.modal\', function (event) {
+                $(\'#modal\').on(\'show.bs.modal\', function (event) {
+                    console.log(calEvent);
                     var modal = $(this);
                     modal.find(\'.modal-title\').text(calEvent.title);
-                    modal.find(\'.modal-body\').html(calEvent.description + 
+                    modal.find(\'.modal-body\').html(
                         "<br>Professional: " + calEvent.professional_id +
                         "<br>Room: " + calEvent.room_id +
                         "<br>Class Type: " + calEvent.class_type_id
                     );
-                });
+                });x
 
-                $(\'#group\').modal(\'show\');
+                $(\'#modal\').modal(\'show\');
             }',
             'eventRender' => 'function(event, element) {
                 var ntoday = Math.round(new Date().getTime() / 1000),

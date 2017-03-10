@@ -30,9 +30,11 @@ class HomeController extends Controller
         $year = Schedule::whereYear('start_at', Carbon::now()->year)
                     ->sum('price');
 
+        $unscheduled = Schedule::Unscheduled(Carbon::now()->month, Carbon::now()->year);
+//dd($unscheduled);
         $month = money_format('%i', $month);
         $year = money_format('%i', $year);
 
-        return view('home', compact('clients', 'professionals', 'month', 'year'));
+        return view('home', compact('clients', 'professionals', 'month', 'year', 'unscheduled'));
     }
 }

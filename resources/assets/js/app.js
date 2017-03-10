@@ -18,9 +18,9 @@ require('multiselect');
 
 Vue.component('professionalClassesPercentageValue', require('./components/professionalClassesPercentageValue.vue')); 
 Vue.component('classProfessionalRoom', require('./components/classProfessionalRoom.vue'));
-Vue.component('scheduleUpdate', require('./components/scheduleUpdate.vue'));
 Vue.component('planPayment', require('./components/planPayment.vue'));
 Vue.component('startAt', require('./components/startAt.vue'));
+Vue.component('modal', require('./components/modal.vue'));
 Vue.component('plans', require('./components/plans.vue'));
 
 Vue.directive('confirm', require('./directives/confirm.vue'));

@@ -65,6 +65,21 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
     }
 
     /**
+     * Return only unscheduled classes.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeUnscheduled($query, $month, $year)
+    {
+        return $query->join('class_type_statuses', 'class_type_statuses.class_type_id', 'schedules.class_type_id')
+                ->where('class_type_statuses.name', 'Desmarcou')
+                ->whereMonth('start_at', $month)
+                ->whereYear('start_at', $year)
+                ->toSql();
+    }
+
+    /**
      * Get the event's id number
      *
      * @return int
