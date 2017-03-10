@@ -20,7 +20,7 @@ class ClassType extends Model
      */
     public function professionals()
     {
-        return $this->belongsToMany('App\Professional')
+        return $this->belongsToMany(\App\Professional::class)
                     ->withPivot('value', 'value_type')
                     ->withTimestamps();
     }
@@ -30,7 +30,7 @@ class ClassType extends Model
      */
     public function discounts()
     {
-        return $this->morphToMany('App\Discount', 'discountable');
+        return $this->morphToMany(\App\Discount::class, 'discountable');
     }
 
     /**
@@ -38,7 +38,7 @@ class ClassType extends Model
      */
     public function rooms()
     {
-        return $this->belongsToMany('App\Room')
+        return $this->belongsToMany(\App\Room::class)
                     ->withTimestamps();
     }
 
@@ -47,7 +47,7 @@ class ClassType extends Model
      */
     public function statuses()
     {
-        return $this->hasMany('App\ClassTypeStatus');
+        return $this->hasMany(\App\ClassTypeStatus::class);
     }
 
     /**
@@ -55,17 +55,17 @@ class ClassType extends Model
      */
     public function plans()
     {
-        return $this->hasMany('App\Plan');
+        return $this->hasMany(\App\Plan::class);
     }
 
     public function schedules()
     {
-        return $this->hasMany('App\Schedule');
+        return $this->hasMany(\App\Schedule::class);
     }
 
     public function clientPlans()
     {
-        return $this->hasMany('App\ClientPlan');
+        return $this->hasMany(\App\ClientPlan::class);
     }
 
     public function scopeWithExtraClass($query)

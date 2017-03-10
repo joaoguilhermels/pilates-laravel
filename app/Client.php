@@ -16,12 +16,12 @@ class Client extends Model
 
     public function clientPlans()
     {
-        return $this->hasMany('App\ClientPlan');
+        return $this->hasMany(\App\ClientPlan::class);
     }
 
     public function schedules()
     {
-        return $this->hasMany('App\Schedule');
+        return $this->hasMany(\App\Schedule::class);
     }
 
     /*public function scopePendingRepositions($query)

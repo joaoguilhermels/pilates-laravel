@@ -16,7 +16,7 @@ class Room extends Model
      */
     public function classTypes()
     {
-        return $this->belongsToMany('App\ClassType')->withTimestamps();
+        return $this->belongsToMany(\App\ClassType::class)->withTimestamps();
     }
 
     public function getClassTypeListAttribute()

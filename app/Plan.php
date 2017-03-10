@@ -23,7 +23,7 @@ class Plan extends Model
      */
     public function classType()
     {
-        return $this->belongsTo('App\ClassType');
+        return $this->belongsTo(\App\ClassType::class);
     }
 
     /**
@@ -31,7 +31,7 @@ class Plan extends Model
      */
     public function plans()
     {
-        return $this->morphToMany('App\Plan', 'discountable');
+        return $this->morphToMany(\App\Plan::class, 'discountable');
     }
 
     public function getNameWithClassAttribute()

@@ -16,7 +16,7 @@ class Professional extends Model
 
     public function financialTransactions()
     {
-        return $this->morphMany('App\FinancialTransaction', 'financiable');
+        return $this->morphMany(\App\FinancialTransaction::class, 'financiable');
     }
 
     /**
@@ -24,7 +24,7 @@ class Professional extends Model
      */
     public function classTypes()
     {
-        return $this->belongsToMany('App\ClassType')->withPivot('value', 'value_type')->withTimestamps();
+        return $this->belongsToMany(\App\ClassType::class)->withPivot('value', 'value_type')->withTimestamps();
     }
 
     public function schedules()

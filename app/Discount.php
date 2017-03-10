@@ -11,7 +11,7 @@ class Discount extends Model
      */
     public function classTypes()
     {
-        return $this->morphedByMany('App\ClassType', 'discountable');
+        return $this->morphedByMany(\App\ClassType::class, 'discountable');
     }
 
     /**
@@ -19,6 +19,6 @@ class Discount extends Model
      */
     public function plans()
     {
-        return $this->morphedByMany('App\Plan', 'discountable');
+        return $this->morphedByMany(\App\Plan::class, 'discountable');
     }
 }

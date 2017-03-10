@@ -13,27 +13,27 @@ class ClientPlan extends Model
 
     public function client()
     {
-        return $this->belongsTo('App\Client');
+        return $this->belongsTo(\App\Client::class);
     }
 
     public function plan()
     {
-        return $this->belongsTo('App\Plan');
+        return $this->belongsTo(\App\Plan::class);
     }
 
     public function classType()
     {
-        return $this->belongsTo('App\ClassType');
+        return $this->belongsTo(\App\ClassType::class);
     }
 
     public function clientPlanDetails()
     {
-        return $this->hasMany('App\ClientPlanDetail');
+        return $this->hasMany(\App\ClientPlanDetail::class);
     }
 
     public function financialTransactions()
     {
-        return $this->morphMany('App\FinancialTransaction', 'financiable');
+        return $this->morphMany(\App\FinancialTransaction::class, 'financiable');
     }
 
     /*public function discounts()

@@ -22,7 +22,7 @@ class ProfessionalsPaymentsController extends Controller
 {
     public function index()
     {
-        $financialTransactions = FinancialTransaction::where('financiable_type', 'App\Professional')
+        $financialTransactions = FinancialTransaction::where('financiable_type', \App\Professional::class)
                                       ->with('financialTransactionDetails')
                                       ->get();
 
