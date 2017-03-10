@@ -16,22 +16,22 @@ class ClientPlanDetail extends Model
 
     public function clientPlan()
     {
-        return $this->belongsTo('App\ClientPlan');
+        return $this->belongsTo(\App\ClientPlan::class);
     }
 
     public function professional()
     {
-        return $this->belongsTo('App\Professional');
+        return $this->belongsTo(\App\Professional::class);
     }
 
     public function room()
     {
-        return $this->belongsTo('App\Room');
+        return $this->belongsTo(\App\Room::class);
     }
 
     public function schedules()
     {
-        return $this->morphMany('App\Schedule', 'scheduable');
+        return $this->morphMany(\App\Schedule::class, 'scheduable');
     }
 
     public function getDayOfWeekAttribute($value)

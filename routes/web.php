@@ -100,5 +100,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('payment-methods', 'PaymentMethodsController', ['parameters' => [
         'payment-methods' => 'paymentMethod'
     ]]);
-    
 });

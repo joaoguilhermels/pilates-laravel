@@ -18,7 +18,7 @@ class ClassTypeStatus extends Model
      */
     public function classType()
     {
-        return $this->belongsTo('App\ClassType');
+        return $this->belongsTo(\App\ClassType::class);
     }
     
     public function getChargeClientAttribute($value)

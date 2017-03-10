@@ -19,16 +19,16 @@ class FinancialTransactionDetail extends Model
 
     public function financialTransaction()
     {
-        return $this->belongsTo('App\FinancialTransaction');
+        return $this->belongsTo(\App\FinancialTransaction::class);
     }
 
     public function paymentMethod()
     {
-        return $this->belongsTo('App\PaymentMethod');
+        return $this->belongsTo(\App\PaymentMethod::class);
     }
 
     public function bankAccount()
     {
-        return $this->belongsTo('App\BankAccount');
+        return $this->belongsTo(\App\BankAccount::class);
     }
 }

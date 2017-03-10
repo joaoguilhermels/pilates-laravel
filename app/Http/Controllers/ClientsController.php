@@ -25,7 +25,7 @@ class ClientsController extends Controller
                                             ->where('class_type_statuses.name', '=', 'Desmarcou') // Usar State Pattern
                                             ->whereNull('schedules.parent_id')
                                             ->select('schedules.*');
-                                },
+        },
                                 'clientPlans'])
                                 ->filter($request->all())
                                 ->orderBy('name')

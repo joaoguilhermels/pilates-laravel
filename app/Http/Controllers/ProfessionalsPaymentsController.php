@@ -22,7 +22,7 @@ class ProfessionalsPaymentsController extends Controller
 {
     public function index()
     {
-        $financialTransactions = FinancialTransaction::where('financiable_type', 'App\Professional')
+        $financialTransactions = FinancialTransaction::where('financiable_type', \App\Professional::class)
                                       ->with('financialTransactionDetails')
                                       ->get();
 
@@ -103,7 +103,7 @@ class ProfessionalsPaymentsController extends Controller
 
         // Delete cascades Financial Transaction Details
         // And onDelete set null on schedules
-        $financialTransaction->delete(); 
+        $financialTransaction->delete();
 
         return redirect('professionals/payments');
     }

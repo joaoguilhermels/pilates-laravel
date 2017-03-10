@@ -12,7 +12,7 @@ class RoomsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Room::class, 2)->create()->each(function($room) {
+        factory(App\Room::class, 2)->create()->each(function ($room) {
             $faker = Faker::create();
 
             $classTypes = App\ClassType::select(['id'])->pluck('id')->toArray();

@@ -20,7 +20,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-    	$page_title = 'Dashboard';
+        $page_title = 'Dashboard';
         $clients = Client::count();
         $professionals = Professional::count();
         $month = Schedule::whereMonth('start_at', Carbon::now()->month)

@@ -27,7 +27,6 @@ class AddProfessionalPaymentFinancialTransactionIdForeignKeyToSchedulesTable ext
     {
         Schema::table('schedules', function (Blueprint $table) {
             $table->dropForeign(['professional_payment_financial_transaction_id']);
-            
         });
     }
 }

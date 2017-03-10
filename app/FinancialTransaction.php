@@ -27,11 +27,11 @@ class FinancialTransaction extends Model
 
     public function financialTransactionDetails()
     {
-        return $this->hasMany('App\FinancialTransactionDetail');
+        return $this->hasMany(\App\FinancialTransactionDetail::class);
     }
 
     public function schedules()
     {
-        return $this->hasMany('App\Schedule');
+        return $this->hasMany(\App\Schedule::class);
     }
 }

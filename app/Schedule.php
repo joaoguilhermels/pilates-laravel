@@ -31,37 +31,37 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
 
     public function classType()
     {
-        return $this->belongsTo('App\ClassType');
+        return $this->belongsTo(\App\ClassType::class);
     }
 
     public function client()
     {
-        return $this->belongsTo('App\Client');
+        return $this->belongsTo(\App\Client::class);
     }
 
     public function professional()
     {
-        return $this->belongsTo('App\Professional');
+        return $this->belongsTo(\App\Professional::class);
     }
 
     public function room()
     {
-        return $this->belongsTo('App\Room');
+        return $this->belongsTo(\App\Room::class);
     }
 
     public function classTypeStatus()
     {
-        return $this->belongsTo('App\ClassTypeStatus');
+        return $this->belongsTo(\App\ClassTypeStatus::class);
     }
 
     public function clientPlanDetail()
     {
-        return $this->belongsTo('App\ClientPlanDetail', 'scheduable_id');
+        return $this->belongsTo(\App\ClientPlanDetail::class, 'scheduable_id');
     }
 
     public function financialTransactions()
     {
-        return $this->morphMany('App\FinancialTransaction', 'financiable');
+        return $this->morphMany(\App\FinancialTransaction::class, 'financiable');
     }
 
     /**
