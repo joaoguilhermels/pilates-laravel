@@ -14,6 +14,6 @@ class DashboardFinancialController extends Controller
     {
         select DATE_FORMAT(start_at, '%Y%m'), sum(price) from schedules group by DATE_FORMAT(start_at, '%Y%m');
 
-        $rows = DB::table('schedules')->select(DB::raw('DATE_FORMAT(start_at, \'%Y%m\'), sum(price)'))->groupBy()
+        //$rows = DB::table('schedules')->select(DB::raw('DATE_FORMAT(start_at, \'%Y%m\'), sum(price)'))->groupBy()
     }
 }
