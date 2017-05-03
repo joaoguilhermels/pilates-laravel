@@ -15,7 +15,7 @@
   <input type="number" min="0" step="any" name="salary" class="form-control" value="{{ old('salary', $professional->salary) }}">
 </div>
 
-<professional-classes-percentage-value classes="{{ json_encode($classTypes) }}" professional_classes="{{ json_encode($professionalClassTypes) }}"></professional-classes-percentage-value>
+<professional-classes-percentage-value :classes="{{ $classTypes }}" :professional_classes="{{ json_encode($professionalClassTypes) }}"></professional-classes-percentage-value>
 
 <div class="form-group">
   <input type="submit" value="{{ $submitButtonText }}" class="btn btn-success btn-block">

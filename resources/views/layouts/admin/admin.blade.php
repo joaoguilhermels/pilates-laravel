@@ -71,7 +71,7 @@ desired effect
 |---------------------------------------------------------|
 -->
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+<div id="app" class="wrapper">
 
   <!-- Header -->
   @include('layouts/admin/header')

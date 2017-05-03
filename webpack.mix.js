@@ -12,4 +12,13 @@ const { mix } = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+	.sass('resources/assets/sass/app.scss', 'public/css');
+	/*.styles([
+			'node_modules/jquery-datetimepicker/jquery.datetimepicker.css',
+			'node_modules/sweetalert2/dist/sweetalert2.css',
+			'node_modules/multiselect/css/multi-select.css'
+		]);
+	.copy('./node_modules/multiselect/img/switch.png', 'public/img/switch.png')
+	.copy('./node_modules/bootswatch', 'resources/assets/sass/bootswatch');*/
+/*		.webpack('app.js')
+		.sass('app.scss');*/

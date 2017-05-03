@@ -15,11 +15,11 @@
   <input type="number" name="extra_class_price" min="0" value="{{ old('extra_class_price', $classType->extra_class_price) }}" class="form-control">
 </div>
 <div class="form-group">
-    <label for="trial">Does this class offers a free trial? </label>
-    <select name="trial" class="form-control">
-      <option value="1" {{ $classType->trial == 1 ? "selected" : "" }}>Yes</option>
-      <option value="0" {{ $classType->trial == 0 ? "selected" : "" }}>No</option>
-    </select>
+  <label for="trial">Does this class offers a free trial? </label>
+  <select name="trial" class="form-control">
+    <option value="1" {{ $classType->trial == 1 ? "selected" : "" }}>Yes</option>
+    <option value="0" {{ $classType->trial == 0 ? "selected" : "" }}>No</option>
+  </select>
 </div>
 
 <div class="form-group">

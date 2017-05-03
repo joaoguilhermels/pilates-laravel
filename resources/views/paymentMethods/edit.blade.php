@@ -9,9 +9,9 @@
 	@include('errors.list')
 
 	<form action="{{ action('PaymentMethodsController@update', [$paymentMethod->id]) }}" method="POST">
-	{{ csrf_field() }}
-	{{ method_field("PATCH") }}
-	@include('paymentMethods.form', ['submitButtonText' => 'Update Payment Method'])
+	  {{ csrf_field() }}
+	  {{ method_field("PATCH") }}
+	  @include('paymentMethods.form', ['submitButtonText' => 'Update Payment Method'])
 	</form>
   {{-- </div> --}}
 @stop

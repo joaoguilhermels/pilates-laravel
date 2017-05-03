@@ -259,7 +259,7 @@ class CalendarController extends Controller
                         "<br>Room: " + calEvent.room_id +
                         "<br>Class Type: " + calEvent.class_type_id
                     );
-                });x
+                });
 
                 $(\'#modal\').modal(\'show\');
             }',

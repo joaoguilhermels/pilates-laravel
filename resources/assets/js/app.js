@@ -10,6 +10,8 @@ require('sweetalert2');
 require('jquery-datetimepicker');
 require('multiselect');
 
+window.Vue = require('vue');
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the body of the page. From here, you may begin adding components to
@@ -27,5 +29,5 @@ Vue.directive('confirm', require('./directives/confirm.vue'));
 Vue.directive('ajax', require('./directives/ajaxForm.vue'));
 
 const app = new Vue({
-    el: 'body'
+    el: '#app'
 });

@@ -14,15 +14,15 @@
             <td>
               <div class="checkbox">
                 <label>
-                  <input type="checkbox" name="class_type_list[{{ class_type.id }}][class_type_id]" v-bind:checked="selectedId(class_type.id)">
+                  <input type="checkbox" :name="classTypeIdName(class_type.id)" :checked="selectedId(class_type.id)">
                   {{ class_type.name }}
                 </label>
               </div>
             </td>
             <td class="form-inline">
               <div class="form-group" v-if="">
-                <input type="number" min="0" step="any" name="class_type_list[{{ class_type.id }}][value]" class="form-control" v-bind:value="selectedValue(class_type.id)">
-                <select name="class_type_list[{{ class_type.id }}][value_type]" class="form-control" v-bind:selected="selectedValueType(class_type.id)">
+                <input type="number" min="0" step="any" :name="classTypeIdValue(class_type.id)" class="form-control" :value="selectedValue(class_type.id)">
+                <select :name="classTypeIdValueType(class_type.id)" class="form-control" :selected="selectedValueType(class_type.id)">
                   <option value="percentage">%</option>
                   <option value="value_per_client">Per Client</option>
                   <option value="value_per_class">Per Class</option>
@@ -40,12 +40,16 @@
     export default {
         props: ['classes', 'professional_classes'],
 
-        created () {
-            this.classes = JSON.parse(this.classes);
-            this.professional_classes = JSON.parse(this.professional_classes);
-        },
-
         methods: {
+          classTypeIdName: function(id) {
+            return "class_type_list[" + id + "][class_type_id]";
+          },
+          classTypeIdValue: function(id) {
+            return "class_type_list[" + id + "][value]";
+          },
+          classTypeIdValueType: function(id) {
+            return "class_type_list[" + id + "][value_type]";
+          },
           checkClass: function(item) {
             return this.professional_classes.filter(function(obj) {
               return obj.id === item;

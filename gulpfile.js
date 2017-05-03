@@ -1,6 +1,6 @@
-const elixir = require('laravel-elixir');
+/*const elixir = require('laravel-elixir');
 
-require('laravel-elixir-vue');
+require('laravel-elixir-vue');*/
 
 /*
  |--------------------------------------------------------------------------
@@ -13,7 +13,7 @@ require('laravel-elixir-vue');
  |
  */
 
-elixir(mix => {
+/*elixir(mix => {
 	mix.styles([
 			'./node_modules/jquery-datetimepicker/jquery.datetimepicker.css',
 			'./node_modules/sweetalert2/dist/sweetalert2.css',
@@ -24,3 +24,4 @@ elixir(mix => {
 		.webpack('app.js')
 		.sass('app.scss');
 });
+*/

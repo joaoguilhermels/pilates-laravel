@@ -43,8 +43,6 @@ class ClientPlansController extends Controller
         $professionals = $form['professionals'];
         $classTypePlans = $form['classTypePlans'];
 
-        dump($discounts);
-
         return view('clientPlans.create', compact('client', 'rooms', 'classTypePlans', 'professionals', 'discounts'));
     }
 
