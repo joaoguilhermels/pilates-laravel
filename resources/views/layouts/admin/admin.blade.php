@@ -40,7 +40,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Styles -->
   <!--link href="/css/app.css" rel="stylesheet"-->
   <link href="/css/all.css" rel="stylesheet">
-  <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
+  <link href="{{ mix('css/app.css') }}" rel="stylesheet">
   @yield('css')
 
   <!-- Scripts -->
@@ -122,7 +122,7 @@ desired effect
 <!-- Bootstrap 3.3.6 -->
 <!-- <script src="bootstrap/js/bootstrap.min.js"></script> -->
 
-  <script src="{{ elixir('js/app.js') }}"></script>
+  <script src="{{ mix('js/app.js') }}"></script>
   {{-- <script src="/js/app.js"></script> --}}
   @yield('script_footer')
 
