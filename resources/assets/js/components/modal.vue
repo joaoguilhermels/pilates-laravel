@@ -20,7 +20,7 @@
 </template>
 <script>
     export default {
-        ready () {
+        mounted () {
             //alert('asdf');
         }
     }

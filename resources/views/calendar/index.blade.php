@@ -10,7 +10,7 @@
     {!! $calendar->calendar() !!}
     <br><br>
         
-    <modal v-if="showScheduleOptions">
+    <modal>
         <h4 slot="modal-title">What would you like to schedule?</h4>
         <div class="modal-body" slot="modal-body">
             <a href="/schedules/trial/create" class="btn btn-info">Trial Class</a>

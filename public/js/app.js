@@ -12070,7 +12070,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    ready: function ready() {
+    mounted: function mounted() {
         //alert('asdf');
     }
 });
@@ -12408,7 +12408,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['date', 'time', 'timepicker'],
-	ready: function ready() {
+	mounted: function mounted() {
 		var newDate = new Date();
 
 		var day = newDate.getDay();

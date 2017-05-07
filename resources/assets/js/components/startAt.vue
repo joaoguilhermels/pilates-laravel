@@ -6,7 +6,7 @@
 <script>
     export default {
     	props: ['date', 'time', 'timepicker'],
-        ready () {
+        mounted () {
 			var newDate = new Date();
 
 			var day = newDate.getDay();
