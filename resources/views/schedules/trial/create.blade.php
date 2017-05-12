@@ -24,9 +24,9 @@
         <input type="email" name="email" class="form-control">
       </div>
 
-      <class-professional-room classes="{{ json_encode($classTypes) }}"></class-professional-room>
-
       <start-at></start-at>
+
+      <class-professional-room classes="{{ json_encode($classTypes) }}"></class-professional-room>
       
       <div class="form-group">
         <label for="email">Observation:</label>

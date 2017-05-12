@@ -1,5 +1,7 @@
 <div id="planos" class="tab-pane fade">
-  <h3>Planos &nbsp; &nbsp; <a href="/clients/{{ $client->id }}/plans/create" class="btn btn-success" data-turbolinks="false">Add a New Plan</a></h3>
+  <h3>
+    Planos &nbsp; &nbsp; <a href="/clients/{{ $client->id }}/plans/create" class="btn btn-success" data-turbolinks="false">Add a New Plan</a>
+  </h3>
 
   <table class="table table-stripped">
     <thead>
@@ -48,10 +50,11 @@
         @endif
       </td>
       <td>
+        {{ $clientPlan }}
         @if ($clientPlan->financialTransactions->count() == 0)
-        <a href="{{ action('FinancialTransactionsController@createPlanPayment', [$clientPlan->id]) }}" class="btn btn-info btn-sm">Add Payment</a>
+        <a href="#" class="btn btn-info btn-sm">Add Payment</a>
         @else
-        <a href="{{ action('FinancialTransactionsController@editPlanPayment', [$clientPlan->financialTransactions->first()->id]) }}" class="btn btn-info btn-sm">Edit Payment</a>
+        <a href="#" class="btn btn-info btn-sm">Edit Payment</a>
         @endif
         <form action="{{ action('ClientPlansController@destroy', [$clientPlan->id]) }}" method="POST">
           {{ csrf_field() }}

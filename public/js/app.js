@@ -12021,8 +12021,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
-    created: function created() {
-        this.classes = JSON.parse(this.classes);
+    mounted: function mounted() {
+        //this._classes = JSON.parse(this.classes);
 
         if (this.classes.length == 1) {
             this.selectedClass = this.classes[0];

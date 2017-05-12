@@ -45,6 +45,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('clients/{client}/plans/create', 'ClientPlansController@create');
     Route::post('clients/{client}/plans/create', 'ClientPlansController@reviewClientPlan');
     Route::post('clients/{client}/plans/review', 'ClientPlansController@store');
+    Route::delete('clients/plans/{clientPlan}/delete', 'ClientPlansController@destroy');
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     /*Route::get('clients/charges', 'ClientsController@indexCharges');
@@ -59,6 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('clients/{clients}/charges/report', 'ClientsController@reportCharge');*/
 
+    // These routes look wrong. Names are inconsistent too.
     Route::get('client-plans/{clientPlan}/payment', 'ClientPlanPaymentsController@create');
     Route::post('client-plans/{clientPlan}/payment', 'ClientPlanPaymentsController@store');
     Route::delete('client-plans/{clientPlan}/delete', 'ClientPlanPaymentsController@destroy');

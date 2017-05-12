@@ -282,7 +282,7 @@ class ClientPlansController extends Controller
      * @param type var Description
      * @return float
      */
-    public function setProfessionalValue($professional, $price)
+    public function setProfessionalValue(Professional $professional, $price)
     {
         // Move this to a professional controller
         if ($professional->value_type == 'percentage') {

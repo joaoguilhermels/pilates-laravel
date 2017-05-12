@@ -1,5 +1,6 @@
 MELHORIAS
 =========
+- Não mostrar o botão de aula experimental caso não tenha nenhuma aula que permita isso
 - Esconder os campos de percentual no cadastro de profissional e só exibir se o tipo de atendimento for selecionado
 - Colocar quantidade de vezes por semana dentro do plano ?
 - Não permitir cadastrar um plano caso não haja um profissional e uma sala associados àquele atendimento

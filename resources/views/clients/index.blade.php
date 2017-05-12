@@ -33,7 +33,6 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th>Phone</th>
           <th>E-mail</th>
           <th class="text-center">Reposições</th>
           <th></th>
@@ -46,8 +45,12 @@
           @foreach ($clients as $client)
           <?php //dump($client->clientPlans); ?>
           <tr>
-            <td><a href="{{ action('ClientsController@show', [$client->id]) }}">{{ $client->name }}</a></td>
-            <td>{{ $client->phone }}</td>
+            <td>
+              <a href="{{ action('ClientsController@show', [$client->id]) }}">{{ $client->name }}</a>
+              @if (empty($client->phone) == false)
+                <br><small>{{ $client->phone }}</small>
+              @endif
+            </td>
             <td>{{ $client->email }}</td>
             <td class="text-center">
               @if($client->schedules->count() > 0)
