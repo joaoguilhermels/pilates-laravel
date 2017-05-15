@@ -35,7 +35,3 @@
   </form>
 </div>
 @stop
-
-@section('script_footer')
-  <script src="/js/components/class-professional-room.js"></script>
-@stop

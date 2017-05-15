@@ -50,7 +50,6 @@
         @endif
       </td>
       <td>
-        {{ $clientPlan }}
         @if ($clientPlan->financialTransactions->count() == 0)
         <a href="#" class="btn btn-info btn-sm">Add Payment</a>
         @else

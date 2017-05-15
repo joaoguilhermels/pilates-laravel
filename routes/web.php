@@ -78,6 +78,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('professionals/payments/{financialTransaction}/update', 'ProfessionalsPaymentsController@update');
     Route::delete('professionals/payments/{financialTransaction}/delete', 'ProfessionalsPaymentsController@destroy');
 
+    Route::get('schedules/create', 'SchedulesController@create');
+    Route::post('schedules/create', 'SchedulesController@store');
     Route::get('schedules/trial/create', 'TrialSchedulesController@create');
     Route::post('schedules/trial/create', 'TrialSchedulesController@store');
     Route::get('schedules/reposition/create', 'RepositionSchedulesController@create');

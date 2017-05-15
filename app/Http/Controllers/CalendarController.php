@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\Schedule;
+use App\ClassType;
 use App\ClassTypeStatus;
 
 class CalendarController extends Controller
@@ -14,6 +15,8 @@ class CalendarController extends Controller
     public function calendar()
     {
         $events = [];
+
+        $has_available_trial_class = ClassType::WithTrial()->count() > 0;
 
         $schedules = Schedule::with(['ClassType', 'ClassTypeStatus', 'Professional'])->get();
 
@@ -131,7 +134,7 @@ class CalendarController extends Controller
             }',
         ]);
 
-        return view('calendar.index', compact('calendar'));
+        return view('calendar.index', compact('calendar', 'has_available_trial_class'));
     }
 
     public function setGroupTitle(Schedule $schedule)
@@ -196,6 +199,8 @@ class CalendarController extends Controller
     public function groupCalendar()
     {
         $events = [];
+
+        $has_available_trial_class = ClassType::WithTrial()->count() > 0;
 
         $schedules = Schedule::with(['ClassType', 'ClassTypeStatus', 'Professional'])->groupBy('start_at', 'room_id')->get();
 
@@ -297,6 +302,6 @@ class CalendarController extends Controller
             }',
         ]);
 
-        return view('calendar.index', compact('calendar'));
+        return view('calendar.index', compact('calendar', 'has_available_trial_class'));
     }
 }

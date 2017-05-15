@@ -39,14 +39,15 @@ class SchedulesController extends Controller
 
     public function create()
     {
-        $rooms              = Room::all();
-        $plans              = Plan::all();
+        $rooms              = Room::orderBy('name')->get();
+        $plans              = Plan::orderBy('name')->get();
         $clients            = Client::orderBy('name')->get();
-        $classTypes         = ClassType::orderBy('name')->get();
-        $professionals      = Professional::orderBy('name')->get();
-        $classTypeStatuses  = ClassTypeStatus::all();
+        $classTypes         = ClassType::with('professionals', 'rooms')->orderBy('name')->get();
+        //$professionals      = Professional::orderBy('name')->get();
+        //$classTypeStatuses  = ClassTypeStatus::all();
 
-        return view('schedules.create', compact('plans', 'clients', 'classTypes', 'rooms', 'professionals', 'classTypeStatuses'));
+        //return view('schedules.create', compact('plans', 'clients', 'classTypes', 'rooms', 'professionals', 'classTypeStatuses'));
+        return view('schedules.create', compact('plans', 'clients', 'classTypes', 'rooms'));
     }
 
     public function store(scheduleRequest $request)
@@ -54,7 +55,9 @@ class SchedulesController extends Controller
         $classType = ClassType::find($request->class_type_id);
         
         $request->request->add([
-            'end_at' => Carbon::parse($request->start_at)->addMinutes($classType->duration)->toDateTimeString()
+            'end_at' => Carbon::parse($request->start_at)
+                ->addMinutes($classType->duration)
+                ->toDateTimeString()
         ]);
 
         $schedule = Schedule::create($request->all());

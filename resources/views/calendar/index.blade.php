@@ -11,12 +11,15 @@
     <br><br>
         
     <modal>
-        <h4 slot="modal-title">What would you like to schedule?</h4>
+        <h4 slot="modal-title">O que você gostaria de agendar?</h4>
         <div class="modal-body" slot="modal-body">
-            <a href="/schedules/trial/create" class="btn btn-info">Trial Class</a>
-            <a href="/schedules/reposition/create" class="btn btn-info">Replacement</a>
-            <a href="/schedules/extra/create" class="btn btn-info">Extra Class</a>
-            <a href="" class="btn btn-info">Practice (no professional)</a>
+            <a href="/schedules/create" class="btn btn-info">Atendimento</a>
+            @if ($has_available_trial_class)
+            <a href="/schedules/trial/create" class="btn btn-info">Aula experimental</a>
+            @endif
+            <a href="/schedules/reposition/create" class="btn btn-info">Reposição</a>
+            <a href="/schedules/extra/create" class="btn btn-info">Aula extra</a>
+            <a href="" class="btn btn-info">Prática (sem profissional)</a>
         </div>
     </modal>
 </div>

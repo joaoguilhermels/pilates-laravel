@@ -1,6 +1,7 @@
 MELHORIAS
 =========
-- Não mostrar o botão de aula experimental caso não tenha nenhuma aula que permita isso
+- Usar chosen nos campos
+- Usar npm para baixar o fullcalendar, moment e qtip local ao invés de usar do cdn
 - Esconder os campos de percentual no cadastro de profissional e só exibir se o tipo de atendimento for selecionado
 - Colocar quantidade de vezes por semana dentro do plano ?
 - Não permitir cadastrar um plano caso não haja um profissional e uma sala associados àquele atendimento
@@ -19,6 +20,8 @@ WORKING ON IT - Descontos (parcerias etc)
 
 Forma de excluir aula da agenda (softdelete)
 Mostrar se o plano terminou
+
+OK - Não mostrar o botão de aula experimental caso não tenha nenhuma aula que permita isso
 
 OK - Julia Vieira mudar plano para segunda 18:00 e quinta 17:00 - Começou em setembro
 OK - Nicole mudar plano para 8 da manhã - Quando começou ? Mensal

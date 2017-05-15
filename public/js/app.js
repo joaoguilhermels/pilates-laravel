@@ -12017,15 +12017,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             selectedClassId: '',
-            selectedClass: ''
+            selectedClass: '',
+            classesList: []
         };
     },
 
     mounted: function mounted() {
-        //this._classes = JSON.parse(this.classes);
+        this.classesList = JSON.parse(this.classes);
 
-        if (this.classes.length == 1) {
-            this.selectedClass = this.classes[0];
+        if (this.classesList.length == 1) {
+            this.selectedClass = this.classesList[0];
         }
     },
 
@@ -12033,7 +12034,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         selectClass: function selectClass() {
             var self = this;
-            this.classes.forEach(function (classType) {
+            this.classesList.forEach(function (classType) {
                 if (classType.id == self.selectedClassId) {
                     self.selectedClass = classType;
                 }
@@ -34900,7 +34901,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "for": "class_type_id"
     }
-  }, [_vm._v("Class: ")]), _vm._v(" "), (_vm.classes.length > 1) ? _c('select', {
+  }, [_vm._v("Class: ")]), _vm._v(" "), (_vm.classesList.length > 1) ? _c('select', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -34926,13 +34927,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "value": ""
     }
-  }), _vm._v(" "), _vm._l((_vm.classes), function(classType) {
+  }), _vm._v(" "), _vm._l((_vm.classesList), function(classType) {
     return _c('option', {
       domProps: {
         "value": classType.id
       }
     }, [_vm._v(_vm._s(classType.name))])
-  })], 2) : _c('div', [_vm._v("\n      " + _vm._s(_vm.classes[0].name) + "\n      "), _c('input', {
+  })], 2) : _c('div', [_vm._v("\n      " + _vm._s(_vm.classesList[0].name) + "\n      "), _c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -34944,7 +34945,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "name": "class_type_id"
     },
     domProps: {
-      "value": _vm.classes[0].id,
+      "value": _vm.classesList[0].id,
       "value": (_vm.selectedClassId)
     },
     on: {

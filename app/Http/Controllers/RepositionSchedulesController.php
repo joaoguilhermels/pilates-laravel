@@ -43,6 +43,8 @@ class RepositionSchedulesController extends Controller
         ->orderBy('class_types.name')
         ->get();
 
+        // If there aren't any clients with unscheduled classes, show a
+        // view warning it and don't allow the user to see the form
         return view('schedules.reposition.create', compact('clients', 'classTypes'));
     }
 
