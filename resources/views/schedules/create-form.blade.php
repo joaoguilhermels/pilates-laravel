@@ -7,9 +7,7 @@
   </select>
 </div>
 
-<class-professional-room classes="{{ json_encode($classTypes) }}"></class-professional-room>
-<br><br><br>
-
+<class-professional-room-status classes="{{ json_encode($classTypes) }}"></class-professional-room-status>
 
 <div class="form-group">
   <label for="price">Price:</label>

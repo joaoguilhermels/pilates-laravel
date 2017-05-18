@@ -14,7 +14,7 @@ class AddSalaryColumnOnProfessionalsTable extends Migration
     public function up()
     {
         Schema::table('professionals', function (Blueprint $table) {
-            $table->float('salary', 8, 2);
+            $table->float('salary', 8, 2)->nullable();
         });
     }
 

@@ -45,7 +45,7 @@ class CreateScheduleTable extends Migration
             $table->dateTime('start_at');
             $table->dateTime('end_at');
 
-            $table->string('observation');
+            $table->string('observation')->nullable();
 
             // No need for this columns because we can track payments based off of the clientplandeatils and clientplan on the financialtransactions table
             //$table->integer('client_payment_financial_transaction_id')->unsigned()->index()->references('id')->on('financial_transactions');

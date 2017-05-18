@@ -14,7 +14,7 @@
             <td>
               <div class="checkbox">
                 <label>
-                  <input type="checkbox" :name="classTypeIdName(class_type.id)" :checked="selectedId(class_type.id)">
+                  <input type="checkbox" :value="class_type.id" :name="classTypeIdName(class_type.id)" :checked="selectedId(class_type.id)">
                   {{ class_type.name }}
                 </label>
               </div>

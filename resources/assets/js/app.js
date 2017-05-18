@@ -20,6 +20,7 @@ window.Vue = require('vue');
 
 Vue.component('professionalClassesPercentageValue', require('./components/professionalClassesPercentageValue.vue')); 
 Vue.component('classProfessionalRoom', require('./components/classProfessionalRoom.vue'));
+Vue.component('classProfessionalRoomStatus', require('./components/classProfessionalRoomStatus.vue'));
 Vue.component('planPayment', require('./components/planPayment.vue'));
 Vue.component('startAt', require('./components/startAt.vue'));
 Vue.component('modal', require('./components/modal.vue'));

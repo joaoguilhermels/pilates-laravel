@@ -39,15 +39,10 @@ class SchedulesController extends Controller
 
     public function create()
     {
-        $rooms              = Room::orderBy('name')->get();
-        $plans              = Plan::orderBy('name')->get();
         $clients            = Client::orderBy('name')->get();
-        $classTypes         = ClassType::with('professionals', 'rooms')->orderBy('name')->get();
-        //$professionals      = Professional::orderBy('name')->get();
-        //$classTypeStatuses  = ClassTypeStatus::all();
+        $classTypes         = ClassType::with('professionals', 'rooms', 'statuses')->orderBy('name')->get();
 
-        //return view('schedules.create', compact('plans', 'clients', 'classTypes', 'rooms', 'professionals', 'classTypeStatuses'));
-        return view('schedules.create', compact('plans', 'clients', 'classTypes', 'rooms'));
+        return view('schedules.create', compact('clients', 'classTypes'));
     }
 
     public function store(scheduleRequest $request)

@@ -29,6 +29,7 @@ class PlansController extends Controller
     public function edit(plan $plan)
     {
         $classTypes = ClassType::all();
+
         $plan->load('classType');
 
         return view('plans.edit', compact('plan', 'classTypes'));
