@@ -1,0 +1,61 @@
+1. Novo Cliente do Sistema
+	1.1 Cliente pode se cadastrar e pagar (dono da conta)
+	1.2 Multi tenant cria nova url
+
+2. Cadastro de Cliente
+	2.1 Usuário pode cadastrar um cliente
+	2.2 Usuário pode atualizar um cliente
+		2.2.1 Validação para mudança de nome (para que Fábio não vire Sérgio e os dados se confundam)
+	2.3 Usuário pode apagar um cliente (SOFT DELETE)
+		2.3.1 Caso o usuário deseje realmente apagar um cliente, mostrar uma lista de items que serão apagados antes de apagar tudo. Somente pode ser executado pelo dono da conta.
+	2.4 Usuário pode dar férias ao cliente
+		2.4.1 Esta ação congela o plano do cliente mas devemos informar que aquele horário pertence a um cliente que está de férias. Além disso devemos zerar os valores a serem pagos durante aquele período e alterar o status para férias (esse status não deve ser exibido) e estender o prazo do plano.
+
+3. Cadastro de Profissionais
+	3.1 Usuário pode cadastrar um profissional
+		3.1.1 Usuário pode associar um profissional a um tipo de atendimento
+			3.1.1.1 Usuário pode definir quanto um profissional recebe por um tipo de atendimento
+				3.1.1.1.1 Usuário pode definir se o profissional recebe um percentual, valor por cliente ou valor por aula
+	3.2 Usuário pode atualizar um profissional
+		3.2.1 Ao atualizar os valores valores que um profissional recebe, perguntar se a atualização se refere a todos valores que ainda não foram pagos ou a partir de uma data específica (ex: a partir do próximo mês)
+			3.2.1.1 Manter histórico dos valores e tipos para referência
+	3.3 Usuário pode apagar um profissional (SOFT DELETE)
+		3.3.1 Caso o usuário deseje realmente apagar um profissional, mostrar uma lista de items que serão apagados antes de apagar tudo. Somente pode ser executado pelo dono da conta.
+	3.4 Usuário pode trocar o profissional que dá certo tipo de aula (útil para casos quando o profissional é trocado)
+		3.4.1 Basicamente coloca outro profissional no lugar do atual. O sistema deve recalcular o valor a ser pago.
+	3.5 Usuário pode dar férias para o profissional
+		3.5.1 O sistema deve colocar outro profissional no lugar do atual por um período. O sistema deve recalcular o valor a ser pago.
+		3.5.2 Mostrar que o profissional está de férias e até quando além de não exibir nas listas em geral.
+	3.6 Horários em que o profissional está disponível
+
+4. Cadastro de Planos do Estúdio
+	4.1 Usuário pode cadastrar um plano do estúdio
+		4.1.1 Usuário pode definir se o plano tem aula experimental
+		4.1.2 Usuário pode definir se o plano dá direito a férias e durante quanto tempo
+		4.1.3 Usuário pode definir as cores dos status do plano
+	4.2 Usuário pode atualizar um plano do estúdio
+		4.2.1 
+	4.3 Usuário pode apagar um plano do estúdio
+
+5. Cadastro de Planos do Cliente
+	5.1 Usuário pode cadastrar um plano para o cliente
+		5.1.1 Revisar datas antes de incluir o plano para que o usuário possa alterar ou excluir o que for necessário
+	5.2 Usuário pode atualizar um plano do cliente
+	5.3 Usuário pode apagar um plano do cliente
+
+6. Cobrança
+	6.1 Usuário pode registrar uma cobrança
+		6.1.2 Usuário pode enviar um email com o detalhamento da cobrança
+	6.2 Usuário pode atualizar uma cobrança
+	6.3 Usuário pode apagar uma cobrança
+
+7. Pagamento de Profissionais
+	7.1 Usuário pode registrar o pagamento de um profissional
+		7.1.2 Usuário pode enviar um email com o detalhamento do pagamento
+	7.2 Usuário pode atualizar o pagamento de um profissional
+	7.3 Usuário pode apagar o pagamento de um profissional
+
+8. Despesas
+
+9. Agenda
+	9.1 

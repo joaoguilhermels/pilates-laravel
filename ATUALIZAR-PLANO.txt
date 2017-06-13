@@ -1,0 +1,8 @@
+ATUALIZAR PLANO
+
+O que fazer com datas passadas?
+E se já tiver um pagamento relacionado?
+E se já tiver algum status diferente de OK
+Apagar tudo e definir as datas novamente?
+Mostrar um modal de review com todas as datas e permitir atualizar uma a uma?
+Mostrar um botão que apaga tudo e redefine as datas com modal review
