@@ -8,7 +8,7 @@
 
     @include('errors.list')
 
-    <form action="{{ action('FinancialTransactionsController@storePlanPayment', [$clientPlan->id]) }}" method="post">
+    <form action="{{ action('ClientPlanPaymentsController@store', [$clientPlan->id]) }}" method="post">
       {{ csrf_field() }}
       @include('clientPlans.payment.create-form', ['submitButtonText' => 'Add Plan Payment'])
     </form>
@@ -17,5 +17,4 @@
 
 @section('script_footer')
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
-  <script src="/js/clientPlanPayment/clientPlanPayment.js"></script>
 @stop

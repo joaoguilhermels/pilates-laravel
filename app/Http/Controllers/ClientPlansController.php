@@ -46,6 +46,18 @@ class ClientPlansController extends Controller
         return view('clientPlans.create', compact('client', 'rooms', 'classTypePlans', 'professionals', 'discounts'));
     }
 
+    public function edit(ClientPlan $clientPlan)
+    {
+        $form = $this->prepareCreateForm();
+
+        $rooms = $form['rooms'];
+        $discounts = $form['discounts'];
+        $professionals = $form['professionals'];
+        $classTypePlans = $form['classTypePlans'];
+
+        return view('clientPlans.edit', compact('client', 'rooms', 'classTypePlans', 'professionals', 'discounts', 'clientPlan'));
+    }
+
     public function prepareCreateForm()
     {
         $form['rooms'] = Room::orderBy('name')->get();
@@ -139,6 +151,24 @@ class ClientPlansController extends Controller
         return redirect('clients');
     }
 
+    public function update(ClientPlanRequest $request, ClientPlan $clientPlan)
+    {
+        $clientPlan->start_at       = $request->start_at;
+        $clientPlan->plan_id        = $request->plan_id;
+
+        $clientPlan = $client->clientPlans()->save($clientPlan);
+
+        $groupedDates = $this->getGroupedDates($request);
+
+        foreach ($request->daysOfWeek as $dayOfWeek) {
+            $this->setSchedules($request, $clientPlan, $client, $dayOfWeek, $groupedDates);
+        }
+
+        Session::flash('message', 'Successfully update the plan to ' . $client->name);
+
+        return redirect('clients');
+    }
+
     public function getGroupedDates(ClientPlanRequest $request)
     {
         $startDate = \Carbon\Carbon::parse($request->start_at);
@@ -208,14 +238,14 @@ class ClientPlansController extends Controller
         $clientPlanDetail = $clientPlan->clientPlanDetails()->save($clientPlanDetail);
 
         $classType = ClassType::with([
-            'plans' =>  function ($query) use ($request) {
-                            return $query->where('id', $request->plan_id);
+            'plans' => function ($query) use ($request) {
+                           return $query->where('id', $request->plan_id);
             },
-            'statuses' =>   function ($query) {
-                                return $query->where('name', 'OK');
+            'statuses' => function ($query) {
+                              return $query->where('name', 'OK');
             },
-            'professionals' =>  function ($query) use ($clientPlanDetail) {
-                                    return $query->where('professional_id', $clientPlanDetail->professional_id);
+            'professionals' => function ($query) use ($clientPlanDetail) {
+                                   return $query->where('professional_id', $clientPlanDetail->professional_id);
             }
         ])
         ->findOrFail($clientPlan->plan->class_type_id);

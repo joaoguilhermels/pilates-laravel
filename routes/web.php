@@ -46,6 +46,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('clients/{client}/plans/create', 'ClientPlansController@reviewClientPlan');
     Route::post('clients/{client}/plans/review', 'ClientPlansController@store');
     Route::delete('clients/plans/{clientPlan}/delete', 'ClientPlansController@destroy');
+    Route::get('client-plans/{clientPlan}/edit', 'ClientPlansController@edit');
+    Route::patch('client-plans/{clientPlan}/edit', 'ClientPlansController@update');
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     /*Route::get('clients/charges', 'ClientsController@indexCharges');

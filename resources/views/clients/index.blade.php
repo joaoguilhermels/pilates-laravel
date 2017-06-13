@@ -38,6 +38,7 @@
           <th></th>
           <th></th>
           <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -63,6 +64,9 @@
               @else
                 0
               @endif
+            </td>
+            <td>
+              {{ count($client->clientPlans) }}
             </td>
             <td>
               <a href="{{ action('ClientPlansController@create', [$client->id]) }}">Create Plan</a>

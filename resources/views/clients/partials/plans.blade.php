@@ -51,10 +51,11 @@
       </td>
       <td>
         @if ($clientPlan->financialTransactions->count() == 0)
-        <a href="#" class="btn btn-info btn-sm">Add Payment</a>
+        <a href="{{ action('ClientPlanPaymentsController@create', [$clientPlan->id]) }}" class="btn btn-info btn-sm">Add Payment</a>
         @else
         <a href="#" class="btn btn-info btn-sm">Edit Payment</a>
         @endif
+        <a href="">edit</a>
         <form action="{{ action('ClientPlansController@destroy', [$clientPlan->id]) }}" method="POST">
           {{ csrf_field() }}
           {{ method_field("DELETE") }}
@@ -63,11 +64,4 @@
       </td>
   @endforeach
   </table>
-
-  <script>
-    //$(".delete").on("submit", function(){
-        //return confirm("Do you want to delete this item?");
-    //});
-  </script>
-
 </div>

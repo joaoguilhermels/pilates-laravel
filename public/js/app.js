@@ -12217,7 +12217,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['plan-duration', 'selected-values', 'payment-methods', 'bank-accounts', 'price', 'start-at'],
@@ -12225,11 +12224,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       numberOfPayments: parseInt(this.planDuration) || 1,
-      paymentMethodsObjs: JSON.parse(this.paymentMethods),
-      bankAccountsObjs: JSON.parse(this.bankAccounts),
+      //paymentMethodsObjs: this.paymentMethods,
+      //bankAccountsObjs: this.bankAccounts,
       payments: this.selectedValues == "" ? "" : JSON.parse(this.selectedValues),
-      startAt: this.startAt
+      paymentNumber: 0
     };
+  },
+
+
+  methods: {
+    paymentNumberName: function paymentNumberName(paymentNumber) {
+      return "payments[" + paymentNumber + "][payment_number]";
+    },
+    paymentMethodName: function paymentMethodName(paymentNumber) {
+      return "payments[" + paymentNumber + "][payment_method_id]";
+    },
+    paymentDateName: function paymentDateName(paymentNumber) {
+      return "payments[" + paymentNumber + "][date]";
+    },
+    paymentValueName: function paymentValueName(paymentNumber) {
+      return "payments[" + paymentNumber + "][value]";
+    },
+    paymentObservationName: function paymentObservationName(paymentNumber) {
+      return "payments[" + paymentNumber + "][observation]";
+    }
   }
 });
 
@@ -35199,37 +35217,37 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('input', {
       attrs: {
         "type": "hidden",
-        "name": _vm.payments[paymentNumber][_vm.payment_number]
+        "name": _vm.paymentNumberName(paymentNumber)
       },
       domProps: {
         "value": paymentNumber + 1
       }
     }), _vm._v(" "), _c('label', {
       attrs: {
-        "for": _vm.payments[paymentNumber][_vm.payment_method_id]
+        "for": _vm.paymentMethodName(paymentNumber)
       }
-    }, [_vm._v("Payment Method: ")]), _vm._v(" "), (_vm.paymentMethodsObjs.length > 1) ? _c('select', {
+    }, [_vm._v("Payment Method: ")]), _vm._v(" "), (_vm.paymentMethods.length > 1) ? _c('select', {
       staticClass: "form-control",
       attrs: {
-        "name": _vm.payments[paymentNumber][_vm.payment_method_id]
+        "name": _vm.paymentMethodName(paymentNumber)
       }
     }, [_c('option', {
       attrs: {
         "value": ""
       }
-    }), _vm._v(" "), _vm._l((_vm.paymentMethodsObjs), function(paymentMethod) {
+    }), _vm._v(" "), _vm._l((_vm.paymentMethods), function(paymentMethod) {
       return _c('option', {
         domProps: {
           "value": paymentMethod.id
         }
       }, [_vm._v(_vm._s(paymentMethod.name))])
-    })], 2) : _c('div', [_vm._v("\n              " + _vm._s(_vm.paymentMethodsObjs[0].name) + "\n              "), _c('input', {
+    })], 2) : _c('div', [_vm._v("\n              " + _vm._s(_vm.paymentMethods[0].name) + "\n              "), _c('input', {
       attrs: {
         "type": "hidden",
-        "name": _vm.payments[paymentNumber][_vm.payment_method_id]
+        "name": _vm.paymentMethodName(paymentNumber)
       },
       domProps: {
-        "value": _vm.paymentMethodsObjs[0].id
+        "value": _vm.paymentMethods[0].id
       }
     })])]), _vm._v(" "), _c('td', {
       staticClass: "col-md-2"
@@ -35241,7 +35259,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "form-control",
       attrs: {
         "type": "date",
-        "name": _vm.payments[paymentNumber][_vm.date]
+        "name": _vm.paymentDateName(paymentNumber)
       },
       domProps: {
         "value": _vm.startAt
@@ -35256,7 +35274,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "form-control",
       attrs: {
         "type": "float",
-        "name": _vm.payments[paymentNumber][_vm.value]
+        "name": _vm.paymentValueName(paymentNumber)
       },
       domProps: {
         "value": _vm.price
@@ -35271,7 +35289,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "form-control",
       attrs: {
         "type": "text",
-        "name": _vm.payments[paymentNumber][_vm.observation]
+        "name": _vm.paymentObservationName(paymentNumber)
       }
     })])])
   }))])])])
