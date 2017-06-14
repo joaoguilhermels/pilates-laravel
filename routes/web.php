@@ -66,8 +66,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('client-plans/{clientPlan}/payment', 'ClientPlanPaymentsController@create');
     Route::post('client-plans/{clientPlan}/payment', 'ClientPlanPaymentsController@store');
     Route::delete('client-plans/{clientPlan}/delete', 'ClientPlanPaymentsController@destroy');
-    Route::get('payment/{financialTransaction}', 'ClientPlanPaymentsController@edit');
-    Route::patch('payment/{financialTransaction}', 'ClientPlanPaymentsController@update');
+    Route::get('payment/{financialTransactions}/edit', 'ClientPlanPaymentsController@edit');
+    Route::patch('payment/{financialTransactions}', 'ClientPlanPaymentsController@update');
+    Route::get('payment/{financialTransactions}', 'ClientPlanPaymentsController@show');
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -27,7 +27,7 @@
             </td>
             <td class="col-md-2">
               <label for="date">Date: </label>
-              <input type="date" :name="paymentDateName(paymentNumber)" :value="startAt" class="form-control">
+              <input type="date" :name="paymentDateName(paymentNumber)" :value="startAtValue(startAt, paymentNumber)" class="form-control">
             </td>
             <td class="col-md-2">
               <label for="room">Value: </label>
@@ -51,12 +51,8 @@
     data() {
       return {
           numberOfPayments: parseInt(this.planDuration) || 1,
-          //paymentMethodsObjs: this.paymentMethods,
-          //bankAccountsObjs: this.bankAccounts,
           payments: this.selectedValues == "" ? "" : JSON.parse(this.selectedValues),
           paymentNumber: 0,
-          // payment_number: 0,
-          //startAt: this.startAt
       }
     },
 
@@ -75,6 +71,15 @@
       },
       paymentObservationName: function(paymentNumber) {
         return "payments[" + paymentNumber + "][observation]";
+      },
+      startAtValue(startAt, paymentNumber) {
+        if (paymentNumber > 1) {
+          var moment = require('moment');
+          return moment(startAt).add(paymentNumber - 1, 'month').format('YYYY-MM-DD');
+        }
+        else {
+          return startAt;
+        }
       },
     }
   }

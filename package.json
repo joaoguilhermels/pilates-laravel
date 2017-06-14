@@ -23,6 +23,7 @@
     "bootswatch": "^3.3.7",
     "font-awesome": "^4.7.0",
     "jquery-datetimepicker": "^2.5.4",
+    "moment": "^2.18.1",
     "multiselect": "^0.9.12",
     "sweetalert2": "^6.6.2"
   }

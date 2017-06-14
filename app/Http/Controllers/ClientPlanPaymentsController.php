@@ -42,7 +42,7 @@ class ClientPlanPaymentsController extends Controller
             $financialTransaction->financialTransactionDetails()->create($payment);
         });
 
-        \Session::flash('message', 'Successfully added Client Plan Payment');
+        \Session::flash('message', 'Pagamento de plano adicionado com sucesso!');
 
         return redirect('clients');
     }
@@ -72,9 +72,15 @@ class ClientPlanPaymentsController extends Controller
             $financialTransaction->financialTransactionDetails()->where('id', $payment['id'])->update($payment);
         });
 
-        \Session::flash('message', 'Successfully updated Client Plan Payment');
+        \Session::flash('message', 'Pagamento de plano atualizado com sucesso!');
 
         return redirect('clients');
+    }
+
+    public function show(FinancialTransaction $financialTransaction)
+    {
+        dd($financialTransaction);
+        return view('show', compact('financialTransaction'));
     }
 
     public function destroy()

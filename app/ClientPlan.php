@@ -11,6 +11,8 @@ class ClientPlan extends Model
       'start_at'
     ];
 
+    protected $with = ['financialTransactions'];
+
     public function client()
     {
         return $this->belongsTo(\App\Client::class);

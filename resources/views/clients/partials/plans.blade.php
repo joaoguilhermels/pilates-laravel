@@ -53,15 +53,17 @@
         @if ($clientPlan->financialTransactions->count() == 0)
         <a href="{{ action('ClientPlanPaymentsController@create', [$clientPlan->id]) }}" class="btn btn-info btn-sm">Add Payment</a>
         @else
-        <a href="#" class="btn btn-info btn-sm">Edit Payment</a>
+        <a href="{{ action('ClientPlanPaymentsController@edit', [$clientPlan->financialTransactions->first()->id]) }}" class="btn btn-info btn-sm">Edit Payment</a>
+        <a href="{{ action('ClientPlanPaymentsController@show', [$clientPlan->financialTransactions->first()->id]) }}" class="btn btn-info btn-sm">View Payment</a>
         @endif
-        <a href="">edit</a>
+        <a href="{{ action('ClientPlansController@edit', [$clientPlan->id]) }}">edit</a>
         <form action="{{ action('ClientPlansController@destroy', [$clientPlan->id]) }}" method="POST">
           {{ csrf_field() }}
           {{ method_field("DELETE") }}
           <button type="submit" class="btn btn-link pull-left">delete</button>
         </form>
       </td>
+    </tr>
   @endforeach
   </table>
 </div>
