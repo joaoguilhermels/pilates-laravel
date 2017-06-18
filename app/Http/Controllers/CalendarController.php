@@ -252,11 +252,22 @@ class CalendarController extends Controller
 
         $calendar = \Calendar::setCallbacks([
             'dayClick' => 'function (date, jsEvent, view) {
+                $(\'#modal\').on(\'show.bs.modal\', function (event) {
+                    var modal = $(this);
+                    modal.find(\'.modal-title\').text("O que você gostaria de agendar?");
+                    modal.find(\'.modal-body\').html(
+                        "<a href=\"/schedules/create\" class=\"btn btn-info\">Atendimento</a>" +
+                        "<a href=\"/schedules/trial/create\" class=\"btn btn-info\">Aula experimental</a>" +
+                        "<a href=\"/schedules/reposition/create\" class=\"btn btn-info\">Reposição</a>" +
+                        "<a href=\"/schedules/extra/create\" class=\"btn btn-info\">Aula extra</a>" +
+                        "<a href=\"\" class=\"btn btn-info\">Prática (sem profissional)</a>"
+                    );
+                });
+
                 $(\'#modal\').modal(\'show\');
             }',
             'eventClick' => 'function(calEvent, jsEvent, view) {
                 $(\'#modal\').on(\'show.bs.modal\', function (event) {
-                    console.log(calEvent);
                     var modal = $(this);
                     modal.find(\'.modal-title\').text(calEvent.title);
                     modal.find(\'.modal-body\').html(
