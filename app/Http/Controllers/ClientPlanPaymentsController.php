@@ -14,6 +14,8 @@ use App\FinancialTransactionDetail;
 use App\Http\Requests;
 use App\Http\Requests\FinancialTransactionRequest;
 
+use Debugbar;
+
 class ClientPlanPaymentsController extends Controller
 {
     public function create(ClientPlan $clientPlan)
@@ -79,8 +81,12 @@ class ClientPlanPaymentsController extends Controller
 
     public function show(FinancialTransaction $financialTransaction)
     {
-        dd($financialTransaction);
-        return view('show', compact('financialTransaction'));
+        //dd($financialTransaction);
+        Debugbar::info($financialTransaction);
+        // Debugbar::error('Error!');
+        // Debugbar::warning('Watch out…');
+        // Debugbar::addMessage('Another message', 'mylabel');
+        return view('clientPlans.payment.show', compact('financialTransaction'));
     }
 
     public function destroy()

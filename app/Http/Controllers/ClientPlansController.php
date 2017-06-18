@@ -312,19 +312,19 @@ class ClientPlansController extends Controller
      * @param type var Description
      * @return float
      */
-    public function setProfessionalValue(Professional $professional, $price)
+    public function setProfessionalValue($class_type_professional, $price)
     {
         // Move this to a professional controller
-        if ($professional->value_type == 'percentage') {
-            return round($price * ($professional->value / 100), 2);
+        if ($class_type_professional->value_type == 'percentage') {
+            return round($price * ($class_type_professional->value / 100), 2);
         }
 
-        switch ($professional->value_type) {
+        switch ($class_type_professional->value_type) {
             case 'percentage':
-                return round($price * ($professional->value / 100), 2);
+                return round($price * ($class_type_professional->value / 100), 2);
                 break;
             case 'value_per_client':
-                return $professional->value;
+                return $class_type_professional->value;
                 break;
         }
     }

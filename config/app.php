@@ -176,6 +176,7 @@ return [
          */
          MaddHatter\LaravelFullcalendar\ServiceProvider::class,
          Watson\Active\ActiveServiceProvider::class,
+         Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*
@@ -225,6 +226,7 @@ return [
         'Form'      => Illuminate\Html\FormFacade::class,
         'Html'      => Illuminate\Html\HtmlFacade::class,
         'Calendar'  => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
+        'Debugbar'  => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
