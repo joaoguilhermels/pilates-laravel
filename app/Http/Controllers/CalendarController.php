@@ -209,6 +209,8 @@ class CalendarController extends Controller
                         ->join('professionals', 'schedules.professional_id', '=', 'professionals.id')
                         ->join('clients', 'schedules.client_id', '=', 'clients.id')
                         ->select('schedules.room_id', 'schedules.class_type_id', 'schedules.professional_id', 'schedules.class_type_status_id', 'schedules.start_at as start', 'schedules.end_at as end', 'clients.name as title')
+                        ->whereDate('start_at', '>=', $start)
+                        ->whereDate('end_at', '<=', $end)
                         ->get();
 
         return $schedules;
