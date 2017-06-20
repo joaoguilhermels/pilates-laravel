@@ -7,7 +7,8 @@
 <div class="container-fluid" id="app">
     {{-- <h1>Agenda</h1> --}}
 
-    {!! $calendar->calendar() !!}
+    {{-- {!! $calendar->calendar() !!} --}}
+    <calendar ></calendar>
     <br><br>
         
     <modal>

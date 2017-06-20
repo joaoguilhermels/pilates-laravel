@@ -37,7 +37,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index');
 
     Route::get('/calendar', 'CalendarController@calendar');
-    Route::get('/calendar/group', 'CalendarController@groupCalendar');
+    Route::get('/calendar/group', 'CalendarController@groupCalendarNew');
+    Route::get('/calendar/group/data', 'CalendarController@groupCalendarEventsNew');
 
     Route::get('reports/cash-journal', 'ReportsController@cashJournal');
     Route::post('reports/cash-journal', 'ReportsController@showCashJournal');

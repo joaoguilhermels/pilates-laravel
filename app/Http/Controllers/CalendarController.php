@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use Carbon\Carbon;
+
 use App\Schedule;
 use App\ClassType;
 use App\ClassTypeStatus;
@@ -194,6 +196,45 @@ class CalendarController extends Controller
         }
 
         return $description;
+    }
+
+    public function groupCalendarEventsNew()
+    {
+        $start = empty($_GET['start']) ? Carbon::parse(date('Y-m-d')) : $_GET['start'];
+        $end = empty($_GET['end']) ? Carbon::parse(date('Y-m-d'))->addMonths(1) : $_GET['end'];
+
+        $schedules = \DB::table('schedules')
+                        ->join('class_types', 'schedules.class_type_id', '=', 'class_types.id')
+                        ->join('class_type_statuses', 'schedules.class_type_status_id', '=', 'class_type_statuses.id')
+                        ->join('professionals', 'schedules.professional_id', '=', 'professionals.id')
+                        ->join('clients', 'schedules.client_id', '=', 'clients.id')
+                        ->select('schedules.room_id', 'schedules.class_type_id', 'schedules.professional_id', 'schedules.class_type_status_id', 'schedules.start_at as start', 'schedules.end_at as end', 'clients.name as title')
+                        ->get();
+
+        return $schedules;
+    }
+
+    public function groupCalendarNew()
+    {
+        $has_available_trial_class = ClassType::WithTrial()->count() > 0;
+
+        if (empty($_GET['start'])) {
+            $start = date('Y-m-d');
+        }
+        else {
+            $start = $_GET['start'];
+        }
+
+        if (empty($_GET['end'])) {
+            $end = date('Y-m-d');
+        }
+        else {
+            $end = $_GET['end'];
+        }
+
+        $schedules = $this->groupCalendarEventsNew($start, $end);
+
+        return view('calendar.index', compact('schedules', 'has_available_trial_class'));
     }
 
     public function groupCalendar()

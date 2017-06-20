@@ -9,6 +9,7 @@ require('./bootstrap');
 require('sweetalert2');
 require('jquery-datetimepicker');
 require('multiselect');
+require('fullcalendar');
 
 window.Vue = require('vue');
 
@@ -22,6 +23,7 @@ Vue.component('professionalClassesPercentageValue', require('./components/profes
 Vue.component('classProfessionalRoom', require('./components/classProfessionalRoom.vue'));
 Vue.component('classProfessionalRoomStatus', require('./components/classProfessionalRoomStatus.vue'));
 Vue.component('planPayment', require('./components/planPayment.vue'));
+Vue.component('calendar', require('./components/calendar.vue'));
 Vue.component('startAt', require('./components/startAt.vue'));
 Vue.component('modal', require('./components/modal.vue'));
 Vue.component('plans', require('./components/plans.vue'));

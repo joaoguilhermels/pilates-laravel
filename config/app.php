@@ -195,6 +195,7 @@ return [
         'App'       => Illuminate\Support\Facades\App::class,
         'Artisan'   => Illuminate\Support\Facades\Artisan::class,
         'Auth'      => Illuminate\Support\Facades\Auth::class,
+        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'Blade'     => Illuminate\Support\Facades\Blade::class,
         'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
         'Cache'     => Illuminate\Support\Facades\Cache::class,
@@ -224,6 +225,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'Form'      => Illuminate\Html\FormFacade::class,
+
         'Html'      => Illuminate\Html\HtmlFacade::class,
         'Calendar'  => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
         'Debugbar'  => Barryvdh\Debugbar\Facade::class,
