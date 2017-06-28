@@ -14,13 +14,13 @@
             <td>
               <div class="checkbox">
                 <label>
-                  <input type="checkbox" :value="class_type.id" :name="classTypeIdName(class_type.id)" :checked="selectedId(class_type.id)">
+                  <input type="checkbox" :value="class_type.id" :name="classTypeIdName(class_type.id)" :checked="selectedId(class_type.id)" v-model="checked[class_type.id]">
                   {{ class_type.name }}
                 </label>
               </div>
             </td>
             <td class="form-inline">
-              <div class="form-group" v-if="">
+              <div class="form-group" v-if="checked[class_type.id]">
                 <input type="number" min="0" step="any" :name="classTypeIdValue(class_type.id)" class="form-control" :value="selectedValue(class_type.id)">
                 <select :name="classTypeIdValueType(class_type.id)" class="form-control" :selected="selectedValueType(class_type.id)">
                   <option value="percentage">%</option>
@@ -39,6 +39,12 @@
 <script>
     export default {
         props: ['classes', 'professional_classes'],
+
+        data: function() {
+            return {
+                checked: []
+            }
+        },
 
         methods: {
           classTypeIdName: function(id) {
@@ -75,6 +81,9 @@
             if (proClass.length > 0) {
               return _.first(proClass).pivot.value_type;
             }
+          },
+          classChecked: function(class_type_id) {
+
           }
         }
     }

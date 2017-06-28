@@ -11,20 +11,20 @@ return [
     |
     */
 
-    'clients'   => 'Clientes',
-    'professionals'   => 'Profissionais',
-    'rooms'   => 'Salas',
-    'classes'   => 'Atendimentos',
-    'plans'   => 'Planos',
-    'schedules'   => 'Agendamentos',
-    'calendar'   => 'Agenda',
-    'financials'   => 'Finanças',
-    'expenses'   => 'Despesas',
-    'pro_payments'   => 'Pagamento de Profissionais',
-    'bank_accounts'   => 'Contas Bancárias',
-    'payment_methods'   => 'Formas de Pagamento',
-    'reports' => 'Relatórios',
-    'cash_journal' => 'Livro Caixa',
-    'logout' => 'Sair',
-    'register' => 'Cadastre-se'
+    'clients'   => 'CLIENTES',
+    'professionals'   => 'PROFISSIONAIS',
+    'rooms'   => 'SALAS',
+    'classes'   => 'ATENDIMENTOS',
+    'plans'   => 'PLANOS',
+    'schedules'   => 'AGENDAMENTOS',
+    'calendar'   => 'AGENDA',
+    'financials'   => 'FINANÇAS',
+    'expenses'   => 'DESPESAS',
+    'pro_payments'   => 'PAGAMENTO DE PROFISSIONAIS',
+    'bank_accounts'   => 'CONTAS BANCÁRIAS',
+    'payment_methods'   => 'FORMAS DE PAGAMENTO',
+    'reports' => 'RELATÓRIOS',
+    'cash_journal' => 'LIVRO CAIXA',
+    'logout' => 'SAIR',
+    'register' => 'CADASTRE-SE'
 ];

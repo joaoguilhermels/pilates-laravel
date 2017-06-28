@@ -8,7 +8,7 @@
     {{-- <h1>Agenda</h1> --}}
 
     {{-- {!! $calendar->calendar() !!} --}}
-    <calendar ></calendar>
+    <calendar url="/calendar/data"></calendar>
     <br><br>
         
     <modal>

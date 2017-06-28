@@ -50,11 +50,10 @@
     <ul class="sidebar-menu">
       <li class="header">MENU</li>
       @if (Auth::check())
-      <li class="{{ active('home') }}"><a href="{{ url('/home') }}"><i class="fa fa-home"></i>Home</a></li>
       <li class="{{ active(['clients', 'clients/*']) }}"><a href="{{ url('/clients') }}"><i class="fa fa-users"></i>{{ trans('menu.clients') }}</a></li>
       <li class="{{ active('calendar') }}"><a href="{{ url('/calendar/group') }}" data-turbolinks="false"><i class="fa fa-calendar"></i>{{ trans('menu.calendar') }}</a></li>
       <li class="dropdown {{ active(['classes', 'classes/*', 'rooms', 'rooms/*', 'professionals', 'professionals/*', 'not:professionals/payments', 'not:professionals/payments/*', 'plans', 'plans/*']) }}">
-        <a href="#"><i class="fa fa-plus"></i> <span>Cadastros</span>
+        <a href="#"><i class="fa fa-plus"></i> <span>CADASTROS</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
@@ -70,7 +69,7 @@
       </li>
       <li class="dropdown {{ active(['bank-accounts', 'payment-methods', 'professionals/payments', 'professionals/payments/*']) }}">
         {{-- <i class="fa fa-link"></i><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ trans('menu.financials') }} <span class="caret"></span></a> --}}
-        <a href="#"><i class="fa fa-usd"></i> <span>Finanças</span>
+        <a href="#"><i class="fa fa-usd"></i> <span>FINANÇAS</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
@@ -82,7 +81,7 @@
         </ul>
       </li>
       <li class="dropdown {{ active(['reports/cash-journal']) }}">
-        <a href="#"><i class="fa fa-line-chart"></i> <span>Relatórios</span>
+        <a href="#"><i class="fa fa-line-chart"></i> <span>RELATÓRIOS</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>

@@ -33,13 +33,6 @@
               </select>
             </td>
             <td class="col-md-3">
-              <label :for="dayOfWeekField(day.number, 'hour')">Time:</label>
-              <select class="form-control" :name="dayOfWeekField(day.number, 'hour')">
-                <option value=""></option>
-                <option v-for="time in times" :value="time">{{ time }}:00</option>
-              </select>
-            </td>
-            <td class="col-md-3">
               <label :for="dayOfWeekField(day.number, 'professional_id')">Professional: </label>
               <select class="form-control" :name="dayOfWeekField(day.number, 'professional_id')" v-if="selectedClass.professionals.length > 1">
                 <option value=""></option>
@@ -49,6 +42,13 @@
                 {{ selectedClass.professionals[0].name }}
                 <input type="hidden" :name="dayOfWeekField(day.number, 'professional_id')" :value="selectedClass.professionals[0].id">
               </div>
+            </td>
+            <td class="col-md-3">
+              <label :for="dayOfWeekField(day.number, 'hour')">Time:</label>
+              <select class="form-control" :name="dayOfWeekField(day.number, 'hour')">
+                <option value=""></option>
+                <option v-for="time in times" :value="time">{{ time }}:00</option>
+              </select>
             </td>
             <td class="col-md-3">
               <label :for="dayOfWeekField(day.number, 'room_id')">Room: </label>
@@ -88,7 +88,7 @@
     },
 
     computed: {
-      daysOfWeek: function() {
+        daysOfWeek: function() {
             var times = 0,
                 self = this
 

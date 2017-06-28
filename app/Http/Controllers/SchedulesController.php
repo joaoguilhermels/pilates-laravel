@@ -37,6 +37,33 @@ class SchedulesController extends Controller
         return view('schedules.show', compact('schedule'));
     }
 
+    public function showGroup($start_at, Room $room)
+    {
+        //dd(\Carbon\Carbon::createFromTimestamp($start_at)->format("d/m/Y H:i"));
+        $start_at = \Carbon\Carbon::createFromTimestamp($start_at)->format("Y-m-d H:i:s");
+
+        $schedules   = Schedule::where('start_at', '=', $start_at)
+                          ->where('room_id', '=', $room->id)
+                          ->with('client', 'classTypeStatus')
+                          ->get();
+
+        $description =  'Class: ' . $schedules->first()->classType->name . '<br>' .
+                        'Professional: ' . $schedules->first()->professional->name . '<br>' .
+                        'Date/Time: ' . $start_at . ' to ' . $schedules->first()->end_at->format("H:i") . '<br>' .
+                        'Clients:<br>';
+
+        foreach ($schedules as $schedule) {
+            $description .= $this->statusLabel($schedule->classTypeStatus) . ' ' . $schedule->client->name . '' . '<br>';
+        }
+
+        return $description;
+    }
+
+    public function statusLabel(classTypeStatus $classTypeStatus)
+    {
+        return '<span class="label" style="background-color: ' . $classTypeStatus->color . '">' . $classTypeStatus->name . '</span>';
+    }
+
     public function create()
     {
         $clients            = Client::orderBy('name')->get();

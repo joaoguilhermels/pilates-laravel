@@ -4,7 +4,7 @@
 
 <script>
     export default {
-        props: ['classes'],
+        props: ['classes', 'url'],
 
         data: function() {
             return {
@@ -14,10 +14,16 @@
             }
         },
 
+        methods: {
+          scheduleDescription: function() {
+            return "Description";
+          },
+        },
+
         mounted () {
             $('#fullcalendar').fullCalendar({
                 events: {
-                    url: '/calendar/group/data',
+                    url: this.url,//'/calendar/group/data',
                     color: 'yellow',   // an option!
                     textColor: 'black' // an option!
                 },
@@ -63,9 +69,9 @@
                         var modal = $(this);
                         modal.find('.modal-title').text(calEvent.title);
                         modal.find('.modal-body').html(
-                            "<br>Professional: " + calEvent.professional_id +
-                            "<br>Room: " + calEvent.room_id +
-                            "<br>Class Type: " + calEvent.class_type_id
+                            "Professional: " + calEvent.professional_name +
+                            "<br>Room: " + calEvent.room_name +
+                            "<br>Class Type: " + calEvent.class_type_name
                         );
                     });
 
@@ -83,7 +89,11 @@
                     element.qtip({
                         prerender: true,
                         content: {
-                            'text': event.description
+                            text: '<i class="fa fa-refresh fa-spin" style="font-size:20px"></i>', // The text to use whilst the AJAX request is loading
+                            ajax: {
+                                url: '/schedules/' + event.start.unix() + '/' + event.room_id + '/group', // URL to the local file
+                                type: 'GET', // POST or GET
+                            }
                         },
                         position: {
                                 at: 'top left',

@@ -36,9 +36,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/home', 'HomeController@index');
 
-    Route::get('/calendar', 'CalendarController@calendar');
-    Route::get('/calendar/group', 'CalendarController@groupCalendarNew');
-    Route::get('/calendar/group/data', 'CalendarController@groupCalendarEventsNew');
+    Route::get('calendar', 'CalendarController@calendar');
+    Route::get('calendar/data', 'CalendarController@calendarEvents');
+    Route::get('calendar/group', 'CalendarController@groupCalendarNew');
+    Route::get('calendar/group/data', 'CalendarController@groupCalendarEventsNew');
 
     Route::get('reports/cash-journal', 'ReportsController@cashJournal');
     Route::post('reports/cash-journal', 'ReportsController@showCashJournal');
@@ -82,6 +83,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('professionals/payments/{financialTransaction}/update', 'ProfessionalsPaymentsController@update');
     Route::delete('professionals/payments/{financialTransaction}/delete', 'ProfessionalsPaymentsController@destroy');
 
+    Route::get('schedules/{start_at}/{room}/group', 'SchedulesController@showGroup');
     Route::get('schedules/create', 'SchedulesController@create');
     Route::post('schedules/create', 'SchedulesController@store');
     Route::get('schedules/trial/create', 'TrialSchedulesController@create');

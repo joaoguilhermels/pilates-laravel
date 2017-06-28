@@ -27559,7 +27559,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['classes'],
+    props: ['classes', 'url'],
 
     data: function data() {
         return {
@@ -27569,10 +27569,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
+    methods: {
+        scheduleDescription: function scheduleDescription() {
+            return "Description";
+        }
+    },
+
     mounted: function mounted() {
         $('#fullcalendar').fullCalendar({
             events: {
-                url: '/calendar/group/data',
+                url: this.url, //'/calendar/group/data',
                 color: 'yellow', // an option!
                 textColor: 'black' // an option!
             },
@@ -27610,7 +27616,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 $('#modal').on('show.bs.modal', function (event) {
                     var modal = $(this);
                     modal.find('.modal-title').text(calEvent.title);
-                    modal.find('.modal-body').html("<br>Professional: " + calEvent.professional_id + "<br>Room: " + calEvent.room_id + "<br>Class Type: " + calEvent.class_type_id);
+                    modal.find('.modal-body').html("Professional: " + calEvent.professional_name + "<br>Room: " + calEvent.room_name + "<br>Class Type: " + calEvent.class_type_name);
                 });
 
                 $('#modal').modal('show');
@@ -27627,7 +27633,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 element.qtip({
                     prerender: true,
                     content: {
-                        'text': event.description
+                        text: '<i class="fa fa-refresh fa-spin" style="font-size:20px"></i>', // The text to use whilst the AJAX request is loading
+                        ajax: {
+                            url: '/schedules/' + event.start.unix() + '/' + event.room_id + '/group', // URL to the local file
+                            type: 'GET' }
                     },
                     position: {
                         at: 'top left',
@@ -28153,6 +28162,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['classes', 'professional_classes'],
 
+  data: function data() {
+    return {
+      checked: []
+    };
+  },
+
   methods: {
     classTypeIdName: function classTypeIdName(id) {
       return "class_type_list[" + id + "][class_type_id]";
@@ -28188,7 +28203,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (proClass.length > 0) {
         return _.first(proClass).pivot.value_type;
       }
-    }
+    },
+    classChecked: function classChecked(class_type_id) {}
   }
 });
 
@@ -67033,27 +67049,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "col-md-3"
     }, [_c('label', {
       attrs: {
-        "for": _vm.dayOfWeekField(day.number, 'hour')
-      }
-    }, [_vm._v("Time:")]), _vm._v(" "), _c('select', {
-      staticClass: "form-control",
-      attrs: {
-        "name": _vm.dayOfWeekField(day.number, 'hour')
-      }
-    }, [_c('option', {
-      attrs: {
-        "value": ""
-      }
-    }), _vm._v(" "), _vm._l((_vm.times), function(time) {
-      return _c('option', {
-        domProps: {
-          "value": time
-        }
-      }, [_vm._v(_vm._s(time) + ":00")])
-    })], 2)]), _vm._v(" "), _c('td', {
-      staticClass: "col-md-3"
-    }, [_c('label', {
-      attrs: {
         "for": _vm.dayOfWeekField(day.number, 'professional_id')
       }
     }, [_vm._v("Professional: ")]), _vm._v(" "), (_vm.selectedClass.professionals.length > 1) ? _c('select', {
@@ -67080,6 +67075,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "value": _vm.selectedClass.professionals[0].id
       }
     })])]), _vm._v(" "), _c('td', {
+      staticClass: "col-md-3"
+    }, [_c('label', {
+      attrs: {
+        "for": _vm.dayOfWeekField(day.number, 'hour')
+      }
+    }, [_vm._v("Time:")]), _vm._v(" "), _c('select', {
+      staticClass: "form-control",
+      attrs: {
+        "name": _vm.dayOfWeekField(day.number, 'hour')
+      }
+    }, [_c('option', {
+      attrs: {
+        "value": ""
+      }
+    }), _vm._v(" "), _vm._l((_vm.times), function(time) {
+      return _c('option', {
+        domProps: {
+          "value": time
+        }
+      }, [_vm._v(_vm._s(time) + ":00")])
+    })], 2)]), _vm._v(" "), _c('td', {
       staticClass: "col-md-3"
     }, [_c('label', {
       attrs: {
@@ -67330,17 +67346,48 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('tr', [_c('td', [_c('div', {
       staticClass: "checkbox"
     }, [_c('label', [_c('input', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: (_vm.checked[class_type.id]),
+        expression: "checked[class_type.id]"
+      }],
       attrs: {
         "type": "checkbox",
         "name": _vm.classTypeIdName(class_type.id)
       },
       domProps: {
         "value": class_type.id,
-        "checked": _vm.selectedId(class_type.id)
+        "checked": _vm.selectedId(class_type.id),
+        "checked": Array.isArray(_vm.checked[class_type.id]) ? _vm._i(_vm.checked[class_type.id], class_type.id) > -1 : (_vm.checked[class_type.id])
+      },
+      on: {
+        "__c": function($event) {
+          var $$a = _vm.checked[class_type.id],
+            $$el = $event.target,
+            $$c = $$el.checked ? (true) : (false);
+          if (Array.isArray($$a)) {
+            var $$v = class_type.id,
+              $$i = _vm._i($$a, $$v);
+            if ($$c) {
+              $$i < 0 && (_vm.checked[class_type.id] = $$a.concat($$v))
+            } else {
+              $$i > -1 && (_vm.checked[class_type.id] = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+            }
+          } else {
+            var $$exp = _vm.checked,
+              $$idx = class_type.id;
+            if (!Array.isArray($$exp)) {
+              _vm.checked[class_type.id] = $$c
+            } else {
+              $$exp.splice($$idx, 1, $$c)
+            }
+          }
+        }
       }
     }), _vm._v("\n                " + _vm._s(class_type.name) + "\n              ")])])]), _vm._v(" "), _c('td', {
       staticClass: "form-inline"
-    }, [_c('div', {
+    }, [(_vm.checked[class_type.id]) ? _c('div', {
       staticClass: "form-group"
     }, [_c('input', {
       staticClass: "form-control",
@@ -67371,7 +67418,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "value": "value_per_class"
       }
-    }, [_vm._v("Per Class")])])])])])
+    }, [_vm._v("Per Class")])])]) : _vm._e()])])
   }))])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('thead', [_c('tr', [_c('td', [_vm._v("Class")]), _vm._v(" "), _c('td', [_vm._v("Value")])])])
