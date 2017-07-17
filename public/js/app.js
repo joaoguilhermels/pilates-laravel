@@ -27559,7 +27559,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['classes', 'url'],
+    props: ['classes', 'url', 'type'],
 
     data: function data() {
         return {
@@ -27616,8 +27616,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 $('#modal').on('show.bs.modal', function (event) {
                     var modal = $(this);
                     modal.find('.modal-title').text(calEvent.title);
-                    modal.find('.modal-body').html("Professional: " + calEvent.professional_name + "<br>Room: " + calEvent.room_name + "<br>Class Type: " + calEvent.class_type_name);
+                    modal.find('.modal-body').html("Professional: " + calEvent.professional_name + "(" + calEvent.professional_id + ")" + "<br>Room: " + calEvent.room_name + "(" + calEvent.room_id + ")" + "<br>Class Type: " + calEvent.title + "(" + calEvent.class_type_id + ")");
                 });
+
+                console.log(calEvent);
 
                 $('#modal').modal('show');
             },
@@ -27630,12 +27632,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     element.addClass('past-event');
                 }
 
+                var url_data = '';
+
+                if (this.type == 'group') {
+                    url_data = '/schedules/' + event.start.unix() + '/' + event.room_id + '/group';
+                } else {
+                    url_data = '/schedules/' + event.start.unix() + '/' + event.room_id + '/group';
+                }
+
                 element.qtip({
                     prerender: true,
                     content: {
                         text: '<i class="fa fa-refresh fa-spin" style="font-size:20px"></i>', // The text to use whilst the AJAX request is loading
                         ajax: {
-                            url: '/schedules/' + event.start.unix() + '/' + event.room_id + '/group', // URL to the local file
+                            url: url_data, // URL to the local file
                             type: 'GET' }
                     },
                     position: {

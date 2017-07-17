@@ -8,9 +8,9 @@
     {{-- <h1>Agenda</h1> --}}
 
     {{-- {!! $calendar->calendar() !!} --}}
-    <calendar url="/calendar/data"></calendar>
+    <calendar url="/calendar/data" type="client"></calendar>
     <br><br>
-        
+
     <modal>
         <h4 slot="modal-title">O que você gostaria de agendar?</h4>
         <div class="modal-body" slot="modal-body">
