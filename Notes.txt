@@ -1,10 +1,14 @@
 MELHORIAS
 =========
+- tell how much to increase in price
+- Tell how many users the studio needs to keep growing and how to get them
+
 - Usar chosen nos campos
-- Usar npm para baixar o fullcalendar, moment e qtip local ao invés de usar do cdn
 - Esconder os campos de percentual no cadastro de profissional e só exibir se o tipo de atendimento for selecionado
 - Colocar quantidade de vezes por semana dentro do plano ?
 - Não permitir cadastrar um plano caso não haja um profissional e uma sala associados àquele atendimento
+
+OK - Usar npm para baixar o fullcalendar, moment e qtip local ao invés de usar do cdn
 
 NOVO
 ====

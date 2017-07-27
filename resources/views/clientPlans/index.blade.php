@@ -3,16 +3,18 @@
 @section('content')
   {{-- <div class="container"> --}}
     <h1>
-      Plans
+      Planos
       &nbsp;&nbsp;&nbsp;
-      <a href="{{ action('PlansController@create') }}" class="btn btn-success">Add New Plan</a>
+      <a href="{{ action('PlansController@create') }}" class="btn btn-success">Adicionar Novo Plano</a>
     </h1>
 
     <hr />
 
     @if (count($plans) == 0)
 
-    <h2>There no plans yet. You can <a href="{{ action('PlansController@create') }}">add one here.</a>
+    <h2>
+      Ainda não tem nenhum plano cadastrado. Você pode <a href="{{ action('PlansController@create') }}">adicionar um aqui.</a>
+    </h2>
 
     @else
 
@@ -20,12 +22,12 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Class</th>
-          <th>Name</th>
-          <th>Price</th>
-          <th>Times</th>
-          <th>Plan Duration</th>
-          <th>Actions</th>
+          <th>Atendimento</th>
+          <th>Nome</th>
+          <th>Preço</th>
+          <th>Vezes</th>
+          <th>Duração do Plano</th>
+          <th>Ações</th>
         </tr>
       </thead>
       <tbody>
@@ -33,15 +35,15 @@
         <tr>
           <td><a href="{{ action('PlansController@show', [$plan->id]) }}">{{ $plan->classType->name }}</a></td>
           <td><a href="{{ action('PlansController@show', [$plan->id]) }}">{{ $plan->name }}</a></td>
-          <td><a href="{{ action('PlansController@show', [$plan->id]) }}">{{ $plan->price }} per {{ $plan->price_type }}</a></td>
-          <td><a href="{{ action('PlansController@show', [$plan->id]) }}">{{ $plan->times }} per {{ $plan->times_type }}</a></td>
+          <td><a href="{{ action('PlansController@show', [$plan->id]) }}">{{ $plan->price }} por {{ $plan->price_type }}</a></td>
+          <td><a href="{{ action('PlansController@show', [$plan->id]) }}">{{ $plan->times }} por {{ $plan->times_type }}</a></td>
           <td><a href="{{ action('PlansController@show', [$plan->id]) }}">{{ $plan->duration }} {{ $plan->duration_type }}</a></td>
           <td>
-            <a href="{{ action('PlansController@edit', [$plan->id]) }}" class="btn pull-left">edit</a>
+            <a href="{{ action('PlansController@edit', [$plan->id]) }}" class="btn pull-left">editar</a>
             <form action="{{ action('PlansController@destroy', [$plan->id]) }}" method="post">
               {{ csrf_field() }}
               {{ method_field('DELETE') }}
-              <button type="submit" class="btn btn-link pull-left">delete</button>
+              <button type="submit" class="btn btn-link pull-left">apagar</button>
             </form>
           </td>
         </tr>

@@ -21,7 +21,7 @@ class CreateFinancialTransactionsTable extends Migration
 
             $table->integer('total_number_of_payments')->unsigned()->default(1);
 
-            $table->string('observation')->nullable;
+            $table->string('observation')->nullable();
 
             $table->timestamps();
         });

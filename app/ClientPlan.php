@@ -11,7 +11,7 @@ class ClientPlan extends Model
       'start_at'
     ];
 
-    protected $with = ['financialTransactions'];
+    protected $with = ['clientPlanDetails', 'financialTransactions'];
 
     public function client()
     {

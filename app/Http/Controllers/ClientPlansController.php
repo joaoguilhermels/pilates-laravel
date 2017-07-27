@@ -42,8 +42,9 @@ class ClientPlansController extends Controller
         $discounts = $form['discounts'];
         $professionals = $form['professionals'];
         $classTypePlans = $form['classTypePlans'];
+        $clientPlan = new ClientPlan();
 
-        return view('clientPlans.create', compact('client', 'rooms', 'classTypePlans', 'professionals', 'discounts'));
+        return view('clientPlans.create', compact('client', 'rooms', 'classTypePlans', 'professionals', 'discounts', 'clientPlan'));
     }
 
     public function edit(ClientPlan $clientPlan)

@@ -1,17 +1,17 @@
 <template id="plans-template">
   <div>
     <div class="form-group">
-      <label for="plans">Plan: </label>
+      <label for="plans">Plano: </label>
       <select name="plan_id" class="form-control" v-model="selectedPlan">
         <option value=""></option>
-          <optgroup :label="class_type.name" v-for="class_type in list">
+          <optgroup :label="class_type.name" v-for="class_type in class_types">
             <option v-for="(plan, index) in class_type.plans" :value="plan.id">{{ plan.name }} ({{ plan.times }}/{{ plan.times_type }})</option>
           </optgroup>
       </select>
     </div>
 
     <div class="form-group">
-      <label for="discounts">Discount: </label>
+      <label for="discounts">Desconto: </label>
       <select name="discount_id" class="form-control">
         <option value=""></option>
         <option v-for="discount in discounts" :value="discount.id">{{ discount.name }} ({{ discount.value }}/{{ discount.value_type }})</option>
@@ -20,20 +20,20 @@
 
     <div id="details" class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Details</h3>
+        <h3 class="panel-title">Detalhes</h3>
       </div>
       <div class="table-responsive">
         <table class="table table-striped">
           <tr v-for="day in daysOfWeek">
             <td class="col-md-3">
-              <label :for="dayOfWeekField(day.number, 'day_of_week')">Days of the week: </label>
+              <label :for="dayOfWeekField(day.number, 'day_of_week')">Dias da semana: </label>
               <select :name="dayOfWeekField(day.number, 'day_of_week')" class="form-control">
                 <option value=""></option>
                 <option v-for="dayOfWeek in daysOfWeekArr" :value="dayOfWeek.number">{{ dayOfWeek.name }}</option>
               </select>
             </td>
             <td class="col-md-3">
-              <label :for="dayOfWeekField(day.number, 'professional_id')">Professional: </label>
+              <label :for="dayOfWeekField(day.number, 'professional_id')">Profissionais: </label>
               <select class="form-control" :name="dayOfWeekField(day.number, 'professional_id')" v-if="selectedClass.professionals.length > 1">
                 <option value=""></option>
                 <option v-for="professional in selectedClass.professionals" :value="professional.id">{{ professional.name }}</option>
@@ -44,14 +44,14 @@
               </div>
             </td>
             <td class="col-md-3">
-              <label :for="dayOfWeekField(day.number, 'hour')">Time:</label>
+              <label :for="dayOfWeekField(day.number, 'hour')">Horas:</label>
               <select class="form-control" :name="dayOfWeekField(day.number, 'hour')">
                 <option value=""></option>
                 <option v-for="time in times" :value="time">{{ time }}:00</option>
               </select>
             </td>
             <td class="col-md-3">
-              <label :for="dayOfWeekField(day.number, 'room_id')">Room: </label>
+              <label :for="dayOfWeekField(day.number, 'room_id')">Salas: </label>
               <select class="form-control" :name="dayOfWeekField(day.number, 'room_id')" v-if="selectedClass.rooms.length > 1">
                 <option value=""></option>
                 <option v-for="room in selectedClass.rooms" :value="room.id">{{ room.name }}</option>
@@ -69,7 +69,11 @@
 </template>
 <script>
   export default {
-    props: ['list', 'discounts'],
+    props: [
+      'class_types',
+      'client_plan',
+      'discounts'
+    ],
 
     data: function() {
         return {
@@ -87,13 +91,17 @@
         }
     },
 
+    mounted () {
+      this.selectedPlan = this.client_plan.plan_id;
+    },
+
     computed: {
         daysOfWeek: function() {
             var times = 0,
                 self = this
 
             if (typeof self.selectedPlan !== 'object') {
-                self.list.forEach(function(classType) {
+                self.class_types.forEach(function(classType) {
                     classType.plans.forEach(function(classTypePlan) {
                         if (classTypePlan.id == self.selectedPlan) {
                             self.selectedClass = classType;
@@ -121,7 +129,7 @@
                 self = this
 
             if (typeof self.selectedPlan !== 'object') {
-                self.list.forEach(function(classType) {
+                self.class_types.forEach(function(classType) {
                     classType.plans.forEach(function(classTypePlan) {
                         if (classTypePlan.id == self.selectedPlan) {
                             self.selectedClass = classType;

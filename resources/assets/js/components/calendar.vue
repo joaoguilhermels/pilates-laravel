@@ -75,8 +75,6 @@ export default {
                     );
                 });
 
-                console.log(calEvent);
-
                 $('#modal').modal('show');
             },
             eventRender: function(event, element) {

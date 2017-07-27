@@ -27619,8 +27619,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     modal.find('.modal-body').html("Professional: " + calEvent.professional_name + "(" + calEvent.professional_id + ")" + "<br>Room: " + calEvent.room_name + "(" + calEvent.room_id + ")" + "<br>Class Type: " + calEvent.title + "(" + calEvent.class_type_id + ")");
                 });
 
-                console.log(calEvent);
-
                 $('#modal').modal('show');
             },
             eventRender: function eventRender(event, element) {
@@ -28039,7 +28037,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['list', 'discounts'],
+    props: ['class_types', 'client_plan', 'discounts'],
 
     data: function data() {
         return {
@@ -28051,13 +28049,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         };
     },
 
+    mounted: function mounted() {
+        this.selectedPlan = this.client_plan.plan_id;
+    },
+
+
     computed: {
         daysOfWeek: function daysOfWeek() {
             var times = 0,
                 self = this;
 
             if (_typeof(self.selectedPlan) !== 'object') {
-                self.list.forEach(function (classType) {
+                self.class_types.forEach(function (classType) {
                     classType.plans.forEach(function (classTypePlan) {
                         if (classTypePlan.id == self.selectedPlan) {
                             self.selectedClass = classType;
@@ -28085,7 +28088,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 self = this;
 
             if (_typeof(self.selectedPlan) !== 'object') {
-                self.list.forEach(function (classType) {
+                self.class_types.forEach(function (classType) {
                     classType.plans.forEach(function (classTypePlan) {
                         if (classTypePlan.id == self.selectedPlan) {
                             self.selectedClass = classType;
@@ -66965,7 +66968,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "for": "plans"
     }
-  }, [_vm._v("Plan: ")]), _vm._v(" "), _c('select', {
+  }, [_vm._v("Plano: ")]), _vm._v(" "), _c('select', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -66991,7 +66994,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "value": ""
     }
-  }), _vm._v(" "), _vm._l((_vm.list), function(class_type) {
+  }), _vm._v(" "), _vm._l((_vm.class_types), function(class_type) {
     return _c('optgroup', {
       attrs: {
         "label": class_type.name
@@ -67009,7 +67012,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "for": "discounts"
     }
-  }, [_vm._v("Discount: ")]), _vm._v(" "), _c('select', {
+  }, [_vm._v("Desconto: ")]), _vm._v(" "), _c('select', {
     staticClass: "form-control",
     attrs: {
       "name": "discount_id"
@@ -67040,7 +67043,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "for": _vm.dayOfWeekField(day.number, 'day_of_week')
       }
-    }, [_vm._v("Days of the week: ")]), _vm._v(" "), _c('select', {
+    }, [_vm._v("Dias da semana: ")]), _vm._v(" "), _c('select', {
       staticClass: "form-control",
       attrs: {
         "name": _vm.dayOfWeekField(day.number, 'day_of_week')
@@ -67061,7 +67064,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "for": _vm.dayOfWeekField(day.number, 'professional_id')
       }
-    }, [_vm._v("Professional: ")]), _vm._v(" "), (_vm.selectedClass.professionals.length > 1) ? _c('select', {
+    }, [_vm._v("Profissionais: ")]), _vm._v(" "), (_vm.selectedClass.professionals.length > 1) ? _c('select', {
       staticClass: "form-control",
       attrs: {
         "name": _vm.dayOfWeekField(day.number, 'professional_id')
@@ -67090,7 +67093,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "for": _vm.dayOfWeekField(day.number, 'hour')
       }
-    }, [_vm._v("Time:")]), _vm._v(" "), _c('select', {
+    }, [_vm._v("Horas:")]), _vm._v(" "), _c('select', {
       staticClass: "form-control",
       attrs: {
         "name": _vm.dayOfWeekField(day.number, 'hour')
@@ -67111,7 +67114,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "for": _vm.dayOfWeekField(day.number, 'room_id')
       }
-    }, [_vm._v("Room: ")]), _vm._v(" "), (_vm.selectedClass.rooms.length > 1) ? _c('select', {
+    }, [_vm._v("Salas: ")]), _vm._v(" "), (_vm.selectedClass.rooms.length > 1) ? _c('select', {
       staticClass: "form-control",
       attrs: {
         "name": _vm.dayOfWeekField(day.number, 'room_id')
@@ -67141,7 +67144,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel-heading"
   }, [_c('h3', {
     staticClass: "panel-title"
-  }, [_vm._v("Details")])])
+  }, [_vm._v("Detalhes")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
