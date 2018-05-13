@@ -92,7 +92,19 @@ class CalendarController extends Controller
                         ->join('professionals', 'schedules.professional_id', '=', 'professionals.id')
                         ->join('clients', 'schedules.client_id', '=', 'clients.id')
                         ->join('rooms', 'schedules.room_id', '=', 'rooms.id')
-                        ->select('schedules.id', 'schedules.room_id', 'schedules.class_type_id', 'schedules.professional_id', 'schedules.class_type_status_id', 'schedules.start_at AS start', 'schedules.end_at AS end', 'clients.name AS title', 'class_type_statuses.color AS color', 'clients.name AS description', 'professionals.name AS professional_name', 'rooms.name AS room_name', 'class_types.name as class_type_name')
+                        ->select('schedules.id',
+                            'schedules.room_id',
+                            'schedules.class_type_id',
+                            'schedules.professional_id',
+                            'schedules.class_type_status_id',
+                            'schedules.start_at AS start',
+                            'schedules.end_at AS end',
+                            'clients.name AS title',
+                            'class_type_statuses.color AS color',
+                            'clients.name AS description',
+                            'professionals.name AS professional_name',
+                            'rooms.name AS room_name',
+                            'class_types.name as class_type_name')
                         ->whereDate('start_at', '>=', $start)
                         ->whereDate('end_at', '<=', $end)
                         ->get();
