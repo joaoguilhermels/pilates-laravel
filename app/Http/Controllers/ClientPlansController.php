@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Arr;
 use App\ClassType;
 use App\ClassTypeStatus;
 use App\Client;
@@ -91,7 +92,7 @@ class ClientPlansController extends Controller
         $dates = [];
 
         foreach ($request->daysOfWeek as $dayOfWeek) {
-            $nameOfDayOfWeek = array_get($this->daysOfWeek, $dayOfWeek['dayOfWeek']);
+            $nameOfDayOfWeek = Arr::get($this->daysOfWeek, $dayOfWeek['dayOfWeek']);
 
             $values = new \DatePeriod(
                 \Carbon\Carbon::parse('first '.$nameOfDayOfWeek.' of '.$startDateMonth.' '.$startDateYear),
@@ -178,7 +179,7 @@ class ClientPlansController extends Controller
         $daysOfWeek = collect($request->daysOfWeek);
 
         $datesGrouped = $daysOfWeek->map(function ($dayOfWeek) use ($startDate, $endDate, $plan) {
-            $nameOfDayOfWeek = array_get($this->daysOfWeek, $dayOfWeek['day_of_week']);
+            $nameOfDayOfWeek = Arr::get($this->daysOfWeek, $dayOfWeek['day_of_week']);
 
             // User for 30 days calculation
             /*$dates = new \DatePeriod(
@@ -256,7 +257,7 @@ class ClientPlansController extends Controller
 
         $classTypeStatusOkId = $classType->statuses->first()->id;
 
-        $nameOfDayOfWeek = array_get($this->daysOfWeek, $dayOfWeek['day_of_week']);
+        $nameOfDayOfWeek = Arr::get($this->daysOfWeek, $dayOfWeek['day_of_week']);
 
         $dates = $groupedDates->where('day_of_week', $nameOfDayOfWeek);
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Arr;
 use App\BankAccount;
 use App\ClientPlan;
 use App\ClientPlanDetail;
@@ -38,7 +39,7 @@ class ClientPlanPaymentsController extends Controller
 
         $payments = collect($request->payments);
         $payments->map(function ($payment) use ($financialTransaction) {
-            $payment = array_add($payment, 'type', 'received');
+            $payment = Arr::add($payment, 'type', 'received');
             $financialTransaction->financialTransactionDetails()->create($payment);
         });
 
