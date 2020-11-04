@@ -12,7 +12,7 @@ class ClassType extends Model
       'max_number_of_clients',
       'duration',
       'extra_class_price',
-      'trial'
+      'trial',
     ];
 
     /**

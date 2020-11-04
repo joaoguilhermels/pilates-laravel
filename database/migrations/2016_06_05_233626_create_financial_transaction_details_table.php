@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateFinancialTransactionDetailsTable extends Migration
 {
@@ -20,7 +20,7 @@ class CreateFinancialTransactionDetailsTable extends Migration
             $table->integer('payment_method_id')->unsigned()->index();
 
             $table->integer('bank_account_id')->unsigned()->index()->nullable(); //pagamento em dinheiro não precisa de banco
-            
+
             $table->date('date');
             $table->float('value');
             $table->enum('type', ['received', 'paid']);

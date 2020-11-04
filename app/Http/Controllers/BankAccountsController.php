@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use Session;
 use App\BankAccount;
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Http\Requests\BankAccountRequest;
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Session;
 
 class BankAccountsController extends Controller
 {
@@ -44,7 +43,7 @@ class BankAccountsController extends Controller
     {
         $bankAccount = BankAccount::create($request->all());
 
-        Session::flash('message', 'Successfully created bank account ' . $bankAccount->name);
+        Session::flash('message', 'Successfully created bank account '.$bankAccount->name);
 
         return redirect('bank-accounts');
     }
@@ -82,7 +81,7 @@ class BankAccountsController extends Controller
     {
         $bankAccount->update($request->all());
 
-        Session::flash('message', 'Successfully updated bank account ' . $bankAccount->name);
+        Session::flash('message', 'Successfully updated bank account '.$bankAccount->name);
 
         return redirect('bank-accounts');
     }
@@ -97,7 +96,7 @@ class BankAccountsController extends Controller
     {
         $bankAccount->delete();
 
-        Session::flash('message', 'Successfully deleted bank account ' . $bankAccount->name);
+        Session::flash('message', 'Successfully deleted bank account '.$bankAccount->name);
 
         return redirect('bank-accounts');
     }

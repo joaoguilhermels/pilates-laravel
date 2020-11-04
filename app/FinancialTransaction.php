@@ -12,7 +12,7 @@ class FinancialTransaction extends Model
       'financiable_type',
       'name',
       'total_number_of_payments',
-      'observation'
+      'observation',
     ];
 
     protected $with = ['FinancialTransactionDetails'];

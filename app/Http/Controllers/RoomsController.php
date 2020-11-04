@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use Session;
-use App\Room;
 use App\ClassType;
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Http\Requests\RoomRequest;
-use App\Http\Controllers\Controller;
+use App\Room;
+use Illuminate\Http\Request;
+use Session;
 
 class RoomsController extends Controller
 {
@@ -47,7 +46,7 @@ class RoomsController extends Controller
 
         $room->classTypes()->sync($request->class_type_list ?? []);
 
-        Session::flash('message', 'Successfully added room ' . $room->name);
+        Session::flash('message', 'Successfully added room '.$room->name);
 
         return redirect('rooms');
     }
@@ -59,7 +58,7 @@ class RoomsController extends Controller
         // Using PHP7 null coalise operator ??
         $room->classTypes()->sync($request->class_type_list ?? []);
 
-        Session::flash('message', 'Successfully updated room ' . $room->name);
+        Session::flash('message', 'Successfully updated room '.$room->name);
 
         return redirect('rooms');
     }
@@ -68,7 +67,7 @@ class RoomsController extends Controller
     {
         $room->destroy($room->id);
 
-        Session::flash('message', 'Successfully deleted room ' . $room->name);
+        Session::flash('message', 'Successfully deleted room '.$room->name);
 
         return redirect('rooms');
     }

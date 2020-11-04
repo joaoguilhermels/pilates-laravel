@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Illuminate\Database\Seeder;
 
 class RoomsTableSeeder extends Seeder
 {
@@ -16,7 +16,7 @@ class RoomsTableSeeder extends Seeder
             $faker = Faker::create();
 
             $classTypes = App\ClassType::select(['id'])->pluck('id')->toArray();
-            
+
             $room->classTypes()->sync($faker->randomElements($classTypes, 2));
         });
     }

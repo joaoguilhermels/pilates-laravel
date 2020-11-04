@@ -2,19 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Requests\ScheduleRequest;
-
-use Session;
-
-use App\Client;
-use App\Schedule;
 use App\ClassType;
 use App\ClassTypeStatus;
-
-use \Carbon\Carbon;
+use App\Client;
+use App\Http\Requests;
+use App\Http\Requests\ScheduleRequest;
+use App\Schedule;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Session;
 
 class TrialSchedulesController extends Controller
 {
@@ -43,12 +39,12 @@ class TrialSchedulesController extends Controller
             'trial' => true,
             'end_at' => Carbon::parse($request->start_at)->addMinutes($classType->duration)->toDateTimeString(),
             'client_id' => $client->id,
-            'class_type_status_id' => $classTypeStatus->id
+            'class_type_status_id' => $classTypeStatus->id,
         ]);
 
         $schedule = Schedule::create($request->all());
 
-        Session::flash('message', 'Successfully added trial schedule ' . $schedule->start_at);
+        Session::flash('message', 'Successfully added trial schedule '.$schedule->start_at);
 
         return redirect('calendar');
     }

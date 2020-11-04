@@ -25,7 +25,7 @@ class PlanRequest extends Request
     {
         return [
             'name' => 'required',
-            'price' => 'required'
+            'price' => 'required',
         ];
     }
 }

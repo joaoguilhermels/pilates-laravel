@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Illuminate\Database\Seeder;
 
 class ProfessionalsTableSeeder extends Seeder
 {
@@ -16,10 +16,10 @@ class ProfessionalsTableSeeder extends Seeder
             $faker = Faker::create();
 
             $classTypes = App\ClassType::select(['id'])->pluck('id')->toArray();
-            
+
             $professional->classTypes()->attach($faker->randomElement($classTypes), [
               'value' => '45',
-              'value_type' => 'percentage'
+              'value_type' => 'percentage',
             ]);
         });
     }

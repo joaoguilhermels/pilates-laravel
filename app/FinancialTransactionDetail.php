@@ -14,7 +14,7 @@ class FinancialTransactionDetail extends Model
       'value',
       'type',
       'payment_number',
-      'observation'
+      'observation',
     ];
 
     public function financialTransaction()

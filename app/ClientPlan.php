@@ -8,7 +8,7 @@ class ClientPlan extends Model
 {
     protected $fillable = [
       'plan_id',
-      'start_at'
+      'start_at',
     ];
 
     protected $with = ['clientPlanDetails', 'financialTransactions'];

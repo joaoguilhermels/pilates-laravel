@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use Session;
-use App\PaymentMethod;
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Http\Requests\PaymentMethodRequest;
-use App\Http\Controllers\Controller;
+use App\PaymentMethod;
+use Illuminate\Http\Request;
+use Session;
 
 class PaymentMethodsController extends Controller
 {
@@ -44,7 +43,7 @@ class PaymentMethodsController extends Controller
     {
         $paymentMethod = PaymentMethod::create($request->all());
 
-        Session::flash('message', 'Successfully added payment method ' . $paymentMethod->name);
+        Session::flash('message', 'Successfully added payment method '.$paymentMethod->name);
 
         return redirect('payment-methods');
     }
@@ -82,7 +81,7 @@ class PaymentMethodsController extends Controller
     {
         $paymentMethod->update($request->all());
 
-        Session::flash('message', 'Successfully updated payment method ' . $paymentMethod->name);
+        Session::flash('message', 'Successfully updated payment method '.$paymentMethod->name);
 
         return redirect('payment-methods');
     }
@@ -97,7 +96,7 @@ class PaymentMethodsController extends Controller
     {
         $paymentMethod->delete();
 
-        Session::flash('message', 'Successfully deleted payment method ' . $paymentMethod->name);
+        Session::flash('message', 'Successfully deleted payment method '.$paymentMethod->name);
 
         return redirect('payment-methods');
     }

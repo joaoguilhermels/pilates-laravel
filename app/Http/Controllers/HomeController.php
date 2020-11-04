@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
-use Illuminate\Http\Request;
-
 use App\Client;
-use App\Schedule;
+use App\Http\Requests;
 use App\Professional;
-
+use App\Schedule;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -31,7 +29,7 @@ class HomeController extends Controller
                     ->sum('price');
 
         $unscheduled = Schedule::Unscheduled(Carbon::now()->month, Carbon::now()->year);
-//dd($unscheduled);
+        //dd($unscheduled);
         $month = money_format('%i', $month);
         $year = money_format('%i', $year);
 

@@ -2,25 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use Session;
-
-use App\Plan;
-use App\Room;
-use App\Client;
-use App\Discount;
-use App\ClientPlan;
-use App\ClientPlanDetail;
 use App\ClassType;
 use App\ClassTypeStatus;
-use App\Professional;
-use App\Schedule;
-
+use App\Client;
+use App\ClientPlan;
+use App\ClientPlanDetail;
+use App\Discount;
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Http\Requests\ClientPlanRequest;
-
-use App\Http\Controllers\Controller;
+use App\Plan;
+use App\Professional;
+use App\Room;
+use App\Schedule;
+use Illuminate\Http\Request;
+use Session;
 
 class ClientPlansController extends Controller
 {
@@ -31,7 +27,7 @@ class ClientPlansController extends Controller
                   3 => 'Wednesday',
                   4 => 'Thursday',
                   5 => 'Friday',
-                  6 => 'Saturday'
+                  6 => 'Saturday',
               ];
 
     public function create(Client $client)
@@ -64,7 +60,7 @@ class ClientPlansController extends Controller
         $form['rooms'] = Room::orderBy('name')->get();
         $form['daysOfWeek'] = $this->daysOfWeek;
         $form['classTypePlans'] = ClassType::with(['plans' => function ($query) {
-                                        $query->orderBy('name');
+            $query->orderBy('name');
         }, 'professionals', 'rooms', 'discounts'])
                                     ->has('plans')
                                     ->orderBy('name')
@@ -98,13 +94,13 @@ class ClientPlansController extends Controller
             $nameOfDayOfWeek = array_get($this->daysOfWeek, $dayOfWeek['dayOfWeek']);
 
             $values = new \DatePeriod(
-                \Carbon\Carbon::parse("first " . $nameOfDayOfWeek . " of " . $startDateMonth . " " . $startDateYear),
+                \Carbon\Carbon::parse('first '.$nameOfDayOfWeek.' of '.$startDateMonth.' '.$startDateYear),
                 \Carbon\CarbonInterval::week(),
-                \Carbon\Carbon::parse("first " . $nameOfDayOfWeek . " of " . $startDateMonth . " " . $startDateYear . " + " . $plan->duration . " " . $plan->duration_type)
+                \Carbon\Carbon::parse('first '.$nameOfDayOfWeek.' of '.$startDateMonth.' '.$startDateYear.' + '.$plan->duration.' '.$plan->duration_type)
             );
 
             foreach ($values as $date) {
-                $dates[] = $date->format("d-m-Y");
+                $dates[] = $date->format('d-m-Y');
             }
         }
 
@@ -115,16 +111,16 @@ class ClientPlansController extends Controller
 
         foreach ($dates as $date) {
             $dateObj = date_create($date);
-            list($year, $month) = explode(" ", $dateObj->format("F Y"));
+            list($year, $month) = explode(' ', $dateObj->format('F Y'));
 
-            $datesGrouped[$year . " " . $month][] = $dateObj->format("d-m-Y");
+            $datesGrouped[$year.' '.$month][] = $dateObj->format('d-m-Y');
         }
 
         return view('clientPlans.review', compact('datesGrouped', 'request', 'client', 'classType', 'plan'));
     }
 
     // Static function used to sort dates used on review
-    static function date_compare($date1, $date2)
+    public static function date_compare($date1, $date2)
     {
         $t1 = strtotime($date1);
         $t2 = strtotime($date2);
@@ -136,8 +132,8 @@ class ClientPlansController extends Controller
     {
         $clientPlan = new ClientPlan;
 
-        $clientPlan->start_at       = $request->start_at;
-        $clientPlan->plan_id        = $request->plan_id;
+        $clientPlan->start_at = $request->start_at;
+        $clientPlan->plan_id = $request->plan_id;
 
         $clientPlan = $client->clientPlans()->save($clientPlan);
 
@@ -147,15 +143,15 @@ class ClientPlansController extends Controller
             $this->setSchedules($request, $clientPlan, $client, $dayOfWeek, $groupedDates);
         }
 
-        Session::flash('message', 'Successfully added a plan to ' . $client->name);
+        Session::flash('message', 'Successfully added a plan to '.$client->name);
 
         return redirect('clients');
     }
 
     public function update(ClientPlanRequest $request, ClientPlan $clientPlan)
     {
-        $clientPlan->start_at       = $request->start_at;
-        $clientPlan->plan_id        = $request->plan_id;
+        $clientPlan->start_at = $request->start_at;
+        $clientPlan->plan_id = $request->plan_id;
 
         $clientPlan = $client->clientPlans()->save($clientPlan);
 
@@ -165,7 +161,7 @@ class ClientPlansController extends Controller
             $this->setSchedules($request, $clientPlan, $client, $dayOfWeek, $groupedDates);
         }
 
-        Session::flash('message', 'Successfully update the plan to ' . $client->name);
+        Session::flash('message', 'Successfully update the plan to '.$client->name);
 
         return redirect('clients');
     }
@@ -194,11 +190,11 @@ class ClientPlansController extends Controller
             $dates = [];
 
             // To have the month of starting date plus X months remove the "- 1"
-            $month = $endDate->format("n");
-            $year = $endDate->format("Y");
+            $month = $endDate->format('n');
+            $year = $endDate->format('Y');
 
-            $beginDate = strtotime("first day of " . $startDate->format("Y") . "-" . $startDate->format("n"));
-            $endDate = strtotime("last day of " . $year . "-" . $month);
+            $beginDate = strtotime('first day of '.$startDate->format('Y').'-'.$startDate->format('n'));
+            $endDate = strtotime('last day of '.$year.'-'.$month);
 
             for ($date = strtotime($nameOfDayOfWeek, $beginDate); $date <= $endDate; $date = strtotime('+1 week', $date)) {
                 $dates[] = new \Carbon\Carbon(date('Y-m-d', $date));
@@ -216,9 +212,9 @@ class ClientPlansController extends Controller
         ->flatten()
         ->map(function ($item) {
             $item = [
-                "month_year" => $item->format("m-Y"),
-                "day_of_week" => $item->format("l"),
-                "date" => $item
+                'month_year' => $item->format('m-Y'),
+                'day_of_week' => $item->format('l'),
+                'date' => $item,
             ];
 
             return $item;
@@ -231,7 +227,7 @@ class ClientPlansController extends Controller
     {
         $clientPlanDetail = new ClientPlanDetail;
 
-        $clientPlanDetail->hour = $dayOfWeek['hour'] . ':00';
+        $clientPlanDetail->hour = $dayOfWeek['hour'].':00';
         $clientPlanDetail->room_id = $dayOfWeek['room_id'];
         $clientPlanDetail->day_of_week = $dayOfWeek['day_of_week'];
         $clientPlanDetail->professional_id = $dayOfWeek['professional_id'];
@@ -240,14 +236,14 @@ class ClientPlansController extends Controller
 
         $classType = ClassType::with([
             'plans' => function ($query) use ($request) {
-                           return $query->where('id', $request->plan_id);
+                return $query->where('id', $request->plan_id);
             },
             'statuses' => function ($query) {
-                              return $query->where('name', 'OK');
+                return $query->where('name', 'OK');
             },
             'professionals' => function ($query) use ($clientPlanDetail) {
-                                   return $query->where('professional_id', $clientPlanDetail->professional_id);
-            }
+                return $query->where('professional_id', $clientPlanDetail->professional_id);
+            },
         ])
         ->findOrFail($clientPlan->plan->class_type_id);
 
@@ -279,15 +275,15 @@ class ClientPlansController extends Controller
 
             $schedule = new Schedule;
 
-            $schedule->price                       = $classPrice;
-            $schedule->trial                       = false;
-            $schedule->end_at                      = $dateEnd->format("Y-m-d H:i:s");
-            $schedule->room_id                     = $clientPlanDetail->room_id;
-            $schedule->start_at                    = $dateStart->format("Y-m-d H:i:s");
-            $schedule->client_id                   = $client->id;
-            $schedule->class_type_id               = $clientPlan->plan->class_type_id;
-            $schedule->professional_id             = $clientPlanDetail->professional_id;
-            $schedule->class_type_status_id        = $classTypeStatusOkId;
+            $schedule->price = $classPrice;
+            $schedule->trial = false;
+            $schedule->end_at = $dateEnd->format('Y-m-d H:i:s');
+            $schedule->room_id = $clientPlanDetail->room_id;
+            $schedule->start_at = $dateStart->format('Y-m-d H:i:s');
+            $schedule->client_id = $client->id;
+            $schedule->class_type_id = $clientPlan->plan->class_type_id;
+            $schedule->professional_id = $clientPlanDetail->professional_id;
+            $schedule->class_type_status_id = $classTypeStatusOkId;
             $schedule->value_professional_receives = $this->setProfessionalValue($professionalClass, $classPrice);
 
             $clientPlanDetail->schedules()->save($schedule);
@@ -298,15 +294,15 @@ class ClientPlansController extends Controller
     {
         if ($plan->price_type == 'class') {
             return $plan->price;
-        } else // per month
-        {
-            $daysCount = $groupedDates->where('month_year', $date->format("m-Y"))->count();
+        } else { // per month
+            $daysCount = $groupedDates->where('month_year', $date->format('m-Y'))->count();
+
             return round($plan->price / $daysCount, 2);
         }
     }
 
     /**
-     * Returns the value the professional receives for one specific class
+     * Returns the value the professional receives for one specific class.
      *
      * Undocumented function long description
      *
@@ -332,7 +328,7 @@ class ClientPlansController extends Controller
 
     public function destroy(ClientPlan $clientPlan)
     {
-        Session::flash('message', 'Successfully deleted client plan ' . $clientPlan->name);
+        Session::flash('message', 'Successfully deleted client plan '.$clientPlan->name);
 
         // Check if all items can be deleted
 

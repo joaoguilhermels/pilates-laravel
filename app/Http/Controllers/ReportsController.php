@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use DB;
-
-use Illuminate\Http\Request;
 use App\FinancialTransaction;
 use App\FinancialTransactionDetail;
 use App\Http\Requests;
+use DB;
+use Illuminate\Http\Request;
 
 class ReportsController extends Controller
 {
@@ -18,7 +17,7 @@ class ReportsController extends Controller
 
     public function showCashJournal(Request $request)
     {
-        $yearMonth = \Carbon\Carbon::parse($request->{"year-month"});
+        $yearMonth = \Carbon\Carbon::parse($request->{'year-month'});
 
         $financialTransactionDetails = FinancialTransactionDetail::whereYear('date', '=', $yearMonth->year)
             ->whereMonth('date', '=', $yearMonth->month)

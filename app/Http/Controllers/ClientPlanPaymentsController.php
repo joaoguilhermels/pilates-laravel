@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Schedule;
+use App\BankAccount;
 use App\ClientPlan;
 use App\ClientPlanDetail;
-use App\PaymentMethod;
-use App\BankAccount;
 use App\FinancialTransaction;
 use App\FinancialTransactionDetail;
 use App\Http\Requests;
 use App\Http\Requests\FinancialTransactionRequest;
-
+use App\PaymentMethod;
+use App\Schedule;
 use Debugbar;
+use Illuminate\Http\Request;
 
 class ClientPlanPaymentsController extends Controller
 {
@@ -33,7 +31,7 @@ class ClientPlanPaymentsController extends Controller
     public function store(FinancialTransactionRequest $request, ClientPlan $clientPlan)
     {
         $request->request->add([
-            'name' => 'Plan payment'
+            'name' => 'Plan payment',
         ]);
 
         $financialTransaction = $clientPlan->financialTransactions()->create($request->all());
@@ -91,6 +89,6 @@ class ClientPlanPaymentsController extends Controller
 
     public function destroy()
     {
-        # code...
+        // code...
     }
 }

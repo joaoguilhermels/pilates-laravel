@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use DB;
-use Session;
 use App\ClassType;
 use App\ClassTypeStatus;
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Http\Requests\ClassTypeRequest;
 use App\Http\Requests\ClassTypeStatusRequest;
-use App\Http\Controllers\Controller;
+use DB;
+use Illuminate\Http\Request;
+use Session;
 
 class ClassTypesController extends Controller
 {
@@ -54,7 +53,7 @@ class ClassTypesController extends Controller
             $classType->statuses()->create($status);
         }
 
-        Session::flash('message', 'Successfully created class ' . $classType->name);
+        Session::flash('message', 'Successfully created class '.$classType->name);
 
         return redirect('classes');
     }
@@ -67,7 +66,7 @@ class ClassTypesController extends Controller
             $classType->statuses()->find($status['id'])->update($status);
         }
 
-        Session::flash('message', 'Successfully updated class ' . $classType->name);
+        Session::flash('message', 'Successfully updated class '.$classType->name);
 
         return redirect('classes');
     }
@@ -76,7 +75,7 @@ class ClassTypesController extends Controller
     {
         $classType->delete();
 
-        Session::flash('message', 'Successfully deleted class ' . $classType->name);
+        Session::flash('message', 'Successfully deleted class '.$classType->name);
 
         return redirect('classes');
     }
@@ -87,28 +86,28 @@ class ClassTypesController extends Controller
           'name' => 'OK',
           'charge_client' => true,
           'pay_professional' => true,
-          'color' => '#6FCB6D'
+          'color' => '#6FCB6D',
         ]);
 
         $statusDesmarcou = new ClassTypeStatus([
           'name' => 'Desmarcou',
           'charge_client' => null,
           'pay_professional' => null,
-          'color' => '#685DFF'
+          'color' => '#685DFF',
         ]);
 
         $statusFaltou = new ClassTypeStatus([
           'name' => 'Faltou',
           'charge_client' => true,
           'pay_professional' => null,
-          'color' => '#FF1E00'
+          'color' => '#FF1E00',
         ]);
 
         $statusReposicao = new ClassTypeStatus([
           'name' => 'Reposição',
           'charge_client' => true,
           'pay_professional' => true,
-          'color' => '#00B9FE'
+          'color' => '#00B9FE',
         ]);
 
         $statuses = collect([$statusOk, $statusDesmarcou, $statusReposicao, $statusFaltou]);

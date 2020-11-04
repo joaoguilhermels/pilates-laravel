@@ -22,7 +22,6 @@
 });
 */
 
-
 $factory->define(App\Client::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
@@ -32,13 +31,12 @@ $factory->define(App\Client::class, function (Faker\Generator $faker) {
     ];
 });
 
-
 $factory->define(App\ClassType::class, function (Faker\Generator $faker) {
     return [
-        'name' => 'Class ' . $faker->name,
+        'name' => 'Class '.$faker->name,
         'max_number_of_clients' => rand(1, 3),
         'duration' => 60,
-        'extra_class_price' => rand(50, 70)
+        'extra_class_price' => rand(50, 70),
     ];
 });
 
@@ -51,13 +49,11 @@ $factory->define(App\ClassTypeStatus::class, function (Faker\Generator $faker) {
     ];
 });
 
-
 $factory->define(App\Room::class, function (Faker\Generator $faker) {
     return [
-        'name' => 'Room ' . $faker->name,
+        'name' => 'Room '.$faker->name,
     ];
 });
-
 
 $factory->define(App\Professional::class, function (Faker\Generator $faker) {
     return [
@@ -67,19 +63,18 @@ $factory->define(App\Professional::class, function (Faker\Generator $faker) {
     ];
 });
 
-
 $factory->define(App\Plan::class, function (Faker\Generator $faker) {
     $classTypes = App\ClassType::select(['id'])->pluck('id')->toArray();
 
     return [
-        'name'          => 'Plan ' . $faker->name,
+        'name'          => 'Plan '.$faker->name,
         'class_type_id' => $faker->randomElement($classTypes),
         'times'         => $faker->randomElement([1, 3]),
         'times_type'    => $faker->randomElement(['week', 'month']),
         'duration'      => $faker->randomElement([1, 3, 6, 12]),
         'duration_type' => $faker->randomElement(['week', 'month']),
         'price'         => $faker->randomFloat(0, 340, 400),
-        'price_type'    => $faker->randomElement(['class', 'month'])
+        'price_type'    => $faker->randomElement(['class', 'month']),
     ];
 });
 
@@ -92,6 +87,6 @@ $factory->define(App\ClientPlan::class, function (Faker\Generator $faker) {
         'client_id' => $faker->randomElement($clients),
         'class_type_id' => $faker->randomElement($classes),
         'plan_id' => $faker->randomElement($plans),
-        'start_at' => $faker->dateTime()
+        'start_at' => $faker->dateTime(),
     ];
 });

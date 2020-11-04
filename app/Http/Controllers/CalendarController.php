@@ -2,48 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-
-use Carbon\Carbon;
-
-use App\Schedule;
 use App\ClassType;
 use App\ClassTypeStatus;
+use App\Http\Requests;
+use App\Schedule;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class CalendarController extends Controller
 {
     public function setGroupTitle(Schedule $schedule)
     {
-        return $schedule->classType->name . ' - ' . $schedule->professional->name;
+        return $schedule->classType->name.' - '.$schedule->professional->name;
     }
 
     public function setEventTitle(Schedule $schedule)
     {
-        $badge = "";
+        $badge = '';
 
         if ($schedule->trial) {
-            $badge = "<span class=\"label label-warning\">AE</span>";
+            $badge = '<span class="label label-warning">AE</span>';
         }
 
-        if ($schedule->observation <> '') {
-            $badge .= " <i class=\"fa fa-comment\"></i>";
+        if ($schedule->observation != '') {
+            $badge .= ' <i class="fa fa-comment"></i>';
         }
 
-        return $badge . ' ' . $schedule->client->name . ' - ' . $schedule->classType->name;
+        return $badge.' '.$schedule->client->name.' - '.$schedule->classType->name;
     }
 
     public function eventDescription(Schedule $schedule)
     {
-        $description =  '<strong>Client:</strong> ' . $schedule->client->name . '<br>' .
-                        '<strong>Class:</strong> ' . $schedule->classType->name . '<br>' .
-                        '<strong>Date/Time:</strong> ' . $schedule->start_at->format("d/m/Y H:i") . ' to ' . $schedule->end_at->format("H:i") . '<br>' .
-                        '<strong>Professional:</strong> ' . $schedule->professional->name . '<br>' .
-                        '<strong>Status:</strong> ' . $schedule->classTypeStatus->name;
+        $description = '<strong>Client:</strong> '.$schedule->client->name.'<br>'.
+                        '<strong>Class:</strong> '.$schedule->classType->name.'<br>'.
+                        '<strong>Date/Time:</strong> '.$schedule->start_at->format('d/m/Y H:i').' to '.$schedule->end_at->format('H:i').'<br>'.
+                        '<strong>Professional:</strong> '.$schedule->professional->name.'<br>'.
+                        '<strong>Status:</strong> '.$schedule->classTypeStatus->name;
 
-        if ($schedule->observation <> '') {
-            $description .= '<br><strong>Observation:</strong><br> ' . $schedule->observation;
+        if ($schedule->observation != '') {
+            $description .= '<br><strong>Observation:</strong><br> '.$schedule->observation;
         }
 
         return $description;

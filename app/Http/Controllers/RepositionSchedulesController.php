@@ -2,19 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Requests\ScheduleRequest;
-
-use Session;
-
-use App\Client;
-use App\Schedule;
 use App\ClassType;
 use App\ClassTypeStatus;
-
-use \Carbon\Carbon;
+use App\Client;
+use App\Http\Requests;
+use App\Http\Requests\ScheduleRequest;
+use App\Schedule;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Session;
 
 class RepositionSchedulesController extends Controller
 {
@@ -38,7 +34,7 @@ class RepositionSchedulesController extends Controller
         },
         'rooms' => function ($query) {
             $query->orderBy('name');
-        }])
+        }, ])
         ->groupBy('class_types.id')
         ->orderBy('class_types.name')
         ->get();
@@ -66,7 +62,7 @@ class RepositionSchedulesController extends Controller
         $classType = ClassType::FindOrFail($request->class_type_id);
 
         $request->request->add([
-            'end_at' => Carbon::parse($request->start_at)->addMinutes($classType->duration)->toDateTimeString()
+            'end_at' => Carbon::parse($request->start_at)->addMinutes($classType->duration)->toDateTimeString(),
         ]);
 
         $schedule = new Schedule;
@@ -87,7 +83,7 @@ class RepositionSchedulesController extends Controller
 
         Schedule::where('id', $unscheduled->id)->update(['parent_id' => $unscheduled->id]);
 
-        Session::flash('message', 'Successfully added reposition schedule ' . $schedule->start_at);
+        Session::flash('message', 'Successfully added reposition schedule '.$schedule->start_at);
 
         return redirect('calendar');
     }

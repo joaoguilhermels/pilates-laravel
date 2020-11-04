@@ -10,9 +10,9 @@ class ClassTypeStatus extends Model
       'name',
       'charge_client',
       'pay_professional',
-      'color'
+      'color',
     ];
-  
+
     /**
      * The rooms where this class can be given.
      */
@@ -20,7 +20,7 @@ class ClassTypeStatus extends Model
     {
         return $this->belongsTo(\App\ClassType::class);
     }
-    
+
     public function getChargeClientAttribute($value)
     {
         return $value == 1 ? true : false;

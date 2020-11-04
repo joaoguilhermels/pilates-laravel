@@ -11,6 +11,6 @@ class BankAccount extends Model
       'bank',
       'agency',
       'account',
-      'balance'
+      'balance',
     ];
 }

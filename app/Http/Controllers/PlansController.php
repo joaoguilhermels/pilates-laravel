@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use Session;
-use App\Plan;
 use App\ClassType;
 use App\ClientPlan;
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Http\Requests\PlanRequest;
-use App\Http\Controllers\Controller;
+use App\Plan;
+use Illuminate\Http\Request;
+use Session;
 
 class PlansController extends Controller
 {
@@ -46,7 +45,7 @@ class PlansController extends Controller
     {
         $plan = plan::create($request->all());
 
-        Session::flash('message', 'Successfully added plan ' . $plan->name);
+        Session::flash('message', 'Successfully added plan '.$plan->name);
 
         return redirect('plans');
     }
@@ -55,7 +54,7 @@ class PlansController extends Controller
     {
         $plan->update($request->all());
 
-        Session::flash('message', 'Successfully updated plan ' . $plan->name);
+        Session::flash('message', 'Successfully updated plan '.$plan->name);
 
         return redirect('plans');
     }
@@ -64,7 +63,7 @@ class PlansController extends Controller
     {
         $plan->destroy($plan->id);
 
-        Session::flash('message', 'Successfully deleted plan ' . $plan->name);
+        Session::flash('message', 'Successfully deleted plan '.$plan->name);
 
         return redirect('plans');
     }
