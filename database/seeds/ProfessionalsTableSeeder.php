@@ -12,7 +12,7 @@ class ProfessionalsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory('App\Professional', 2)->create()->each(function ($professional) {
+        factory(\App\Professional::class, 2)->create()->each(function ($professional) {
             $faker = Faker::create();
 
             $classTypes = App\ClassType::select(['id'])->pluck('id')->toArray();
