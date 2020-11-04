@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Arr;
 use App\ClassType;
 use App\ClassTypeStatus;
 use App\Client;
@@ -17,6 +16,7 @@ use App\Professional;
 use App\Room;
 use App\Schedule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Session;
 
 class ClientPlansController extends Controller

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Arr;
 use App\BankAccount;
 use App\ClientPlan;
 use App\ClientPlanDetail;
@@ -14,6 +13,7 @@ use App\PaymentMethod;
 use App\Schedule;
 use Debugbar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class ClientPlanPaymentsController extends Controller
 {
