@@ -2,31 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use Session;
-use App\Client;
-use App\Schedule;
-use App\ClientPlan;
 use App\BankAccount;
-use App\PaymentMethod;
+use App\Client;
+use App\ClientPlan;
 use App\FinancialTransaction;
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Http\Requests\ClientRequest;
 use App\Http\Requests\FinancialTransactionRequest;
-use App\Http\Controllers\Controller;
+use App\PaymentMethod;
+use App\Schedule;
+use Illuminate\Http\Request;
+use Session;
 
 class ClientsController extends Controller
 {
     public function index(Request $request)
     {
         $clients = Client::with(['schedules' => function ($query) {
-                                    $query->join('class_type_statuses', 'schedules.class_type_status_id', '=', 'class_type_statuses.id')
+            $query->join('class_type_statuses', 'schedules.class_type_status_id', '=', 'class_type_statuses.id')
                                             ->where('class_type_statuses.name', '=', 'Desmarcou') // Usar State Pattern
                                             ->whereNull('schedules.parent_id')
                                             ->select('schedules.*');
         },
-                                'clientPlans'])
+                                'clientPlans', ])
                                 ->filter($request->all())
                                 ->orderBy('name')
                                 ->paginate(20);
@@ -57,7 +56,7 @@ class ClientsController extends Controller
     {
         $client = Client::create($request->all());
 
-        Session::flash('message', 'Successfully created client ' . $client->name);
+        Session::flash('message', 'Successfully created client '.$client->name);
 
         return redirect('clients');
     }
@@ -66,7 +65,7 @@ class ClientsController extends Controller
     {
         $client->update($request->all());
 
-        Session::flash('message', 'Successfully updated client ' . $client->name);
+        Session::flash('message', 'Successfully updated client '.$client->name);
 
         return redirect('clients');
     }
@@ -75,7 +74,7 @@ class ClientsController extends Controller
     {
         $client->delete();
 
-        Session::flash('message', 'Successfully deleted client ' . $client->name);
+        Session::flash('message', 'Successfully deleted client '.$client->name);
 
         return redirect('clients');
     }

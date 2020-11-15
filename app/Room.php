@@ -30,10 +30,10 @@ class Room extends Model
         $classTypesList = '';
 
         foreach ($classTypes as $classType) {
-            $classTypesList .= $classTypesList == '' ? $classType->name : ', ' . $classType->name;
+            $classTypesList .= $classTypesList == '' ? $classType->name : ', '.$classType->name;
         }
 
-        return $this->name . ' (' . $classTypesList . ')';
+        return $this->name.' ('.$classTypesList.')';
     }
 
     public function scopeWhereClassesAllowTrials($query)

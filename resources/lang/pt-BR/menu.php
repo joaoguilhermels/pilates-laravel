@@ -26,5 +26,5 @@ return [
     'reports' => 'RELATÓRIOS',
     'cash_journal' => 'LIVRO CAIXA',
     'logout' => 'SAIR',
-    'register' => 'CADASTRE-SE'
+    'register' => 'CADASTRE-SE',
 ];

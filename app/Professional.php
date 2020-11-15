@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Notifications\ProfessionalPaid;
+use Illuminate\Database\Eloquent\Model;
 
 class Professional extends Model
 {
@@ -12,7 +12,7 @@ class Professional extends Model
       'name',
       'phone',
       'email',
-      'salary'
+      'salary',
     ];
 
     public function financialTransactions()
@@ -21,7 +21,7 @@ class Professional extends Model
     }
 
     /**
-     * The class types given by the professional
+     * The class types given by the professional.
      */
     public function classTypes()
     {
@@ -44,10 +44,10 @@ class Professional extends Model
         $classTypesList = '';
 
         foreach ($classTypes as $classType) {
-            $classTypesList .= $classTypesList == '' ? $classType->name : ', ' . $classType->name;
+            $classTypesList .= $classTypesList == '' ? $classType->name : ', '.$classType->name;
         }
 
-        return $this->name . ' (' . $classTypesList . ')';
+        return $this->name.' ('.$classTypesList.')';
     }
 
     public function scopeGivingTrialClasses($query)

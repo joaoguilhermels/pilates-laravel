@@ -11,7 +11,7 @@ class Client extends Model
       'name',
       'phone',
       'email',
-      'observation'
+      'observation',
     ];
 
     public function clientPlans()
@@ -36,7 +36,7 @@ class Client extends Model
     public function scopeFilter($query, $params)
     {
         if (isset($params['name']) && trim($params['name']) !== '') {
-            $query->where('name', 'LIKE', trim($params['name'] . '%'));
+            $query->where('name', 'LIKE', trim($params['name'].'%'));
         }
 
         if (isset($params['email']) && trim($params['email']) !== '') {

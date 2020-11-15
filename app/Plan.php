@@ -15,9 +15,9 @@ class Plan extends Model
         'duration',
         'duration_type',
         'price',
-        'price_type'
+        'price_type',
     ];
-    
+
     /**
      * The roles that belong to the user.
      */
@@ -31,11 +31,11 @@ class Plan extends Model
      */
     public function plans()
     {
-        return $this->morphToMany(\App\Plan::class, 'discountable');
+        return $this->morphToMany(self::class, 'discountable');
     }
 
     public function getNameWithClassAttribute()
     {
-        return $this->classType->name . ' - ' . $this->name . ' - ' . $this->times . ' per ' . $this->times_type;
+        return $this->classType->name.' - '.$this->name.' - '.$this->times.' per '.$this->times_type;
     }
 }

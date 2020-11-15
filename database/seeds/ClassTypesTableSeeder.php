@@ -17,7 +17,7 @@ class ClassTypesTableSeeder extends Seeder
                 'name' => 'OK',
                 'charge_client' => true,
                 'pay_professional' => true,
-                'color' => '#6FCB6D'
+                'color' => '#6FCB6D',
             ]));
 
             $classType->statuses()->save(factory(App\ClassTypeStatus::class)->create([
@@ -25,7 +25,7 @@ class ClassTypesTableSeeder extends Seeder
                 'name' => 'Desmarcou',
                 'charge_client' => null,
                 'pay_professional' => null,
-                'color' => '#00B9FE'
+                'color' => '#00B9FE',
             ]));
 
             $classType->statuses()->save(factory(App\ClassTypeStatus::class)->create([
@@ -33,7 +33,7 @@ class ClassTypesTableSeeder extends Seeder
                 'name' => 'Faltou',
                 'charge_client' => true,
                 'pay_professional' => null,
-                'color' => '#FF1E00'
+                'color' => '#FF1E00',
             ]));
 
             $classType->statuses()->save(factory(App\ClassTypeStatus::class)->create([
@@ -41,7 +41,7 @@ class ClassTypesTableSeeder extends Seeder
                 'name' => 'Reposição',
                 'charge_client' => true,
                 'pay_professional' => true,
-                'color' => '#685DFF'
+                'color' => '#685DFF',
             ]));
         });
     }

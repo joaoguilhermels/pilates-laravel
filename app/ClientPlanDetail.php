@@ -11,7 +11,7 @@ class ClientPlanDetail extends Model
       'day_of_week',
       'hour',
       'professional_id',
-      'room_id'
+      'room_id',
     ];
 
     public function clientPlan()

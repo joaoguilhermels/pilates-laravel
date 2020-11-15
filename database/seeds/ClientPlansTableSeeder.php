@@ -12,10 +12,10 @@ class ClientPlansTableSeeder extends Seeder
     public function run()
     {
         $clientsCount = App\Client::count();
-      
+
         /*factory('App\ClientPlan', $clientsCount)->create()->each(functoon ($clientPlan) {
             for($i = $clientPlan->plan->) {
-              
+
             }
         });*/
     }

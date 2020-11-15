@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use Session;
-use Carbon\Carbon;
-
-use App\Http\Requests;
+use App\BankAccount;
 use App\FinancialTransaction;
 use App\FinancialTransactionDetail;
-use App\BankAccount;
-use App\PaymentMethod;
-use App\Schedule;
-use App\Professional;
-
+use App\Http\Requests;
 use App\Http\Requests\PaymentReportRequest;
 use App\Http\Requests\ProfessionalPaymentRequest;
+use App\PaymentMethod;
+use App\Professional;
+use App\Schedule;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Session;
 
 class ProfessionalsPaymentsController extends Controller
 {
@@ -39,7 +36,7 @@ class ProfessionalsPaymentsController extends Controller
     /**
      * Stores Professional payment by creating a FinancialTransaction and a
      * FinancialTransactionDetail. Once this is done the function also
-     * updates the schedules to make a relationship with the FinancialTransaction
+     * updates the schedules to make a relationship with the FinancialTransaction.
      *
      * @param  ProfessionalPaymentRequest $request      [description]
      * @param  Professional               $professional [The proessional to associate with the FinancialTransaction (payment)]
@@ -52,13 +49,13 @@ class ProfessionalsPaymentsController extends Controller
 
         $request->request->add([
             'total_number_of_payments' => 1,
-            'name' => 'Professional Payment'
+            'name' => 'Professional Payment',
         ]);
 
         $financialTransaction = $professional->financialTransactions()->create($request->all());
 
         $request->request->add([
-            'type' => 'paid'
+            'type' => 'paid',
         ]);
 
         $financialTransaction->financialTransactionDetails()->create($request->all());
@@ -68,7 +65,7 @@ class ProfessionalsPaymentsController extends Controller
                         ->whereDate('end_at', '<=', $endAt)
                         ->update(['professional_payment_financial_transaction_id' => $financialTransaction->id]);
 
-        Session::flash('message', 'Successfully added payment to professional ' . $professional->name);
+        Session::flash('message', 'Successfully added payment to professional '.$professional->name);
 
         return redirect('professionals/payments');
     }
@@ -78,13 +75,13 @@ class ProfessionalsPaymentsController extends Controller
         $rows = Schedule::where('professional_payment_financial_transaction_id', $financialTransaction->id)
                         ->orderBy('start_at')
                         ->get();
-        
+
         $total = $rows->sum('price');
         $endAt = $rows->max('start_at');
         $startAt = $rows->min('start_at');
         $professional = $financialTransaction->financiable;
 
-        $bankAccounts   = BankAccount::orderBy('name')->get();
+        $bankAccounts = BankAccount::orderBy('name')->get();
         $paymentMethods = PaymentMethod::orderBy('name')->get();
         $financialTransactionDetail = $financialTransaction->financialTransactionDetails->first();
         $professional_total = $financialTransactionDetail->value;
@@ -94,7 +91,7 @@ class ProfessionalsPaymentsController extends Controller
 
     public function update(ProfessionalPaymentRequest $request, Professional $professional)
     {
-        # code...
+        // code...
     }
 
     public function destroy(FinancialTransaction $financialTransaction)
@@ -110,10 +107,10 @@ class ProfessionalsPaymentsController extends Controller
 
     public function generatePaymentReport(PaymentReportRequest $request, FinancialTransaction $financialTransaction)
     {
-        $startAt        = Carbon::parse($request->start_at);
-        $endAt          = Carbon::parse($request->end_at);
-        $professional   = Professional::findOrFail($request->professional); // ! Route Model Bind !
-        $bankAccounts   = BankAccount::orderBy('name')->get();
+        $startAt = Carbon::parse($request->start_at);
+        $endAt = Carbon::parse($request->end_at);
+        $professional = Professional::findOrFail($request->professional); // ! Route Model Bind !
+        $bankAccounts = BankAccount::orderBy('name')->get();
         $paymentMethods = PaymentMethod::orderBy('name')->get();
 
         $rows = Schedule::where('professional_id', $request->professional)

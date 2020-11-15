@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use Session;
-use App\Schedule;
-use App\Professional;
+use App\BankAccount;
 use App\ClassType;
 use App\FinancialTransaction;
-use App\BankAccount;
-use App\PaymentMethod;
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
-use App\Http\Requests\ProfessionalRequest;
 use App\Http\Requests\PaymentReportRequest;
 use App\Http\Requests\ProfessionalPaymentStoreRequest;
-use App\Http\Controllers\Controller;
-
+use App\Http\Requests\ProfessionalRequest;
+use App\PaymentMethod;
+use App\Professional;
+use App\Schedule;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Session;
 
 class ProfessionalsController extends Controller
 {
@@ -33,7 +31,7 @@ class ProfessionalsController extends Controller
     public function show(Professional $professional)
     {
         $page_title = 'Professionals';
-        
+
         return view('professionals.show', compact('professional'));
     }
 
@@ -62,7 +60,7 @@ class ProfessionalsController extends Controller
         $classTypeList = $request->class_type_list;
 
         foreach ($classTypeList as $key => $classType) {
-            if (!isset($classType['class_type_id'])) {
+            if (! isset($classType['class_type_id'])) {
                 unset($classTypeList[$key]);
             }
         }
@@ -71,7 +69,7 @@ class ProfessionalsController extends Controller
 
         $professional->classTypes()->sync($classTypeList);
 
-        Session::flash('message', 'Successfully added professional ' . $professional->name);
+        Session::flash('message', 'Successfully added professional '.$professional->name);
 
         return redirect('professionals');
     }
@@ -83,20 +81,20 @@ class ProfessionalsController extends Controller
         $classTypeList = $request->class_type_list;
 
         foreach ($classTypeList as $key => $classType) {
-            if (!isset($classType['class_type_id'])) {
+            if (! isset($classType['class_type_id'])) {
                 unset($classTypeList[$key]);
             }
         }
 
         $professional->classTypes()->sync($classTypeList);
 
-        Session::flash('message', 'Successfully updated professional ' . $professional->name);
+        Session::flash('message', 'Successfully updated professional '.$professional->name);
 
         return redirect('professionals');
     }
 
     /**
-     * Deletes a professional
+     * Deletes a professional.
      * @param  Professional $professional [description]
      * @return [type]                     [description]
      */
@@ -104,13 +102,13 @@ class ProfessionalsController extends Controller
     {
         $professional->delete();
 
-        Session::flash('message', 'Successfully deleted professional ' . $professional->name);
+        Session::flash('message', 'Successfully deleted professional '.$professional->name);
 
         return redirect('professionals');
     }
 
     /**
-     * [getPricePerClass description]
+     * [getPricePerClass description].
      * @param  Professional $professional [description]
      * @param  ClassType    $classType    [description]
      * @param  Plan         $plan         [description]

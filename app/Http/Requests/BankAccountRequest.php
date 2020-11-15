@@ -24,7 +24,7 @@ class BankAccountRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required'
+            'name' => 'required',
         ];
     }
 }

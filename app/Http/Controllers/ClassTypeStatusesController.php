@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests;
+use Illuminate\Http\Request;
 
 class ClassTypeStatusesController extends Controller
 {
@@ -15,7 +14,7 @@ class ClassTypeStatusesController extends Controller
 
       return view('classes.index')->with('classTypes', $classTypes);
     }
-    
+
     // Show only statuses of the current class
     public function show(ClassType $classType)
     {
@@ -26,17 +25,17 @@ class ClassTypeStatusesController extends Controller
     {
         return view('classes.edit', compact('classType'));
     }
-    
+
     public function create()
     {
       return view('classes.create');
     }*/
-    
+
     public function store(ClassTypeStatusRequest $request)
     {
         dd('asdf');
         ClassType::create($request->all());
-      
+
         return redirect('classes');
     }
 

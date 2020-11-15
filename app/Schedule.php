@@ -17,7 +17,7 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
       'price',
       'start_at',
       'end_at',
-      'observation'
+      'observation',
     ];
 
     protected $with = ['clientPlanDetail.clientPlan.plan', 'professional', 'client', 'room', 'classType', 'classTypeStatus'];
@@ -80,7 +80,7 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
     }
 
     /**
-     * Get the event's id number
+     * Get the event's id number.
      *
      * @return int
      */
@@ -90,7 +90,7 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
     }
 
     /**
-     * Get the event's title
+     * Get the event's title.
      *
      * @return string
      */
@@ -106,11 +106,11 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
      */
     public function isAllDay()
     {
-        return (bool)$this->all_day;
+        return (bool) $this->all_day;
     }
 
     /**
-     * Get the start time
+     * Get the start time.
      *
      * @return DateTime
      */
@@ -120,7 +120,7 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
     }
 
     /**
-     * Get the end time
+     * Get the end time.
      *
      * @return DateTime
      */
@@ -130,7 +130,7 @@ class Schedule extends Model implements \MaddHatter\LaravelFullcalendar\Identifi
     }
 
     /**
-     * Optional FullCalendar.io settings for this event
+     * Optional FullCalendar.io settings for this event.
      *
      * @return array
      */

@@ -33,7 +33,6 @@ Route::auth();
 
 //Route::group(['middleware' => 'auth', 'domain' => '{account}.pilates-laravel.dev'], function () {
 Route::group(['middleware' => 'auth'], function () {
-
     Route::get('/home', 'HomeController@index');
 
     Route::get('calendar', 'CalendarController@calendar');
@@ -95,20 +94,20 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('schedules/extra/create', 'ExtraClassSchedulesController@store');
 
     Route::get('schedules/class/{classType}/professional/{professionals}/room/{rooms}/date/{date}/time/{time}', 'GroupSchedulesController@edit');
-    
+
     Route::resource('rooms', 'RoomsController');
     Route::resource('plans', 'PlansController');
     Route::resource('clients', 'ClientsController');
     Route::resource('schedules', 'SchedulesController');
     Route::resource('professionals', 'ProfessionalsController');
-    
+
     Route::resource('classes', 'ClassTypesController', ['parameters' => [
-        'classes' => 'classType'
+        'classes' => 'classType',
     ]]);
     Route::resource('bank-accounts', 'BankAccountsController', ['parameters' => [
-        'bank-accounts' => 'bankAccount'
+        'bank-accounts' => 'bankAccount',
     ]]);
     Route::resource('payment-methods', 'PaymentMethodsController', ['parameters' => [
-        'payment-methods' => 'paymentMethod'
+        'payment-methods' => 'paymentMethod',
     ]]);
 });

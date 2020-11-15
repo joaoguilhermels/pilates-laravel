@@ -26,7 +26,7 @@ class ExpenseRequest extends Request
         return [
             'name' => 'required',
             'date' => 'required',
-            'price' => 'required'
+            'price' => 'required',
         ];
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\PaymentMethod;
 use App\Http\Requests\Request;
+use App\PaymentMethod;
 
 class PaymentMethodRequest extends Request
 {
@@ -25,7 +25,7 @@ class PaymentMethodRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required'
+            'name' => 'required',
         ];
     }
 }

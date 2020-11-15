@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreatePlansTable extends Migration
 {
@@ -15,7 +15,7 @@ class CreatePlansTable extends Migration
         Schema::create('plans', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            
+
             $table->integer('class_type_id')->unsigned()->index();
             $table->foreign('class_type_id')->references('id')->on('class_types')->onDelete('cascade');
 
