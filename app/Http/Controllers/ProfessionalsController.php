@@ -2,19 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\BankAccount;
-use App\ClassType;
-use App\FinancialTransaction;
+use App\Models\ClassType;
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
-use App\Http\Requests\PaymentReportRequest;
-use App\Http\Requests\ProfessionalPaymentStoreRequest;
 use App\Http\Requests\ProfessionalRequest;
-use App\PaymentMethod;
-use App\Professional;
-use App\Schedule;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
+use App\Models\Professional;
 use Session;
 
 class ProfessionalsController extends Controller

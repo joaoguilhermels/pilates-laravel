@@ -1,7 +1,7 @@
-@extends('layouts/admin/admin')
+@extends('layouts/app')
 
 @section('content')
-  {{-- <div class="container"> --}}
+  <div class="container">
     <h1>
       Cash Journal
     </h1>
@@ -25,5 +25,5 @@
         <input type="submit" class="btn btn-success btn-block" value="Generate Report">
       </div>
     </form>
-  {{-- </div> --}}
+  </div>
 @stop

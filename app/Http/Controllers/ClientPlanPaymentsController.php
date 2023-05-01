@@ -2,17 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\BankAccount;
-use App\ClientPlan;
-use App\ClientPlanDetail;
-use App\FinancialTransaction;
-use App\FinancialTransactionDetail;
-use App\Http\Requests;
+use App\Models\BankAccount;
+use App\Models\ClientPlan;
+use App\Models\FinancialTransaction;
 use App\Http\Requests\FinancialTransactionRequest;
-use App\PaymentMethod;
-use App\Schedule;
+use App\Models\PaymentMethod;
 use Debugbar;
-use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
 class ClientPlanPaymentsController extends Controller

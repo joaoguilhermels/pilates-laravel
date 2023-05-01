@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
 use App\Http\Requests\PaymentMethodRequest;
-use App\PaymentMethod;
-use Illuminate\Http\Request;
+use App\Models\PaymentMethod;
 use Session;
 
 class PaymentMethodsController extends Controller

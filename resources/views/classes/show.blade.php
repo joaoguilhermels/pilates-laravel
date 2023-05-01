@@ -1,7 +1,7 @@
-@extends('layouts/admin/admin')
+@extends('layouts/app')
 
 @section('content')
-  {{-- <div class="container"> --}}
+  <div class="container">
     <h1>{{ $classType->name }}</h1>
     <a href="{{ action('ClassTypesController@index') }}">Back to Classes List</a>
     <hr />
@@ -28,5 +28,5 @@
         @include('classes.partials.rooms-block')
       </div>
     </div>
-  {{-- </div> --}}
+  </div>
 @stop

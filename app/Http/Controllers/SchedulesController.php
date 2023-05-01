@@ -2,19 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\ClassType;
-use App\ClassTypeStatus;
-use App\Client;
-use App\ClientPlanDetail;
+use App\Models\ClassType;
+use App\Models\ClassTypeStatus;
+use App\Models\Client;
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
 use App\Http\Requests\ScheduleRequest;
-use App\Plan;
-use App\Professional;
-use App\Room;
-use App\Schedule;
+use App\Models\Room;
+use App\Models\Schedule;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Session;
 
 class SchedulesController extends Controller

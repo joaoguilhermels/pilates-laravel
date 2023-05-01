@@ -1,7 +1,7 @@
-@extends('layouts/admin/admin')
+@extends('layouts/app')
 
 @section('content')
-  {{-- <div class="container"> --}}
+  <div class="container">
 	<h1>Create New Class</h1>
 	<a href="{{ action('ClassTypesController@index') }}">Back to Classes List</a>
 	<hr />
@@ -12,5 +12,5 @@
 	{{ csrf_field() }}
 	@include('classes.form', ['submitButtonText' => 'Add New Class'])
 	</form>
-  {{-- </div> --}}
+  </div>
 @stop

@@ -1,7 +1,7 @@
-@extends('layouts/admin/admin')
+@extends('layouts/app')
 
 @section('content')
-  {{-- <div class="container"> --}}
+  <div class="container">
     <h1>{{ $professional->name }}</h1>
     <a href="{{ action('ProfessionalsController@index') }}">Back to Professionals List</a>
     <hr />
@@ -26,5 +26,5 @@
         @include('professionals.partials.classes-block')
       </div>
     </div>
-  {{-- </div> --}}
+  </div>
 @stop

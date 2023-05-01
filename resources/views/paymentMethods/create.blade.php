@@ -1,7 +1,7 @@
-@extends('layouts/admin/admin')
+@extends('layouts/app')
 
 @section('content')
-  {{-- <div class="container"> --}}
+  <div class="container">
     <h1>
       Create New Payment Method
     </h1>
@@ -14,5 +14,5 @@
       {{ csrf_field() }}
       @include('paymentMethods.form', ['submitButtonText' => 'Add New Payment Method'])
     </form>
-  {{-- </div> --}}
+  </div>
 @stop

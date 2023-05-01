@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\ClassType;
-use App\ClassTypeStatus;
-use App\Client;
-use App\Http\Requests;
+use App\Models\ClassType;
+use App\Models\ClassTypeStatus;
+use App\Models\Client;
 use App\Http\Requests\ScheduleRequest;
-use App\Schedule;
+use App\Models\Schedule;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Session;
 
 class RepositionSchedulesController extends Controller

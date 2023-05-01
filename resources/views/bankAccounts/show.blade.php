@@ -1,7 +1,7 @@
-@extends('layouts/admin/admin')
+@extends('layouts/app')
 
 @section('content')
-  {{-- <div class="container"> --}}
+  <div class="container">
     <h1>{{ $bankAccount->name }}</h1>
     <a href="{{ action('BankAccountsController@index') }}">Back to Bank Accounts List</a>
     <hr />
@@ -27,5 +27,5 @@
         <a href="{{ action('BankAccountsController@edit', [$bankAccount->id]) }}" class="btn btn-block btn-success">Edit This Bank Account</a>
       </div>
     </div>
-  {{-- </div> --}}
+  </div>
 @stop

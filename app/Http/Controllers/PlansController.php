@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\ClassType;
-use App\ClientPlan;
+use App\Models\ClassType;
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
 use App\Http\Requests\PlanRequest;
-use App\Plan;
-use Illuminate\Http\Request;
+use App\Models\Plan;
 use Session;
 
 class PlansController extends Controller

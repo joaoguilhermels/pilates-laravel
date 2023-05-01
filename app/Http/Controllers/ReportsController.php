@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\FinancialTransaction;
-use App\FinancialTransactionDetail;
-use App\Http\Requests;
 use DB;
 use Illuminate\Http\Request;
+use App\FinancialTransactionDetail;
 
 class ReportsController extends Controller
 {

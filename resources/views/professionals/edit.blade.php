@@ -1,7 +1,7 @@
-@extends('layouts/admin/admin')
+@extends('layouts/app')
 
 @section('content')
-  {{-- <div class="container"> --}}
+  <div class="container">
     <h1>Edit {{ $professional->name }}</h1>
     <a href="{{ action('ProfessionalsController@index') }}">Back to Professionals List</a>
     <hr />
@@ -14,5 +14,5 @@
       @include('professionals.form', [$professional, 'submitButtonText' => 'Update Professional'])
 
     </form>
-  {{-- </div> --}}
+  </div>
 @stop

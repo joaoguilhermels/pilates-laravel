@@ -174,8 +174,8 @@ return [
         /*
          * 3rd Party Service Providers...
          */
-         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
-         Watson\Active\ActiveServiceProvider::class,
+        //  MaddHatter\LaravelFullcalendar\ServiceProvider::class,
+        //  Watson\Active\ActiveServiceProvider::class,
          Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
@@ -227,7 +227,7 @@ return [
         'Form'      => Illuminate\Html\FormFacade::class,
 
         'Html'      => Illuminate\Html\HtmlFacade::class,
-        'Calendar'  => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
+        // 'Calendar'  => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
         'Debugbar'  => Barryvdh\Debugbar\Facade::class,
     ],
 

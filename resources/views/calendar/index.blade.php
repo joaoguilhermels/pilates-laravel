@@ -1,11 +1,11 @@
-@extends('layouts/admin/admin')
+@extends('layouts/app')
 
 @include('calendar.partials.stylesheet')
 
 @section('content')
 
 <div class="container-fluid" id="app">
-    {{-- <h1>Agenda</h1> --}}
+    <h1>Agenda</h1>
 
     {{-- {!! $calendar->calendar() !!} --}}
     <calendar url="/calendar/data" type="client"></calendar>

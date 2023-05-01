@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\ClassType;
-use App\ClassTypeStatus;
-use App\Http\Requests;
-use App\Schedule;
+use App\Models\ClassType;
+use App\Models\Schedule;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class CalendarController extends Controller
 {
@@ -75,7 +72,7 @@ class CalendarController extends Controller
 
         $schedules = $this->calendarGroupEvents($start, $end);
 
-        return view('calendar.indexGroup', compact('schedules', 'has_available_trial_class'));
+        return view('calendar.group', compact('schedules', 'has_available_trial_class'));
     }
 
     public function calendarEvents()

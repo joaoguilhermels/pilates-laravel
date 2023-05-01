@@ -1,7 +1,7 @@
-@extends('layouts/admin/admin')
+@extends('layouts/app')
 
 @section('content')
-  {{-- <div class="container" id="app"> --}}
+  <div class="container" id="app">
   <div id="app">
     <h1>Create New Trial Class</h1>
     <a href="{{ action('SchedulesController@index') }}">Back to Schedules List</a>

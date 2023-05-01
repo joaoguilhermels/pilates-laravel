@@ -1,7 +1,7 @@
-@extends('layouts/admin/admin')
+@extends('layouts/app')
 
 @section('content')
-  {{-- <div class="container"> --}}
+  <div class="container">
     <h1>Edit {{ $classType->name }}</h1>
     <a href="{{ action('ClassTypesController@index') }}">Back to Classes List</a>
     <hr />
@@ -17,5 +17,5 @@
         </form>
       </div>
     </div>
-  {{-- </div> --}}
+  </div>
 @stop

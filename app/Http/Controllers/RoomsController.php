@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\ClassType;
+use App\Models\ClassType;
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
 use App\Http\Requests\RoomRequest;
-use App\Room;
-use Illuminate\Http\Request;
+use App\Models\Room;
 use Session;
 
 class RoomsController extends Controller

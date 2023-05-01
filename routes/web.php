@@ -29,7 +29,7 @@ Route::get('/', function () {
 | kernel and includes session state, CSRF protection, and more.
 |
 */
-Route::auth();
+// Route::auth();
 
 //Route::group(['middleware' => 'auth', 'domain' => '{account}.pilates-laravel.dev'], function () {
 Route::group(['middleware' => 'auth'], function () {
@@ -111,3 +111,7 @@ Route::group(['middleware' => 'auth'], function () {
         'payment-methods' => 'paymentMethod',
     ]]);
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

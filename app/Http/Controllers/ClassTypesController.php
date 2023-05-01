@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\ClassType;
-use App\ClassTypeStatus;
+use App\Models\ClassType;
+use App\Models\ClassTypeStatus;
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
 use App\Http\Requests\ClassTypeRequest;
-use App\Http\Requests\ClassTypeStatusRequest;
-use DB;
-use Illuminate\Http\Request;
 use Session;
 
 class ClassTypesController extends Controller

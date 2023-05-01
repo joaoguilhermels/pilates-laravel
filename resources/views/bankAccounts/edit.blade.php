@@ -1,7 +1,7 @@
-@extends('layouts/admin/admin')
+@extends('layouts/app')
 
 @section('content')
-  {{-- <div class="container"> --}}
+  <div class="container">
 	<h1>Edit {{ $bankAccount->name }}</h1>
 	<a href="{{ action('BankAccountsController@index') }}">Back to Bank Accounts List</a>
 	<hr />
@@ -13,5 +13,5 @@
 	  {{ method_field("PATCH") }}
 	  @include('bankAccounts.form', ['submitButtonText' => 'Update Bank Account'])
 	</form>
-  {{-- </div> --}}
+  </div>
 @stop

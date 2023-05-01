@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\ClassType;
-use App\ClassTypeStatus;
-use App\Client;
-use App\Http\Requests;
-use App\Http\Requests\ScheduleRequest;
-use App\Schedule;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Session;
+use App\Models\Client;
+use App\Models\Schedule;
+use App\Models\ClassType;
+use Carbon\Carbon;
+use App\ClassTypeStatus;
+use App\Http\Requests\ScheduleRequest;
 
 class ExtraClassSchedulesController extends Controller
 {

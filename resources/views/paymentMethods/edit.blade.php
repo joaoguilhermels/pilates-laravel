@@ -1,7 +1,7 @@
-@extends('layouts/admin/admin')
+@extends('layouts/app')
 
 @section('content')
-  {{-- <div class="container"> --}}
+  <div class="container">
 	<h1>Edit {{ $paymentMethod->name }}</h1>
 	<a href="{{ action('PaymentMethodsController@index') }}">Back to Payment Methods List</a>
 	<hr />
@@ -13,5 +13,5 @@
 	  {{ method_field("PATCH") }}
 	  @include('paymentMethods.form', ['submitButtonText' => 'Update Payment Method'])
 	</form>
-  {{-- </div> --}}
+  </div>
 @stop

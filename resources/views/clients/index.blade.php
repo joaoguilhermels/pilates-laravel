@@ -1,7 +1,7 @@
-@extends('layouts/admin/admin')
+@extends('layouts/app')
 
 @section('content')
-  {{-- <div class="container"> --}}
+  <div class="container">
     <h1>
       Clients
       &nbsp;&nbsp;&nbsp;
@@ -98,5 +98,5 @@
     </div>
     </div>
     @endif
-  {{-- </div> --}}
+  </div>
 @stop

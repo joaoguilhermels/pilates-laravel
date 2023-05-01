@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\BankAccount;
+use App\Models\BankAccount;
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
 use App\Http\Requests\BankAccountRequest;
-use Illuminate\Http\Request;
 use Session;
 
 class BankAccountsController extends Controller

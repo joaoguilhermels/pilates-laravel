@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\ClassType;
-use App\ClassTypeStatus;
-use App\Client;
-use App\ClientPlan;
-use App\ClientPlanDetail;
-use App\Discount;
+use App\Models\ClassType;
+use App\Models\Client;
+use App\Models\ClientPlan;
+use App\Models\ClientPlanDetail;
+use App\Models\Discount;
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
 use App\Http\Requests\ClientPlanRequest;
-use App\Plan;
-use App\Professional;
-use App\Room;
-use App\Schedule;
-use Illuminate\Http\Request;
+use App\Models\Plan;
+use App\Models\Professional;
+use App\Models\Room;
+use App\Models\Schedule;
 use Illuminate\Support\Arr;
 use Session;
 

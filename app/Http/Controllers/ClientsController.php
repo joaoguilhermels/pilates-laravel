@@ -2,16 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\BankAccount;
-use App\Client;
-use App\ClientPlan;
-use App\FinancialTransaction;
+use App\Models\Client;
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
 use App\Http\Requests\ClientRequest;
-use App\Http\Requests\FinancialTransactionRequest;
-use App\PaymentMethod;
-use App\Schedule;
 use Illuminate\Http\Request;
 use Session;
 

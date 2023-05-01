@@ -1,7 +1,7 @@
-@extends('layouts/admin/admin')
+@extends('layouts/app')
 
 @section('content')
-  {{-- <div class="container"> --}}
+  <div class="container">
     <h1>Create New Plan</h1>
     <a href="{{ action('PlansController@index') }}">Back to Plans List</a>
     <hr />
@@ -12,5 +12,5 @@
       {{ csrf_field() }}
       @include('plans.form', ['submitButtonText' => 'Add New Plan', 'plan' => $plan, 'classTypes' => $classTypes])
     </form>
-  {{-- </div> --}}
+  </div>
 @stop

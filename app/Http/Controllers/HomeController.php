@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Client;
-use App\Http\Requests;
-use App\Professional;
-use App\Schedule;
+use App\Models\Client;
+use App\Models\Professional;
+use App\Models\Schedule;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -30,8 +28,11 @@ class HomeController extends Controller
 
         $unscheduled = Schedule::Unscheduled(Carbon::now()->month, Carbon::now()->year);
         //dd($unscheduled);
-        $month = money_format('%i', $month);
-        $year = money_format('%i', $year);
+        //$fmt = new NumberFormatter( 'de_DE', NumberFormatter::CURRENCY );
+        //echo $fmt->formatCurrency(1234567.891234567890000, "EUR")."\n";
+
+        //$month = money_format('%i', $month);
+        //$year = money_format('%i', $year);
 
         return view('home', compact('clients', 'professionals', 'month', 'year', 'unscheduled'));
     }
