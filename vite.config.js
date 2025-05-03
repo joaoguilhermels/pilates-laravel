@@ -6,8 +6,8 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/assets/sass/app.scss',
-                'resources/assets/js/app.js',
+                'resources/css/app.css',
+                'resources/js/app.js',
             ],
             refresh: true,
         }),
@@ -32,7 +32,18 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-            '@': '/resources/assets/js'
+            '@': '/resources/js',
+            '~': '/resources'
         }
-    }
+    },
+    optimizeDeps: {
+        include: [
+            'vue',
+        ]
+    },
+    build: {
+        commonjsOptions: {
+            include: [/node_modules/],
+        },
+    },
 });
