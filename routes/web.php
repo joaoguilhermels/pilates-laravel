@@ -52,22 +52,22 @@ Route::get('/', function () {
 */
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/home', [HomeController::class, 'index']);
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-    Route::get('calendar', [CalendarController::class, 'calendar']);
-    Route::get('calendar/data', [CalendarController::class, 'calendarEvents']);
-    Route::get('calendar/group', [CalendarController::class, 'groupCalendar']);
-    Route::get('calendar/group/data', [CalendarController::class, 'calendarGroupEvents']);
+    Route::get('calendar', [CalendarController::class, 'calendar'])->name('calendar');
+    Route::get('calendar/data', [CalendarController::class, 'calendarEvents'])->name('calendar.data');
+    Route::get('calendar/group', [CalendarController::class, 'groupCalendar'])->name('calendar.group');
+    Route::get('calendar/group/data', [CalendarController::class, 'calendarGroupEvents'])->name('calendar.group.data');
 
-    Route::get('reports/cash-journal', [ReportsController::class, 'cashJournal']);
-    Route::post('reports/cash-journal', [ReportsController::class, 'showCashJournal']);
+    Route::get('reports/cash-journal', [ReportsController::class, 'cashJournal'])->name('reports.cash-journal');
+    Route::post('reports/cash-journal', [ReportsController::class, 'showCashJournal'])->name('reports.cash-journal.show');
 
-    Route::get('clients/{client}/plans/create', [ClientPlansController::class, 'create']);
-    Route::post('clients/{client}/plans/create', [ClientPlansController::class, 'reviewClientPlan']);
-    Route::post('clients/{client}/plans/review', [ClientPlansController::class, 'store']);
-    Route::delete('clients/plans/{clientPlan}/delete', [ClientPlansController::class, 'destroy']);
-    Route::get('client-plans/{clientPlan}/edit', [ClientPlansController::class, 'edit']);
-    Route::patch('client-plans/{clientPlan}/edit', [ClientPlansController::class, 'update']);
+    Route::get('clients/{client}/plans/create', [ClientPlansController::class, 'create'])->name('clients.plans.create');
+    Route::post('clients/{client}/plans/create', [ClientPlansController::class, 'reviewClientPlan'])->name('clients.plans.review');
+    Route::post('clients/{client}/plans/review', [ClientPlansController::class, 'store'])->name('clients.plans.store');
+    Route::delete('clients/plans/{clientPlan}/delete', [ClientPlansController::class, 'destroy'])->name('clients.plans.destroy');
+    Route::get('client-plans/{clientPlan}/edit', [ClientPlansController::class, 'edit'])->name('client-plans.edit');
+    Route::patch('client-plans/{clientPlan}/edit', [ClientPlansController::class, 'update'])->name('client-plans.update');
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     /*Route::get('clients/charges', [ClientsController::class, 'indexCharges']);
@@ -83,36 +83,36 @@ Route::middleware(['auth'])->group(function () {
     Route::get('clients/{clients}/charges/report', [ClientsController::class, 'reportCharge']);*/
 
     // These routes look wrong. Names are inconsistent too.
-    Route::get('client-plans/{clientPlan}/payment', [ClientPlanPaymentsController::class, 'create']);
-    Route::post('client-plans/{clientPlan}/payment', [ClientPlanPaymentsController::class, 'store']);
-    Route::delete('client-plans/{clientPlan}/delete', [ClientPlanPaymentsController::class, 'destroy']);
-    Route::get('payment/{financialTransactions}/edit', [ClientPlanPaymentsController::class, 'edit']);
-    Route::patch('payment/{financialTransactions}', [ClientPlanPaymentsController::class, 'update']);
-    Route::get('payment/{financialTransactions}', [ClientPlanPaymentsController::class, 'show']);
+    Route::get('client-plans/{clientPlan}/payment', [ClientPlanPaymentsController::class, 'create'])->name('client-plans.payment.create');
+    Route::post('client-plans/{clientPlan}/payment', [ClientPlanPaymentsController::class, 'store'])->name('client-plans.payment.store');
+    Route::delete('client-plans/{clientPlan}/delete', [ClientPlanPaymentsController::class, 'destroy'])->name('client-plans.payment.destroy');
+    Route::get('payment/{financialTransactions}/edit', [ClientPlanPaymentsController::class, 'edit'])->name('payment.edit');
+    Route::patch('payment/{financialTransactions}', [ClientPlanPaymentsController::class, 'update'])->name('payment.update');
+    Route::get('payment/{financialTransactions}', [ClientPlanPaymentsController::class, 'show'])->name('payment.show');
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     //Route::get('professionals/{professionals}/payments/report', [ProfessionalsController::class, 'reportPayment']);
-    Route::get('professionals/payments', [ProfessionalsPaymentsController::class, 'index']);
-    Route::get('professionals/payments/create', [ProfessionalsPaymentsController::class, 'create']);
-    Route::post('professionals/payments/review', [ProfessionalsPaymentsController::class, 'generatePaymentReport']);
-    Route::post('professionals/{professional}/payments/store', [ProfessionalsPaymentsController::class, 'store']);
-    Route::get('professionals/payments/{financialTransaction}/edit', [ProfessionalsPaymentsController::class, 'edit']);
-    Route::patch('professionals/payments/{financialTransaction}/update', [ProfessionalsPaymentsController::class, 'update']);
-    Route::delete('professionals/payments/{financialTransaction}/delete', [ProfessionalsPaymentsController::class, 'destroy']);
+    Route::get('professionals/payments', [ProfessionalsPaymentsController::class, 'index'])->name('professionals.payments.index');
+    Route::get('professionals/payments/create', [ProfessionalsPaymentsController::class, 'create'])->name('professionals.payments.create');
+    Route::post('professionals/payments/review', [ProfessionalsPaymentsController::class, 'generatePaymentReport'])->name('professionals.payments.review');
+    Route::post('professionals/{professional}/payments/store', [ProfessionalsPaymentsController::class, 'store'])->name('professionals.payments.store');
+    Route::get('professionals/payments/{financialTransaction}/edit', [ProfessionalsPaymentsController::class, 'edit'])->name('professionals.payments.edit');
+    Route::patch('professionals/payments/{financialTransaction}/update', [ProfessionalsPaymentsController::class, 'update'])->name('professionals.payments.update');
+    Route::delete('professionals/payments/{financialTransaction}/delete', [ProfessionalsPaymentsController::class, 'destroy'])->name('professionals.payments.destroy');
 
-    Route::get('schedules/{start_at}/{room}/group', [SchedulesController::class, 'showGroup']);
-    Route::get('schedules/{start_at}/{room}', [SchedulesController::class, 'showSchedule']);
-    Route::get('schedules/create', [SchedulesController::class, 'create']);
-    Route::post('schedules/create', [SchedulesController::class, 'store']);
-    Route::get('schedules/trial/create', [TrialSchedulesController::class, 'create']);
-    Route::post('schedules/trial/create', [TrialSchedulesController::class, 'store']);
-    Route::get('schedules/reposition/create', [RepositionSchedulesController::class, 'create']);
-    Route::post('schedules/reposition/create', [RepositionSchedulesController::class, 'store']);
-    Route::get('schedules/extra/create', [ExtraClassSchedulesController::class, 'create']);
-    Route::post('schedules/extra/create', [ExtraClassSchedulesController::class, 'store']);
+    Route::get('schedules/{start_at}/{room}/group', [SchedulesController::class, 'showGroup'])->name('schedules.group');
+    Route::get('schedules/{start_at}/{room}', [SchedulesController::class, 'showSchedule'])->name('schedules.show-schedule');
+    Route::get('schedules/create', [SchedulesController::class, 'create'])->name('schedules.create');
+    Route::post('schedules/create', [SchedulesController::class, 'store'])->name('schedules.store');
+    Route::get('schedules/trial/create', [TrialSchedulesController::class, 'create'])->name('schedules.trial.create');
+    Route::post('schedules/trial/create', [TrialSchedulesController::class, 'store'])->name('schedules.trial.store');
+    Route::get('schedules/reposition/create', [RepositionSchedulesController::class, 'create'])->name('schedules.reposition.create');
+    Route::post('schedules/reposition/create', [RepositionSchedulesController::class, 'store'])->name('schedules.reposition.store');
+    Route::get('schedules/extra/create', [ExtraClassSchedulesController::class, 'create'])->name('schedules.extra.create');
+    Route::post('schedules/extra/create', [ExtraClassSchedulesController::class, 'store'])->name('schedules.extra.store');
 
-    Route::get('schedules/class/{classType}/professional/{professionals}/room/{rooms}/date/{date}/time/{time}', [GroupSchedulesController::class, 'edit']);
+    Route::get('schedules/class/{classType}/professional/{professionals}/room/{rooms}/date/{date}/time/{time}', [GroupSchedulesController::class, 'edit'])->name('schedules.group.edit');
 
     Route::resource('rooms', RoomsController::class);
     Route::resource('plans', PlansController::class);

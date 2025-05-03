@@ -5,23 +5,38 @@ namespace App\Models;
 use App\Models\Schedule;
 use App\Models\ClientPlan;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Builder;
 
 class Client extends Model
 {
-    // Permitted mass assingment fields
+    use HasFactory;
+    
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
       'name',
       'phone',
       'email',
       'observation',
     ];
-
-    public function clientPlans()
+    
+    /**
+     * Get the client plans for the client.
+     */
+    public function clientPlans(): HasMany
     {
         return $this->hasMany(ClientPlan::class);
     }
 
-    public function schedules()
+    /**
+     * Get the schedules for the client.
+     */
+    public function schedules(): HasMany
     {
         return $this->hasMany(Schedule::class);
     }
@@ -35,7 +50,10 @@ class Client extends Model
                 ->select('schedules.*');
     }*/
 
-    public function scopeFilter($query, $params)
+    /**
+     * Scope a query to filter clients.
+     */
+    public function scopeFilter(Builder $query, array $params): Builder
     {
         if (isset($params['name']) && trim($params['name']) !== '') {
             $query->where('name', 'LIKE', trim($params['name'].'%'));
