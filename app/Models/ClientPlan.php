@@ -7,11 +7,15 @@ use App\Models\Client;
 use App\Models\ClassType;
 use App\Models\ClientPlanDetail;
 use App\Models\FinancialTransaction;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ClientPlan extends Model
 {
+    use HasFactory, SoftDeletes;
     protected $fillable = [
+      'client_id',
       'plan_id',
       'start_at',
     ];

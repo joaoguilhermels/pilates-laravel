@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use App\Models\ClassType;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Plan extends Model
 {
+    use HasFactory, SoftDeletes;
     // Permitted mass assingment fields
     protected $fillable = [
         'name',

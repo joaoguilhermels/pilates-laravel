@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/html/app/Http</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../_css/bootstrap.min.css?v=11.0.11" rel="stylesheet" type="text/css">
+  <link href="../_css/nv.d3.min.css?v=11.0.11" rel="stylesheet" type="text/css">
+  <link href="../_css/style.css?v=11.0.11" rel="stylesheet" type="text/css">
+  <link href="../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../index.html">/var/www/html/app</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Http</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Controllers/Auth/ConfirmPasswordController.php.html#9">App\Http\Controllers\Auth\ConfirmPasswordController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/Auth/LoginController.php.html#9">App\Http\Controllers\Auth\LoginController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/Auth/PasswordController.php.html#8">App\Http\Controllers\Auth\PasswordController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/Auth/RegisterController.php.html#12">App\Http\Controllers\Auth\RegisterController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/Auth/VerificationController.php.html#9">App\Http\Controllers\Auth\VerificationController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/BankAccountsController.php.html#10">App\Http\Controllers\BankAccountsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/CalendarController.php.html#9">App\Http\Controllers\CalendarController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClassTypeStatusesController.php.html#9">App\Http\Controllers\ClassTypeStatusesController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClassTypesController.php.html#11">App\Http\Controllers\ClassTypesController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientController.php.html#8">App\Http\Controllers\ClientController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientPlanPaymentsController.php.html#13">App\Http\Controllers\ClientPlanPaymentsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientPlansController.php.html#19">App\Http\Controllers\ClientPlansController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientsController.php.html#13">App\Http\Controllers\ClientsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/DashboardFinancialController.php.html#5">App\Http\Controllers\DashboardFinancialController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ExtraClassSchedulesController.php.html#13">App\Http\Controllers\ExtraClassSchedulesController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/GroupSchedulesController.php.html#7">App\Http\Controllers\GroupSchedulesController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/HomeController.php.html#10">App\Http\Controllers\HomeController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PaymentMethodsController.php.html#10">App\Http\Controllers\PaymentMethodsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PaymentsController.php.html#8">App\Http\Controllers\PaymentsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PlansController.php.html#11">App\Http\Controllers\PlansController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ProfessionalsController.php.html#11">App\Http\Controllers\ProfessionalsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ProfessionalsPaymentsController.php.html#16">App\Http\Controllers\ProfessionalsPaymentsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ReportsController.php.html#9">App\Http\Controllers\ReportsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/RepositionSchedulesController.php.html#13">App\Http\Controllers\RepositionSchedulesController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/RoomsController.php.html#11">App\Http\Controllers\RoomsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ScheduleController.php.html#8">App\Http\Controllers\ScheduleController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/SchedulesController.php.html#15">App\Http\Controllers\SchedulesController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/TrialSchedulesController.php.html#13">App\Http\Controllers\TrialSchedulesController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Middleware/Authenticate.php.html#8">App\Http\Middleware\Authenticate</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Middleware/RedirectIfAuthenticated.php.html#9">App\Http\Middleware\RedirectIfAuthenticated</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/BankAccountRequest.php.html#7">App\Http\Requests\BankAccountRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ClassTypeRequest.php.html#7">App\Http\Requests\ClassTypeRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ClassTypeStatusRequest.php.html#7">App\Http\Requests\ClassTypeStatusRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ClientPlanRequest.php.html#7">App\Http\Requests\ClientPlanRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ClientRequest.php.html#7">App\Http\Requests\ClientRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ExpenseRequest.php.html#7">App\Http\Requests\ExpenseRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/FinancialTransactionRequest.php.html#7">App\Http\Requests\FinancialTransactionRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/PaymentMethodRequest.php.html#8">App\Http\Requests\PaymentMethodRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/PaymentReportRequest.php.html#7">App\Http\Requests\PaymentReportRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/PaymentRequest.php.html#7">App\Http\Requests\PaymentRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/PlanRequest.php.html#7">App\Http\Requests\PlanRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ProfessionalPaymentRequest.php.html#7">App\Http\Requests\ProfessionalPaymentRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ProfessionalRequest.php.html#7">App\Http\Requests\ProfessionalRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/RoomRequest.php.html#7">App\Http\Requests\RoomRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ScheduleRequest.php.html#7">App\Http\Requests\ScheduleRequest</a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Controllers/ClientPlansController.php.html#19">App\Http\Controllers\ClientPlansController</a></td><td class="text-right">600</td></tr>
+       <tr><td><a href="Controllers/CalendarController.php.html#9">App\Http\Controllers\CalendarController</a></td><td class="text-right">342</td></tr>
+       <tr><td><a href="Controllers/ProfessionalsController.php.html#11">App\Http\Controllers\ProfessionalsController</a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="Controllers/SchedulesController.php.html#15">App\Http\Controllers\SchedulesController</a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="Controllers/ClassTypesController.php.html#11">App\Http\Controllers\ClassTypesController</a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="Middleware/Authenticate.php.html#8">App\Http\Middleware\Authenticate</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Middleware/RedirectIfAuthenticated.php.html#9">App\Http\Middleware\RedirectIfAuthenticated</a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Controllers/Auth/ConfirmPasswordController.php.html#36"><abbr title="App\Http\Controllers\Auth\ConfirmPasswordController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/Auth/LoginController.php.html#36"><abbr title="App\Http\Controllers\Auth\LoginController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/Auth/PasswordController.php.html#28"><abbr title="App\Http\Controllers\Auth\PasswordController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/Auth/RegisterController.php.html#39"><abbr title="App\Http\Controllers\Auth\RegisterController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/Auth/RegisterController.php.html#50"><abbr title="App\Http\Controllers\Auth\RegisterController::validator">validator</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/Auth/RegisterController.php.html#65"><abbr title="App\Http\Controllers\Auth\RegisterController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/Auth/VerificationController.php.html#36"><abbr title="App\Http\Controllers\Auth\VerificationController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/BankAccountsController.php.html#17"><abbr title="App\Http\Controllers\BankAccountsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/BankAccountsController.php.html#29"><abbr title="App\Http\Controllers\BankAccountsController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/BankAccountsController.php.html#40"><abbr title="App\Http\Controllers\BankAccountsController::store">store</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/BankAccountsController.php.html#55"><abbr title="App\Http\Controllers\BankAccountsController::show">show</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/BankAccountsController.php.html#66"><abbr title="App\Http\Controllers\BankAccountsController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/BankAccountsController.php.html#78"><abbr title="App\Http\Controllers\BankAccountsController::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/BankAccountsController.php.html#93"><abbr title="App\Http\Controllers\BankAccountsController::destroy">destroy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/CalendarController.php.html#11"><abbr title="App\Http\Controllers\CalendarController::setGroupTitle">setGroupTitle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/CalendarController.php.html#16"><abbr title="App\Http\Controllers\CalendarController::setEventTitle">setEventTitle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/CalendarController.php.html#31"><abbr title="App\Http\Controllers\CalendarController::eventDescription">eventDescription</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/CalendarController.php.html#46"><abbr title="App\Http\Controllers\CalendarController::calendarGroupEvents">calendarGroupEvents</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/CalendarController.php.html#66"><abbr title="App\Http\Controllers\CalendarController::groupCalendar">groupCalendar</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/CalendarController.php.html#78"><abbr title="App\Http\Controllers\CalendarController::calendarEvents">calendarEvents</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/CalendarController.php.html#109"><abbr title="App\Http\Controllers\CalendarController::calendar">calendar</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClassTypeStatusesController.php.html#34"><abbr title="App\Http\Controllers\ClassTypeStatusesController::store">store</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClassTypeStatusesController.php.html#42"><abbr title="App\Http\Controllers\ClassTypeStatusesController::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClassTypesController.php.html#13"><abbr title="App\Http\Controllers\ClassTypesController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClassTypesController.php.html#20"><abbr title="App\Http\Controllers\ClassTypesController::show">show</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClassTypesController.php.html#28"><abbr title="App\Http\Controllers\ClassTypesController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClassTypesController.php.html#35"><abbr title="App\Http\Controllers\ClassTypesController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClassTypesController.php.html#44"><abbr title="App\Http\Controllers\ClassTypesController::store">store</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClassTypesController.php.html#57"><abbr title="App\Http\Controllers\ClassTypesController::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClassTypesController.php.html#70"><abbr title="App\Http\Controllers\ClassTypesController::destroy">destroy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClassTypesController.php.html#79"><abbr title="App\Http\Controllers\ClassTypesController::create_default_statuses">create_default_statuses</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientController.php.html#13"><abbr title="App\Http\Controllers\ClientController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientController.php.html#22"><abbr title="App\Http\Controllers\ClientController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientController.php.html#30"><abbr title="App\Http\Controllers\ClientController::store">store</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientController.php.html#46"><abbr title="App\Http\Controllers\ClientController::show">show</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientController.php.html#55"><abbr title="App\Http\Controllers\ClientController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientController.php.html#64"><abbr title="App\Http\Controllers\ClientController::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientController.php.html#81"><abbr title="App\Http\Controllers\ClientController::destroy">destroy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientPlanPaymentsController.php.html#15"><abbr title="App\Http\Controllers\ClientPlanPaymentsController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientPlanPaymentsController.php.html#27"><abbr title="App\Http\Controllers\ClientPlanPaymentsController::store">store</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientPlanPaymentsController.php.html#46"><abbr title="App\Http\Controllers\ClientPlanPaymentsController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientPlanPaymentsController.php.html#57"><abbr title="App\Http\Controllers\ClientPlanPaymentsController::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientPlanPaymentsController.php.html#76"><abbr title="App\Http\Controllers\ClientPlanPaymentsController::show">show</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientPlanPaymentsController.php.html#86"><abbr title="App\Http\Controllers\ClientPlanPaymentsController::destroy">destroy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientPlansController.php.html#31"><abbr title="App\Http\Controllers\ClientPlansController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientPlansController.php.html#44"><abbr title="App\Http\Controllers\ClientPlansController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientPlansController.php.html#56"><abbr title="App\Http\Controllers\ClientPlansController::prepareCreateForm">prepareCreateForm</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientPlansController.php.html#74"><abbr title="App\Http\Controllers\ClientPlansController::reviewClientPlan">reviewClientPlan</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientPlansController.php.html#121"><abbr title="App\Http\Controllers\ClientPlansController::date_compare">date_compare</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientPlansController.php.html#129"><abbr title="App\Http\Controllers\ClientPlansController::store">store</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientPlansController.php.html#149"><abbr title="App\Http\Controllers\ClientPlansController::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientPlansController.php.html#167"><abbr title="App\Http\Controllers\ClientPlansController::getGroupedDates">getGroupedDates</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientPlansController.php.html#224"><abbr title="App\Http\Controllers\ClientPlansController::setSchedules">setSchedules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientPlansController.php.html#291"><abbr title="App\Http\Controllers\ClientPlansController::setPrice">setPrice</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientPlansController.php.html#310"><abbr title="App\Http\Controllers\ClientPlansController::setProfessionalValue">setProfessionalValue</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientPlansController.php.html#327"><abbr title="App\Http\Controllers\ClientPlansController::destroy">destroy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientsController.php.html#18"><abbr title="App\Http\Controllers\ClientsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientsController.php.html#39"><abbr title="App\Http\Controllers\ClientsController::show">show</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientsController.php.html#49"><abbr title="App\Http\Controllers\ClientsController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientsController.php.html#57"><abbr title="App\Http\Controllers\ClientsController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientsController.php.html#66"><abbr title="App\Http\Controllers\ClientsController::store">store</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientsController.php.html#78"><abbr title="App\Http\Controllers\ClientsController::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ClientsController.php.html#90"><abbr title="App\Http\Controllers\ClientsController::destroy">destroy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/DashboardFinancialController.php.html#7"><abbr title="App\Http\Controllers\DashboardFinancialController::ClientPlaymentsBox">ClientPlaymentsBox</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ExtraClassSchedulesController.php.html#15"><abbr title="App\Http\Controllers\ExtraClassSchedulesController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ExtraClassSchedulesController.php.html#23"><abbr title="App\Http\Controllers\ExtraClassSchedulesController::store">store</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/GroupSchedulesController.php.html#14"><abbr title="App\Http\Controllers\GroupSchedulesController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/GroupSchedulesController.php.html#24"><abbr title="App\Http\Controllers\GroupSchedulesController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/GroupSchedulesController.php.html#35"><abbr title="App\Http\Controllers\GroupSchedulesController::store">store</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/GroupSchedulesController.php.html#46"><abbr title="App\Http\Controllers\GroupSchedulesController::show">show</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/GroupSchedulesController.php.html#57"><abbr title="App\Http\Controllers\GroupSchedulesController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/GroupSchedulesController.php.html#73"><abbr title="App\Http\Controllers\GroupSchedulesController::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/GroupSchedulesController.php.html#84"><abbr title="App\Http\Controllers\GroupSchedulesController::destroy">destroy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/HomeController.php.html#17"><abbr title="App\Http\Controllers\HomeController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PaymentMethodsController.php.html#17"><abbr title="App\Http\Controllers\PaymentMethodsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PaymentMethodsController.php.html#29"><abbr title="App\Http\Controllers\PaymentMethodsController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PaymentMethodsController.php.html#40"><abbr title="App\Http\Controllers\PaymentMethodsController::store">store</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PaymentMethodsController.php.html#55"><abbr title="App\Http\Controllers\PaymentMethodsController::show">show</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PaymentMethodsController.php.html#66"><abbr title="App\Http\Controllers\PaymentMethodsController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PaymentMethodsController.php.html#78"><abbr title="App\Http\Controllers\PaymentMethodsController::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PaymentMethodsController.php.html#93"><abbr title="App\Http\Controllers\PaymentMethodsController::destroy">destroy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PaymentsController.php.html#15"><abbr title="App\Http\Controllers\PaymentsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PaymentsController.php.html#25"><abbr title="App\Http\Controllers\PaymentsController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PaymentsController.php.html#36"><abbr title="App\Http\Controllers\PaymentsController::store">store</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PaymentsController.php.html#47"><abbr title="App\Http\Controllers\PaymentsController::show">show</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PaymentsController.php.html#58"><abbr title="App\Http\Controllers\PaymentsController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PaymentsController.php.html#70"><abbr title="App\Http\Controllers\PaymentsController::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PaymentsController.php.html#81"><abbr title="App\Http\Controllers\PaymentsController::destroy">destroy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PlansController.php.html#13"><abbr title="App\Http\Controllers\PlansController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PlansController.php.html#20"><abbr title="App\Http\Controllers\PlansController::show">show</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PlansController.php.html#25"><abbr title="App\Http\Controllers\PlansController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PlansController.php.html#34"><abbr title="App\Http\Controllers\PlansController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PlansController.php.html#41"><abbr title="App\Http\Controllers\PlansController::store">store</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PlansController.php.html#50"><abbr title="App\Http\Controllers\PlansController::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/PlansController.php.html#59"><abbr title="App\Http\Controllers\PlansController::destroy">destroy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ProfessionalsController.php.html#13"><abbr title="App\Http\Controllers\ProfessionalsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ProfessionalsController.php.html#22"><abbr title="App\Http\Controllers\ProfessionalsController::show">show</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ProfessionalsController.php.html#29"><abbr title="App\Http\Controllers\ProfessionalsController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ProfessionalsController.php.html#40"><abbr title="App\Http\Controllers\ProfessionalsController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ProfessionalsController.php.html#49"><abbr title="App\Http\Controllers\ProfessionalsController::store">store</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ProfessionalsController.php.html#68"><abbr title="App\Http\Controllers\ProfessionalsController::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ProfessionalsController.php.html#92"><abbr title="App\Http\Controllers\ProfessionalsController::destroy">destroy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ProfessionalsController.php.html#109"><abbr title="App\Http\Controllers\ProfessionalsController::getPricePerClass">getPricePerClass</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ProfessionalsPaymentsController.php.html#18"><abbr title="App\Http\Controllers\ProfessionalsPaymentsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ProfessionalsPaymentsController.php.html#27"><abbr title="App\Http\Controllers\ProfessionalsPaymentsController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ProfessionalsPaymentsController.php.html#43"><abbr title="App\Http\Controllers\ProfessionalsPaymentsController::store">store</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ProfessionalsPaymentsController.php.html#71"><abbr title="App\Http\Controllers\ProfessionalsPaymentsController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ProfessionalsPaymentsController.php.html#90"><abbr title="App\Http\Controllers\ProfessionalsPaymentsController::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ProfessionalsPaymentsController.php.html#95"><abbr title="App\Http\Controllers\ProfessionalsPaymentsController::destroy">destroy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ProfessionalsPaymentsController.php.html#106"><abbr title="App\Http\Controllers\ProfessionalsPaymentsController::generatePaymentReport">generatePaymentReport</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ReportsController.php.html#11"><abbr title="App\Http\Controllers\ReportsController::cashJournal">cashJournal</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ReportsController.php.html#16"><abbr title="App\Http\Controllers\ReportsController::showCashJournal">showCashJournal</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/RepositionSchedulesController.php.html#15"><abbr title="App\Http\Controllers\RepositionSchedulesController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/RepositionSchedulesController.php.html#45"><abbr title="App\Http\Controllers\RepositionSchedulesController::store">store</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/RoomsController.php.html#13"><abbr title="App\Http\Controllers\RoomsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/RoomsController.php.html#20"><abbr title="App\Http\Controllers\RoomsController::show">show</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/RoomsController.php.html#25"><abbr title="App\Http\Controllers\RoomsController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/RoomsController.php.html#33"><abbr title="App\Http\Controllers\RoomsController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/RoomsController.php.html#41"><abbr title="App\Http\Controllers\RoomsController::store">store</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/RoomsController.php.html#52"><abbr title="App\Http\Controllers\RoomsController::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/RoomsController.php.html#64"><abbr title="App\Http\Controllers\RoomsController::destroy">destroy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ScheduleController.php.html#13"><abbr title="App\Http\Controllers\ScheduleController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ScheduleController.php.html#22"><abbr title="App\Http\Controllers\ScheduleController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ScheduleController.php.html#30"><abbr title="App\Http\Controllers\ScheduleController::store">store</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ScheduleController.php.html#52"><abbr title="App\Http\Controllers\ScheduleController::show">show</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ScheduleController.php.html#61"><abbr title="App\Http\Controllers\ScheduleController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ScheduleController.php.html#70"><abbr title="App\Http\Controllers\ScheduleController::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/ScheduleController.php.html#93"><abbr title="App\Http\Controllers\ScheduleController::destroy">destroy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/SchedulesController.php.html#17"><abbr title="App\Http\Controllers\SchedulesController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/SchedulesController.php.html#28"><abbr title="App\Http\Controllers\SchedulesController::show">show</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/SchedulesController.php.html#33"><abbr title="App\Http\Controllers\SchedulesController::showSchedule">showSchedule</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/SchedulesController.php.html#50"><abbr title="App\Http\Controllers\SchedulesController::showGroup">showGroup</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/SchedulesController.php.html#71"><abbr title="App\Http\Controllers\SchedulesController::statusLabel">statusLabel</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/SchedulesController.php.html#76"><abbr title="App\Http\Controllers\SchedulesController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/SchedulesController.php.html#84"><abbr title="App\Http\Controllers\SchedulesController::store">store</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/SchedulesController.php.html#101"><abbr title="App\Http\Controllers\SchedulesController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/SchedulesController.php.html#114"><abbr title="App\Http\Controllers\SchedulesController::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/SchedulesController.php.html#129"><abbr title="App\Http\Controllers\SchedulesController::destroy">destroy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/TrialSchedulesController.php.html#15"><abbr title="App\Http\Controllers\TrialSchedulesController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controllers/TrialSchedulesController.php.html#22"><abbr title="App\Http\Controllers\TrialSchedulesController::store">store</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Middleware/Authenticate.php.html#18"><abbr title="App\Http\Middleware\Authenticate::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Middleware/RedirectIfAuthenticated.php.html#19"><abbr title="App\Http\Middleware\RedirectIfAuthenticated::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/BankAccountRequest.php.html#14"><abbr title="App\Http\Requests\BankAccountRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/BankAccountRequest.php.html#24"><abbr title="App\Http\Requests\BankAccountRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ClassTypeRequest.php.html#14"><abbr title="App\Http\Requests\ClassTypeRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ClassTypeRequest.php.html#24"><abbr title="App\Http\Requests\ClassTypeRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ClassTypeStatusRequest.php.html#14"><abbr title="App\Http\Requests\ClassTypeStatusRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ClassTypeStatusRequest.php.html#24"><abbr title="App\Http\Requests\ClassTypeStatusRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ClientPlanRequest.php.html#14"><abbr title="App\Http\Requests\ClientPlanRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ClientPlanRequest.php.html#24"><abbr title="App\Http\Requests\ClientPlanRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ClientRequest.php.html#12"><abbr title="App\Http\Requests\ClientRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ClientRequest.php.html#22"><abbr title="App\Http\Requests\ClientRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ExpenseRequest.php.html#14"><abbr title="App\Http\Requests\ExpenseRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ExpenseRequest.php.html#24"><abbr title="App\Http\Requests\ExpenseRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/FinancialTransactionRequest.php.html#14"><abbr title="App\Http\Requests\FinancialTransactionRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/FinancialTransactionRequest.php.html#24"><abbr title="App\Http\Requests\FinancialTransactionRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/PaymentMethodRequest.php.html#15"><abbr title="App\Http\Requests\PaymentMethodRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/PaymentMethodRequest.php.html#25"><abbr title="App\Http\Requests\PaymentMethodRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/PaymentReportRequest.php.html#14"><abbr title="App\Http\Requests\PaymentReportRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/PaymentReportRequest.php.html#24"><abbr title="App\Http\Requests\PaymentReportRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/PaymentRequest.php.html#14"><abbr title="App\Http\Requests\PaymentRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/PaymentRequest.php.html#24"><abbr title="App\Http\Requests\PaymentRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/PlanRequest.php.html#14"><abbr title="App\Http\Requests\PlanRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/PlanRequest.php.html#24"><abbr title="App\Http\Requests\PlanRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ProfessionalPaymentRequest.php.html#14"><abbr title="App\Http\Requests\ProfessionalPaymentRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ProfessionalPaymentRequest.php.html#24"><abbr title="App\Http\Requests\ProfessionalPaymentRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ProfessionalRequest.php.html#14"><abbr title="App\Http\Requests\ProfessionalRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ProfessionalRequest.php.html#24"><abbr title="App\Http\Requests\ProfessionalRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/RoomRequest.php.html#14"><abbr title="App\Http\Requests\RoomRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/RoomRequest.php.html#24"><abbr title="App\Http\Requests\RoomRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ScheduleRequest.php.html#14"><abbr title="App\Http\Requests\ScheduleRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Requests/ScheduleRequest.php.html#24"><abbr title="App\Http\Requests\ScheduleRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Controllers/ClientPlansController.php.html#74"><abbr title="App\Http\Controllers\ClientPlansController::reviewClientPlan">reviewClientPlan</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Controllers/ClientPlansController.php.html#310"><abbr title="App\Http\Controllers\ClientPlansController::setProfessionalValue">setProfessionalValue</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Middleware/Authenticate.php.html#18"><abbr title="App\Http\Middleware\Authenticate::handle">handle</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Controllers/CalendarController.php.html#16"><abbr title="App\Http\Controllers\CalendarController::setEventTitle">setEventTitle</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controllers/CalendarController.php.html#46"><abbr title="App\Http\Controllers\CalendarController::calendarGroupEvents">calendarGroupEvents</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controllers/CalendarController.php.html#66"><abbr title="App\Http\Controllers\CalendarController::groupCalendar">groupCalendar</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controllers/CalendarController.php.html#78"><abbr title="App\Http\Controllers\CalendarController::calendarEvents">calendarEvents</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controllers/CalendarController.php.html#109"><abbr title="App\Http\Controllers\CalendarController::calendar">calendar</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controllers/ClientPlansController.php.html#224"><abbr title="App\Http\Controllers\ClientPlansController::setSchedules">setSchedules</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controllers/ProfessionalsController.php.html#49"><abbr title="App\Http\Controllers\ProfessionalsController::store">store</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controllers/ProfessionalsController.php.html#68"><abbr title="App\Http\Controllers\ProfessionalsController::update">update</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controllers/CalendarController.php.html#31"><abbr title="App\Http\Controllers\CalendarController::eventDescription">eventDescription</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Controllers/ClassTypesController.php.html#44"><abbr title="App\Http\Controllers\ClassTypesController::store">store</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Controllers/ClassTypesController.php.html#57"><abbr title="App\Http\Controllers\ClassTypesController::update">update</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Controllers/ClientPlansController.php.html#129"><abbr title="App\Http\Controllers\ClientPlansController::store">store</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Controllers/ClientPlansController.php.html#149"><abbr title="App\Http\Controllers\ClientPlansController::update">update</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Controllers/ClientPlansController.php.html#167"><abbr title="App\Http\Controllers\ClientPlansController::getGroupedDates">getGroupedDates</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Controllers/ClientPlansController.php.html#291"><abbr title="App\Http\Controllers\ClientPlansController::setPrice">setPrice</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Controllers/SchedulesController.php.html#50"><abbr title="App\Http\Controllers\SchedulesController::showGroup">showGroup</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Middleware/RedirectIfAuthenticated.php.html#19"><abbr title="App\Http\Middleware\RedirectIfAuthenticated::handle">handle</abbr></a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 11.0.11</a> using <a href="https://www.php.net/" target="_top">PHP 8.2.28</a> and <a href="https://phpunit.de/">PHPUnit 11.5.39</a> at Tue Sep 16 19:31:23 UTC 2025.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../_js/jquery.min.js?v=11.0.11" type="text/javascript"></script>
+  <script src="../_js/d3.min.js?v=11.0.11" type="text/javascript"></script>
+  <script src="../_js/nv.d3.min.js?v=11.0.11" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([45,0,0,0,0,0,0,0,0,0,0,10], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([172,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,1,"<a href=\"Controllers\/Auth\/ConfirmPasswordController.php.html#9\">App\\Http\\Controllers\\Auth\\ConfirmPasswordController<\/a>"],[100,0,"<a href=\"Controllers\/Auth\/ForgotPasswordController.php.html#8\">App\\Http\\Controllers\\Auth\\ForgotPasswordController<\/a>"],[0,1,"<a href=\"Controllers\/Auth\/LoginController.php.html#9\">App\\Http\\Controllers\\Auth\\LoginController<\/a>"],[0,1,"<a href=\"Controllers\/Auth\/PasswordController.php.html#8\">App\\Http\\Controllers\\Auth\\PasswordController<\/a>"],[0,3,"<a href=\"Controllers\/Auth\/RegisterController.php.html#12\">App\\Http\\Controllers\\Auth\\RegisterController<\/a>"],[100,0,"<a href=\"Controllers\/Auth\/ResetPasswordController.php.html#9\">App\\Http\\Controllers\\Auth\\ResetPasswordController<\/a>"],[0,1,"<a href=\"Controllers\/Auth\/VerificationController.php.html#9\">App\\Http\\Controllers\\Auth\\VerificationController<\/a>"],[0,7,"<a href=\"Controllers\/BankAccountsController.php.html#10\">App\\Http\\Controllers\\BankAccountsController<\/a>"],[0,18,"<a href=\"Controllers\/CalendarController.php.html#9\">App\\Http\\Controllers\\CalendarController<\/a>"],[0,2,"<a href=\"Controllers\/ClassTypeStatusesController.php.html#9\">App\\Http\\Controllers\\ClassTypeStatusesController<\/a>"],[0,10,"<a href=\"Controllers\/ClassTypesController.php.html#11\">App\\Http\\Controllers\\ClassTypesController<\/a>"],[0,7,"<a href=\"Controllers\/ClientController.php.html#8\">App\\Http\\Controllers\\ClientController<\/a>"],[0,6,"<a href=\"Controllers\/ClientPlanPaymentsController.php.html#13\">App\\Http\\Controllers\\ClientPlanPaymentsController<\/a>"],[0,24,"<a href=\"Controllers\/ClientPlansController.php.html#19\">App\\Http\\Controllers\\ClientPlansController<\/a>"],[0,7,"<a href=\"Controllers\/ClientsController.php.html#13\">App\\Http\\Controllers\\ClientsController<\/a>"],[100,0,"<a href=\"Controllers\/Controller.php.html#10\">App\\Http\\Controllers\\Controller<\/a>"],[0,1,"<a href=\"Controllers\/DashboardFinancialController.php.html#5\">App\\Http\\Controllers\\DashboardFinancialController<\/a>"],[0,2,"<a href=\"Controllers\/ExtraClassSchedulesController.php.html#13\">App\\Http\\Controllers\\ExtraClassSchedulesController<\/a>"],[0,7,"<a href=\"Controllers\/GroupSchedulesController.php.html#7\">App\\Http\\Controllers\\GroupSchedulesController<\/a>"],[0,1,"<a href=\"Controllers\/HomeController.php.html#10\">App\\Http\\Controllers\\HomeController<\/a>"],[0,7,"<a href=\"Controllers\/PaymentMethodsController.php.html#10\">App\\Http\\Controllers\\PaymentMethodsController<\/a>"],[0,7,"<a href=\"Controllers\/PaymentsController.php.html#8\">App\\Http\\Controllers\\PaymentsController<\/a>"],[0,7,"<a href=\"Controllers\/PlansController.php.html#11\">App\\Http\\Controllers\\PlansController<\/a>"],[0,12,"<a href=\"Controllers\/ProfessionalsController.php.html#11\">App\\Http\\Controllers\\ProfessionalsController<\/a>"],[0,7,"<a href=\"Controllers\/ProfessionalsPaymentsController.php.html#16\">App\\Http\\Controllers\\ProfessionalsPaymentsController<\/a>"],[0,2,"<a href=\"Controllers\/ReportsController.php.html#9\">App\\Http\\Controllers\\ReportsController<\/a>"],[0,2,"<a href=\"Controllers\/RepositionSchedulesController.php.html#13\">App\\Http\\Controllers\\RepositionSchedulesController<\/a>"],[0,7,"<a href=\"Controllers\/RoomsController.php.html#11\">App\\Http\\Controllers\\RoomsController<\/a>"],[0,7,"<a href=\"Controllers\/ScheduleController.php.html#8\">App\\Http\\Controllers\\ScheduleController<\/a>"],[0,11,"<a href=\"Controllers\/SchedulesController.php.html#15\">App\\Http\\Controllers\\SchedulesController<\/a>"],[0,2,"<a href=\"Controllers\/TrialSchedulesController.php.html#13\">App\\Http\\Controllers\\TrialSchedulesController<\/a>"],[100,0,"<a href=\"Kernel.php.html#7\">App\\Http\\Kernel<\/a>"],[0,4,"<a href=\"Middleware\/Authenticate.php.html#8\">App\\Http\\Middleware\\Authenticate<\/a>"],[100,0,"<a href=\"Middleware\/CheckForMaintenanceMode.php.html#7\">App\\Http\\Middleware\\CheckForMaintenanceMode<\/a>"],[100,0,"<a href=\"Middleware\/EncryptCookies.php.html#7\">App\\Http\\Middleware\\EncryptCookies<\/a>"],[0,2,"<a href=\"Middleware\/RedirectIfAuthenticated.php.html#9\">App\\Http\\Middleware\\RedirectIfAuthenticated<\/a>"],[100,0,"<a href=\"Middleware\/TrimStrings.php.html#7\">App\\Http\\Middleware\\TrimStrings<\/a>"],[100,0,"<a href=\"Middleware\/TrustProxies.php.html#8\">App\\Http\\Middleware\\TrustProxies<\/a>"],[100,0,"<a href=\"Middleware\/VerifyCsrfToken.php.html#7\">App\\Http\\Middleware\\VerifyCsrfToken<\/a>"],[0,2,"<a href=\"Requests\/BankAccountRequest.php.html#7\">App\\Http\\Requests\\BankAccountRequest<\/a>"],[0,2,"<a href=\"Requests\/ClassTypeRequest.php.html#7\">App\\Http\\Requests\\ClassTypeRequest<\/a>"],[0,2,"<a href=\"Requests\/ClassTypeStatusRequest.php.html#7\">App\\Http\\Requests\\ClassTypeStatusRequest<\/a>"],[0,2,"<a href=\"Requests\/ClientPlanRequest.php.html#7\">App\\Http\\Requests\\ClientPlanRequest<\/a>"],[0,2,"<a href=\"Requests\/ClientRequest.php.html#7\">App\\Http\\Requests\\ClientRequest<\/a>"],[0,2,"<a href=\"Requests\/ExpenseRequest.php.html#7\">App\\Http\\Requests\\ExpenseRequest<\/a>"],[0,2,"<a href=\"Requests\/FinancialTransactionRequest.php.html#7\">App\\Http\\Requests\\FinancialTransactionRequest<\/a>"],[0,2,"<a href=\"Requests\/PaymentMethodRequest.php.html#8\">App\\Http\\Requests\\PaymentMethodRequest<\/a>"],[0,2,"<a href=\"Requests\/PaymentReportRequest.php.html#7\">App\\Http\\Requests\\PaymentReportRequest<\/a>"],[0,2,"<a href=\"Requests\/PaymentRequest.php.html#7\">App\\Http\\Requests\\PaymentRequest<\/a>"],[0,2,"<a href=\"Requests\/PlanRequest.php.html#7\">App\\Http\\Requests\\PlanRequest<\/a>"],[0,2,"<a href=\"Requests\/ProfessionalPaymentRequest.php.html#7\">App\\Http\\Requests\\ProfessionalPaymentRequest<\/a>"],[0,2,"<a href=\"Requests\/ProfessionalRequest.php.html#7\">App\\Http\\Requests\\ProfessionalRequest<\/a>"],[100,0,"<a href=\"Requests\/Request.php.html#7\">App\\Http\\Requests\\Request<\/a>"],[0,2,"<a href=\"Requests\/RoomRequest.php.html#7\">App\\Http\\Requests\\RoomRequest<\/a>"],[0,2,"<a href=\"Requests\/ScheduleRequest.php.html#7\">App\\Http\\Requests\\ScheduleRequest<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,1,"<a href=\"Controllers\/Auth\/ConfirmPasswordController.php.html#36\">App\\Http\\Controllers\\Auth\\ConfirmPasswordController::__construct<\/a>"],[0,1,"<a href=\"Controllers\/Auth\/LoginController.php.html#36\">App\\Http\\Controllers\\Auth\\LoginController::__construct<\/a>"],[0,1,"<a href=\"Controllers\/Auth\/PasswordController.php.html#28\">App\\Http\\Controllers\\Auth\\PasswordController::__construct<\/a>"],[0,1,"<a href=\"Controllers\/Auth\/RegisterController.php.html#39\">App\\Http\\Controllers\\Auth\\RegisterController::__construct<\/a>"],[0,1,"<a href=\"Controllers\/Auth\/RegisterController.php.html#50\">App\\Http\\Controllers\\Auth\\RegisterController::validator<\/a>"],[0,1,"<a href=\"Controllers\/Auth\/RegisterController.php.html#65\">App\\Http\\Controllers\\Auth\\RegisterController::create<\/a>"],[0,1,"<a href=\"Controllers\/Auth\/VerificationController.php.html#36\">App\\Http\\Controllers\\Auth\\VerificationController::__construct<\/a>"],[0,1,"<a href=\"Controllers\/BankAccountsController.php.html#17\">App\\Http\\Controllers\\BankAccountsController::index<\/a>"],[0,1,"<a href=\"Controllers\/BankAccountsController.php.html#29\">App\\Http\\Controllers\\BankAccountsController::create<\/a>"],[0,1,"<a href=\"Controllers\/BankAccountsController.php.html#40\">App\\Http\\Controllers\\BankAccountsController::store<\/a>"],[0,1,"<a href=\"Controllers\/BankAccountsController.php.html#55\">App\\Http\\Controllers\\BankAccountsController::show<\/a>"],[0,1,"<a href=\"Controllers\/BankAccountsController.php.html#66\">App\\Http\\Controllers\\BankAccountsController::edit<\/a>"],[0,1,"<a href=\"Controllers\/BankAccountsController.php.html#78\">App\\Http\\Controllers\\BankAccountsController::update<\/a>"],[0,1,"<a href=\"Controllers\/BankAccountsController.php.html#93\">App\\Http\\Controllers\\BankAccountsController::destroy<\/a>"],[0,1,"<a href=\"Controllers\/CalendarController.php.html#11\">App\\Http\\Controllers\\CalendarController::setGroupTitle<\/a>"],[0,3,"<a href=\"Controllers\/CalendarController.php.html#16\">App\\Http\\Controllers\\CalendarController::setEventTitle<\/a>"],[0,2,"<a href=\"Controllers\/CalendarController.php.html#31\">App\\Http\\Controllers\\CalendarController::eventDescription<\/a>"],[0,3,"<a href=\"Controllers\/CalendarController.php.html#46\">App\\Http\\Controllers\\CalendarController::calendarGroupEvents<\/a>"],[0,3,"<a href=\"Controllers\/CalendarController.php.html#66\">App\\Http\\Controllers\\CalendarController::groupCalendar<\/a>"],[0,3,"<a href=\"Controllers\/CalendarController.php.html#78\">App\\Http\\Controllers\\CalendarController::calendarEvents<\/a>"],[0,3,"<a href=\"Controllers\/CalendarController.php.html#109\">App\\Http\\Controllers\\CalendarController::calendar<\/a>"],[0,1,"<a href=\"Controllers\/ClassTypeStatusesController.php.html#34\">App\\Http\\Controllers\\ClassTypeStatusesController::store<\/a>"],[0,1,"<a href=\"Controllers\/ClassTypeStatusesController.php.html#42\">App\\Http\\Controllers\\ClassTypeStatusesController::update<\/a>"],[0,1,"<a href=\"Controllers\/ClassTypesController.php.html#13\">App\\Http\\Controllers\\ClassTypesController::index<\/a>"],[0,1,"<a href=\"Controllers\/ClassTypesController.php.html#20\">App\\Http\\Controllers\\ClassTypesController::show<\/a>"],[0,1,"<a href=\"Controllers\/ClassTypesController.php.html#28\">App\\Http\\Controllers\\ClassTypesController::edit<\/a>"],[0,1,"<a href=\"Controllers\/ClassTypesController.php.html#35\">App\\Http\\Controllers\\ClassTypesController::create<\/a>"],[0,2,"<a href=\"Controllers\/ClassTypesController.php.html#44\">App\\Http\\Controllers\\ClassTypesController::store<\/a>"],[0,2,"<a href=\"Controllers\/ClassTypesController.php.html#57\">App\\Http\\Controllers\\ClassTypesController::update<\/a>"],[0,1,"<a href=\"Controllers\/ClassTypesController.php.html#70\">App\\Http\\Controllers\\ClassTypesController::destroy<\/a>"],[0,1,"<a href=\"Controllers\/ClassTypesController.php.html#79\">App\\Http\\Controllers\\ClassTypesController::create_default_statuses<\/a>"],[0,1,"<a href=\"Controllers\/ClientController.php.html#13\">App\\Http\\Controllers\\ClientController::index<\/a>"],[0,1,"<a href=\"Controllers\/ClientController.php.html#22\">App\\Http\\Controllers\\ClientController::create<\/a>"],[0,1,"<a href=\"Controllers\/ClientController.php.html#30\">App\\Http\\Controllers\\ClientController::store<\/a>"],[0,1,"<a href=\"Controllers\/ClientController.php.html#46\">App\\Http\\Controllers\\ClientController::show<\/a>"],[0,1,"<a href=\"Controllers\/ClientController.php.html#55\">App\\Http\\Controllers\\ClientController::edit<\/a>"],[0,1,"<a href=\"Controllers\/ClientController.php.html#64\">App\\Http\\Controllers\\ClientController::update<\/a>"],[0,1,"<a href=\"Controllers\/ClientController.php.html#81\">App\\Http\\Controllers\\ClientController::destroy<\/a>"],[0,1,"<a href=\"Controllers\/ClientPlanPaymentsController.php.html#15\">App\\Http\\Controllers\\ClientPlanPaymentsController::create<\/a>"],[0,1,"<a href=\"Controllers\/ClientPlanPaymentsController.php.html#27\">App\\Http\\Controllers\\ClientPlanPaymentsController::store<\/a>"],[0,1,"<a href=\"Controllers\/ClientPlanPaymentsController.php.html#46\">App\\Http\\Controllers\\ClientPlanPaymentsController::edit<\/a>"],[0,1,"<a href=\"Controllers\/ClientPlanPaymentsController.php.html#57\">App\\Http\\Controllers\\ClientPlanPaymentsController::update<\/a>"],[0,1,"<a href=\"Controllers\/ClientPlanPaymentsController.php.html#76\">App\\Http\\Controllers\\ClientPlanPaymentsController::show<\/a>"],[0,1,"<a href=\"Controllers\/ClientPlanPaymentsController.php.html#86\">App\\Http\\Controllers\\ClientPlanPaymentsController::destroy<\/a>"],[0,1,"<a href=\"Controllers\/ClientPlansController.php.html#31\">App\\Http\\Controllers\\ClientPlansController::create<\/a>"],[0,1,"<a href=\"Controllers\/ClientPlansController.php.html#44\">App\\Http\\Controllers\\ClientPlansController::edit<\/a>"],[0,1,"<a href=\"Controllers\/ClientPlansController.php.html#56\">App\\Http\\Controllers\\ClientPlansController::prepareCreateForm<\/a>"],[0,4,"<a href=\"Controllers\/ClientPlansController.php.html#74\">App\\Http\\Controllers\\ClientPlansController::reviewClientPlan<\/a>"],[0,1,"<a href=\"Controllers\/ClientPlansController.php.html#121\">App\\Http\\Controllers\\ClientPlansController::date_compare<\/a>"],[0,2,"<a href=\"Controllers\/ClientPlansController.php.html#129\">App\\Http\\Controllers\\ClientPlansController::store<\/a>"],[0,2,"<a href=\"Controllers\/ClientPlansController.php.html#149\">App\\Http\\Controllers\\ClientPlansController::update<\/a>"],[0,2,"<a href=\"Controllers\/ClientPlansController.php.html#167\">App\\Http\\Controllers\\ClientPlansController::getGroupedDates<\/a>"],[0,3,"<a href=\"Controllers\/ClientPlansController.php.html#224\">App\\Http\\Controllers\\ClientPlansController::setSchedules<\/a>"],[0,2,"<a href=\"Controllers\/ClientPlansController.php.html#291\">App\\Http\\Controllers\\ClientPlansController::setPrice<\/a>"],[0,4,"<a href=\"Controllers\/ClientPlansController.php.html#310\">App\\Http\\Controllers\\ClientPlansController::setProfessionalValue<\/a>"],[0,1,"<a href=\"Controllers\/ClientPlansController.php.html#327\">App\\Http\\Controllers\\ClientPlansController::destroy<\/a>"],[0,1,"<a href=\"Controllers\/ClientsController.php.html#18\">App\\Http\\Controllers\\ClientsController::index<\/a>"],[0,1,"<a href=\"Controllers\/ClientsController.php.html#39\">App\\Http\\Controllers\\ClientsController::show<\/a>"],[0,1,"<a href=\"Controllers\/ClientsController.php.html#49\">App\\Http\\Controllers\\ClientsController::edit<\/a>"],[0,1,"<a href=\"Controllers\/ClientsController.php.html#57\">App\\Http\\Controllers\\ClientsController::create<\/a>"],[0,1,"<a href=\"Controllers\/ClientsController.php.html#66\">App\\Http\\Controllers\\ClientsController::store<\/a>"],[0,1,"<a href=\"Controllers\/ClientsController.php.html#78\">App\\Http\\Controllers\\ClientsController::update<\/a>"],[0,1,"<a href=\"Controllers\/ClientsController.php.html#90\">App\\Http\\Controllers\\ClientsController::destroy<\/a>"],[0,1,"<a href=\"Controllers\/DashboardFinancialController.php.html#7\">App\\Http\\Controllers\\DashboardFinancialController::ClientPlaymentsBox<\/a>"],[0,1,"<a href=\"Controllers\/ExtraClassSchedulesController.php.html#15\">App\\Http\\Controllers\\ExtraClassSchedulesController::create<\/a>"],[0,1,"<a href=\"Controllers\/ExtraClassSchedulesController.php.html#23\">App\\Http\\Controllers\\ExtraClassSchedulesController::store<\/a>"],[0,1,"<a href=\"Controllers\/GroupSchedulesController.php.html#14\">App\\Http\\Controllers\\GroupSchedulesController::index<\/a>"],[0,1,"<a href=\"Controllers\/GroupSchedulesController.php.html#24\">App\\Http\\Controllers\\GroupSchedulesController::create<\/a>"],[0,1,"<a href=\"Controllers\/GroupSchedulesController.php.html#35\">App\\Http\\Controllers\\GroupSchedulesController::store<\/a>"],[0,1,"<a href=\"Controllers\/GroupSchedulesController.php.html#46\">App\\Http\\Controllers\\GroupSchedulesController::show<\/a>"],[0,1,"<a href=\"Controllers\/GroupSchedulesController.php.html#57\">App\\Http\\Controllers\\GroupSchedulesController::edit<\/a>"],[0,1,"<a href=\"Controllers\/GroupSchedulesController.php.html#73\">App\\Http\\Controllers\\GroupSchedulesController::update<\/a>"],[0,1,"<a href=\"Controllers\/GroupSchedulesController.php.html#84\">App\\Http\\Controllers\\GroupSchedulesController::destroy<\/a>"],[0,1,"<a href=\"Controllers\/HomeController.php.html#17\">App\\Http\\Controllers\\HomeController::index<\/a>"],[0,1,"<a href=\"Controllers\/PaymentMethodsController.php.html#17\">App\\Http\\Controllers\\PaymentMethodsController::index<\/a>"],[0,1,"<a href=\"Controllers\/PaymentMethodsController.php.html#29\">App\\Http\\Controllers\\PaymentMethodsController::create<\/a>"],[0,1,"<a href=\"Controllers\/PaymentMethodsController.php.html#40\">App\\Http\\Controllers\\PaymentMethodsController::store<\/a>"],[0,1,"<a href=\"Controllers\/PaymentMethodsController.php.html#55\">App\\Http\\Controllers\\PaymentMethodsController::show<\/a>"],[0,1,"<a href=\"Controllers\/PaymentMethodsController.php.html#66\">App\\Http\\Controllers\\PaymentMethodsController::edit<\/a>"],[0,1,"<a href=\"Controllers\/PaymentMethodsController.php.html#78\">App\\Http\\Controllers\\PaymentMethodsController::update<\/a>"],[0,1,"<a href=\"Controllers\/PaymentMethodsController.php.html#93\">App\\Http\\Controllers\\PaymentMethodsController::destroy<\/a>"],[0,1,"<a href=\"Controllers\/PaymentsController.php.html#15\">App\\Http\\Controllers\\PaymentsController::index<\/a>"],[0,1,"<a href=\"Controllers\/PaymentsController.php.html#25\">App\\Http\\Controllers\\PaymentsController::create<\/a>"],[0,1,"<a href=\"Controllers\/PaymentsController.php.html#36\">App\\Http\\Controllers\\PaymentsController::store<\/a>"],[0,1,"<a href=\"Controllers\/PaymentsController.php.html#47\">App\\Http\\Controllers\\PaymentsController::show<\/a>"],[0,1,"<a href=\"Controllers\/PaymentsController.php.html#58\">App\\Http\\Controllers\\PaymentsController::edit<\/a>"],[0,1,"<a href=\"Controllers\/PaymentsController.php.html#70\">App\\Http\\Controllers\\PaymentsController::update<\/a>"],[0,1,"<a href=\"Controllers\/PaymentsController.php.html#81\">App\\Http\\Controllers\\PaymentsController::destroy<\/a>"],[0,1,"<a href=\"Controllers\/PlansController.php.html#13\">App\\Http\\Controllers\\PlansController::index<\/a>"],[0,1,"<a href=\"Controllers\/PlansController.php.html#20\">App\\Http\\Controllers\\PlansController::show<\/a>"],[0,1,"<a href=\"Controllers\/PlansController.php.html#25\">App\\Http\\Controllers\\PlansController::edit<\/a>"],[0,1,"<a href=\"Controllers\/PlansController.php.html#34\">App\\Http\\Controllers\\PlansController::create<\/a>"],[0,1,"<a href=\"Controllers\/PlansController.php.html#41\">App\\Http\\Controllers\\PlansController::store<\/a>"],[0,1,"<a href=\"Controllers\/PlansController.php.html#50\">App\\Http\\Controllers\\PlansController::update<\/a>"],[0,1,"<a href=\"Controllers\/PlansController.php.html#59\">App\\Http\\Controllers\\PlansController::destroy<\/a>"],[0,1,"<a href=\"Controllers\/ProfessionalsController.php.html#13\">App\\Http\\Controllers\\ProfessionalsController::index<\/a>"],[0,1,"<a href=\"Controllers\/ProfessionalsController.php.html#22\">App\\Http\\Controllers\\ProfessionalsController::show<\/a>"],[0,1,"<a href=\"Controllers\/ProfessionalsController.php.html#29\">App\\Http\\Controllers\\ProfessionalsController::edit<\/a>"],[0,1,"<a href=\"Controllers\/ProfessionalsController.php.html#40\">App\\Http\\Controllers\\ProfessionalsController::create<\/a>"],[0,3,"<a href=\"Controllers\/ProfessionalsController.php.html#49\">App\\Http\\Controllers\\ProfessionalsController::store<\/a>"],[0,3,"<a href=\"Controllers\/ProfessionalsController.php.html#68\">App\\Http\\Controllers\\ProfessionalsController::update<\/a>"],[0,1,"<a href=\"Controllers\/ProfessionalsController.php.html#92\">App\\Http\\Controllers\\ProfessionalsController::destroy<\/a>"],[0,1,"<a href=\"Controllers\/ProfessionalsController.php.html#109\">App\\Http\\Controllers\\ProfessionalsController::getPricePerClass<\/a>"],[0,1,"<a href=\"Controllers\/ProfessionalsPaymentsController.php.html#18\">App\\Http\\Controllers\\ProfessionalsPaymentsController::index<\/a>"],[0,1,"<a href=\"Controllers\/ProfessionalsPaymentsController.php.html#27\">App\\Http\\Controllers\\ProfessionalsPaymentsController::create<\/a>"],[0,1,"<a href=\"Controllers\/ProfessionalsPaymentsController.php.html#43\">App\\Http\\Controllers\\ProfessionalsPaymentsController::store<\/a>"],[0,1,"<a href=\"Controllers\/ProfessionalsPaymentsController.php.html#71\">App\\Http\\Controllers\\ProfessionalsPaymentsController::edit<\/a>"],[0,1,"<a href=\"Controllers\/ProfessionalsPaymentsController.php.html#90\">App\\Http\\Controllers\\ProfessionalsPaymentsController::update<\/a>"],[0,1,"<a href=\"Controllers\/ProfessionalsPaymentsController.php.html#95\">App\\Http\\Controllers\\ProfessionalsPaymentsController::destroy<\/a>"],[0,1,"<a href=\"Controllers\/ProfessionalsPaymentsController.php.html#106\">App\\Http\\Controllers\\ProfessionalsPaymentsController::generatePaymentReport<\/a>"],[0,1,"<a href=\"Controllers\/ReportsController.php.html#11\">App\\Http\\Controllers\\ReportsController::cashJournal<\/a>"],[0,1,"<a href=\"Controllers\/ReportsController.php.html#16\">App\\Http\\Controllers\\ReportsController::showCashJournal<\/a>"],[0,1,"<a href=\"Controllers\/RepositionSchedulesController.php.html#15\">App\\Http\\Controllers\\RepositionSchedulesController::create<\/a>"],[0,1,"<a href=\"Controllers\/RepositionSchedulesController.php.html#45\">App\\Http\\Controllers\\RepositionSchedulesController::store<\/a>"],[0,1,"<a href=\"Controllers\/RoomsController.php.html#13\">App\\Http\\Controllers\\RoomsController::index<\/a>"],[0,1,"<a href=\"Controllers\/RoomsController.php.html#20\">App\\Http\\Controllers\\RoomsController::show<\/a>"],[0,1,"<a href=\"Controllers\/RoomsController.php.html#25\">App\\Http\\Controllers\\RoomsController::edit<\/a>"],[0,1,"<a href=\"Controllers\/RoomsController.php.html#33\">App\\Http\\Controllers\\RoomsController::create<\/a>"],[0,1,"<a href=\"Controllers\/RoomsController.php.html#41\">App\\Http\\Controllers\\RoomsController::store<\/a>"],[0,1,"<a href=\"Controllers\/RoomsController.php.html#52\">App\\Http\\Controllers\\RoomsController::update<\/a>"],[0,1,"<a href=\"Controllers\/RoomsController.php.html#64\">App\\Http\\Controllers\\RoomsController::destroy<\/a>"],[0,1,"<a href=\"Controllers\/ScheduleController.php.html#13\">App\\Http\\Controllers\\ScheduleController::index<\/a>"],[0,1,"<a href=\"Controllers\/ScheduleController.php.html#22\">App\\Http\\Controllers\\ScheduleController::create<\/a>"],[0,1,"<a href=\"Controllers\/ScheduleController.php.html#30\">App\\Http\\Controllers\\ScheduleController::store<\/a>"],[0,1,"<a href=\"Controllers\/ScheduleController.php.html#52\">App\\Http\\Controllers\\ScheduleController::show<\/a>"],[0,1,"<a href=\"Controllers\/ScheduleController.php.html#61\">App\\Http\\Controllers\\ScheduleController::edit<\/a>"],[0,1,"<a href=\"Controllers\/ScheduleController.php.html#70\">App\\Http\\Controllers\\ScheduleController::update<\/a>"],[0,1,"<a href=\"Controllers\/ScheduleController.php.html#93\">App\\Http\\Controllers\\ScheduleController::destroy<\/a>"],[0,1,"<a href=\"Controllers\/SchedulesController.php.html#17\">App\\Http\\Controllers\\SchedulesController::index<\/a>"],[0,1,"<a href=\"Controllers\/SchedulesController.php.html#28\">App\\Http\\Controllers\\SchedulesController::show<\/a>"],[0,1,"<a href=\"Controllers\/SchedulesController.php.html#33\">App\\Http\\Controllers\\SchedulesController::showSchedule<\/a>"],[0,2,"<a href=\"Controllers\/SchedulesController.php.html#50\">App\\Http\\Controllers\\SchedulesController::showGroup<\/a>"],[0,1,"<a href=\"Controllers\/SchedulesController.php.html#71\">App\\Http\\Controllers\\SchedulesController::statusLabel<\/a>"],[0,1,"<a href=\"Controllers\/SchedulesController.php.html#76\">App\\Http\\Controllers\\SchedulesController::create<\/a>"],[0,1,"<a href=\"Controllers\/SchedulesController.php.html#84\">App\\Http\\Controllers\\SchedulesController::store<\/a>"],[0,1,"<a href=\"Controllers\/SchedulesController.php.html#101\">App\\Http\\Controllers\\SchedulesController::edit<\/a>"],[0,1,"<a href=\"Controllers\/SchedulesController.php.html#114\">App\\Http\\Controllers\\SchedulesController::update<\/a>"],[0,1,"<a href=\"Controllers\/SchedulesController.php.html#129\">App\\Http\\Controllers\\SchedulesController::destroy<\/a>"],[0,1,"<a href=\"Controllers\/TrialSchedulesController.php.html#15\">App\\Http\\Controllers\\TrialSchedulesController::create<\/a>"],[0,1,"<a href=\"Controllers\/TrialSchedulesController.php.html#22\">App\\Http\\Controllers\\TrialSchedulesController::store<\/a>"],[0,4,"<a href=\"Middleware\/Authenticate.php.html#18\">App\\Http\\Middleware\\Authenticate::handle<\/a>"],[0,2,"<a href=\"Middleware\/RedirectIfAuthenticated.php.html#19\">App\\Http\\Middleware\\RedirectIfAuthenticated::handle<\/a>"],[0,1,"<a href=\"Requests\/BankAccountRequest.php.html#14\">App\\Http\\Requests\\BankAccountRequest::authorize<\/a>"],[0,1,"<a href=\"Requests\/BankAccountRequest.php.html#24\">App\\Http\\Requests\\BankAccountRequest::rules<\/a>"],[0,1,"<a href=\"Requests\/ClassTypeRequest.php.html#14\">App\\Http\\Requests\\ClassTypeRequest::authorize<\/a>"],[0,1,"<a href=\"Requests\/ClassTypeRequest.php.html#24\">App\\Http\\Requests\\ClassTypeRequest::rules<\/a>"],[0,1,"<a href=\"Requests\/ClassTypeStatusRequest.php.html#14\">App\\Http\\Requests\\ClassTypeStatusRequest::authorize<\/a>"],[0,1,"<a href=\"Requests\/ClassTypeStatusRequest.php.html#24\">App\\Http\\Requests\\ClassTypeStatusRequest::rules<\/a>"],[0,1,"<a href=\"Requests\/ClientPlanRequest.php.html#14\">App\\Http\\Requests\\ClientPlanRequest::authorize<\/a>"],[0,1,"<a href=\"Requests\/ClientPlanRequest.php.html#24\">App\\Http\\Requests\\ClientPlanRequest::rules<\/a>"],[0,1,"<a href=\"Requests\/ClientRequest.php.html#12\">App\\Http\\Requests\\ClientRequest::authorize<\/a>"],[0,1,"<a href=\"Requests\/ClientRequest.php.html#22\">App\\Http\\Requests\\ClientRequest::rules<\/a>"],[0,1,"<a href=\"Requests\/ExpenseRequest.php.html#14\">App\\Http\\Requests\\ExpenseRequest::authorize<\/a>"],[0,1,"<a href=\"Requests\/ExpenseRequest.php.html#24\">App\\Http\\Requests\\ExpenseRequest::rules<\/a>"],[0,1,"<a href=\"Requests\/FinancialTransactionRequest.php.html#14\">App\\Http\\Requests\\FinancialTransactionRequest::authorize<\/a>"],[0,1,"<a href=\"Requests\/FinancialTransactionRequest.php.html#24\">App\\Http\\Requests\\FinancialTransactionRequest::rules<\/a>"],[0,1,"<a href=\"Requests\/PaymentMethodRequest.php.html#15\">App\\Http\\Requests\\PaymentMethodRequest::authorize<\/a>"],[0,1,"<a href=\"Requests\/PaymentMethodRequest.php.html#25\">App\\Http\\Requests\\PaymentMethodRequest::rules<\/a>"],[0,1,"<a href=\"Requests\/PaymentReportRequest.php.html#14\">App\\Http\\Requests\\PaymentReportRequest::authorize<\/a>"],[0,1,"<a href=\"Requests\/PaymentReportRequest.php.html#24\">App\\Http\\Requests\\PaymentReportRequest::rules<\/a>"],[0,1,"<a href=\"Requests\/PaymentRequest.php.html#14\">App\\Http\\Requests\\PaymentRequest::authorize<\/a>"],[0,1,"<a href=\"Requests\/PaymentRequest.php.html#24\">App\\Http\\Requests\\PaymentRequest::rules<\/a>"],[0,1,"<a href=\"Requests\/PlanRequest.php.html#14\">App\\Http\\Requests\\PlanRequest::authorize<\/a>"],[0,1,"<a href=\"Requests\/PlanRequest.php.html#24\">App\\Http\\Requests\\PlanRequest::rules<\/a>"],[0,1,"<a href=\"Requests\/ProfessionalPaymentRequest.php.html#14\">App\\Http\\Requests\\ProfessionalPaymentRequest::authorize<\/a>"],[0,1,"<a href=\"Requests\/ProfessionalPaymentRequest.php.html#24\">App\\Http\\Requests\\ProfessionalPaymentRequest::rules<\/a>"],[0,1,"<a href=\"Requests\/ProfessionalRequest.php.html#14\">App\\Http\\Requests\\ProfessionalRequest::authorize<\/a>"],[0,1,"<a href=\"Requests\/ProfessionalRequest.php.html#24\">App\\Http\\Requests\\ProfessionalRequest::rules<\/a>"],[0,1,"<a href=\"Requests\/RoomRequest.php.html#14\">App\\Http\\Requests\\RoomRequest::authorize<\/a>"],[0,1,"<a href=\"Requests\/RoomRequest.php.html#24\">App\\Http\\Requests\\RoomRequest::rules<\/a>"],[0,1,"<a href=\"Requests\/ScheduleRequest.php.html#14\">App\\Http\\Requests\\ScheduleRequest::authorize<\/a>"],[0,1,"<a href=\"Requests\/ScheduleRequest.php.html#24\">App\\Http\\Requests\\ScheduleRequest::rules<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

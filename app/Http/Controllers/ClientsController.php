@@ -23,7 +23,7 @@ class ClientsController extends Controller
                   ->whereNull('schedules.parent_id')
                   ->select('schedules.*');
         },
-        'clientPlans'])
+        'clientPlans.plan'])
         ->filter($request->all())
         ->orderBy('name')
         ->paginate(20);

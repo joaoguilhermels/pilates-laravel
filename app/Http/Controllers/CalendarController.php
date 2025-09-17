@@ -77,8 +77,8 @@ class CalendarController extends Controller
 
     public function calendarEvents()
     {
-        $start = empty($_GET['start']) ? Carbon::parse(date('Y-m-d')) : $_GET['start'];
-        $end = empty($_GET['end']) ? Carbon::parse(date('Y-m-d'))->addMonths(1) : $_GET['end'];
+        $start = request('start') ? Carbon::parse(request('start')) : Carbon::now()->startOfMonth();
+        $end = request('end') ? Carbon::parse(request('end')) : Carbon::now()->endOfMonth();
 
         $schedules = \DB::table('schedules')
                         ->join('class_types', 'schedules.class_type_id', '=', 'class_types.id')
@@ -93,28 +93,50 @@ class CalendarController extends Controller
                             'schedules.class_type_status_id',
                             'schedules.start_at AS start',
                             'schedules.end_at AS end',
+                            'schedules.price',
+                            'schedules.trial',
+                            'schedules.observation',
                             'clients.name AS title',
-                            'class_type_statuses.color AS color',
+                            'class_type_statuses.color AS backgroundColor',
+                            'class_type_statuses.color AS borderColor',
+                            'class_type_statuses.name AS status_name',
                             'clients.name AS description',
                             'professionals.name AS professional_name',
                             'rooms.name AS room_name',
                             'class_types.name as class_type_name')
-                        ->whereDate('start_at', '>=', $start)
-                        ->whereDate('end_at', '<=', $end)
-                        ->get();
+                        ->where('start_at', '>=', $start)
+                        ->where('end_at', '<=', $end)
+                        ->get()
+                        ->map(function ($schedule) {
+                            return [
+                                'id' => $schedule->id,
+                                'title' => $schedule->title,
+                                'start' => $schedule->start,
+                                'end' => $schedule->end,
+                                'backgroundColor' => $schedule->backgroundColor ?: '#3b82f6',
+                                'borderColor' => $schedule->borderColor ?: '#3b82f6',
+                                'textColor' => '#ffffff',
+                                'extendedProps' => [
+                                    'client_name' => $schedule->title,
+                                    'professional_name' => $schedule->professional_name,
+                                    'room_name' => $schedule->room_name,
+                                    'class_type_name' => $schedule->class_type_name,
+                                    'status_name' => $schedule->status_name,
+                                    'price' => $schedule->price,
+                                    'trial' => $schedule->trial,
+                                    'observation' => $schedule->observation,
+                                    'description' => $schedule->description
+                                ]
+                            ];
+                        });
 
-        return $schedules;
+        return response()->json($schedules);
     }
 
     public function calendar()
     {
         $has_available_trial_class = ClassType::WithTrial()->count() > 0;
 
-        $start = empty($_GET['start']) ? date('Y-m-d') : $_GET['start'];
-        $end = empty($_GET['end']) ? date('Y-m-d') : $_GET['end'];
-
-        $schedules = $this->calendarEvents($start, $end);
-
-        return view('calendar.index', compact('schedules', 'has_available_trial_class'));
+        return view('calendar.index', compact('has_available_trial_class'));
     }
 }

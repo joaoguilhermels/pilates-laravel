@@ -1,18 +1,29 @@
-@extends('layouts/app')
+@extends('layouts.dashboard')
 
 @section('content')
-  <div class="container">
-    <h1>
-      Create New Professional
-    </h1>
-    <a href="{{ action('ProfessionalsController@index') }}">Back to Professionals List</a>
-    <hr />
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Page Header -->
+  <div class="mb-8">
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl font-semibold text-gray-900">Create New Professional</h1>
+        <p class="mt-1 text-sm text-gray-600">Add a new instructor or staff member to your studio.</p>
+      </div>
+      <a href="{{ route('professionals.index') }}" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <svg class="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to Professionals
+      </a>
+    </div>
+  </div>
 
-    @include('errors.list')
-
-    <form action="{{ action('ProfessionalsController@store') }}" method="post">
-      {{ csrf_field() }}
-      @include('professionals.form', ['submitButtonText' => 'Add New Professional'])
+  <!-- Form -->
+  <div class="bg-white shadow rounded-lg">
+    <form action="{{ route('professionals.store') }}" method="POST" class="space-y-6 p-6">
+      @csrf
+      @include('professionals.form', ['submitButtonText' => 'Create Professional'])
     </form>
   </div>
-@stop
+</div>
+@endsection

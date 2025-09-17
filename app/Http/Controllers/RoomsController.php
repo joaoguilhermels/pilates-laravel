@@ -63,7 +63,7 @@ class RoomsController extends Controller
 
     public function destroy(Room $room)
     {
-        $room->destroy($room->id);
+        $room->delete();
 
         Session::flash('message', 'Successfully deleted room '.$room->name);
 

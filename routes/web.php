@@ -3,23 +3,27 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\ClientPlansController;
-use App\Http\Controllers\ClientPlanPaymentsController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ProfessionalsPaymentsController;
-use App\Http\Controllers\SchedulesController;
 use App\Http\Controllers\TrialSchedulesController;
-use App\Http\Controllers\RepositionSchedulesController;
 use App\Http\Controllers\ExtraClassSchedulesController;
+use App\Http\Controllers\RepositionSchedulesController;
 use App\Http\Controllers\GroupSchedulesController;
 use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\PlansController;
 use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\ClientPlanPaymentsController;
 use App\Http\Controllers\ProfessionalsController;
 use App\Http\Controllers\ClassTypesController;
 use App\Http\Controllers\BankAccountsController;
 use App\Http\Controllers\PaymentMethodsController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\SchedulesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +58,22 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+    // User Profile Routes
+    Route::get('/profile', [UserController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit', [UserController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [UserController::class, 'update'])->name('profile.update');
+    Route::get('/profile/password', [UserController::class, 'editPassword'])->name('profile.password.edit');
+    Route::patch('/profile/password', [UserController::class, 'updatePassword'])->name('profile.password.update');
+    Route::get('/settings', [UserController::class, 'settings'])->name('settings');
+
+    // Role Management Routes (Only for System Admin and Studio Owner)
+    Route::middleware(['role:system_admin,studio_owner'])->group(function () {
+        Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+        Route::get('/roles/{role}', [RoleController::class, 'show'])->name('roles.show');
+        Route::post('/roles/assign', [RoleController::class, 'assignRole'])->name('roles.assign');
+        Route::delete('/roles/remove', [RoleController::class, 'removeRole'])->name('roles.remove');
+    });
+
     Route::get('calendar', [CalendarController::class, 'calendar'])->name('calendar');
     Route::get('calendar/data', [CalendarController::class, 'calendarEvents'])->name('calendar.data');
     Route::get('calendar/group', [CalendarController::class, 'groupCalendar'])->name('calendar.group');
@@ -64,10 +84,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('clients/{client}/plans/create', [ClientPlansController::class, 'create'])->name('clients.plans.create');
     Route::post('clients/{client}/plans/create', [ClientPlansController::class, 'reviewClientPlan'])->name('clients.plans.review');
-    Route::post('clients/{client}/plans/review', [ClientPlansController::class, 'store'])->name('clients.plans.store');
+    Route::post('clients/{client}/plans', [ClientPlansController::class, 'store'])->name('clients.plans.store');
     Route::delete('clients/plans/{clientPlan}/delete', [ClientPlansController::class, 'destroy'])->name('clients.plans.destroy');
     Route::get('client-plans/{clientPlan}/edit', [ClientPlansController::class, 'edit'])->name('client-plans.edit');
-    Route::patch('client-plans/{clientPlan}/edit', [ClientPlansController::class, 'update'])->name('client-plans.update');
+    Route::put('client-plans/{clientPlan}', [ClientPlansController::class, 'update'])->name('client-plans.update');
+    Route::patch('client-plans/{clientPlan}', [ClientPlansController::class, 'update']);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     /*Route::get('clients/charges', [ClientsController::class, 'indexCharges']);
@@ -101,18 +122,18 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('professionals/payments/{financialTransaction}/update', [ProfessionalsPaymentsController::class, 'update'])->name('professionals.payments.update');
     Route::delete('professionals/payments/{financialTransaction}/delete', [ProfessionalsPaymentsController::class, 'destroy'])->name('professionals.payments.destroy');
 
-    Route::get('schedules/{start_at}/{room}/group', [SchedulesController::class, 'showGroup'])->name('schedules.group');
-    Route::get('schedules/{start_at}/{room}', [SchedulesController::class, 'showSchedule'])->name('schedules.show-schedule');
-    Route::get('schedules/create', [SchedulesController::class, 'create'])->name('schedules.create');
-    Route::post('schedules/create', [SchedulesController::class, 'store'])->name('schedules.store');
+    // Specific schedule routes MUST come before the resource route
     Route::get('schedules/trial/create', [TrialSchedulesController::class, 'create'])->name('schedules.trial.create');
     Route::post('schedules/trial/create', [TrialSchedulesController::class, 'store'])->name('schedules.trial.store');
     Route::get('schedules/reposition/create', [RepositionSchedulesController::class, 'create'])->name('schedules.reposition.create');
     Route::post('schedules/reposition/create', [RepositionSchedulesController::class, 'store'])->name('schedules.reposition.store');
     Route::get('schedules/extra/create', [ExtraClassSchedulesController::class, 'create'])->name('schedules.extra.create');
     Route::post('schedules/extra/create', [ExtraClassSchedulesController::class, 'store'])->name('schedules.extra.store');
-
+    Route::get('schedules/create', [SchedulesController::class, 'create'])->name('schedules.create');
+    Route::post('schedules/create', [SchedulesController::class, 'store'])->name('schedules.store');
     Route::get('schedules/class/{classType}/professional/{professionals}/room/{rooms}/date/{date}/time/{time}', [GroupSchedulesController::class, 'edit'])->name('schedules.group.edit');
+    Route::get('schedules/{start_at}/{room}/group', [SchedulesController::class, 'showGroup'])->name('schedules.group');
+    Route::get('schedules/{start_at}/{room}', [SchedulesController::class, 'showSchedule'])->name('schedules.show-schedule');
 
     Route::resource('rooms', RoomsController::class);
     Route::resource('plans', PlansController::class);
@@ -134,3 +155,7 @@ Route::middleware(['auth'])->group(function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
