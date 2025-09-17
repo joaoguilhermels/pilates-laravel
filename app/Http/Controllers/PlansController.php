@@ -58,7 +58,7 @@ class PlansController extends Controller
 
     public function destroy(plan $plan)
     {
-        $plan->destroy($plan->id);
+        $plan->delete();
 
         Session::flash('message', 'Successfully deleted plan '.$plan->name);
 

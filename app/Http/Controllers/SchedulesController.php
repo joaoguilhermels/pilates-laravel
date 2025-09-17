@@ -81,7 +81,7 @@ class SchedulesController extends Controller
         return view('schedules.create', compact('clients', 'classTypes'));
     }
 
-    public function store(scheduleRequest $request)
+    public function store(ScheduleRequest $request)
     {
         $classType = ClassType::find($request->class_type_id);
 
@@ -128,7 +128,7 @@ class SchedulesController extends Controller
 
     public function destroy(Schedule $schedule)
     {
-        $schedule->destroy($schedule->id);
+        $schedule->delete();
 
         Session::flash('message', 'Successfully deleted schedule '.$schedule->start_at);
 

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/html/app/Http/Requests</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../_css/bootstrap.min.css?v=11.0.11" rel="stylesheet" type="text/css">
+  <link href="../../_css/nv.d3.min.css?v=11.0.11" rel="stylesheet" type="text/css">
+  <link href="../../_css/style.css?v=11.0.11" rel="stylesheet" type="text/css">
+  <link href="../../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../../index.html">/var/www/html/app</a></li>
+         <li class="breadcrumb-item"><a href="../index.html">Http</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Requests</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="BankAccountRequest.php.html#7">App\Http\Requests\BankAccountRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ClassTypeRequest.php.html#7">App\Http\Requests\ClassTypeRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ClassTypeStatusRequest.php.html#7">App\Http\Requests\ClassTypeStatusRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ClientPlanRequest.php.html#7">App\Http\Requests\ClientPlanRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ClientRequest.php.html#7">App\Http\Requests\ClientRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ExpenseRequest.php.html#7">App\Http\Requests\ExpenseRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FinancialTransactionRequest.php.html#7">App\Http\Requests\FinancialTransactionRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PaymentMethodRequest.php.html#8">App\Http\Requests\PaymentMethodRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PaymentReportRequest.php.html#7">App\Http\Requests\PaymentReportRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PaymentRequest.php.html#7">App\Http\Requests\PaymentRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PlanRequest.php.html#7">App\Http\Requests\PlanRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProfessionalPaymentRequest.php.html#7">App\Http\Requests\ProfessionalPaymentRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProfessionalRequest.php.html#7">App\Http\Requests\ProfessionalRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="RoomRequest.php.html#7">App\Http\Requests\RoomRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ScheduleRequest.php.html#7">App\Http\Requests\ScheduleRequest</a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="BankAccountRequest.php.html#14"><abbr title="App\Http\Requests\BankAccountRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BankAccountRequest.php.html#24"><abbr title="App\Http\Requests\BankAccountRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ClassTypeRequest.php.html#14"><abbr title="App\Http\Requests\ClassTypeRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ClassTypeRequest.php.html#24"><abbr title="App\Http\Requests\ClassTypeRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ClassTypeStatusRequest.php.html#14"><abbr title="App\Http\Requests\ClassTypeStatusRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ClassTypeStatusRequest.php.html#24"><abbr title="App\Http\Requests\ClassTypeStatusRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ClientPlanRequest.php.html#14"><abbr title="App\Http\Requests\ClientPlanRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ClientPlanRequest.php.html#24"><abbr title="App\Http\Requests\ClientPlanRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ClientRequest.php.html#12"><abbr title="App\Http\Requests\ClientRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ClientRequest.php.html#22"><abbr title="App\Http\Requests\ClientRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ExpenseRequest.php.html#14"><abbr title="App\Http\Requests\ExpenseRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ExpenseRequest.php.html#24"><abbr title="App\Http\Requests\ExpenseRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FinancialTransactionRequest.php.html#14"><abbr title="App\Http\Requests\FinancialTransactionRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FinancialTransactionRequest.php.html#24"><abbr title="App\Http\Requests\FinancialTransactionRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PaymentMethodRequest.php.html#15"><abbr title="App\Http\Requests\PaymentMethodRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PaymentMethodRequest.php.html#25"><abbr title="App\Http\Requests\PaymentMethodRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PaymentReportRequest.php.html#14"><abbr title="App\Http\Requests\PaymentReportRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PaymentReportRequest.php.html#24"><abbr title="App\Http\Requests\PaymentReportRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PaymentRequest.php.html#14"><abbr title="App\Http\Requests\PaymentRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PaymentRequest.php.html#24"><abbr title="App\Http\Requests\PaymentRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PlanRequest.php.html#14"><abbr title="App\Http\Requests\PlanRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PlanRequest.php.html#24"><abbr title="App\Http\Requests\PlanRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProfessionalPaymentRequest.php.html#14"><abbr title="App\Http\Requests\ProfessionalPaymentRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProfessionalPaymentRequest.php.html#24"><abbr title="App\Http\Requests\ProfessionalPaymentRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProfessionalRequest.php.html#14"><abbr title="App\Http\Requests\ProfessionalRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProfessionalRequest.php.html#24"><abbr title="App\Http\Requests\ProfessionalRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="RoomRequest.php.html#14"><abbr title="App\Http\Requests\RoomRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="RoomRequest.php.html#24"><abbr title="App\Http\Requests\RoomRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ScheduleRequest.php.html#14"><abbr title="App\Http\Requests\ScheduleRequest::authorize">authorize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ScheduleRequest.php.html#24"><abbr title="App\Http\Requests\ScheduleRequest::rules">rules</abbr></a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 11.0.11</a> using <a href="https://www.php.net/" target="_top">PHP 8.2.28</a> and <a href="https://phpunit.de/">PHPUnit 11.5.39</a> at Tue Sep 16 19:31:23 UTC 2025.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../../_js/jquery.min.js?v=11.0.11" type="text/javascript"></script>
+  <script src="../../_js/d3.min.js?v=11.0.11" type="text/javascript"></script>
+  <script src="../../_js/nv.d3.min.js?v=11.0.11" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([15,0,0,0,0,0,0,0,0,0,0,1], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([30,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,2,"<a href=\"BankAccountRequest.php.html#7\">App\\Http\\Requests\\BankAccountRequest<\/a>"],[0,2,"<a href=\"ClassTypeRequest.php.html#7\">App\\Http\\Requests\\ClassTypeRequest<\/a>"],[0,2,"<a href=\"ClassTypeStatusRequest.php.html#7\">App\\Http\\Requests\\ClassTypeStatusRequest<\/a>"],[0,2,"<a href=\"ClientPlanRequest.php.html#7\">App\\Http\\Requests\\ClientPlanRequest<\/a>"],[0,2,"<a href=\"ClientRequest.php.html#7\">App\\Http\\Requests\\ClientRequest<\/a>"],[0,2,"<a href=\"ExpenseRequest.php.html#7\">App\\Http\\Requests\\ExpenseRequest<\/a>"],[0,2,"<a href=\"FinancialTransactionRequest.php.html#7\">App\\Http\\Requests\\FinancialTransactionRequest<\/a>"],[0,2,"<a href=\"PaymentMethodRequest.php.html#8\">App\\Http\\Requests\\PaymentMethodRequest<\/a>"],[0,2,"<a href=\"PaymentReportRequest.php.html#7\">App\\Http\\Requests\\PaymentReportRequest<\/a>"],[0,2,"<a href=\"PaymentRequest.php.html#7\">App\\Http\\Requests\\PaymentRequest<\/a>"],[0,2,"<a href=\"PlanRequest.php.html#7\">App\\Http\\Requests\\PlanRequest<\/a>"],[0,2,"<a href=\"ProfessionalPaymentRequest.php.html#7\">App\\Http\\Requests\\ProfessionalPaymentRequest<\/a>"],[0,2,"<a href=\"ProfessionalRequest.php.html#7\">App\\Http\\Requests\\ProfessionalRequest<\/a>"],[100,0,"<a href=\"Request.php.html#7\">App\\Http\\Requests\\Request<\/a>"],[0,2,"<a href=\"RoomRequest.php.html#7\">App\\Http\\Requests\\RoomRequest<\/a>"],[0,2,"<a href=\"ScheduleRequest.php.html#7\">App\\Http\\Requests\\ScheduleRequest<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,1,"<a href=\"BankAccountRequest.php.html#14\">App\\Http\\Requests\\BankAccountRequest::authorize<\/a>"],[0,1,"<a href=\"BankAccountRequest.php.html#24\">App\\Http\\Requests\\BankAccountRequest::rules<\/a>"],[0,1,"<a href=\"ClassTypeRequest.php.html#14\">App\\Http\\Requests\\ClassTypeRequest::authorize<\/a>"],[0,1,"<a href=\"ClassTypeRequest.php.html#24\">App\\Http\\Requests\\ClassTypeRequest::rules<\/a>"],[0,1,"<a href=\"ClassTypeStatusRequest.php.html#14\">App\\Http\\Requests\\ClassTypeStatusRequest::authorize<\/a>"],[0,1,"<a href=\"ClassTypeStatusRequest.php.html#24\">App\\Http\\Requests\\ClassTypeStatusRequest::rules<\/a>"],[0,1,"<a href=\"ClientPlanRequest.php.html#14\">App\\Http\\Requests\\ClientPlanRequest::authorize<\/a>"],[0,1,"<a href=\"ClientPlanRequest.php.html#24\">App\\Http\\Requests\\ClientPlanRequest::rules<\/a>"],[0,1,"<a href=\"ClientRequest.php.html#12\">App\\Http\\Requests\\ClientRequest::authorize<\/a>"],[0,1,"<a href=\"ClientRequest.php.html#22\">App\\Http\\Requests\\ClientRequest::rules<\/a>"],[0,1,"<a href=\"ExpenseRequest.php.html#14\">App\\Http\\Requests\\ExpenseRequest::authorize<\/a>"],[0,1,"<a href=\"ExpenseRequest.php.html#24\">App\\Http\\Requests\\ExpenseRequest::rules<\/a>"],[0,1,"<a href=\"FinancialTransactionRequest.php.html#14\">App\\Http\\Requests\\FinancialTransactionRequest::authorize<\/a>"],[0,1,"<a href=\"FinancialTransactionRequest.php.html#24\">App\\Http\\Requests\\FinancialTransactionRequest::rules<\/a>"],[0,1,"<a href=\"PaymentMethodRequest.php.html#15\">App\\Http\\Requests\\PaymentMethodRequest::authorize<\/a>"],[0,1,"<a href=\"PaymentMethodRequest.php.html#25\">App\\Http\\Requests\\PaymentMethodRequest::rules<\/a>"],[0,1,"<a href=\"PaymentReportRequest.php.html#14\">App\\Http\\Requests\\PaymentReportRequest::authorize<\/a>"],[0,1,"<a href=\"PaymentReportRequest.php.html#24\">App\\Http\\Requests\\PaymentReportRequest::rules<\/a>"],[0,1,"<a href=\"PaymentRequest.php.html#14\">App\\Http\\Requests\\PaymentRequest::authorize<\/a>"],[0,1,"<a href=\"PaymentRequest.php.html#24\">App\\Http\\Requests\\PaymentRequest::rules<\/a>"],[0,1,"<a href=\"PlanRequest.php.html#14\">App\\Http\\Requests\\PlanRequest::authorize<\/a>"],[0,1,"<a href=\"PlanRequest.php.html#24\">App\\Http\\Requests\\PlanRequest::rules<\/a>"],[0,1,"<a href=\"ProfessionalPaymentRequest.php.html#14\">App\\Http\\Requests\\ProfessionalPaymentRequest::authorize<\/a>"],[0,1,"<a href=\"ProfessionalPaymentRequest.php.html#24\">App\\Http\\Requests\\ProfessionalPaymentRequest::rules<\/a>"],[0,1,"<a href=\"ProfessionalRequest.php.html#14\">App\\Http\\Requests\\ProfessionalRequest::authorize<\/a>"],[0,1,"<a href=\"ProfessionalRequest.php.html#24\">App\\Http\\Requests\\ProfessionalRequest::rules<\/a>"],[0,1,"<a href=\"RoomRequest.php.html#14\">App\\Http\\Requests\\RoomRequest::authorize<\/a>"],[0,1,"<a href=\"RoomRequest.php.html#24\">App\\Http\\Requests\\RoomRequest::rules<\/a>"],[0,1,"<a href=\"ScheduleRequest.php.html#14\">App\\Http\\Requests\\ScheduleRequest::authorize<\/a>"],[0,1,"<a href=\"ScheduleRequest.php.html#24\">App\\Http\\Requests\\ScheduleRequest::rules<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

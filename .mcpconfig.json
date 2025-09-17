@@ -1,0 +1,63 @@
+{
+  "version": "1.0",
+  "project": {
+    "name": "Pilates Studio Management System",
+    "description": "A comprehensive management system for pilates studios",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/yourusername/pilates-laravel-1"
+    }
+  },
+  "environments": [
+    {
+      "name": "development",
+      "description": "Local development environment"
+    },
+    {
+      "name": "staging",
+      "description": "Staging environment for testing"
+    },
+    {
+      "name": "production",
+      "description": "Production environment"
+    }
+  ],
+  "tasks": [
+    {
+      "name": "laravel-upgrade",
+      "description": "Upgrade from Laravel 9 to Laravel 11",
+      "status": "in-progress",
+      "priority": "high",
+      "assignee": "developer",
+      "due_date": "2023-12-31"
+    },
+    {
+      "name": "code-coverage",
+      "description": "Implement comprehensive test coverage",
+      "status": "pending",
+      "priority": "medium",
+      "assignee": "tester",
+      "due_date": "2023-12-31"
+    }
+  ],
+  "settings": {
+    "editor": {
+      "formatOnSave": true,
+      "tabSize": 4,
+      "indentStyle": "space"
+    },
+    "testing": {
+      "framework": "phpunit",
+      "autoRunOnSave": false
+    },
+    "linting": {
+      "phpcs": {
+        "enabled": true,
+        "standard": "PSR12"
+      },
+      "eslint": {
+        "enabled": true
+      }
+    }
+  }
+} 

@@ -4,9 +4,11 @@ namespace App\Models;
 
 use App\Models\ClassType;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ClassTypeStatus extends Model
 {
+    use HasFactory;
     protected $fillable = [
       'name',
       'charge_client',

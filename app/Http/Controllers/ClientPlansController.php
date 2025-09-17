@@ -49,6 +49,7 @@ class ClientPlansController extends Controller
         $discounts = $form['discounts'];
         $professionals = $form['professionals'];
         $classTypePlans = $form['classTypePlans'];
+        $client = $clientPlan->client;
 
         return view('clientPlans.edit', compact('client', 'rooms', 'classTypePlans', 'professionals', 'discounts', 'clientPlan'));
     }
@@ -79,7 +80,7 @@ class ClientPlansController extends Controller
 
         $plan = $classType->plans->first();
 
-        $rooms = Room::all()->lists('name_with_classes', 'id');
+        $rooms = Room::all()->pluck('name_with_classes', 'id');
         $classTypePlans = ClassType::with('plans')->get()->toArray();
 
         $startDate = \Carbon\Carbon::parse($request->start_date);
@@ -143,15 +144,22 @@ class ClientPlansController extends Controller
 
         Session::flash('message', 'Successfully added a plan to '.$client->name);
 
-        return redirect('clients');
+        return redirect()->route('clients.show', $client);
     }
 
     public function update(ClientPlanRequest $request, ClientPlan $clientPlan)
     {
+        $client = $clientPlan->client;
+        
         $clientPlan->start_at = $request->start_at;
         $clientPlan->plan_id = $request->plan_id;
+        $clientPlan->save();
 
-        $clientPlan = $client->clientPlans()->save($clientPlan);
+        // Clear existing schedules for this client plan
+        foreach ($clientPlan->clientPlanDetails as $detail) {
+            $detail->schedules()->delete();
+            $detail->delete();
+        }
 
         $groupedDates = $this->getGroupedDates($request);
 
@@ -159,9 +167,9 @@ class ClientPlansController extends Controller
             $this->setSchedules($request, $clientPlan, $client, $dayOfWeek, $groupedDates);
         }
 
-        Session::flash('message', 'Successfully update the plan to '.$client->name);
+        Session::flash('message', 'Successfully updated the plan for '.$client->name);
 
-        return redirect('clients');
+        return redirect()->route('clients.show', $client);
     }
 
     public function getGroupedDates(ClientPlanRequest $request)
@@ -248,7 +256,8 @@ class ClientPlansController extends Controller
         $clientPlanDetail->load('professional');
         $clientPlanDetail->professional->load('classTypes');
 
-        $professionalClass = $clientPlanDetail->professional->classTypes->first()->pivot;
+        $professionalClassType = $clientPlanDetail->professional->classTypes->first();
+        $professionalClass = $professionalClassType ? $professionalClassType->pivot : null;
 
         $plan = $classType->plans->first();
 
@@ -309,11 +318,12 @@ class ClientPlansController extends Controller
      */
     public function setProfessionalValue($class_type_professional, $price)
     {
-        // Move this to a professional controller
-        if ($class_type_professional->value_type == 'percentage') {
-            return round($price * ($class_type_professional->value / 100), 2);
+        // If no professional class type relationship exists, return 0
+        if (!$class_type_professional) {
+            return 0;
         }
 
+        // Move this to a professional controller
         switch ($class_type_professional->value_type) {
             case 'percentage':
                 return round($price * ($class_type_professional->value / 100), 2);
@@ -321,6 +331,8 @@ class ClientPlansController extends Controller
             case 'value_per_client':
                 return $class_type_professional->value;
                 break;
+            default:
+                return 0;
         }
     }
 

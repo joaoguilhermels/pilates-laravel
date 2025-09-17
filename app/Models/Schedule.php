@@ -10,9 +10,12 @@ use App\Models\ClassTypeStatus;
 use App\Models\ClientPlanDetail;
 use App\Models\FinancialTransaction;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Schedule extends Model //implements \MaddHatter\LaravelFullcalendar\IdentifiableEvent
 {
+    use HasFactory, SoftDeletes;
     protected $fillable = [
       'parent_id',
       'client_id',
@@ -29,7 +32,10 @@ class Schedule extends Model //implements \MaddHatter\LaravelFullcalendar\Identi
 
     protected $with = ['clientPlanDetail.clientPlan.plan', 'professional', 'client', 'room', 'classType', 'classTypeStatus'];
 
-    protected $dates = ['start_at', 'end_at', 'created_at', 'updated_at'];
+    protected $casts = [
+        'start_at' => 'datetime',
+        'end_at' => 'datetime',
+    ];
 
     public function scheduable()
     {

@@ -1,27 +1,121 @@
-# Laravel PHP Framework
+# Pilates Studio Management System
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+This application is a comprehensive management system for pilates studios, handling scheduling, payments, client management, and reporting.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+## Laravel Upgrade Project
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+This branch contains the upgrade from Laravel 9 to Laravel 11. The following changes have been made:
 
-## Official Documentation
+- Updated PHP requirement from ^7.2|^8.0 to ^8.2
+- Updated Laravel Framework from ^9.0 to ^11.0
+- Updated all dependencies to their Laravel 11 compatible versions
+- Created modern factory pattern files for models
+- Updated routes to use named routes
+- Updated controllers with proper return types
+- Updated models with proper type declarations
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+## Features
 
-## Contributing
+- User Management: Authentication system for different user roles
+- Client Management: Track client information and history
+- Professional Management: Manage instructors and staff
+- Schedule Management: Calendar for booking and managing classes
+- Payment Processing: Handle payments and financial transactions
+- Room Management: Manage studio spaces
+- Reporting: Financial and operational reporting capabilities
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+## Technical Stack
 
-## Security Vulnerabilities
+- **Backend**: Laravel 11.x with PHP 8.2+
+- **Frontend**: Vue.js with Vite
+- **Styling**: Bootstrap/Tailwind CSS
+- **Database**: MySQL
+- **Testing**: PHPUnit
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+## Upgrade Process Checklist
 
-## License
+- [x] Create a new branch for the upgrade
+- [x] Update composer.json with Laravel 11 requirements
+- [x] Create MCP configuration file
+- [x] Update routes syntax for new Laravel standards
+- [x] Update models for the new Laravel 11 conventions
+- [x] Update controllers for the new Laravel 11 conventions
+- [x] Update Blade templates for Laravel 11 compatibility
+- [x] Update Vite configuration for Laravel 11
+- [x] Create modern factory pattern files
+- [ ] Update PHP dependency to 8.2+
+- [ ] Update Laravel Framework to 11.x
+- [ ] Upgrade all packages to their Laravel 11 compatible versions
+- [ ] Update database migrations if needed
+- [ ] Implement comprehensive tests
+- [ ] Run tests to ensure application functionality
+- [ ] Fix any issues found during testing
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+## Running the Application
+
+```bash
+# Clone the repository
+git clone <repository-url>
+
+# Install dependencies
+composer install
+npm install
+
+# Set up environment
+cp .env.example .env
+php artisan key:generate
+
+# Run migrations
+php artisan migrate
+
+# Start the development server
+php artisan serve
+npm run dev
+```
+
+## Testing
+
+```bash
+php artisan test
+```
+
+## Code Coverage
+
+Current code coverage: TBD
+
+## Laravel 11 Upgrade Notes
+
+### Key Changes
+
+1. **Route Definitions**
+
+   - Updated to use controller class references instead of string actions
+   - Added route names to all routes for better maintainability
+
+2. **Controllers**
+
+   - Added proper return type declarations
+   - Updated dependency injection
+   - Using validated() method for form requests
+
+3. **Models**
+
+   - Added HasFactory trait
+   - Added proper type declarations for relations
+   - Updated property PHPDoc
+
+4. **Views**
+
+   - Updated Blade templates to use route() helpers instead of action()
+   - Using modern Blade directives like @forelse
+
+5. **Factories**
+   - Created proper factory classes for models
+   - Implemented the latest factory pattern
+
+## Next Steps
+
+1. Complete the upgrade by testing all features
+2. Ensure all database migrations work correctly
+3. Implement comprehensive test coverage
+4. Document any breaking changes

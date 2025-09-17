@@ -1,123 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Laravel</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
-    <!-- link href="//fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css' -->
-
-    <!-- Styles -->
-    {{-- <link href="/css/all.css" rel="stylesheet"> --}}
-    
-    @vite('public/css/app.css')
-    @vite('public/css/all.css')
-    @yield('css')
+    <link rel="dns-prefetch" href="//fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    <script defer>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
-    </script>
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <div class="navbar-header">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name', 'Laravel') }}
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        Pilates
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        @if (Auth::check())
-                        <li class="{{-- active('home') --}}"><a href="{{ url('/home') }}">Home</a></li>
-                        <li class="{{-- active('classes') --}}"><a href="{{ url('/classes') }}">{{ trans('menu.classes') }}</a></li>
-                        <li class="{{-- active('rooms') --}}"><a href="{{ url('/rooms') }}">{{ trans('menu.rooms') }}</a></li>
-                        <li class="{{-- active('professionals') --}}"><a href="{{ url('/professionals') }}">{{ trans('menu.professionals') }}</a></li>
-                        <li class="{{-- active('plans') --}}"><a href="{{ url('/plans') }}">{{ trans('menu.plans') }}</a></li>
-                        <li class="{{-- active('clients') --}}"><a href="{{ url('/clients') }}">{{ trans('menu.clients') }}</a></li>
-                        <!--li class="{{-- active('schedules') --}} hidden-sm"><a href="{{ url('/schedules') }}">{{ trans('menu.schedules') }}</a></li-->
-                        <li class="{{-- active('calendar') --}}"><a href="{{ url('/calendar/group') }}" data-turbolinks="false">{{ trans('menu.calendar') }}</a></li>
-                        <li class="dropdown {{-- active(['bank-accounts', 'payment-methods']) --}}">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ trans('menu.financials') }} <span class="caret"></span></a>
-                          <ul class="dropdown-menu">
-                            <li class="{{-- active('professionals/payments') --}}"><a href="{{ url('/professionals/payments') }}">{{ trans('menu.pro_payments') }}</a></li>
-                            <li class="{{-- active('bank-accounts') --}}"><a href="{{ url('/bank-accounts') }}">{{ trans('menu.bank_accounts') }}</a></li>
-                            <li class="{{-- active('payment-methods') --}}"><a href="{{ url('/payment-methods') }}">{{ trans('menu.payment_methods') }}</a></li>
-                          </ul>
-                        </li>
-                        <li class="dropdown {{-- active(['reports/cash-journal']) --}}">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ trans('menu.reports') }} <span class="caret"></span></a>
-                          <ul class="dropdown-menu">
-                            <li class="{{-- active('reports/cash-journal') --}}"><a href="{{ url('/reports/cash-journal') }}">{{ trans('menu.cash_journal') }}</a></li>
-                          </ul>
-                        </li>
-                        @endif
+                    <ul class="navbar-nav me-auto">
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ url('/login') }}">Login</a></li>
-                            <li><a href="{{ url('/register') }}">{{ trans('menu.register') }}</a></li>
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
                         @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
                                 </a>
 
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <form action="{{ action('Auth\LoginController@logout') }}" method="POST">
-                                            {{ csrf_field() }}
-                                            <button class="btn btn-link"><i class="fa fa-btn fa-sign-out"></i>{{ trans('menu.logout') }}</button>
-                                        </form>
-                                    </li>
-                                </ul>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
                             </li>
-                        @endif
+                        @endguest
                     </ul>
                 </div>
             </div>
         </nav>
+
+        <main class="py-4">
+            @yield('content')
+        </main>
     </div>
-
-    <div class="container">
-      <!-- will be used to show any messages -->
-      @if (Session::has('message'))
-          <div class="alert alert-info fade in">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            {{ Session::get('message') }}
-          </div>
-      @endif
-    </div>
-
-    @yield('content')
-
-    @vite('public/js/app.js')
-    @yield('script_footer')
 </body>
 </html>
