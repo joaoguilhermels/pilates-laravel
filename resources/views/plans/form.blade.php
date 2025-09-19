@@ -1,23 +1,23 @@
 <!-- Plan Name -->
 <div>
-  <label for="name" class="block text-sm font-medium text-gray-700">Plan Name *</label>
+  <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Plan Name *</label>
   <div class="mt-1">
     <input type="text" name="name" id="name" 
-           class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm @error('name') border-red-300 @enderror" 
+           class="block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm @error('name') border-red-300 dark:border-red-500 @enderror" 
            value="{{ old('name', $plan->name ?? '') }}" 
            required>
   </div>
   @error('name')
-    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+    <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
   @enderror
 </div>
 
 <!-- Class Type -->
 <div>
-  <label for="class_type_id" class="block text-sm font-medium text-gray-700">Related Class Type</label>
+  <label for="class_type_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Related Class Type</label>
   <div class="mt-1">
     <select name="class_type_id" id="class_type_id" 
-            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm @error('class_type_id') border-red-300 @enderror">
+            class="block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm @error('class_type_id') border-red-300 dark:border-red-500 @enderror">
       <option value="">Select a class type (optional)</option>
       @if(isset($classTypes))
         @foreach($classTypes as $classType)
@@ -29,20 +29,20 @@
     </select>
   </div>
   @error('class_type_id')
-    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+    <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
   @enderror
 </div>
 
 <!-- Description -->
 <div>
-  <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+  <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>
   <div class="mt-1">
     <textarea name="description" id="description" rows="3" 
-              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm @error('description') border-red-300 @enderror" 
+              class="block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm @error('description') border-red-300 dark:border-red-500 @enderror" 
               placeholder="Plan description, benefits, terms...">{{ old('description', $plan->description ?? '') }}</textarea>
   </div>
   @error('description')
-    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+    <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
   @enderror
 </div>
 

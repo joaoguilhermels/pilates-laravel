@@ -9,23 +9,28 @@
   <!-- Dark theme detection script - MUST run before CSS loads -->
   <script>
     (function() {
-      const theme = localStorage.getItem('theme') || 
-                   (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
+      try {
+        const theme = localStorage.getItem('theme') || 
+                     (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        }
+        // Prevent flash by ensuring body is ready
+        document.documentElement.style.visibility = 'visible';
+      } catch (e) {
+        // Fallback if localStorage is not available
+        console.warn('Theme detection failed:', e);
       }
     })();
   </script>
   
   @vite(['resources/css/app.css','resources/js/app.js'])
   
-  <!-- Alpine.js cloak style to prevent flash -->
+  <!-- Prevent flash during page load -->
   <style>
-    [x-cloak] { display: none !important; }
+    /* Reduce transition conflicts */
+    .transition-colors { transition-duration: 0.15s !important; }
   </style>
-  
-  <!-- Alpine.js for theme toggle functionality -->
-  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 antialiased transition-colors duration-200">
   <header class="border-b border-gray-200/80 dark:border-gray-700/80">

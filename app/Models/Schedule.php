@@ -78,6 +78,38 @@ class Schedule extends Model //implements \MaddHatter\LaravelFullcalendar\Identi
     }
 
     /**
+     * Get the parent schedule (original schedule that was rescheduled)
+     */
+    public function parentSchedule()
+    {
+        return $this->belongsTo(Schedule::class, 'parent_id');
+    }
+
+    /**
+     * Get the reschedule schedules (makeup classes for this schedule)
+     */
+    public function reschedules()
+    {
+        return $this->hasMany(Schedule::class, 'parent_id');
+    }
+
+    /**
+     * Check if this schedule is a reschedule (makeup class)
+     */
+    public function isReschedule()
+    {
+        return !is_null($this->parent_id);
+    }
+
+    /**
+     * Check if this schedule has reschedules
+     */
+    public function hasReschedules()
+    {
+        return $this->reschedules()->exists();
+    }
+
+    /**
      * Return only unscheduled classes.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query

@@ -1,23 +1,23 @@
 <!-- Start Date -->
 <div>
-  <label for="start_at" class="block text-sm font-medium text-gray-700">Plan Start Date *</label>
+  <label for="start_at" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Plan Start Date *</label>
   <div class="mt-1">
     <input type="date" name="start_at" id="start_at" 
-           class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm @error('start_at') border-red-300 @enderror" 
+           class="block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm @error('start_at') border-red-300 @enderror" 
            value="{{ old('start_at', \Carbon\Carbon::now()->format('Y-m-d')) }}" 
            required>
   </div>
   @error('start_at')
-    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+    <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
   @enderror
 </div>
 
 <!-- Plan Selection -->
 <div>
-  <label for="plan_id" class="block text-sm font-medium text-gray-700">Select Plan *</label>
+  <label for="plan_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Select Plan *</label>
   <div class="mt-1">
     <select name="plan_id" id="plan_id" 
-            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm @error('plan_id') border-red-300 @enderror" 
+            class="block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm @error('plan_id') border-red-300 @enderror" 
             required onchange="updatePlanDetails()">
       <option value="">Choose a membership plan...</option>
       @if(isset($classTypePlans))
@@ -43,28 +43,28 @@
     </select>
   </div>
   @error('plan_id')
-    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+    <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
   @enderror
 </div>
 
 <!-- Plan Details Preview -->
-<div id="plan-details" class="hidden bg-blue-50 rounded-lg p-4">
-  <h3 class="text-lg font-medium text-blue-900 mb-2">Plan Details</h3>
-  <div id="plan-summary" class="text-sm text-blue-700">
+<div id="plan-details" class="hidden bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
+  <h3 class="text-lg font-medium text-blue-900 dark:text-blue-200 mb-2">Plan Details</h3>
+  <div id="plan-summary" class="text-sm text-blue-700 dark:text-blue-300">
     <!-- Plan details will be populated by JavaScript -->
   </div>
 </div>
 
 <!-- Schedule Configuration -->
 <div id="schedule-config" class="hidden space-y-4">
-  <h3 class="text-lg font-medium text-gray-900">Schedule Configuration</h3>
-  <p class="text-sm text-gray-600">Configure when the client will attend classes for this plan.</p>
+  <h3 class="text-lg font-medium text-gray-900 dark:text-white">Schedule Configuration</h3>
+  <p class="text-sm text-gray-600 dark:text-gray-300">Configure when the client will attend classes for this plan.</p>
   
   <div id="schedule-slots">
     <!-- Schedule slots will be added dynamically -->
   </div>
   
-  <button type="button" onclick="addScheduleSlot()" class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+  <button type="button" onclick="addScheduleSlot()" class="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
     <svg class="-ml-0.5 mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
     </svg>
@@ -73,11 +73,11 @@
 </div>
 
 <!-- Submit Button -->
-<div class="flex justify-end space-x-3 pt-6 border-t border-gray-200">
-  <a href="{{ route('clients.show', $client ?? '') }}" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+<div class="flex justify-end space-x-3 pt-6 border-t border-gray-200 dark:border-gray-600">
+  <a href="{{ route('clients.show', $client->id ?? '') }}" class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
     Cancel
   </a>
-  <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+  <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
     <svg class="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
     </svg>
@@ -149,10 +149,10 @@ function addScheduleSlot() {
   });
   
   const slotHtml = `
-    <div class="schedule-slot bg-gray-50 rounded-lg p-4" id="slot-${scheduleSlotCount}">
+    <div class="schedule-slot bg-gray-50 dark:bg-gray-700 rounded-lg p-4" id="slot-${scheduleSlotCount}">
       <div class="flex items-center justify-between mb-3">
-        <h4 class="text-sm font-medium text-gray-900">Schedule Slot ${scheduleSlotCount}</h4>
-        <button type="button" onclick="removeScheduleSlot(${scheduleSlotCount})" class="text-red-600 hover:text-red-500">
+        <h4 class="text-sm font-medium text-gray-900 dark:text-white">Schedule Slot ${scheduleSlotCount}</h4>
+        <button type="button" onclick="removeScheduleSlot(${scheduleSlotCount})" class="text-red-600 dark:text-red-400 hover:text-red-500 dark:hover:text-red-300">
           <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
           </svg>
@@ -161,8 +161,8 @@ function addScheduleSlot() {
       
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-4">
         <div>
-          <label class="block text-sm font-medium text-gray-700">Day of Week</label>
-          <select name="daysOfWeek[${scheduleSlotCount}][day_of_week]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Day of Week</label>
+          <select name="daysOfWeek[${scheduleSlotCount}][day_of_week]" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
             <option value="">Select day...</option>
             <option value="0">Sunday</option>
             <option value="1">Monday</option>
@@ -175,20 +175,20 @@ function addScheduleSlot() {
         </div>
         
         <div>
-          <label class="block text-sm font-medium text-gray-700">Time</label>
-          <input type="time" name="daysOfWeek[${scheduleSlotCount}][hour]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Time</label>
+          <input type="time" name="daysOfWeek[${scheduleSlotCount}][hour]" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
         </div>
         
         <div>
-          <label class="block text-sm font-medium text-gray-700">Professional</label>
-          <select name="daysOfWeek[${scheduleSlotCount}][professional_id]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Professional</label>
+          <select name="daysOfWeek[${scheduleSlotCount}][professional_id]" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
             ${professionalsOptions}
           </select>
         </div>
         
         <div>
-          <label class="block text-sm font-medium text-gray-700">Room</label>
-          <select name="daysOfWeek[${scheduleSlotCount}][room_id]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Room</label>
+          <select name="daysOfWeek[${scheduleSlotCount}][room_id]" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
             ${roomsOptions}
           </select>
         </div>

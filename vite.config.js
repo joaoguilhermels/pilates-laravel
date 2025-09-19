@@ -3,6 +3,10 @@ import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
+    define: {
+        __VUE_OPTIONS_API__: true,
+        __VUE_PROD_DEVTOOLS__: false,
+    },
     server: {
         host: '0.0.0.0',
         port: 5173,
@@ -40,7 +44,8 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': '/resources/js',
-            '~': '/resources'
+            '~': '/resources',
+            'vue': 'vue/dist/vue.esm-bundler.js'
         }
     },
     optimizeDeps: {

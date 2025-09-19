@@ -1,19 +1,13 @@
 {{-- Theme Toggle Component --}}
-<div x-data="themeToggle()" x-cloak class="relative">
+<div class="relative">
   <button 
-    @click="toggleTheme()"
+    id="theme-toggle"
     class="flex items-center justify-center w-8 h-8 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors duration-200"
-    :title="isDark ? '{{ __('app.switch_to_light_mode') }}' : '{{ __('app.switch_to_dark_mode') }}'"
+    title="Toggle theme"
   >
     <!-- Sun Icon (Light Mode) -->
     <svg 
-      x-show="!isDark" 
-      x-transition:enter="transition ease-in-out duration-200"
-      x-transition:enter-start="opacity-0 rotate-90 scale-75"
-      x-transition:enter-end="opacity-100 rotate-0 scale-100"
-      x-transition:leave="transition ease-in-out duration-200"
-      x-transition:leave-start="opacity-100 rotate-0 scale-100"
-      x-transition:leave-end="opacity-0 rotate-90 scale-75"
+      id="sun-icon"
       class="w-5 h-5 text-yellow-500" 
       fill="currentColor" 
       viewBox="0 0 20 20"
@@ -23,16 +17,11 @@
     
     <!-- Moon Icon (Dark Mode) -->
     <svg 
-      x-show="isDark" 
-      x-transition:enter="transition ease-in-out duration-200"
-      x-transition:enter-start="opacity-0 -rotate-90 scale-75"
-      x-transition:enter-end="opacity-100 rotate-0 scale-100"
-      x-transition:leave="transition ease-in-out duration-200"
-      x-transition:leave-start="opacity-100 rotate-0 scale-100"
-      x-transition:leave-end="opacity-0 -rotate-90 scale-75"
+      id="moon-icon"
       class="w-5 h-5 text-blue-400" 
       fill="currentColor" 
       viewBox="0 0 20 20"
+      style="display: none;"
     >
       <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
     </svg>
@@ -40,45 +29,46 @@
 </div>
 
 <script>
-function themeToggle() {
-  return {
-    // Initialize isDark based on current DOM state to prevent flash
-    isDark: document.documentElement.classList.contains('dark'),
+document.addEventListener('DOMContentLoaded', function() {
+  const themeToggle = document.getElementById('theme-toggle');
+  const sunIcon = document.getElementById('sun-icon');
+  const moonIcon = document.getElementById('moon-icon');
+  
+  // Initialize icons based on current theme
+  function updateIcons() {
+    const isDark = document.documentElement.classList.contains('dark');
+    sunIcon.style.display = isDark ? 'none' : 'block';
+    moonIcon.style.display = isDark ? 'block' : 'none';
+  }
+  
+  // Set initial icon state
+  updateIcons();
+  
+  // Toggle theme on click
+  themeToggle.addEventListener('click', function() {
+    const isDark = document.documentElement.classList.contains('dark');
     
-    init() {
-      // Double-check theme state and ensure it's correct
-      const savedTheme = localStorage.getItem('theme');
-      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const shouldBeDark = savedTheme === 'dark' || (!savedTheme && systemPrefersDark);
-      
-      // Only update if there's a mismatch
-      if (this.isDark !== shouldBeDark) {
-        this.isDark = shouldBeDark;
-        this.updateTheme();
-      }
-      
-      // Listen for system theme changes
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!localStorage.getItem('theme')) {
-          this.isDark = e.matches;
-          this.updateTheme();
-        }
-      });
-    },
+    if (isDark) {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    }
     
-    toggleTheme() {
-      this.isDark = !this.isDark;
-      this.updateTheme();
-      localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
-    },
-    
-    updateTheme() {
-      if (this.isDark) {
+    updateIcons();
+  });
+  
+  // Listen for system theme changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      if (e.matches) {
         document.documentElement.classList.add('dark');
       } else {
         document.documentElement.classList.remove('dark');
       }
+      updateIcons();
     }
-  }
-}
+  });
+});
 </script>

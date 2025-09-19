@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ClassType;
 use App\Models\ClassTypeStatus;
 use App\Models\Client;
+use App\Models\ClientPlanDetail;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ScheduleRequest;
 use App\Models\Room;
@@ -100,10 +101,24 @@ class SchedulesController extends Controller
 
     public function edit(Schedule $schedule)
     {
-        $plan = $schedule->clientPlanDetail->clientPlan->plan->name ?? '';
-        $rooms = $schedule->classType->rooms;
-        $professionals = $schedule->classType->professionals;
-        $classTypeStatuses = $schedule->classType->statuses;
+        // Safely get the plan name with proper polymorphic relationship checking
+        $plan = '';
+        try {
+            // Check if the scheduable is a ClientPlanDetail and has the required relationships
+            if ($schedule->scheduable instanceof ClientPlanDetail &&
+                $schedule->scheduable->clientPlan && 
+                $schedule->scheduable->clientPlan->plan) {
+                $plan = $schedule->scheduable->clientPlan->plan->name;
+            }
+        } catch (\Exception $e) {
+            // If there's any error accessing the relationship, just use empty string
+            $plan = '';
+        }
+
+        // Safely get related data with null checking
+        $rooms = $schedule->classType ? $schedule->classType->rooms : collect();
+        $professionals = $schedule->classType ? $schedule->classType->professionals : collect();
+        $classTypeStatuses = $schedule->classType ? $schedule->classType->statuses : collect();
 
         $schedule->load('client')
                   ->load('scheduable');
