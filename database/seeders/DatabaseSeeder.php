@@ -10,6 +10,8 @@ use App\Models\Professional;
 use App\Models\Room;
 use App\Models\Schedule;
 use App\Models\User;
+use App\Models\PaymentMethod;
+use App\Models\BankAccount;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -204,6 +206,83 @@ class DatabaseSeeder extends Seeder
         ]);
         echo "Created " . $schedules->count() . " schedules\n";
 
+        // Create reschedules (makeup classes) for some clients
+        $rescheduleCount = 0;
+        $reposicaoStatus = ClassTypeStatus::where('name', 'Reposição')->first();
+        $desmarcouStatus = ClassTypeStatus::where('name', 'Desmarcou')->first();
+        $faltouStatus = ClassTypeStatus::where('name', 'Faltou')->first();
+        
+        if ($reposicaoStatus && ($desmarcouStatus || $faltouStatus)) {
+            // Get some schedules that were cancelled or missed to create reschedules for
+            $originalSchedules = $schedules->filter(function ($schedule) use ($desmarcouStatus, $faltouStatus) {
+                return $schedule->class_type_status_id === $desmarcouStatus?->id || 
+                       $schedule->class_type_status_id === $faltouStatus?->id;
+            })->take(15); // Create reschedules for up to 15 cancelled/missed classes
+            
+            foreach ($originalSchedules as $originalSchedule) {
+                // Create a reschedule (makeup class) for this cancelled/missed class
+                $reschedule = Schedule::factory()->create([
+                    'parent_id' => $originalSchedule->id, // Link to original schedule
+                    'client_id' => $originalSchedule->client_id, // Same client
+                    'class_type_id' => $originalSchedule->class_type_id, // Same class type
+                    'professional_id' => $professionals->random()->id, // Could be different professional
+                    'room_id' => $rooms->random()->id, // Could be different room
+                    'class_type_status_id' => $reposicaoStatus->id, // Reschedule status
+                    'trial' => $originalSchedule->trial,
+                    'price' => 0.00, // Reschedules typically don't charge extra
+                    'start_at' => fake()->dateTimeBetween('+1 day', '+2 months'), // Future date
+                    'observation' => 'Reposição da aula de ' . $originalSchedule->start_at->format('d/m/Y H:i'),
+                ]);
+                $rescheduleCount++;
+            }
+        }
+        echo "Created " . $rescheduleCount . " reschedule/makeup classes\n";
+
+        // Create payment methods
+        $paymentMethods = [
+            ['name' => 'Dinheiro', 'enabled' => true],
+            ['name' => 'Cartão de Crédito', 'enabled' => true],
+            ['name' => 'Cartão de Débito', 'enabled' => true],
+            ['name' => 'PIX', 'enabled' => true],
+            ['name' => 'Transferência Bancária', 'enabled' => true],
+            ['name' => 'Boleto', 'enabled' => true],
+        ];
+
+        foreach ($paymentMethods as $method) {
+            PaymentMethod::create($method);
+        }
+        echo "Created " . count($paymentMethods) . " payment methods\n";
+
+        // Create bank accounts
+        $bankAccounts = [
+            [
+                'name' => 'Conta Principal',
+                'bank' => 'Banco do Brasil',
+                'agency' => '1234-5',
+                'account' => '12345-6',
+                'balance' => 10000.00,
+            ],
+            [
+                'name' => 'Conta Poupança',
+                'bank' => 'Caixa Econômica Federal',
+                'agency' => '5678-9',
+                'account' => '67890-1',
+                'balance' => 5000.00,
+            ],
+            [
+                'name' => 'Conta Digital',
+                'bank' => 'Nubank',
+                'agency' => '0001',
+                'account' => '98765-4',
+                'balance' => 2500.00,
+            ],
+        ];
+
+        foreach ($bankAccounts as $account) {
+            BankAccount::create($account);
+        }
+        echo "Created " . count($bankAccounts) . " bank accounts\n";
+
         echo "\n✅ Database seeding completed successfully!\n";
         echo "Summary:\n";
         echo "- Clients: " . Client::count() . "\n";
@@ -214,5 +293,7 @@ class DatabaseSeeder extends Seeder
         echo "- Client Plans: " . ClientPlan::count() . "\n";
         echo "- Class Type Statuses: " . ClassTypeStatus::count() . "\n";
         echo "- Schedules: " . Schedule::count() . "\n";
+        echo "- Payment Methods: " . PaymentMethod::count() . "\n";
+        echo "- Bank Accounts: " . BankAccount::count() . "\n";
     }
 }

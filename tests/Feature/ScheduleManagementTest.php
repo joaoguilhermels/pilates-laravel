@@ -28,7 +28,7 @@ class ScheduleManagementTest extends TestCase
         $this->actingAs($this->user);
         $schedules = Schedule::factory()->count(3)->create();
 
-        $response = $this->get('/schedules');
+        $response = $this->get('/api/schedules');
 
         $response->assertStatus(200);
         $response->assertJsonCount(3);
@@ -55,7 +55,7 @@ class ScheduleManagementTest extends TestCase
             'trial' => false
         ];
 
-        $response = $this->post('/schedules', $scheduleData);
+        $response = $this->post('/api/schedules', $scheduleData);
 
         $response->assertStatus(201);
         $this->assertDatabaseHas('schedules', [
@@ -69,7 +69,7 @@ class ScheduleManagementTest extends TestCase
         $this->actingAs($this->user);
         $schedule = Schedule::factory()->create();
 
-        $response = $this->get("/schedules/{$schedule->id}");
+        $response = $this->get("/api/schedules/{$schedule->id}");
 
         $response->assertStatus(200);
         $response->assertJsonFragment(['id' => $schedule->id]);
@@ -91,7 +91,7 @@ class ScheduleManagementTest extends TestCase
             'trial' => $schedule->trial
         ];
 
-        $response = $this->put("/schedules/{$schedule->id}", $updatedData);
+        $response = $this->put("/api/schedules/{$schedule->id}", $updatedData);
 
         $response->assertStatus(200);
         $this->assertDatabaseHas('schedules', [
@@ -105,10 +105,10 @@ class ScheduleManagementTest extends TestCase
         $this->actingAs($this->user);
         $schedule = Schedule::factory()->create();
 
-        $response = $this->delete("/schedules/{$schedule->id}");
+        $response = $this->delete("/api/schedules/{$schedule->id}");
 
         $response->assertStatus(200);
-        $this->assertDatabaseMissing('schedules', ['id' => $schedule->id]);
+        $this->assertSoftDeleted('schedules', ['id' => $schedule->id]);
     }
 
     public function test_schedule_validation_requires_client()
@@ -122,7 +122,7 @@ class ScheduleManagementTest extends TestCase
             'end_at' => now()->addDay()->addHour()->format('Y-m-d H:i:s')
         ];
 
-        $response = $this->post('/schedules', $scheduleData);
+        $response = $this->postJson('/api/schedules', $scheduleData);
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors('client_id');
@@ -140,7 +140,7 @@ class ScheduleManagementTest extends TestCase
             'end_at' => 'invalid-date'
         ];
 
-        $response = $this->post('/schedules', $scheduleData);
+        $response = $this->postJson('/api/schedules', $scheduleData);
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors(['start_at', 'end_at']);
