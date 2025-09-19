@@ -24,7 +24,7 @@ class ClientManagementTest extends TestCase
         $this->actingAs($this->user);
         $clients = Client::factory()->count(3)->create();
 
-        $response = $this->get('/clients');
+        $response = $this->get('/api/clients');
 
         $response->assertStatus(200);
         $response->assertJsonCount(3);
@@ -40,7 +40,7 @@ class ClientManagementTest extends TestCase
             'observation' => 'New client'
         ];
 
-        $response = $this->post('/clients', $clientData);
+        $response = $this->postJson('/api/clients', $clientData);
 
         $response->assertStatus(201);
         $this->assertDatabaseHas('clients', $clientData);
@@ -51,7 +51,7 @@ class ClientManagementTest extends TestCase
         $this->actingAs($this->user);
         $client = Client::factory()->create();
 
-        $response = $this->get("/clients/{$client->id}");
+        $response = $this->get("/api/clients/{$client->id}");
 
         $response->assertStatus(200);
         $response->assertJsonFragment(['id' => $client->id]);
@@ -68,7 +68,7 @@ class ClientManagementTest extends TestCase
             'observation' => 'Updated observation'
         ];
 
-        $response = $this->put("/clients/{$client->id}", $updatedData);
+        $response = $this->put("/api/clients/{$client->id}", $updatedData);
 
         $response->assertStatus(200);
         $this->assertDatabaseHas('clients', [
@@ -83,10 +83,10 @@ class ClientManagementTest extends TestCase
         $this->actingAs($this->user);
         $client = Client::factory()->create();
 
-        $response = $this->delete("/clients/{$client->id}");
+        $response = $this->delete("/api/clients/{$client->id}");
 
         $response->assertStatus(200);
-        $this->assertDatabaseMissing('clients', ['id' => $client->id]);
+        $this->assertSoftDeleted('clients', ['id' => $client->id]);
     }
 
     public function test_client_validation_requires_name()
@@ -97,7 +97,7 @@ class ClientManagementTest extends TestCase
             'email' => 'john@example.com'
         ];
 
-        $response = $this->post('/clients', $clientData);
+        $response = $this->postJson('/api/clients', $clientData);
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors('name');
@@ -112,7 +112,7 @@ class ClientManagementTest extends TestCase
             'email' => 'invalid-email'
         ];
 
-        $response = $this->post('/clients', $clientData);
+        $response = $this->postJson('/api/clients', $clientData);
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors('email');

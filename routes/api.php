@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +15,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['middleware' => 'auth'], function () {
-    // Route::get('/user', function (Request $request) {
-    //     return $request->user();
-    // });
+Route::middleware(['auth'])->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
 
+    // API Resources for testing
+    Route::apiResource('schedules', ScheduleController::class);
+    Route::apiResource('clients', ClientController::class);
+    
     Route::get('/calendar/group', 'CalendarController@groupCalendarEventsNew');
 });
