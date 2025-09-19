@@ -1,5 +1,6 @@
 // Application JavaScript
 import './bootstrap';
+import './deletion-protection';
 
 import { createApp } from 'vue';
 import PlanPayment from './components/PlanPayment.vue';
