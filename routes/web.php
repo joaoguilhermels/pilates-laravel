@@ -132,13 +132,23 @@ Route::middleware(['auth'])->group(function () {
     Route::get('schedules/create', [SchedulesController::class, 'create'])->name('schedules.create');
     Route::post('schedules/create', [SchedulesController::class, 'store'])->name('schedules.store');
     Route::get('schedules/class/{classType}/professional/{professionals}/room/{rooms}/date/{date}/time/{time}', [GroupSchedulesController::class, 'edit'])->name('schedules.group.edit');
-    Route::get('schedules/{start_at}/{room}/group', [SchedulesController::class, 'showGroup'])->name('schedules.group');
-    Route::get('schedules/{start_at}/{room}', [SchedulesController::class, 'showSchedule'])->name('schedules.show-schedule');
+    
+    // Resource route for schedules (must come before the timestamp-based routes)
+    Route::resource('schedules', SchedulesController::class);
+    
+    // Timestamp-based routes with constraints to avoid conflicts
+    Route::get('schedules/{start_at}/{room}/group', [SchedulesController::class, 'showGroup'])
+        ->where('start_at', '[0-9]+')
+        ->where('room', '[0-9]+')
+        ->name('schedules.group');
+    Route::get('schedules/{start_at}/{room}', [SchedulesController::class, 'showSchedule'])
+        ->where('start_at', '[0-9]+')
+        ->where('room', '[0-9]+')
+        ->name('schedules.show-schedule');
 
     Route::resource('rooms', RoomsController::class);
     Route::resource('plans', PlansController::class);
     Route::resource('clients', ClientsController::class);
-    Route::resource('schedules', SchedulesController::class);
     Route::resource('professionals', ProfessionalsController::class);
 
     Route::resource('classes', ClassTypesController::class)->parameters([
