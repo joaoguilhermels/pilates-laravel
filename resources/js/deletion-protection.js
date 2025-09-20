@@ -6,6 +6,7 @@
 class DeletionProtection {
     constructor() {
         this.initializeEventListeners();
+        this.preventDefaultDeletions();
     }
 
     initializeEventListeners() {
@@ -24,6 +25,37 @@ class DeletionProtection {
                 return false;
             }
         }, true); // Use capture phase to intercept early
+    }
+
+    preventDefaultDeletions() {
+        // Prevent any form submissions that might be delete forms
+        document.addEventListener('submit', (e) => {
+            const form = e.target;
+            if (form.method && form.method.toLowerCase() === 'post' && 
+                form.querySelector('input[name="_method"][value="DELETE"]')) {
+                
+                // Check if this form has a delete button with our data attributes
+                const deleteButton = form.querySelector('[data-delete-entity]');
+                if (deleteButton) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+                    console.log('Prevented form submission, using smart deletion instead');
+                    this.handleDeletionRequest(deleteButton);
+                    return false;
+                }
+            }
+        }, true);
+
+        // Also prevent any confirm dialogs
+        const originalConfirm = window.confirm;
+        window.confirm = function(message) {
+            if (message && message.toLowerCase().includes('delete')) {
+                console.log('Blocked confirm dialog for deletion:', message);
+                return false; // Block the deletion
+            }
+            return originalConfirm.call(this, message);
+        };
     }
 
     async handleDeletionRequest(button) {
