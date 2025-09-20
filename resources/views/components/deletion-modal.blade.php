@@ -10,7 +10,9 @@
     'alternativeActions' => []
 ])
 
-<div x-data="{ open: false }" x-on:open-deletion-modal.window="open = true">
+<div x-data="{ open: false, modalData: {} }" 
+     x-on:open-deletion-modal.window="open = true; modalData = $event.detail || {}"
+     x-cloak>
   <!-- Modal Backdrop -->
   <div x-show="open" 
        x-transition:enter="ease-out duration-300" 

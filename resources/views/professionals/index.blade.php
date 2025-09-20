@@ -111,10 +111,15 @@
 <script>
 // Include deletion protection functionality
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize deletion protection
-    if (typeof DeletionProtection !== 'undefined') {
-        new DeletionProtection();
-    }
+    // Wait a bit for all scripts to load
+    setTimeout(function() {
+        if (typeof DeletionProtection !== 'undefined') {
+            new DeletionProtection();
+            console.log('Deletion protection initialized');
+        } else {
+            console.error('DeletionProtection class not found');
+        }
+    }, 100);
 });
 </script>
 @endpush

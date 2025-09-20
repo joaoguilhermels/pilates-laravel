@@ -13,10 +13,17 @@ class DeletionProtection {
         document.addEventListener('click', (e) => {
             if (e.target.matches('[data-delete-entity]') || e.target.closest('[data-delete-entity]')) {
                 e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                
+                console.log('Deletion button clicked, preventing default behavior');
+                
                 const button = e.target.matches('[data-delete-entity]') ? e.target : e.target.closest('[data-delete-entity]');
                 this.handleDeletionRequest(button);
+                
+                return false;
             }
-        });
+        }, true); // Use capture phase to intercept early
     }
 
     async handleDeletionRequest(button) {
