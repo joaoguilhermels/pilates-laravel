@@ -45,11 +45,11 @@
           </div>
 
           <div class="flex space-x-4 justify-center">
-            <button @click="showWizard = false; fetch('{{ route('onboarding.skip') }}', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').getAttribute('content') }, body: JSON.stringify({}) }).then(() => setTimeout(() => window.location.reload(), 1000))" 
+            <button @click="showWizard = false; window.fetch('{{ route('onboarding.skip') }}', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': window.document.querySelector('meta[name=csrf-token]').getAttribute('content') }, body: JSON.stringify({}) }).then(() => window.setTimeout(() => window.location.reload(), 1000))" 
                     class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200">
               I'll Set Up Later
             </button>
-            <button @click="showWizard = false; setTimeout(() => { const el = document.getElementById('setup-steps'); if (el) el.scrollIntoView({ behavior: 'smooth' }); else window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); }, 100)" 
+            <button @click="showWizard = false; window.setTimeout(() => { const el = window.document.getElementById('setup-steps'); if (el) el.scrollIntoView({ behavior: 'smooth' }); else window.scrollTo({ top: window.document.body.scrollHeight, behavior: 'smooth' }); }, 100)" 
                     class="px-6 py-2 text-sm font-medium text-white bg-gradient-to-r from-indigo-500 to-purple-600 rounded-md hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105">
               Let's Get Started!
             </button>
