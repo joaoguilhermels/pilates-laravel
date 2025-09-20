@@ -2,7 +2,29 @@
 @props(['onboardingStatus'])
 
 @if($onboardingStatus['needsOnboarding'])
-<div class="mb-8" x-data="{ showWizard: {{ $onboardingStatus['isNewUser'] ? 'true' : 'false' }}, currentStep: 0 }">
+<div class="mb-8" x-data="{ 
+  showWizard: {{ $onboardingStatus['isNewUser'] ? 'true' : 'false' }}, 
+  currentStep: 0,
+  async skipOnboarding() {
+    try {
+      const response = await fetch('{{ route('onboarding.skip') }}', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': document.querySelector('meta[name=\"csrf-token\"]').getAttribute('content')
+        }
+      });
+      if (response.ok) {
+        this.showWizard = false;
+        // Optionally reload the page to hide the onboarding completely
+        setTimeout(() => window.location.reload(), 500);
+      }
+    } catch (error) {
+      console.error('Error skipping onboarding:', error);
+      this.showWizard = false;
+    }
+  }
+}">
   
   @if($onboardingStatus['isNewUser'])
     <!-- Welcome Modal for Brand New Users -->
@@ -42,11 +64,11 @@
           </div>
 
           <div class="flex space-x-4 justify-center">
-            <button @click="showWizard = false" 
+            <button @click="skipOnboarding()" 
                     class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200">
               I'll Set Up Later
             </button>
-            <button @click="showWizard = false" 
+            <button @click="showWizard = false; $nextTick(() => { document.getElementById('setup-steps')?.scrollIntoView({ behavior: 'smooth' }); })" 
                     class="px-6 py-2 text-sm font-medium text-white bg-gradient-to-r from-indigo-500 to-purple-600 rounded-md hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105">
               Let's Get Started!
             </button>
@@ -89,7 +111,7 @@
 
   @if(count($onboardingStatus['nextSteps']) > 0)
     <!-- Setup Steps -->
-    <div class="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow">
+    <div id="setup-steps" class="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow">
       <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
         <h4 class="text-lg font-medium text-gray-900 dark:text-white">Next Steps to Complete Your Setup</h4>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
