@@ -5,24 +5,59 @@
 <div class="mb-8" x-data="{ 
   showWizard: {{ $onboardingStatus['isNewUser'] ? 'true' : 'false' }}, 
   currentStep: 0,
-  async skipOnboarding() {
-    try {
-      const response = await fetch('{{ route('onboarding.skip') }}', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-TOKEN': document.querySelector('meta[name=\"csrf-token\"]').getAttribute('content')
-        }
-      });
-      if (response.ok) {
-        this.showWizard = false;
-        // Optionally reload the page to hide the onboarding completely
-        setTimeout(() => window.location.reload(), 500);
-      }
-    } catch (error) {
-      console.error('Error skipping onboarding:', error);
-      this.showWizard = false;
+  skipOnboarding() {
+    console.log('Skip onboarding clicked');
+    this.showWizard = false;
+    
+    // Get CSRF token
+    const csrfToken = document.querySelector('meta[name=\"csrf-token\"]');
+    if (!csrfToken) {
+      console.error('CSRF token not found');
+      setTimeout(() => window.location.reload(), 1000);
+      return;
     }
+    
+    // Make API call to skip onboarding
+    fetch('{{ route('onboarding.skip') }}', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-CSRF-TOKEN': csrfToken.getAttribute('content')
+      },
+      body: JSON.stringify({})
+    })
+    .then(response => {
+      console.log('Skip response status:', response.status);
+      if (response.ok) {
+        console.log('Onboarding skipped successfully');
+        setTimeout(() => window.location.reload(), 1000);
+      } else {
+        console.error('Failed to skip onboarding, status:', response.status);
+        // Still reload to hide the modal
+        setTimeout(() => window.location.reload(), 1000);
+      }
+    })
+    .catch(error => {
+      console.error('Error skipping onboarding:', error);
+      // Still reload to hide the modal
+      setTimeout(() => window.location.reload(), 1000);
+    });
+  },
+  startOnboarding() {
+    console.log('Start onboarding clicked');
+    this.showWizard = false;
+    this.$nextTick(() => {
+      const element = document.getElementById('setup-steps');
+      if (element) {
+        console.log('Scrolling to setup steps');
+        element.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        console.log('Setup steps element not found, scrolling to bottom');
+        // Fallback: scroll to bottom of page
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      }
+    });
   }
 }">
   
@@ -68,7 +103,7 @@
                     class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200">
               I'll Set Up Later
             </button>
-            <button @click="showWizard = false; $nextTick(() => { document.getElementById('setup-steps')?.scrollIntoView({ behavior: 'smooth' }); })" 
+            <button @click="startOnboarding()" 
                     class="px-6 py-2 text-sm font-medium text-white bg-gradient-to-r from-indigo-500 to-purple-600 rounded-md hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105">
               Let's Get Started!
             </button>
