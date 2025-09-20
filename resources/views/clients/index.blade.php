@@ -148,11 +148,15 @@
                         <a href="{{ route('clients.show', $client) }}" class="text-blue-600 hover:text-blue-900" title="View client details and plans">View</a>
                         <a href="{{ route('clients.plans.create', $client) }}" class="text-indigo-600 hover:text-indigo-900" title="Add new plan">Add Plan</a>
                         <a href="{{ route('clients.edit', $client) }}" class="text-indigo-600 hover:text-indigo-900" title="Edit client information">Edit</a>
-                        <form action="{{ route('clients.destroy', $client) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this client?')">
-                          @csrf
-                          @method('DELETE')
-                          <button type="submit" class="text-red-600 hover:text-red-900" title="Delete client">Delete</button>
-                        </form>
+                        <button type="button" 
+                                data-delete-entity="client"
+                                data-delete-id="{{ $client->id }}"
+                                data-delete-name="{{ $client->name }}"
+                                data-delete-url="{{ route('clients.destroy', $client) }}"
+                                class="text-red-600 hover:text-red-900 transition-colors duration-200" 
+                                title="Delete client">
+                          Delete
+                        </button>
                       </div>
                     </td>
                   </tr>
@@ -174,4 +178,19 @@
     </div>
   @endif
 </div>
+
+<!-- Smart Deletion Modal -->
+<x-deletion-modal />
+
+@push('scripts')
+<script>
+// Include deletion protection functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize deletion protection
+    if (typeof DeletionProtection !== 'undefined') {
+        new DeletionProtection();
+    }
+});
+</script>
+@endpush
 @endsection

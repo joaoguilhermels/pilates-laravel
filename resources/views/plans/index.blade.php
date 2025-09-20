@@ -84,16 +84,17 @@
                   </svg>
                   Edit
                 </a>
-                <form action="{{ route('plans.destroy', $plan) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this plan?')">
-                  @csrf
-                  @method('DELETE')
-                  <button type="submit" class="inline-flex items-center px-3 py-1.5 border border-red-300 dark:border-red-600 shadow-sm text-xs font-medium rounded text-red-700 dark:text-red-400 bg-white dark:bg-gray-700 hover:bg-red-50 dark:hover:bg-red-900/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 dark:focus:ring-offset-gray-800 transition-colors duration-200">
-                    <svg class="-ml-0.5 mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                    </svg>
-                    Delete
-                  </button>
-                </form>
+                <button type="button" 
+                        data-delete-entity="plan"
+                        data-delete-id="{{ $plan->id }}"
+                        data-delete-name="{{ $plan->name }}"
+                        data-delete-url="{{ route('plans.destroy', $plan) }}"
+                        class="inline-flex items-center px-3 py-1.5 border border-red-300 dark:border-red-600 shadow-sm text-xs font-medium rounded text-red-700 dark:text-red-400 bg-white dark:bg-gray-700 hover:bg-red-50 dark:hover:bg-red-900/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 dark:focus:ring-offset-gray-800 transition-colors duration-200">
+                  <svg class="-ml-0.5 mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                  Delete
+                </button>
               </div>
             </div>
           </div>
@@ -102,4 +103,19 @@
     </div>
   @endif
 </div>
+
+<!-- Smart Deletion Modal -->
+<x-deletion-modal />
+
+@push('scripts')
+<script>
+// Include deletion protection functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize deletion protection
+    if (typeof DeletionProtection !== 'undefined') {
+        new DeletionProtection();
+    }
+});
+</script>
+@endpush
 @endsection
