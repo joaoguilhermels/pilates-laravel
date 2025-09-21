@@ -44,7 +44,7 @@ class HomeController extends Controller
     /**
      * Check onboarding status and determine what setup steps are needed
      */
-    private function checkOnboardingStatus()
+    public function checkOnboardingStatus()
     {
         $status = [
             'needsOnboarding' => false,

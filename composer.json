@@ -28,7 +28,9 @@
         "laravel/sail": "^1.29",
         "fakerphp/faker": "^1.24",
         "laravel/boost": "^1.1",
-        "laravel/dusk": "^8.3"
+        "laravel/dusk": "^8.3",
+        "pestphp/pest": "^3.8",
+        "pestphp/pest-plugin-laravel": "^3.2"
     },
     "autoload": {
         "psr-4": {
