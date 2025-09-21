@@ -2,57 +2,13 @@
 @props(['onboardingStatus'])
 
 @if($onboardingStatus['needsOnboarding'])
-<div class="mb-8" 
-     x-data="{
-       showWizard: {{ $onboardingStatus['isNewUser'] ? 'true' : 'false' }},
-       currentStep: 0,
-       
-       skipOnboarding() {
-         console.log('Skip onboarding clicked');
-         this.showWizard = false;
-         fetch('{{ route('onboarding.skip') }}', {
-           method: 'POST',
-           headers: {
-             'Content-Type': 'application/json',
-             'Accept': 'application/json',
-             'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').getAttribute('content')
-           },
-           body: JSON.stringify({})
-         })
-         .then(response => {
-           console.log('Skip response status:', response.status);
-           setTimeout(() => location.reload(), 1000);
-         })
-         .catch(error => {
-           console.error('Error skipping onboarding:', error);
-           setTimeout(() => location.reload(), 1000);
-         });
-       },
-       
-       startOnboarding() {
-         console.log('Start onboarding clicked');
-         this.showWizard = false;
-         setTimeout(() => {
-           const element = document.getElementById('setup-steps');
-           if (element) {
-             console.log('Scrolling to setup steps');
-             element.scrollIntoView({ behavior: 'smooth' });
-           } else {
-             console.log('Setup steps element not found, scrolling to bottom');
-             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-           }
-         }, 100);
-       }
-     }">
+<div class="mb-8">
   
   @if($onboardingStatus['isNewUser'])
     <!-- Welcome Modal for Brand New Users -->
-    <div x-show="showWizard" 
-         x-transition:enter="ease-out duration-300" 
-         x-transition:enter-start="opacity-0" 
-         x-transition:enter-end="opacity-100"
+    <div id="onboarding-modal" 
          class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50"
-         x-cloak>
+         style="display: block;">
       <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full mx-4 p-6">
         <div class="text-center">
           <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 mb-4">
@@ -83,11 +39,11 @@
           </div>
 
           <div class="flex space-x-4 justify-center">
-            <button @click="skipOnboarding()" 
+            <button onclick="skipOnboarding()" 
                     class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200">
               I'll Set Up Later
             </button>
-            <button @click="startOnboarding()" 
+            <button onclick="startOnboarding()" 
                     class="px-6 py-2 text-sm font-medium text-white bg-gradient-to-r from-indigo-500 to-purple-600 rounded-md hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105">
               Let's Get Started!
             </button>
@@ -255,4 +211,57 @@
     </div>
   @endif
 </div>
+
+<script>
+function skipOnboarding() {
+  console.log('Skip onboarding clicked');
+  
+  // Hide the modal
+  const modal = document.getElementById('onboarding-modal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+  
+  // Make API call
+  fetch('{{ route('onboarding.skip') }}', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').getAttribute('content')
+    },
+    body: JSON.stringify({})
+  })
+  .then(response => {
+    console.log('Skip response status:', response.status);
+    setTimeout(() => location.reload(), 1000);
+  })
+  .catch(error => {
+    console.error('Error skipping onboarding:', error);
+    setTimeout(() => location.reload(), 1000);
+  });
+}
+
+function startOnboarding() {
+  console.log('Start onboarding clicked');
+  
+  // Hide the modal
+  const modal = document.getElementById('onboarding-modal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+  
+  // Scroll to setup steps
+  setTimeout(() => {
+    const element = document.getElementById('setup-steps');
+    if (element) {
+      console.log('Scrolling to setup steps');
+      element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      console.log('Setup steps element not found, scrolling to bottom');
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+  }, 100);
+}
+</script>
 @endif
