@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="test-token">
+    <title>Onboarding Test</title>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <style>
+        .modal { background: rgba(0,0,0,0.5); }
+        .modal-content { background: white; padding: 20px; margin: 50px auto; width: 80%; max-width: 500px; }
+        .btn { padding: 10px 20px; margin: 5px; border: none; cursor: pointer; }
+        .btn-primary { background: #4F46E5; color: white; }
+        .btn-secondary { background: #6B7280; color: white; }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body>
+    <div x-data="onboardingWizard(true)">
+        <!-- Modal -->
+        <div x-show="showWizard" 
+             x-transition
+             class="modal"
+             style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 50;"
+             x-cloak>
+            <div class="modal-content">
+                <h2>Welcome to Your Pilates Studio Management System!</h2>
+                <p>Let's get your studio set up in just a few minutes.</p>
+                
+                <div style="margin-top: 20px;">
+                    <button @click="skipOnboarding()" class="btn btn-secondary">
+                        I'll Set Up Later
+                    </button>
+                    <button @click="startOnboarding()" class="btn btn-primary">
+                        Let's Get Started!
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Content -->
+        <div style="padding: 20px;">
+            <h1>Dashboard</h1>
+            <p>Welcome to the dashboard!</p>
+            
+            <div id="setup-steps" style="margin-top: 50px; padding: 20px; background: #f0f0f0;">
+                <h3>Setup Steps</h3>
+                <p>This is where the setup steps would be displayed.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Define the Alpine.js component
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('onboardingWizard', (isNewUser) => ({
+                showWizard: isNewUser,
+                currentStep: 0,
+                
+                skipOnboarding() {
+                    console.log('Skip onboarding clicked');
+                    this.showWizard = false;
+                    
+                    // Simulate API call
+                    console.log('Would make API call to /onboarding/skip');
+                    alert('Skip onboarding clicked! Check console for logs.');
+                },
+                
+                startOnboarding() {
+                    console.log('Start onboarding clicked');
+                    this.showWizard = false;
+                    
+                    this.$nextTick(() => {
+                        setTimeout(() => {
+                            const element = document.getElementById('setup-steps');
+                            if (element) {
+                                console.log('Scrolling to setup steps');
+                                element.scrollIntoView({ behavior: 'smooth' });
+                                alert('Start onboarding clicked! Scrolled to setup steps. Check console for logs.');
+                            } else {
+                                console.log('Setup steps element not found');
+                                alert('Setup steps element not found!');
+                            }
+                        }, 100);
+                    });
+                }
+            }));
+        });
+    </script>
+</body>
+</html>

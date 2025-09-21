@@ -59,6 +59,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::post('/onboarding/complete-step', [HomeController::class, 'completeOnboardingStep'])->name('onboarding.complete-step');
     Route::post('/onboarding/skip', [HomeController::class, 'skipOnboarding'])->name('onboarding.skip');
+    
+    // Test route for Alpine.js debugging
+    Route::get('/test-alpine', function () {
+        return view('test-alpine');
+    })->name('test.alpine');
 
     // User Profile Routes
     Route::get('/profile', [UserController::class, 'show'])->name('profile.show');
