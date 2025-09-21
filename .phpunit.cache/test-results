@@ -1,0 +1,1 @@
+{"version":2,"defects":{"Tests\\Browser\\OnboardingWizardTest::onboarding_modal_displays_for_new_users":8,"Tests\\Browser\\OnboardingWizardTest::csrf_token_is_present":8},"times":{"Tests\\Browser\\OnboardingWizardTest::onboarding_modal_displays_for_new_users":15.853,"Tests\\Browser\\OnboardingWizardTest::csrf_token_is_present":3.141}}
