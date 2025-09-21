@@ -1,7 +1,8 @@
 @extends('layouts.dashboard')
 
-@push('scripts')
+@push('styles')
 <script>
+// Define Alpine.js component before Alpine loads
 document.addEventListener('alpine:init', () => {
     Alpine.data('onboardingWizard', (isNewUser) => ({
         showWizard: isNewUser,

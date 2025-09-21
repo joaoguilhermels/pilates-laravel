@@ -186,7 +186,7 @@
               Add Room
             </a>
             <button type="button" 
-                    onclick="if(confirm('Are you sure you want to skip the setup guide? You can access it later from the help menu.')) { window.location.href = '{{ route('onboarding.skip') }}'; }"
+                    @click="if(confirm('Are you sure you want to skip the setup guide? You can access it later from the help menu.')) { skipOnboarding(); }"
                     class="inline-flex items-center px-4 py-2 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-md hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors duration-200">
               Skip Setup Guide
             </button>
