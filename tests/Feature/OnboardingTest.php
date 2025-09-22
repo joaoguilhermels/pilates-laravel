@@ -19,8 +19,8 @@ test('home page contains onboarding wizard', function () {
     
     $content = $response->getContent();
     expect($content)
-        ->toContain('Welcome to Your Pilates Studio Management System!')
-        ->toContain('Set Up Later')
+        ->toContain('Welcome to Your Pilates Studio!')
+        ->toContain('Skip for now')
         ->toContain('Get Started');
 });
 

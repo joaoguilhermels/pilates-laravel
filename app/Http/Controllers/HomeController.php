@@ -110,7 +110,13 @@ class HomeController extends Controller
                 $status['completedSteps'][] = $key;
                 $completedCount++;
             } else {
-                $status['nextSteps'][] = array_merge($step, ['key' => $key]);
+                // Add required fields for the onboarding component
+                $stepWithExtras = array_merge($step, [
+                    'key' => $key,
+                    'url' => route($step['route']),
+                    'action' => $this->getActionText($step['title'])
+                ]);
+                $status['nextSteps'][] = $stepWithExtras;
             }
         }
 
@@ -199,5 +205,23 @@ class HomeController extends Controller
         session(['onboarding_active' => true]);
         
         return response()->json(['success' => true]);
+    }
+
+    /**
+     * Generate action text from step title
+     */
+    private function getActionText($title)
+    {
+        // Convert titles to action text
+        $actionMap = [
+            'Add Your First Instructor' => 'Add Instructor',
+            'Set Up Studio Rooms' => 'Add Room',
+            'Create Class Types' => 'Add Class Type',
+            'Set Up Pricing Plans' => 'Add Plan',
+            'Add Your First Client' => 'Add Client',
+            'Schedule Your First Class' => 'Add Schedule'
+        ];
+
+        return $actionMap[$title] ?? 'Start Setup';
     }
 }
