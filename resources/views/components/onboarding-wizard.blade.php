@@ -5,47 +5,34 @@
 <div class="mb-8">
   
   @if($onboardingStatus['isNewUser'])
-    <!-- Welcome Modal for Brand New Users -->
-    <div id="onboarding-modal" 
-         class="fixed inset-0 bg-gray-500 bg-opacity-75 z-50"
-         style="display: flex; align-items: center; justify-content: center; min-height: 100vh;">
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full mx-4 p-6 relative">
-        <div class="text-center">
-          <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 mb-4">
-            <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-          </div>
-          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-            Welcome to Your Pilates Studio Management System!
-          </h3>
-          <p class="text-gray-600 dark:text-gray-400 mb-6">
-            Let's get your studio set up in just a few minutes. We'll guide you through the essential steps to start managing your classes, clients, and bookings.
-          </p>
-          
-          <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
-            <div class="flex items-start">
-              <svg class="h-5 w-5 text-blue-400 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    <!-- Simplified Welcome Banner -->
+    <div id="onboarding-banner" 
+         class="mb-6 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg shadow-lg overflow-hidden">
+      <div class="px-6 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
-              <div class="text-left">
-                <h4 class="text-sm font-medium text-blue-800 dark:text-blue-200">Quick Setup Process</h4>
-                <p class="text-sm text-blue-700 dark:text-blue-300 mt-1">
-                  We'll help you add instructors, set up rooms, create class types, and schedule your first class. 
-                  This should take about 5-10 minutes.
-                </p>
-              </div>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-lg font-semibold text-white">
+                Welcome to Your Pilates Studio! 🎉
+              </h3>
+              <p class="text-indigo-100 text-sm">
+                Let's get your studio set up in just a few minutes.
+              </p>
             </div>
           </div>
-
-          <div class="flex space-x-4 justify-center">
-            <button onclick="skipOnboarding()" 
-                    class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200">
-              I'll Set Up Later
-            </button>
+          <div class="flex items-center space-x-3">
             <button onclick="startOnboarding()" 
-                    class="px-6 py-2 text-sm font-medium text-white bg-gradient-to-r from-indigo-500 to-purple-600 rounded-md hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105">
-              Let's Get Started!
+                    class="px-4 py-2 text-sm font-medium text-indigo-600 bg-white rounded-md hover:bg-gray-50 transition-colors duration-200">
+              Get Started
+            </button>
+            <button onclick="skipOnboarding()" 
+                    class="text-indigo-200 hover:text-white text-sm">
+              Skip for now
             </button>
           </div>
         </div>
@@ -85,17 +72,16 @@
   </div>
 
   @if(count($onboardingStatus['nextSteps']) > 0)
-    <!-- Setup Steps -->
-    <div id="setup-steps" class="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow">
-      <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-        <h4 class="text-lg font-medium text-gray-900 dark:text-white">Next Steps to Complete Your Setup</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
-          Complete these steps to unlock the full potential of your studio management system.
+    <!-- Simplified Setup Steps -->
+    <div id="setup-steps" class="mt-6">
+      <div class="mb-4">
+        <h4 class="text-lg font-medium text-gray-900 dark:text-white">Quick Setup</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400">
+          Complete these essential steps to get started.
         </p>
       </div>
       
-      <div class="p-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           @foreach($onboardingStatus['nextSteps'] as $index => $step)
             <div class="relative group">
               <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 border-2 border-dashed border-gray-300 dark:border-gray-600 hover:border-indigo-300 dark:hover:border-indigo-500 transition-all duration-200 hover:shadow-md">
@@ -216,10 +202,10 @@
 function skipOnboarding() {
   console.log('Skip onboarding clicked');
   
-  // Hide the modal
-  const modal = document.getElementById('onboarding-modal');
-  if (modal) {
-    modal.style.display = 'none';
+  // Hide the banner
+  const banner = document.getElementById('onboarding-banner');
+  if (banner) {
+    banner.style.display = 'none';
   }
   
   // Make API call
@@ -245,10 +231,10 @@ function skipOnboarding() {
 function startOnboarding() {
   console.log('Start onboarding clicked');
   
-  // Hide the modal
-  const modal = document.getElementById('onboarding-modal');
-  if (modal) {
-    modal.style.display = 'none';
+  // Hide the banner
+  const banner = document.getElementById('onboarding-banner');
+  if (banner) {
+    banner.style.display = 'none';
   }
   
   // Scroll to setup steps
