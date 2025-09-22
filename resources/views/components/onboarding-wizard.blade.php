@@ -130,13 +130,13 @@
                       {{ $step['description'] }}
                     </p>
                     <div class="mt-3">
-                      <a href="{{ route($step['route']) }}" 
-                         class="inline-flex items-center text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300 transition-colors duration-200">
-                        Start Setup
-                        <svg class="ml-1 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
+                      <a href="{{ $step['url'] }}?onboarding=1" 
+                       class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200">
+                      {{ $step['action'] }}
                       </a>
+                      <svg class="ml-1 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                      </svg>
                     </div>
                   </div>
                 </div>
@@ -237,17 +237,34 @@ function startOnboarding() {
     banner.style.display = 'none';
   }
   
-  // Scroll to setup steps
-  setTimeout(() => {
-    const element = document.getElementById('setup-steps');
-    if (element) {
-      console.log('Scrolling to setup steps');
-      element.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      console.log('Setup steps element not found, scrolling to bottom');
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    }
-  }, 100);
+  // Start onboarding mode
+  fetch('{{ route('onboarding.start') }}', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').getAttribute('content')
+    },
+    body: JSON.stringify({})
+  })
+  .then(response => {
+    console.log('Onboarding started');
+    
+    // Scroll to setup steps
+    setTimeout(() => {
+      const element = document.getElementById('setup-steps');
+      if (element) {
+        console.log('Scrolling to setup steps');
+        element.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        console.log('Setup steps element not found, scrolling to bottom');
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      }
+    }, 100);
+  })
+  .catch(error => {
+    console.error('Error starting onboarding:', error);
+  });
 }
 </script>
 @endif

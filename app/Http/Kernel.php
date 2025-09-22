@@ -66,6 +66,9 @@ class Kernel extends HttpKernel
         'role' => \App\Http\Middleware\RoleMiddleware::class,
         'permission' => \App\Http\Middleware\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
+        
+        // Onboarding Middleware
+        'onboarding' => \App\Http\Middleware\OnboardingMiddleware::class,
     ];
 
     /**

@@ -182,11 +182,22 @@ class HomeController extends Controller
     /**
      * Skip onboarding (for experienced users)
      */
-    public function skipOnboarding(Request $request)
+    public function skipOnboarding()
     {
-        // Store user preference to skip onboarding
+        // Mark onboarding as completed for this user
         auth()->user()->update(['onboarding_completed' => true]);
         
-        return redirect()->route('home')->with('status', 'Onboarding skipped. You can access setup guides anytime from the help menu.');
+        // Clear onboarding session
+        session()->forget('onboarding_active');
+        
+        return response()->json(['success' => true]);
+    }
+
+    public function startOnboarding()
+    {
+        // Set onboarding as active in session
+        session(['onboarding_active' => true]);
+        
+        return response()->json(['success' => true]);
     }
 }
