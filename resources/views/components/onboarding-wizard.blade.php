@@ -7,9 +7,9 @@
   @if($onboardingStatus['isNewUser'])
     <!-- Welcome Modal for Brand New Users -->
     <div id="onboarding-modal" 
-         class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50"
-         style="display: block;">
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full mx-4 p-6">
+         class="fixed inset-0 bg-gray-500 bg-opacity-75 z-50"
+         style="display: flex; align-items: center; justify-content: center; min-height: 100vh;">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full mx-4 p-6 relative">
         <div class="text-center">
           <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 mb-4">
             <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
