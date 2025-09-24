@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use App\Rules\NotBlacklistedEmail;
+use App\Rules\BrazilianPhone;
 
 class RegisterController extends Controller
 {
@@ -40,6 +42,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('throttle:5,60')->only(['register']); // 5 attempts per hour
     }
 
     /**
@@ -60,13 +63,18 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'studio_name' => ['required', 'string', 'max:255'],
-            'phone' => ['nullable', 'string', 'max:20'],
+            'name' => ['required', 'string', 'max:255', 'regex:/^[a-zA-ZÀ-ÿ\s]+$/'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', new NotBlacklistedEmail],
+            'password' => ['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'],
+            'studio_name' => ['required', 'string', 'max:255', 'min:2'],
+            'phone' => ['nullable', 'string', new BrazilianPhone],
             'saas_plan_id' => ['required', 'exists:saas_plans,id'],
             'billing_cycle' => ['required', 'in:monthly,yearly'],
+        ], [
+            'name.regex' => 'O nome deve conter apenas letras e espaços.',
+            'email.unique' => 'Este email já está em uso.',
+            'password.regex' => 'A senha deve conter pelo menos uma letra minúscula, uma maiúscula e um número.',
+            'studio_name.min' => 'O nome do estúdio deve ter pelo menos 2 caracteres.',
         ]);
     }
 

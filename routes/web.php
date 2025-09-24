@@ -174,6 +174,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     ]);
 });
 
-Auth::routes(['verify' => true]);
+// Authentication routes with security middleware
+Route::middleware(['security'])->group(function () {
+    Auth::routes(['verify' => true]);
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

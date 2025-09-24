@@ -72,6 +72,9 @@ class Kernel extends HttpKernel
         
         // Feature Management Middleware
         'plan.features' => \App\Http\Middleware\CheckPlanFeatures::class,
+        
+        // Security Middleware
+        'security' => \App\Http\Middleware\SecurityMiddleware::class,
     ];
 
     /**
