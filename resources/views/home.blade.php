@@ -25,6 +25,9 @@
     </div>
   @endif
 
+  <!-- Onboarding Progress Component -->
+  <x-onboarding-progress :user="Auth::user()" />
+  
   <!-- Feature Limits Component -->
   <x-feature-limits :user="Auth::user()" />
 

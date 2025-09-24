@@ -23,6 +23,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'onboarding_completed',
+        'onboarding_skipped',
+        'onboarding_completed_at',
         'studio_name',
         'phone',
         'saas_plan_id',

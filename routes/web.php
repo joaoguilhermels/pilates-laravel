@@ -61,9 +61,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Upgrade routes
     Route::get('/upgrade', [App\Http\Controllers\UpgradeController::class, 'index'])->name('upgrade');
     Route::post('/upgrade', [App\Http\Controllers\UpgradeController::class, 'upgrade'])->name('upgrade.process');
-    Route::post('/onboarding/complete-step', [HomeController::class, 'completeOnboardingStep'])->name('onboarding.complete-step');
-    Route::post('/onboarding/skip', [HomeController::class, 'skipOnboarding'])->name('onboarding.skip');
-    Route::post('/onboarding/start', [HomeController::class, 'startOnboarding'])->name('onboarding.start');
+    
+    // Onboarding routes
+    Route::get('/onboarding', [App\Http\Controllers\OnboardingController::class, 'index'])->name('onboarding.wizard');
+    Route::post('/onboarding/skip', [App\Http\Controllers\OnboardingController::class, 'skip'])->name('onboarding.skip');
+    Route::post('/onboarding/complete', [App\Http\Controllers\OnboardingController::class, 'complete'])->name('onboarding.complete');
+    Route::get('/onboarding/status', [App\Http\Controllers\OnboardingController::class, 'status'])->name('onboarding.status');
+    Route::post('/onboarding/step/{stepId}/complete', [App\Http\Controllers\OnboardingController::class, 'markStepCompleted'])->name('onboarding.step.complete');
     
     // Test route for Alpine.js debugging
     Route::get('/test-alpine', function () {
