@@ -57,6 +57,10 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    
+    // Upgrade routes
+    Route::get('/upgrade', [App\Http\Controllers\UpgradeController::class, 'index'])->name('upgrade');
+    Route::post('/upgrade', [App\Http\Controllers\UpgradeController::class, 'upgrade'])->name('upgrade.process');
     Route::post('/onboarding/complete-step', [HomeController::class, 'completeOnboardingStep'])->name('onboarding.complete-step');
     Route::post('/onboarding/skip', [HomeController::class, 'skipOnboarding'])->name('onboarding.skip');
     Route::post('/onboarding/start', [HomeController::class, 'startOnboarding'])->name('onboarding.start');
@@ -154,10 +158,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->where('room', '[0-9]+')
         ->name('schedules.show-schedule');
 
-    Route::resource('rooms', RoomsController::class)->middleware('onboarding');
-    Route::resource('plans', PlansController::class)->middleware('onboarding');
-    Route::resource('clients', ClientsController::class)->middleware('onboarding');
-    Route::resource('professionals', ProfessionalsController::class)->middleware('onboarding');
+    Route::resource('rooms', RoomsController::class)->middleware(['onboarding', 'plan.features:multi_location_management,rooms']);
+    Route::resource('plans', PlansController::class)->middleware(['onboarding', 'plan.features:,plans']);
+    Route::resource('clients', ClientsController::class)->middleware(['onboarding', 'plan.features:,clients']);
+    Route::resource('professionals', ProfessionalsController::class)->middleware(['onboarding', 'plan.features:team_management,users']);
 
     Route::resource('classes', ClassTypesController::class)->parameters([
         'classes' => 'classType',

@@ -69,6 +69,9 @@ class Kernel extends HttpKernel
         
         // Onboarding Middleware
         'onboarding' => \App\Http\Middleware\OnboardingMiddleware::class,
+        
+        // Feature Management Middleware
+        'plan.features' => \App\Http\Middleware\CheckPlanFeatures::class,
     ];
 
     /**

@@ -25,6 +25,9 @@
     </div>
   @endif
 
+  <!-- Feature Limits Component -->
+  <x-feature-limits :user="Auth::user()" />
+
   @if (session('onboarding_success'))
     <div class="mb-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-md p-4">
       <div class="flex">
