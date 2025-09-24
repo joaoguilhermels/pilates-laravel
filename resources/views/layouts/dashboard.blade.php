@@ -9,17 +9,33 @@
   <!-- Dark theme detection script - MUST run before CSS loads -->
   <script>
     (function() {
+      'use strict';
       try {
-        const theme = localStorage.getItem('theme') || 
-                     (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        var theme = 'light';
+        try {
+          theme = localStorage.getItem('theme');
+        } catch (e) {
+          // localStorage not available
+        }
+        
+        if (!theme) {
+          try {
+            theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          } catch (e) {
+            theme = 'light';
+          }
+        }
+        
         if (theme === 'dark') {
           document.documentElement.classList.add('dark');
         }
+        
         // Prevent flash by ensuring body is ready
         document.documentElement.style.visibility = 'visible';
       } catch (e) {
-        // Fallback if localStorage is not available
+        // Fallback if everything fails
         console.warn('Theme detection failed:', e);
+        document.documentElement.style.visibility = 'visible';
       }
     })();
   </script>
@@ -298,10 +314,13 @@
   </nav>
 
   <!-- Page Content -->
-  <div id="app">
+  <div>
     <main class="py-6">
       @yield('content')
     </main>
+    
+    <!-- Vue.js App Container (only for specific components) -->
+    <div id="app" style="display: none;"></div>
   </div>
   
   @stack('scripts')

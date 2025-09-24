@@ -126,7 +126,7 @@ export default {
   data() {
     return {
       numberOfPayments: parseInt(this.planDuration) || 1,
-      payments: this.selectedValues === "" ? [] : JSON.parse(this.selectedValues),
+      payments: this.selectedValues === "" ? [] : this.parseSelectedValues(this.selectedValues),
     }
   },
 
@@ -145,6 +145,14 @@ export default {
     },
     paymentObservationName(paymentNumber) {
       return `payments[${paymentNumber - 1}][observation]`;
+    },
+    parseSelectedValues(selectedValues) {
+      try {
+        return JSON.parse(selectedValues);
+      } catch (e) {
+        console.warn('Failed to parse selectedValues:', e);
+        return [];
+      }
     },
     startAtValue(startAt, paymentNumber) {
       if (!startAt) return '';

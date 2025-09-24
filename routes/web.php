@@ -57,6 +57,14 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::post('/onboarding/complete-step', [HomeController::class, 'completeOnboardingStep'])->name('onboarding.complete-step');
+    Route::post('/onboarding/skip', [HomeController::class, 'skipOnboarding'])->name('onboarding.skip');
+    Route::post('/onboarding/start', [HomeController::class, 'startOnboarding'])->name('onboarding.start');
+    
+    // Test route for Alpine.js debugging
+    Route::get('/test-alpine', function () {
+        return view('test-alpine');
+    })->name('test.alpine');
 
     // User Profile Routes
     Route::get('/profile', [UserController::class, 'show'])->name('profile.show');
@@ -146,14 +154,14 @@ Route::middleware(['auth'])->group(function () {
         ->where('room', '[0-9]+')
         ->name('schedules.show-schedule');
 
-    Route::resource('rooms', RoomsController::class);
-    Route::resource('plans', PlansController::class);
-    Route::resource('clients', ClientsController::class);
-    Route::resource('professionals', ProfessionalsController::class);
+    Route::resource('rooms', RoomsController::class)->middleware('onboarding');
+    Route::resource('plans', PlansController::class)->middleware('onboarding');
+    Route::resource('clients', ClientsController::class)->middleware('onboarding');
+    Route::resource('professionals', ProfessionalsController::class)->middleware('onboarding');
 
     Route::resource('classes', ClassTypesController::class)->parameters([
         'classes' => 'classType',
-    ]);
+    ])->middleware('onboarding');
     Route::resource('bank-accounts', BankAccountsController::class)->parameters([
         'bank-accounts' => 'bankAccount',
     ]);

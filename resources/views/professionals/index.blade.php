@@ -88,13 +88,14 @@
                   View Details
                 </a>
               </div>
-              <form action="{{ route('professionals.destroy', $professional) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this professional?')">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="text-sm font-medium text-red-600 dark:text-red-400 hover:text-red-500 dark:hover:text-red-300">
-                  Delete
-                </button>
-              </form>
+              <button type="button" 
+                      data-delete-entity="professional"
+                      data-delete-id="{{ $professional->id }}"
+                      data-delete-name="{{ $professional->name }}"
+                      data-delete-url="{{ route('professionals.destroy', $professional) }}"
+                      class="text-sm font-medium text-red-600 dark:text-red-400 hover:text-red-500 dark:hover:text-red-300 transition-colors duration-200">
+                Delete
+              </button>
             </div>
           </div>
         </div>
@@ -102,4 +103,24 @@
     </div>
   @endif
 </div>
+
+<!-- Smart Deletion Modal -->
+<x-deletion-modal />
+
+@push('scripts')
+<script>
+// Include deletion protection functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Wait a bit for all scripts to load
+    setTimeout(function() {
+        if (typeof DeletionProtection !== 'undefined') {
+            new DeletionProtection();
+            console.log('Deletion protection initialized');
+        } else {
+            console.error('DeletionProtection class not found');
+        }
+    }, 100);
+});
+</script>
+@endpush
 @endsection

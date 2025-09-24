@@ -34,8 +34,33 @@ class PlansController extends Controller
     public function create(Plan $plan)
     {
         $classTypes = ClassType::all();
+        
+        // Get popular plans (most used plans based on client_plans count)
+        $popularPlans = [];
+        if (request('onboarding')) {
+            $popularPlans = Plan::withCount('clientPlans')
+                ->having('client_plans_count', '>', 0)
+                ->orderBy('client_plans_count', 'desc')
+                ->take(3)
+                ->get()
+                ->map(function ($plan) {
+                    return [
+                        'id' => $plan->id,
+                        'name' => $plan->name,
+                        'times' => $plan->times,
+                        'times_type' => $plan->times_type,
+                        'duration' => $plan->duration,
+                        'duration_type' => $plan->duration_type,
+                        'price' => $plan->price,
+                        'price_type' => $plan->price_type,
+                        'description' => $plan->description,
+                        'usage_count' => $plan->client_plans_count,
+                        'class_type_name' => $plan->classType->name ?? null
+                    ];
+                });
+        }
 
-        return view('plans.create', compact('classTypes', 'plan'));
+        return view('plans.create', compact('classTypes', 'plan', 'popularPlans'));
     }
 
     public function store(planRequest $request)

@@ -18,9 +18,14 @@
     </div>
   </div>
 
+  <!-- Impact Analysis -->
+  @if(isset($impactAnalysis))
+    <x-professional-change-impact :professional="$professional" :impact-analysis="$impactAnalysis" />
+  @endif
+
   <!-- Form -->
   <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg border border-gray-200 dark:border-gray-700">
-    <form action="{{ route('professionals.update', $professional) }}" method="POST" class="space-y-6 p-6">
+    <form action="{{ route('professionals.update', $professional) }}" method="POST" class="space-y-6 p-6" id="professional-form">
       @csrf
       @method('PATCH')
       @include('professionals.form', ['submitButtonText' => 'Update Professional'])

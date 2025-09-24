@@ -33,26 +33,32 @@ class ProfessionalsController extends Controller
         }])->get();
 
         $professionalClassTypes = $professional->classTypes->all();
+        
+        // Analyze potential impact of changes
+        $analyzer = new \App\Services\ProfessionalChangeAnalyzer();
+        $currentClassTypeIds = $professional->classTypes->pluck('id')->toArray();
+        $impactAnalysis = $analyzer->analyzeClassTypeChanges($professional, $currentClassTypeIds);
 
-        return view('professionals.edit', compact('professional', 'classTypes', 'professionalClassTypes'));
+        return view('professionals.edit', compact('professional', 'classTypes', 'professionalClassTypes', 'impactAnalysis'));
     }
 
-    public function create(Professional $professional)
+    public function create()
     {
         $classTypes = ClassType::all();
+        $professionalClassTypes = [];
 
-        $professionalClassTypes = $professional->classTypes->all();
-
-        return view('professionals.create', compact('professional', 'classTypes', 'professionalClassTypes'));
+        return view('professionals.create', compact('classTypes', 'professionalClassTypes'));
     }
 
     public function store(ProfessionalRequest $request)
     {
-        $classTypeList = $request->class_type_list;
+        $classTypeList = $request->class_type_list ?? [];
 
-        foreach ($classTypeList as $key => $classType) {
-            if (! isset($classType['class_type_id'])) {
-                unset($classTypeList[$key]);
+        if (!empty($classTypeList)) {
+            foreach ($classTypeList as $key => $classType) {
+                if (! isset($classType['class_type_id'])) {
+                    unset($classTypeList[$key]);
+                }
             }
         }
 

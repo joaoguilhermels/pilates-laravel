@@ -20,6 +20,15 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'onboarding_completed',
+        'studio_name',
+        'phone',
+        'saas_plan_id',
+        'billing_cycle',
+        'trial_ends_at',
+        'subscription_ends_at',
+        'is_trial',
+        'is_active',
     ];
 
     /**
@@ -36,5 +45,37 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'onboarding_completed' => 'boolean',
+        'trial_ends_at' => 'datetime',
+        'subscription_ends_at' => 'datetime',
+        'is_trial' => 'boolean',
+        'is_active' => 'boolean',
     ];
+
+    /**
+     * Get the SaaS plan for this user
+     */
+    public function saasPlans()
+    {
+        return $this->belongsTo(SaasPlans::class, 'saas_plan_id');
+    }
+
+    /**
+     * Check if user is on trial
+     */
+    public function isOnTrial()
+    {
+        return $this->is_trial && $this->trial_ends_at && $this->trial_ends_at->isFuture();
+    }
+
+    /**
+     * Check if user's subscription is active
+     */
+    public function hasActiveSubscription()
+    {
+        return $this->is_active && (
+            $this->isOnTrial() || 
+            ($this->subscription_ends_at && $this->subscription_ends_at->isFuture())
+        );
+    }
 }
