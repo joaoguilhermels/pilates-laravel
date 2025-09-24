@@ -45,7 +45,6 @@ Route::get('/', function () {
 });
 
 /*
-|--------------------------------------------------------------------------
 | Application Routes
 |--------------------------------------------------------------------------
 |
@@ -54,6 +53,12 @@ Route::get('/', function () {
 | kernel and includes session state, CSRF protection, and more.
 |
 */
+
+// Authentication routes with security middleware
+Auth::routes(['verify' => true]);
+
+// Stripe webhook route (no auth required)
+Route::post('/stripe/webhook', [App\Http\Controllers\StripeWebhookController::class, 'handle'])->name('stripe.webhook');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -68,6 +73,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/onboarding/complete', [App\Http\Controllers\OnboardingController::class, 'complete'])->name('onboarding.complete');
     Route::get('/onboarding/status', [App\Http\Controllers\OnboardingController::class, 'status'])->name('onboarding.status');
     Route::post('/onboarding/step/{stepId}/complete', [App\Http\Controllers\OnboardingController::class, 'markStepCompleted'])->name('onboarding.step.complete');
+    
+    // Billing routes
+    Route::prefix('billing')->name('billing.')->group(function () {
+        Route::get('/', [App\Http\Controllers\BillingController::class, 'index'])->name('index');
+        Route::get('/plans', [App\Http\Controllers\BillingController::class, 'plans'])->name('plans');
+        Route::post('/checkout', [App\Http\Controllers\BillingController::class, 'checkout'])->name('checkout');
+        Route::get('/success', [App\Http\Controllers\BillingController::class, 'success'])->name('success');
+        Route::get('/cancel', [App\Http\Controllers\BillingController::class, 'cancel'])->name('cancel');
+        Route::get('/info', [App\Http\Controllers\BillingController::class, 'showBillingInfo'])->name('info');
+        Route::post('/info', [App\Http\Controllers\BillingController::class, 'updateBillingInfo'])->name('info.update');
+        Route::get('/portal', [App\Http\Controllers\BillingController::class, 'portal'])->name('portal');
+        Route::post('/cancel-subscription', [App\Http\Controllers\BillingController::class, 'cancelSubscription'])->name('cancel-subscription');
+        Route::post('/resume-subscription', [App\Http\Controllers\BillingController::class, 'resumeSubscription'])->name('resume-subscription');
+    });
     
     // Test route for Alpine.js debugging
     Route::get('/test-alpine', function () {
@@ -177,10 +196,3 @@ Route::middleware(['auth', 'verified'])->group(function () {
         'payment-methods' => 'paymentMethod',
     ]);
 });
-
-// Authentication routes with security middleware
-Route::middleware(['security'])->group(function () {
-    Auth::routes(['verify' => true]);
-});
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
