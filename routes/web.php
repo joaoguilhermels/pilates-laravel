@@ -55,7 +55,7 @@ Route::get('/', function () {
 |
 */
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::post('/onboarding/complete-step', [HomeController::class, 'completeOnboardingStep'])->name('onboarding.complete-step');
     Route::post('/onboarding/skip', [HomeController::class, 'skipOnboarding'])->name('onboarding.skip');
@@ -170,10 +170,6 @@ Route::middleware(['auth'])->group(function () {
     ]);
 });
 
-Auth::routes();
-
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
