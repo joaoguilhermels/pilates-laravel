@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\SaasPlans;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -41,6 +43,15 @@ class RegisterController extends Controller
     }
 
     /**
+     * Show the registration form with plan selection.
+     */
+    public function showRegistrationForm()
+    {
+        $plans = SaasPlans::active()->get();
+        return view('auth.register', compact('plans'));
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -52,6 +63,10 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'studio_name' => ['required', 'string', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:20'],
+            'saas_plan_id' => ['required', 'exists:saas_plans,id'],
+            'billing_cycle' => ['required', 'in:monthly,yearly'],
         ]);
     }
 
@@ -63,10 +78,29 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $plan = SaasPlans::find($data['saas_plan_id']);
+        
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'studio_name' => $data['studio_name'],
+            'phone' => $data['phone'] ?? null,
+            'saas_plan_id' => $data['saas_plan_id'],
+            'billing_cycle' => $data['billing_cycle'],
+            'trial_ends_at' => now()->addDays($plan->trial_days),
+            'is_trial' => true,
+            'is_active' => true,
+            'onboarding_completed' => false,
         ]);
+
+        // Assign role based on selected plan
+        if ($plan->slug === 'profissional') {
+            $user->assignRole('studio_professional');
+        } else {
+            $user->assignRole('studio_owner');
+        }
+
+        return $user;
     }
 }

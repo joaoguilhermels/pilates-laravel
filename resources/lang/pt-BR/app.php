@@ -48,4 +48,68 @@ return [
     'import' => 'Importar',
     'print' => 'Imprimir',
 
+    // Plans
+    'plans' => 'Planos',
+    'plan' => 'Plano',
+    'create_new_plan' => 'Criar Novo Plano',
+    'add_new_membership_plan' => 'Adicione um novo plano de mensalidade às ofertas do seu estúdio.',
+    'back_to_plans' => 'Voltar aos Planos',
+    'create_plan' => 'Criar Plano',
+    'update_plan' => 'Atualizar Plano',
+    'plan_name' => 'Nome do Plano',
+    'related_class_type' => 'Tipo de Aula Relacionado',
+    'select_class_type_optional' => 'Selecione um tipo de aula (opcional)',
+    'description' => 'Descrição',
+    'plan_description_placeholder' => 'Descrição do plano, benefícios, termos...',
+    'plan_structure' => 'Estrutura do Plano',
+    'number_of_sessions' => 'Número de Sessões',
+    'per' => 'Por',
+    'week' => 'Semana',
+    'month' => 'Mês',
+    'weeks' => 'Semana(s)',
+    'months' => 'Mês(es)',
+    'plan_duration' => 'Duração do Plano',
+    'duration_unit' => 'Unidade de Duração',
+    'pricing' => 'Preços',
+    'price' => 'Preço',
+    'price_per' => 'Preço Por',
+    'class' => 'Aula',
+    'plan_summary' => 'Resumo do Plano',
+    'configure_plan_details' => 'Configure os detalhes do plano acima para ver um resumo.',
+    'total_sessions' => 'Total de sessões',
+    'total_cost' => 'Custo total',
+    
+    // Plans Index
+    'membership_plans' => 'Planos de Mensalidade',
+    'manage_studio_plans' => 'Gerencie os planos de mensalidade e preços do seu estúdio.',
+    'add_new_plan' => 'Adicionar Novo Plano',
+    'no_plans' => 'Nenhum plano',
+    'get_started_first_plan' => 'Comece criando seu primeiro plano de mensalidade.',
+    'add_plan' => 'Adicionar Plano',
+
+    // Onboarding Context
+    'creating_first_plan' => 'Criando seu primeiro plano!',
+    'popular_plans_help' => 'Veja os planos mais utilizados por outros estúdios ou crie do zero:',
+    'no_popular_plans' => 'Ainda não há planos populares. Seja o primeiro a criar!',
+    'popular_plans_title' => 'Planos Populares',
+    'used_by_clients' => 'usado por :count cliente(s)',
+    'use_as_base' => 'Usar como Base',
+    'create_from_scratch' => 'Criar do Zero',
+    
+    // Improved Labels
+    'session_frequency' => 'Frequência das Aulas',
+    'how_often_classes' => 'Com que frequência as aulas acontecem?',
+    'plan_total_duration' => 'Duração Total do Plano',
+    'how_long_plan_lasts' => 'Por quanto tempo o plano será válido?',
+    'pricing_model' => 'Modelo de Cobrança',
+    'how_charge_client' => 'Como você cobrará o cliente?',
+    'per_class' => 'Por Aula',
+    'per_month' => 'Por Mês',
+    
+    // Smart Summary
+    'plan_preview' => 'Prévia do Plano',
+    'estimated_revenue' => 'Receita Estimada',
+    'sessions_included' => 'Sessões Incluídas',
+    'cost_per_session' => 'Custo por Sessão',
+
 ];

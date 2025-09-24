@@ -14,6 +14,7 @@ class Plan extends Model
     protected $fillable = [
         'name',
         'class_type_id',
+        'description',
         'times',
         'times_type',
         'duration',
@@ -28,6 +29,14 @@ class Plan extends Model
     public function classType()
     {
         return $this->belongsTo(ClassType::class);
+    }
+
+    /**
+     * Client plans associated with this Plan.
+     */
+    public function clientPlans()
+    {
+        return $this->hasMany(ClientPlan::class);
     }
 
     /**

@@ -18,6 +18,9 @@ class Professional extends Model
       'phone',
       'email',
       'salary',
+      'compensation_model',
+      'fixed_salary',
+      'compensation_notes',
     ];
 
     public function financialTransactions()

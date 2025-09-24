@@ -210,7 +210,7 @@ class HomeController extends Controller
     /**
      * Generate action text from step title
      */
-    private function getActionText($title)
+    public function getActionText($title)
     {
         // Convert titles to action text
         $actionMap = [

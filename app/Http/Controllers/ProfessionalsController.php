@@ -33,8 +33,13 @@ class ProfessionalsController extends Controller
         }])->get();
 
         $professionalClassTypes = $professional->classTypes->all();
+        
+        // Analyze potential impact of changes
+        $analyzer = new \App\Services\ProfessionalChangeAnalyzer();
+        $currentClassTypeIds = $professional->classTypes->pluck('id')->toArray();
+        $impactAnalysis = $analyzer->analyzeClassTypeChanges($professional, $currentClassTypeIds);
 
-        return view('professionals.edit', compact('professional', 'classTypes', 'professionalClassTypes'));
+        return view('professionals.edit', compact('professional', 'classTypes', 'professionalClassTypes', 'impactAnalysis'));
     }
 
     public function create()
