@@ -6,14 +6,14 @@
   <div class="mb-8">
     <div class="flex items-center justify-between">
       <div>
-        <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Settings</h1>
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">Manage your application preferences and studio settings.</p>
+        <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">{{ __('app.settings_title') }}</h1>
+        <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">{{ __('app.settings_subtitle') }}</p>
       </div>
       <a href="{{ route('profile.show') }}" class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-900 transition-colors duration-200">
         <svg class="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
-        Back to Profile
+        {{ __('app.back_to_profile') }}
       </a>
     </div>
   </div>
@@ -22,21 +22,21 @@
     <!-- Studio Information -->
     <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg border border-gray-200 dark:border-gray-700">
       <div class="px-4 py-5 sm:p-6">
-        <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white mb-4">Studio Information</h3>
+        <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white mb-4">{{ __('app.studio_information') }}</h3>
         
         <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
           <div>
-            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Studio Name</dt>
+            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('app.studio_name') }}</dt>
             <dd class="mt-1 text-sm text-gray-900 dark:text-white">{{ config('app.name', 'Pilates Studio') }}</dd>
           </div>
           
           <div>
-            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Application Version</dt>
+            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('app.application_version') }}</dt>
             <dd class="mt-1 text-sm text-gray-900 dark:text-white">Laravel {{ app()->version() }}</dd>
           </div>
           
           <div>
-            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Environment</dt>
+            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('app.environment') }}</dt>
             <dd class="mt-1">
               <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ config('app.env') === 'production' ? 'bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-200' : 'bg-yellow-100 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200' }}">
                 {{ ucfirst(config('app.env')) }}
@@ -45,10 +45,10 @@
           </div>
           
           <div>
-            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Debug Mode</dt>
+            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('app.debug_mode') }}</dt>
             <dd class="mt-1">
               <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ config('app.debug') ? 'bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200' : 'bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-200' }}">
-                {{ config('app.debug') ? 'Enabled' : 'Disabled' }}
+                {{ config('app.debug') ? __('app.enabled') : __('app.disabled') }}
               </span>
             </dd>
           </div>
@@ -59,7 +59,7 @@
     <!-- System Statistics -->
     <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg border border-gray-200 dark:border-gray-700">
       <div class="px-4 py-5 sm:p-6">
-        <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white mb-4">System Statistics</h3>
+        <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white mb-4">{{ __('app.system_statistics') }}</h3>
         
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           <div class="bg-gray-50 dark:bg-gray-700 overflow-hidden shadow-sm rounded-lg border border-gray-200 dark:border-gray-600">
@@ -72,7 +72,7 @@
                 </div>
                 <div class="ml-5 w-0 flex-1">
                   <dl>
-                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Total Clients</dt>
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">{{ __('app.total_clients') }}</dt>
                     <dd class="text-lg font-medium text-gray-900 dark:text-white">{{ \App\Models\Client::count() }}</dd>
                   </dl>
                 </div>
@@ -90,7 +90,7 @@
                 </div>
                 <div class="ml-5 w-0 flex-1">
                   <dl>
-                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Professionals</dt>
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">{{ __('app.professionals') }}</dt>
                     <dd class="text-lg font-medium text-gray-900 dark:text-white">{{ \App\Models\Professional::count() }}</dd>
                   </dl>
                 </div>
@@ -108,7 +108,7 @@
                 </div>
                 <div class="ml-5 w-0 flex-1">
                   <dl>
-                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Total Sessions</dt>
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">{{ __('app.total_sessions') }}</dt>
                     <dd class="text-lg font-medium text-gray-900 dark:text-white">{{ \App\Models\Schedule::count() }}</dd>
                   </dl>
                 </div>
@@ -126,7 +126,7 @@
                 </div>
                 <div class="ml-5 w-0 flex-1">
                   <dl>
-                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Rooms</dt>
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">{{ __('app.rooms') }}</dt>
                     <dd class="text-lg font-medium text-gray-900 dark:text-white">{{ \App\Models\Room::count() }}</dd>
                   </dl>
                 </div>
@@ -140,7 +140,7 @@
     <!-- Quick Links -->
     <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg border border-gray-200 dark:border-gray-700">
       <div class="px-4 py-5 sm:p-6">
-        <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white mb-4">Quick Management</h3>
+        <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white mb-4">{{ __('app.quick_management') }}</h3>
         
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <a href="{{ route('classes.index') }}" class="relative group bg-white dark:bg-gray-800 p-4 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500 rounded-lg border border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 transition-colors duration-200">
@@ -151,8 +151,8 @@
                 </svg>
               </div>
               <div>
-                <h4 class="text-sm font-medium text-gray-900 dark:text-white">Manage Class Types</h4>
-                <p class="text-sm text-gray-500 dark:text-gray-400">Configure available classes</p>
+                <h4 class="text-sm font-medium text-gray-900 dark:text-white">{{ __('app.manage_class_types') }}</h4>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{{ __('app.configure_available_classes') }}</p>
               </div>
             </div>
           </a>
@@ -165,8 +165,8 @@
                 </svg>
               </div>
               <div>
-                <h4 class="text-sm font-medium text-gray-900 dark:text-white">Manage Rooms</h4>
-                <p class="text-sm text-gray-500 dark:text-gray-400">Configure studio spaces</p>
+                <h4 class="text-sm font-medium text-gray-900 dark:text-white">{{ __('app.manage_rooms') }}</h4>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{{ __('app.configure_studio_spaces') }}</p>
               </div>
             </div>
           </a>
@@ -179,8 +179,8 @@
                 </svg>
               </div>
               <div>
-                <h4 class="text-sm font-medium text-gray-900 dark:text-white">Manage Plans</h4>
-                <p class="text-sm text-gray-500 dark:text-gray-400">Configure membership plans</p>
+                <h4 class="text-sm font-medium text-gray-900 dark:text-white">{{ __('app.manage_plans') }}</h4>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{{ __('app.configure_membership_plans') }}</p>
               </div>
             </div>
           </a>

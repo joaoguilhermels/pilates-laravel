@@ -48,6 +48,28 @@ return [
     'import' => 'Importar',
     'print' => 'Imprimir',
 
+    // Settings Page
+    'settings_title' => 'Configurações',
+    'settings_subtitle' => 'Gerencie suas preferências da aplicação e configurações do estúdio.',
+    'back_to_profile' => 'Voltar ao Perfil',
+    'studio_information' => 'Informações do Estúdio',
+    'studio_name' => 'Nome do Estúdio',
+    'application_version' => 'Versão da Aplicação',
+    'environment' => 'Ambiente',
+    'debug_mode' => 'Modo Debug',
+    'enabled' => 'Habilitado',
+    'disabled' => 'Desabilitado',
+    'system_statistics' => 'Estatísticas do Sistema',
+    'total_clients' => 'Total de Clientes',
+    'total_sessions' => 'Total de Sessões',
+    'quick_management' => 'Gerenciamento Rápido',
+    'manage_class_types' => 'Gerenciar Tipos de Aula',
+    'configure_available_classes' => 'Configure aulas disponíveis',
+    'manage_rooms' => 'Gerenciar Salas',
+    'configure_studio_spaces' => 'Configure espaços do estúdio',
+    'manage_plans' => 'Gerenciar Planos',
+    'configure_membership_plans' => 'Configure planos de assinatura',
+
     // Plans
     'plans' => 'Planos',
     'plan' => 'Plano',
