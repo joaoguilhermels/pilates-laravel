@@ -1,6 +1,6 @@
 @props(['placeholder' => 'Buscar clientes, aulas, profissionais...'])
 
-<div x-data="globalSearch()" class="relative" @click.away="closeResults()">
+<div x-data="globalSearch()" x-cloak class="relative" @click.away="closeResults()">
     <!-- Search Input -->
     <div class="relative">
         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -23,7 +23,7 @@
         >
         
         <!-- Loading Spinner -->
-        <div x-show="loading" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+        <div x-show="loading" x-cloak class="absolute inset-y-0 right-0 pr-3 flex items-center">
             <svg class="animate-spin h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -34,16 +34,18 @@
     <!-- Search Results -->
     <div 
         x-show="showResults && (results.length > 0 || query.length > 0)" 
-        x-transition:enter="transition ease-out duration-200"
-        x-transition:enter-start="opacity-0 scale-95"
-        x-transition:enter-end="opacity-100 scale-100"
-        x-transition:leave="transition ease-in duration-150"
-        x-transition:leave-start="opacity-100 scale-100"
-        x-transition:leave-end="opacity-0 scale-95"
+        x-cloak
+        x-transition:enter="transition ease-out duration-150"
+        x-transition:enter-start="opacity-0 transform scale-95"
+        x-transition:enter-end="opacity-100 transform scale-100"
+        x-transition:leave="transition ease-in duration-100"
+        x-transition:leave-start="opacity-100 transform scale-100"
+        x-transition:leave-end="opacity-0 transform scale-95"
         class="absolute z-50 mt-1 w-full bg-white dark:bg-gray-800 shadow-lg rounded-md border border-gray-200 dark:border-gray-600 max-h-96 overflow-auto"
+        style="display: none;"
     >
         <!-- Quick Filters -->
-        <div x-show="query.length === 0" class="p-3 border-b border-gray-200 dark:border-gray-600">
+        <div x-show="query.length === 0" x-cloak class="p-3 border-b border-gray-200 dark:border-gray-600">
             <p class="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">Busca Rápida</p>
             <div class="flex flex-wrap gap-2">
                 <button @click="quickSearch('clients')" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-indigo-700 dark:text-indigo-300 bg-indigo-100 dark:bg-indigo-900/20 hover:bg-indigo-200 dark:hover:bg-indigo-900/40 transition-colors duration-200">
@@ -68,7 +70,7 @@
         </div>
 
         <!-- Results -->
-        <div x-show="results.length > 0">
+        <div x-show="results.length > 0" x-cloak>
             <template x-for="(group, groupIndex) in groupedResults" :key="groupIndex">
                 <div>
                     <div class="px-3 py-2 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide bg-gray-50 dark:bg-gray-700/50" x-text="group.title"></div>
@@ -100,7 +102,7 @@
         </div>
 
         <!-- No Results -->
-        <div x-show="query.length > 0 && results.length === 0 && !loading" class="px-3 py-8 text-center">
+        <div x-show="query.length > 0 && results.length === 0 && !loading" x-cloak class="px-3 py-8 text-center">
             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
             </svg>
@@ -120,15 +122,23 @@ function globalSearch() {
         loading: false,
         selectedIndex: -1,
         placeholder: 'Buscar clientes, aulas, profissionais...',
+        
+        init() {
+            // Initialize with proper state to prevent flashing
+            this.showResults = false;
+            this.loading = false;
+        },
 
         async search() {
             if (this.query.length < 2) {
                 this.results = [];
                 this.groupedResults = [];
+                this.showResults = this.query.length > 0; // Show empty state if typing
                 return;
             }
 
             this.loading = true;
+            this.showResults = true;
             
             try {
                 const response = await fetch(`/api/search?q=${encodeURIComponent(this.query)}`);
@@ -203,8 +213,11 @@ function globalSearch() {
         },
 
         closeResults() {
-            this.showResults = false;
-            this.selectedIndex = -1;
+            // Use setTimeout to prevent flashing when clicking away
+            setTimeout(() => {
+                this.showResults = false;
+                this.selectedIndex = -1;
+            }, 150);
         }
     }
 }

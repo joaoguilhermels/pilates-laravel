@@ -52,6 +52,8 @@
     /* Hide dropdowns by default */
     .dropdown-menu { display: none; }
     .dropdown-menu.show { display: block; }
+    /* Alpine.js x-cloak directive - prevents flashing */
+    [x-cloak] { display: none !important; }
   </style>
   
   <!-- Navigation functionality -->
