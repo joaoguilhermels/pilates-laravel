@@ -70,6 +70,19 @@ return [
     'manage_plans' => 'Gerenciar Planos',
     'configure_membership_plans' => 'Configure planos de assinatura',
 
+    // Rooms
+    'create_new_room' => 'Criar Nova Sala',
+    'add_new_room_subtitle' => 'Adicione uma nova sala ou espaço ao seu estúdio.',
+    'back_to_rooms' => 'Voltar às Salas',
+    'create_room' => 'Criar Sala',
+    'room_name' => 'Nome da Sala',
+    'room_description' => 'Descrição',
+    'room_description_placeholder' => 'Descrição da sala, capacidade, equipamentos...',
+    'capacity' => 'Capacidade',
+    'capacity_placeholder' => 'Número máximo de pessoas',
+    'available_class_types' => 'Tipos de Aula Disponíveis',
+    'select_class_types_help' => 'Selecione quais tipos de aulas podem ser realizadas nesta sala.',
+
     // Plans
     'plans' => 'Planos',
     'plan' => 'Plano',

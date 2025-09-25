@@ -1,6 +1,6 @@
 <!-- Room Name -->
 <div>
-  <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Room Name *</label>
+  <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('app.room_name') }} *</label>
   <div class="mt-1">
     <input type="text" name="name" id="name" 
            class="block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm @error('name') border-red-300 @enderror" 
@@ -14,11 +14,11 @@
 
 <!-- Description -->
 <div>
-  <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>
+  <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('app.room_description') }}</label>
   <div class="mt-1">
     <textarea name="description" id="description" rows="3" 
               class="block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm @error('description') border-red-300 @enderror" 
-              placeholder="Room description, capacity, equipment...">{{ old('description', $room->description ?? '') }}</textarea>
+              placeholder="{{ __('app.room_description_placeholder') }}">{{ old('description', $room->description ?? '') }}</textarea>
   </div>
   @error('description')
     <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
@@ -27,12 +27,12 @@
 
 <!-- Capacity -->
 <div>
-  <label for="capacity" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Capacity</label>
+  <label for="capacity" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('app.capacity') }}</label>
   <div class="mt-1">
     <input type="number" name="capacity" id="capacity" min="1" 
            class="block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm @error('capacity') border-red-300 @enderror" 
            value="{{ old('capacity', $room->capacity ?? '') }}" 
-           placeholder="Maximum number of people">
+           placeholder="{{ __('app.capacity_placeholder') }}">
   </div>
   @error('capacity')
     <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
@@ -42,7 +42,7 @@
 <!-- Class Types -->
 @if(isset($classTypes) && count($classTypes) > 0)
 <div>
-  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Available Class Types</label>
+  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">{{ __('app.available_class_types') }}</label>
   <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 space-y-2">
     @foreach($classTypes as $classType)
       <div class="flex items-center">
@@ -53,14 +53,14 @@
       </div>
     @endforeach
   </div>
-  <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Select which types of classes can be held in this room.</p>
+  <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ __('app.select_class_types_help') }}</p>
 </div>
 @endif
 
 <!-- Submit Button -->
 <div class="flex justify-end space-x-3 pt-6 border-t border-gray-200 dark:border-gray-600">
   <a href="{{ route('rooms.index') }}" class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-    Cancel
+    {{ __('app.cancel') }}
   </a>
   <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
     <svg class="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
