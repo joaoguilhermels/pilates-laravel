@@ -7,126 +7,182 @@
     $plansCount = \App\Models\Plan::count();
     $professionalsCount = \App\Models\Professional::count();
     
-    // Define onboarding steps
+    // Define onboarding steps with better descriptions and priorities
     $steps = [
         [
             'id' => 'profile',
             'title' => 'Complete seu Perfil',
-            'completed' => !empty($user->name) && !empty($user->email) && !empty($user->studio_name) && !empty($user->phone)
+            'description' => 'Adicione suas informações básicas',
+            'icon' => 'user',
+            'route' => 'profile.edit',
+            'priority' => 1,
+            'completed' => !empty($user->name) && !empty($user->email) && !empty($user->studio_name)
         ],
         [
             'id' => 'rooms',
             'title' => 'Configure Salas',
+            'description' => 'Defina os espaços do seu estúdio',
+            'icon' => 'building',
+            'route' => 'rooms.create',
+            'priority' => 2,
             'completed' => $roomsCount > 0
         ],
         [
             'id' => 'class_types',
             'title' => 'Tipos de Aula',
+            'description' => 'Configure os tipos de aulas oferecidas',
+            'icon' => 'academic-cap',
+            'route' => 'class-types.create',
+            'priority' => 3,
             'completed' => $classTypesCount > 0
         ],
         [
             'id' => 'plans',
             'title' => 'Criar Planos',
+            'description' => 'Configure planos de assinatura',
+            'icon' => 'document-text',
+            'route' => 'plans.create',
+            'priority' => 4,
             'completed' => $plansCount > 0
         ]
     ];
     
     // Add professionals step for studio owners
     if (method_exists($user, 'hasRole') && $user->hasRole('studio_owner')) {
-        array_splice($steps, 3, 0, [[
+        array_splice($steps, 2, 0, [[
             'id' => 'professionals',
             'title' => 'Adicionar Profissionais',
+            'description' => 'Cadastre instrutores da equipe',
+            'icon' => 'users',
+            'route' => 'professionals.create',
+            'priority' => 3,
             'completed' => $professionalsCount > 0
         ]]);
+        
+        // Reorder priorities after insertion
+        foreach ($steps as $index => &$step) {
+            if ($step['id'] === 'class_types') $step['priority'] = 4;
+            if ($step['id'] === 'plans') $step['priority'] = 5;
+        }
     }
     
     $completedSteps = collect($steps)->filter(fn($step) => $step['completed'])->count();
     $totalSteps = count($steps);
     $progress = $totalSteps > 0 ? round(($completedSteps / $totalSteps) * 100) : 0;
     $isComplete = $progress === 100;
+    
+    // Find next step to focus on
+    $nextStep = collect($steps)->first(fn($step) => !$step['completed']);
 @endphp
 
 @if(!$user->onboarding_completed && !$user->onboarding_skipped)
-<div class="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 border border-indigo-200 dark:border-indigo-800 rounded-lg p-6 mb-6">
-    <div class="flex items-start justify-between">
-        <div class="flex-1">
-            <div class="flex items-center mb-2">
-                <div class="w-8 h-8 bg-indigo-100 dark:bg-indigo-900/30 rounded-full flex items-center justify-center mr-3">
-                    <svg class="w-4 h-4 text-indigo-600 dark:text-indigo-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    Configuração Inicial
-                </h3>
+<!-- Simplified Progress Bar -->
+<div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 mb-6">
+    <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center">
+            <div class="w-6 h-6 bg-indigo-100 dark:bg-indigo-900/30 rounded-full flex items-center justify-center mr-2">
+                <svg class="w-3 h-3 text-indigo-600 dark:text-indigo-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                </svg>
             </div>
-            
-            <p class="text-gray-600 dark:text-gray-300 mb-4">
-                @if($isComplete)
-                    🎉 Parabéns! Você completou todos os passos básicos. Finalize a configuração para começar a usar o sistema.
-                @else
-                    Complete a configuração inicial para aproveitar ao máximo o PilatesFlow. {{ $completedSteps }} de {{ $totalSteps }} passos concluídos.
-                @endif
-            </p>
-            
-            <!-- Progress Bar -->
-            <div class="mb-4">
-                <div class="flex items-center justify-between mb-1">
-                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Progresso</span>
-                    <span class="text-sm font-medium text-indigo-600 dark:text-indigo-400">{{ $progress }}%</span>
-                </div>
-                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                    <div class="bg-gradient-to-r from-indigo-600 to-purple-600 h-2 rounded-full transition-all duration-500" style="width: {{ $progress }}%"></div>
-                </div>
-            </div>
-            
-            <!-- Steps Summary -->
-            <div class="grid grid-cols-2 md:grid-cols-{{ min(4, count($steps)) }} gap-2 mb-4">
-                @foreach($steps as $step)
-                    <div class="flex items-center text-sm">
-                        @if($step['completed'])
-                            <svg class="w-4 h-4 text-green-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-green-700 dark:text-green-300">{{ $step['title'] }}</span>
-                        @else
-                            <svg class="w-4 h-4 text-gray-400 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-gray-500 dark:text-gray-400">{{ $step['title'] }}</span>
-                        @endif
-                    </div>
-                @endforeach
-            </div>
+            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Configuração Inicial</span>
         </div>
-        
-        <!-- Action Buttons -->
-        <div class="flex flex-col space-y-2 ml-4">
-            @if($isComplete)
-                <a href="{{ route('onboarding.wizard') }}" 
-                   class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-medium rounded-lg transition-all duration-200 shadow-sm">
-                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                    </svg>
-                    Finalizar
-                </a>
-            @else
-                <a href="{{ route('onboarding.wizard') }}" 
-                   class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-200">
-                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                    </svg>
-                    Continuar
-                </a>
-            @endif
-            
+        <div class="flex items-center space-x-3">
+            <span class="text-sm text-gray-500 dark:text-gray-400">{{ $completedSteps }}/{{ $totalSteps }}</span>
             <button onclick="skipOnboarding()" 
-                    class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 font-medium rounded-lg transition-colors duration-200 text-sm">
-                Pular por Agora
+                    class="text-xs text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                Pular
             </button>
         </div>
     </div>
+    
+    <!-- Compact Progress Bar -->
+    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 mb-3">
+        <div class="bg-gradient-to-r from-indigo-600 to-purple-600 h-1.5 rounded-full transition-all duration-500" style="width: {{ $progress }}%"></div>
+    </div>
+    
+    @if($isComplete)
+        <!-- Completion State -->
+        <div class="flex items-center justify-between">
+            <div class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-sm text-green-700 dark:text-green-300 font-medium">Configuração completa!</span>
+            </div>
+            <a href="{{ route('onboarding.wizard') }}" 
+               class="inline-flex items-center px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md transition-colors duration-200">
+                Finalizar
+            </a>
+        </div>
+    @elseif($nextStep)
+        <!-- Next Step Focus -->
+        <div class="flex items-center justify-between">
+            <div class="flex items-center">
+                @php
+                    $iconMap = [
+                        'user' => 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z',
+                        'building' => 'M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm2 6a2 2 0 104 0 2 2 0 00-4 0zm8 0a2 2 0 104 0 2 2 0 00-4 0z',
+                        'users' => 'M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z',
+                        'academic-cap' => 'M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z',
+                        'document-text' => 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'
+                    ];
+                    $iconPath = $iconMap[$nextStep['icon']] ?? $iconMap['user'];
+                @endphp
+                <div class="w-5 h-5 text-indigo-600 dark:text-indigo-400 mr-2">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $iconPath }}"/>
+                    </svg>
+                </div>
+                <div>
+                    <span class="text-sm font-medium text-gray-900 dark:text-white">{{ $nextStep['title'] }}</span>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">{{ $nextStep['description'] }}</p>
+                </div>
+            </div>
+            <a href="{{ route($nextStep['route']) }}" 
+               class="inline-flex items-center px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-md transition-colors duration-200">
+                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                </svg>
+                Começar
+            </a>
+        </div>
+    @endif
 </div>
+
+@if($nextStep && $completedSteps > 0)
+<!-- Quick Setup Grid - Only show after first step -->
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 mb-6">
+    <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Configuração Rápida</h3>
+        <span class="text-xs text-gray-500 dark:text-gray-400">Opcional</span>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        @foreach($steps as $step)
+            @if(!$step['completed'])
+                <a href="{{ route($step['route']) }}" 
+                   class="group p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:border-indigo-300 dark:hover:border-indigo-500 hover:shadow-sm transition-all duration-200">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-gray-100 dark:bg-gray-700 group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/20 rounded-lg flex items-center justify-center mr-3 transition-colors">
+                            @php $iconPath = $iconMap[$step['icon']] ?? $iconMap['user']; @endphp
+                            <svg class="w-4 h-4 text-gray-600 dark:text-gray-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $iconPath }}"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-sm font-medium text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                                {{ $step['title'] }}
+                            </h4>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ $step['description'] }}</p>
+                        </div>
+                    </div>
+                </a>
+            @endif
+        @endforeach
+    </div>
+</div>
+@endif
 
 <script>
 async function skipOnboarding() {
