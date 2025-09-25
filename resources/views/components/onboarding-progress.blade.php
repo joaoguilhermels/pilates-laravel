@@ -32,7 +32,7 @@
             'title' => 'Tipos de Aula',
             'description' => 'Configure os tipos de aulas oferecidas',
             'icon' => 'academic-cap',
-            'route' => 'class-types.create',
+            'route' => 'classes.create',
             'priority' => 3,
             'completed' => $classTypesCount > 0
         ],
