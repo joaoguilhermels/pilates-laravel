@@ -6,7 +6,7 @@
         {{ __('auth.sign_in') }}
       </h2>
       <p class="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-        Ou
+        {{ __('auth.register_or') }}
         <a href="{{ route('register') }}" class="font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300 transition-colors duration-200">
           {{ __('auth.create_new_account') }}
         </a>
@@ -68,7 +68,7 @@
             </div>
             <div class="ml-3">
               <h3 class="text-sm font-medium text-red-800 dark:text-red-200">
-                There were errors with your submission
+                {{ __('auth.login_errors_title') }}
               </h3>
               <div class="mt-2 text-sm text-red-700 dark:text-red-300">
                 <ul class="list-disc pl-5 space-y-1">

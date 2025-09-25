@@ -127,7 +127,7 @@
 
           <!-- Enhanced Plans Grid -->
           <div class="space-y-4" id="plans-container">
-            @if(isset($plans))
+            @if(isset($plans) && $plans->count() > 0)
               @foreach($plans as $plan)
                 <div class="plan-card group relative rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 cursor-pointer hover:border-indigo-500 dark:hover:border-indigo-400 hover:shadow-lg transition-all duration-300 {{ $plan->is_popular ? 'border-indigo-500 dark:border-indigo-400 ring-2 ring-indigo-100 dark:ring-indigo-900/50 shadow-lg' : '' }}" 
                      data-plan-id="{{ $plan->id }}" 
@@ -226,6 +226,22 @@
                   <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                 </div>
               @endforeach
+            @else
+              <!-- No Plans Available Message -->
+              <div class="text-center py-12">
+                <div class="mx-auto w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mb-4">
+                  <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Nenhum plano disponível</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">
+                  Não há planos de assinatura disponíveis no momento.
+                </p>
+                <a href="{{ route('login') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-indigo-600 dark:text-indigo-400 bg-indigo-100 dark:bg-indigo-900/20 hover:bg-indigo-200 dark:hover:bg-indigo-900/40">
+                  Voltar ao Login
+                </a>
+              </div>
             @endif
           </div>
         </div>
@@ -442,11 +458,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Pre-select popular plan if no errors
-    @if(!$errors->any() && isset($plans))
-        const popularPlan = document.querySelector('.plan-card[data-plan-id="{{ $plans->where('is_popular', true)->first()->id ?? $plans->first()->id }}"]');
-        if (popularPlan) {
-            popularPlan.click();
-        }
+    @if(!$errors->any() && isset($plans) && $plans->count() > 0)
+        @php
+            $popularPlan = $plans->where('is_popular', true)->first();
+            $defaultPlan = $popularPlan ?: $plans->first();
+        @endphp
+        @if($defaultPlan)
+            const popularPlan = document.querySelector('.plan-card[data-plan-id="{{ $defaultPlan->id }}"]');
+            if (popularPlan) {
+                popularPlan.click();
+            }
+        @endif
     @endif
 });
 </script>

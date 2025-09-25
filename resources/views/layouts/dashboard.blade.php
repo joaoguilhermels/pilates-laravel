@@ -117,6 +117,11 @@
           <a href="{{ route('home') }}" class="font-semibold text-xl tracking-tight text-gray-900 dark:text-white">
             {{ config('app.name', 'Pilates') }}
           </a>
+          <!-- Global Search -->
+          <div class="hidden md:block md:ml-6 md:w-96">
+            <x-global-search />
+          </div>
+          
           <!-- Desktop Navigation -->
           <div class="hidden md:ml-6 md:flex md:space-x-6">
             <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'border-indigo-500 text-gray-900 dark:text-white' : 'border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200' }} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200">

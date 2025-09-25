@@ -2,14 +2,58 @@
 
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <!-- Page Header -->
-  <div class="mb-8">
-    <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">{{ __('app.dashboard') }}</h1>
-    <p class="mt-2 text-sm text-gray-700 dark:text-gray-300">{{ __('app.welcome') }}, {{ Auth::user()->name }}!</p>
+  @php
+    $user = Auth::user();
+    $isStudioOwner = method_exists($user, 'hasRole') && $user->hasRole('studio_owner');
+    $isProfessional = method_exists($user, 'hasRole') && $user->hasRole('studio_professional');
+    $needsOnboarding = !$user->onboarding_completed;
+  @endphp
+
+  <!-- Page Header with Context -->
+  <div class="mb-6">
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">
+          @if($needsOnboarding)
+            Bem-vindo ao PilatesFlow! 👋
+          @else
+            {{ __('app.dashboard') }}
+          @endif
+        </h1>
+        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+          @if($needsOnboarding)
+            Vamos configurar seu estúdio em poucos passos
+          @else
+            {{ __('app.welcome') }}, {{ $user->name }}! 
+            @if($isStudioOwner)
+              <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-purple-100 dark:bg-purple-900/20 text-purple-800 dark:text-purple-200 ml-2">
+                👑 Studio Owner
+              </span>
+            @elseif($isProfessional)
+              <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900/20 text-blue-800 dark:text-blue-200 ml-2">
+                💪 Professional
+              </span>
+            @endif
+          @endif
+        </p>
+      </div>
+      
+      @if(!$needsOnboarding)
+        <div class="flex items-center space-x-3">
+          <a href="{{ route('calendar') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200">
+            <svg class="-ml-1 mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            {{ __('app.calendar') }}
+          </a>
+        </div>
+      @endif
+    </div>
   </div>
 
+  <!-- Session Messages -->
   @if (session('status'))
-    <div class="mb-6 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-md p-4">
+    <div class="mb-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-md p-4">
       <div class="flex">
         <div class="flex-shrink-0">
           <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
@@ -17,22 +61,14 @@
           </svg>
         </div>
         <div class="ml-3">
-          <p class="text-sm font-medium text-green-800 dark:text-green-200">
-            {{ session('status') }}
-          </p>
+          <p class="text-sm font-medium text-green-800 dark:text-green-200">{{ session('status') }}</p>
         </div>
       </div>
     </div>
   @endif
 
-  <!-- Onboarding Progress Component -->
-  <x-onboarding-progress :user="Auth::user()" />
-  
-  <!-- Feature Limits Component -->
-  <x-feature-limits :user="Auth::user()" />
-
   @if (session('onboarding_success'))
-    <div class="mb-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-md p-4">
+    <div class="mb-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-md p-4">
       <div class="flex">
         <div class="flex-shrink-0">
           <svg class="h-5 w-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -40,211 +76,311 @@
           </svg>
         </div>
         <div class="ml-3">
-          <p class="text-sm font-medium text-blue-800 dark:text-blue-200">
-            {{ session('onboarding_success') }}
-          </p>
+          <p class="text-sm font-medium text-blue-800 dark:text-blue-200">{{ session('onboarding_success') }}</p>
         </div>
       </div>
     </div>
   @endif
 
-  <!-- Onboarding Wizard -->
-  <x-onboarding-wizard :onboarding-status="$onboardingStatus" />
-
-  <!-- Quick Stats -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-    <!-- Clients Card -->
-    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
-      <div class="p-5">
-        <div class="flex items-center">
-          <div class="flex-shrink-0">
-            <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
-          </div>
-          <div class="ml-5 w-0 flex-1">
-            <dl>
-              <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">{{ __('app.clients') }}</dt>
-              <dd class="text-lg font-medium text-gray-900 dark:text-white">{{ $stats['clients'] }}</dd>
-            </dl>
-          </div>
-        </div>
-      </div>
-      <div class="bg-gray-50 dark:bg-gray-700 px-5 py-3">
-        <div class="text-sm">
-          <a href="{{ route('clients.index') }}" class="font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">{{ __('app.view') }} {{ __('app.clients') }}</a>
-        </div>
+  @if($needsOnboarding)
+    <!-- Onboarding Flow - Priority #1 -->
+    <div class="mb-8">
+      <x-onboarding-wizard :onboarding-status="$onboardingStatus" />
+      <div class="mt-6">
+        <x-onboarding-progress :user="$user" />
       </div>
     </div>
-
-    <!-- Schedules Card -->
-    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
-      <div class="p-5">
-        <div class="flex items-center">
-          <div class="flex-shrink-0">
-            <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
+  @else
+    <!-- Main Dashboard Content -->
+    <div class="space-y-6">
+      
+      <!-- Smart Insights -->
+      <x-smart-insights />
+      
+      <!-- Today's Overview Card -->
+      <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg shadow-lg p-6 text-white">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-lg font-semibold">Hoje, {{ now()->format('d/m/Y') }}</h2>
+            <p class="text-indigo-100 mt-1">
+              @if($stats['today_schedules'] > 0)
+                Você tem {{ $stats['today_schedules'] }} aula{{ $stats['today_schedules'] > 1 ? 's' : '' }} agendada{{ $stats['today_schedules'] > 1 ? 's' : '' }} hoje
+              @else
+                Nenhuma aula agendada para hoje
+              @endif
+            </p>
           </div>
-          <div class="ml-5 w-0 flex-1">
-            <dl>
-              <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Today's Classes</dt>
-              <dd class="text-lg font-medium text-gray-900 dark:text-white">{{ $stats['today_schedules'] }}</dd>
-              <dd class="text-xs text-gray-500 dark:text-gray-400">{{ $stats['upcoming_schedules'] }} upcoming</dd>
-            </dl>
-          </div>
-        </div>
-      </div>
-      <div class="bg-gray-50 dark:bg-gray-700 px-5 py-3">
-        <div class="text-sm">
-          <a href="{{ route('schedules.index') }}" class="font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">{{ __('app.view') }} {{ __('app.schedules') }}</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Professionals Card -->
-    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
-      <div class="p-5">
-        <div class="flex items-center">
-          <div class="flex-shrink-0">
-            <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
-            </svg>
-          </div>
-          <div class="ml-5 w-0 flex-1">
-            <dl>
-              <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">{{ __('app.professionals') }}</dt>
-              <dd class="text-lg font-medium text-gray-900 dark:text-white">{{ $stats['professionals'] }}</dd>
-            </dl>
+          <div class="text-right">
+            <div class="text-2xl font-bold">{{ $stats['today_schedules'] }}</div>
+            <div class="text-indigo-100 text-sm">aulas hoje</div>
           </div>
         </div>
-      </div>
-      <div class="bg-gray-50 dark:bg-gray-700 px-5 py-3">
-        <div class="text-sm">
-          <a href="{{ route('professionals.index') }}" class="font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">{{ __('app.view') }} {{ __('app.professionals') }}</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Plans Card -->
-    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
-      <div class="p-5">
-        <div class="flex items-center">
-          <div class="flex-shrink-0">
-            <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-          </div>
-          <div class="ml-5 w-0 flex-1">
-            <dl>
-              <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">{{ __('app.plans') }}</dt>
-              <dd class="text-lg font-medium text-gray-900 dark:text-white">{{ $stats['plans'] }}</dd>
-            </dl>
-          </div>
-        </div>
-      </div>
-      <div class="bg-gray-50 dark:bg-gray-700 px-5 py-3">
-        <div class="text-sm">
-          <a href="{{ route('plans.index') }}" class="font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">{{ __('app.view') }} {{ __('app.plans') }}</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Recent Activity and Quick Actions -->
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-    
-    <!-- Quick Actions -->
-    <div class="bg-white dark:bg-gray-800 shadow rounded-lg">
-      <div class="px-4 py-5 sm:p-6">
-        <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">Quick Actions</h3>
-        <div class="mt-2 max-w-xl text-sm text-gray-500 dark:text-gray-400">
-          <p>Fast access to the most common tasks.</p>
-        </div>
-        <div class="mt-5">
-          <div class="grid grid-cols-1 gap-4">
-            <a href="{{ route('clients.create') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-indigo-700 dark:text-indigo-200 bg-indigo-100 dark:bg-indigo-900 hover:bg-indigo-200 dark:hover:bg-indigo-800 transition-colors duration-200">
-              <svg class="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-              </svg>
-              {{ __('app.add_client') }}
-            </a>
-            <a href="{{ route('schedules.create') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-green-700 dark:text-green-200 bg-green-100 dark:bg-green-900 hover:bg-green-200 dark:hover:bg-green-800 transition-colors duration-200">
-              <svg class="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              New Schedule
-            </a>
-            <a href="{{ route('calendar') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-purple-700 dark:text-purple-200 bg-purple-100 dark:bg-purple-900 hover:bg-purple-200 dark:hover:bg-purple-800 transition-colors duration-200">
-              <svg class="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              {{ __('app.calendar') }}
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Recent Activity -->
-    <div class="bg-white dark:bg-gray-800 shadow rounded-lg">
-      <div class="px-4 py-5 sm:p-6">
-        <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">Upcoming Classes</h3>
-        <div class="mt-2 max-w-xl text-sm text-gray-500 dark:text-gray-400">
-          <p>Next scheduled classes in your studio.</p>
-        </div>
-        
-        @if(count($recentActivity['upcoming_schedules']) > 0)
-          <div class="mt-5 space-y-3">
-            @foreach($recentActivity['upcoming_schedules'] as $schedule)
-              <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                <div class="flex items-center space-x-3">
-                  <div class="flex-shrink-0">
-                    <div class="w-8 h-8 bg-indigo-100 dark:bg-indigo-900 rounded-full flex items-center justify-center">
-                      <svg class="w-4 h-4 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="flex-1 min-w-0">
-                    <p class="text-sm font-medium text-gray-900 dark:text-white truncate">
-                      {{ $schedule->classType->name ?? 'Class' }}
-                    </p>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">
-                      {{ $schedule->client->name ?? 'No client' }} • {{ $schedule->professional->name ?? 'No instructor' }}
-                    </p>
-                  </div>
-                </div>
-                <div class="text-right">
-                  <p class="text-sm font-medium text-gray-900 dark:text-white">
-                    {{ $schedule->start_at->format('M j') }}
-                  </p>
-                  <p class="text-xs text-gray-500 dark:text-gray-400">
-                    {{ $schedule->start_at->format('g:i A') }}
-                  </p>
-                </div>
-              </div>
-            @endforeach
-          </div>
-        @else
-          <div class="mt-5 text-center py-6">
-            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-            <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">No upcoming classes</h3>
-            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Get started by scheduling your first class.</p>
-            <div class="mt-6">
-              <a href="{{ route('schedules.create') }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                <svg class="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                </svg>
-                Schedule Class
-              </a>
-            </div>
+        @if($stats['upcoming_schedules'] > 0)
+          <div class="mt-4 pt-4 border-t border-indigo-400">
+            <p class="text-indigo-100 text-sm">
+              {{ $stats['upcoming_schedules'] }} próximas aulas nos próximos dias
+            </p>
           </div>
         @endif
       </div>
+
+      @if($isStudioOwner)
+        <!-- Studio Owner Dashboard -->
+        
+        <!-- Key Metrics Row -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Clients Card -->
+          <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg hover:shadow-md transition-shadow duration-200">
+            <div class="p-5">
+              <div class="flex items-center">
+                <div class="flex-shrink-0">
+                  <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center">
+                    <svg class="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="ml-4 flex-1">
+                  <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ $stats['clients'] }}</div>
+                  <div class="text-sm text-gray-500 dark:text-gray-400">{{ __('app.clients') }}</div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-gray-50 dark:bg-gray-700 px-5 py-3">
+              <a href="{{ route('clients.index') }}" class="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
+                {{ __('app.view') }} todos →
+              </a>
+            </div>
+          </div>
+
+          <!-- Professionals Card -->
+          <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg hover:shadow-md transition-shadow duration-200">
+            <div class="p-5">
+              <div class="flex items-center">
+                <div class="flex-shrink-0">
+                  <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/20 rounded-lg flex items-center justify-center">
+                    <svg class="h-6 w-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="ml-4 flex-1">
+                  <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ $stats['professionals'] }}</div>
+                  <div class="text-sm text-gray-500 dark:text-gray-400">{{ __('app.professionals') }}</div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-gray-50 dark:bg-gray-700 px-5 py-3">
+              <a href="{{ route('professionals.index') }}" class="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
+                {{ __('app.view') }} todos →
+              </a>
+            </div>
+          </div>
+
+          <!-- Plans Card -->
+          <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg hover:shadow-md transition-shadow duration-200">
+            <div class="p-5">
+              <div class="flex items-center">
+                <div class="flex-shrink-0">
+                  <div class="w-10 h-10 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center">
+                    <svg class="h-6 w-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="ml-4 flex-1">
+                  <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ $stats['plans'] }}</div>
+                  <div class="text-sm text-gray-500 dark:text-gray-400">{{ __('app.plans') }}</div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-gray-50 dark:bg-gray-700 px-5 py-3">
+              <a href="{{ route('plans.index') }}" class="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
+                {{ __('app.view') }} todos →
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature Limits for Studio Owners -->
+        <x-feature-limits :user="$user" />
+
+      @elseif($isProfessional)
+        <!-- Professional Dashboard -->
+        
+        <!-- Professional Quick Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- My Clients -->
+          <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
+            <div class="p-5">
+              <div class="flex items-center">
+                <div class="flex-shrink-0">
+                  <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center">
+                    <svg class="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="ml-4 flex-1">
+                  <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ $stats['clients'] }}</div>
+                  <div class="text-sm text-gray-500 dark:text-gray-400">Meus Clientes</div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-gray-50 dark:bg-gray-700 px-5 py-3">
+              <a href="{{ route('clients.index') }}" class="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
+                Ver clientes →
+              </a>
+            </div>
+          </div>
+
+          <!-- My Schedule -->
+          <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
+            <div class="p-5">
+              <div class="flex items-center">
+                <div class="flex-shrink-0">
+                  <div class="w-10 h-10 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center">
+                    <svg class="h-6 w-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="ml-4 flex-1">
+                  <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ $stats['upcoming_schedules'] }}</div>
+                  <div class="text-sm text-gray-500 dark:text-gray-400">Próximas Aulas</div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-gray-50 dark:bg-gray-700 px-5 py-3">
+              <a href="{{ route('schedules.index') }}" class="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
+                Ver agenda →
+              </a>
+            </div>
+          </div>
+        </div>
+
+      @endif
+
+      <!-- Quick Actions Section -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- Quick Actions -->
+        <div class="bg-white dark:bg-gray-800 shadow rounded-lg">
+          <div class="px-6 py-5">
+            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Ações Rápidas</h3>
+            <div class="space-y-3">
+              @if($isStudioOwner)
+                <a href="{{ route('clients.create') }}" class="flex items-center p-3 rounded-lg border border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                  <div class="flex-shrink-0">
+                    <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center">
+                      <svg class="h-4 w-4 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-sm font-medium text-gray-900 dark:text-white">{{ __('app.add_client') }}</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Cadastrar novo cliente</p>
+                  </div>
+                </a>
+                <a href="{{ route('professionals.create') }}" class="flex items-center p-3 rounded-lg border border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                  <div class="flex-shrink-0">
+                    <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900/20 rounded-lg flex items-center justify-center">
+                      <svg class="h-4 w-4 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-sm font-medium text-gray-900 dark:text-white">Adicionar Profissional</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Cadastrar novo instrutor</p>
+                  </div>
+                </a>
+              @endif
+              
+              <a href="{{ route('schedules.create') }}" class="flex items-center p-3 rounded-lg border border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                <div class="flex-shrink-0">
+                  <div class="w-8 h-8 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center">
+                    <svg class="h-4 w-4 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="ml-3">
+                  <p class="text-sm font-medium text-gray-900 dark:text-white">Nova Aula</p>
+                  <p class="text-xs text-gray-500 dark:text-gray-400">Agendar nova sessão</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="bg-white dark:bg-gray-800 shadow rounded-lg">
+          <div class="px-6 py-5">
+            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Próximas Aulas</h3>
+            
+            @if(count($recentActivity['upcoming_schedules']) > 0)
+              <div class="space-y-3">
+                @foreach($recentActivity['upcoming_schedules'] as $schedule)
+                  <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                      <div class="flex-shrink-0">
+                        <div class="w-8 h-8 bg-indigo-100 dark:bg-indigo-900/20 rounded-full flex items-center justify-center">
+                          <svg class="w-4 h-4 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div class="flex-1 min-w-0">
+                        <p class="text-sm font-medium text-gray-900 dark:text-white truncate">
+                          {{ $schedule->classType->name ?? 'Aula' }}
+                        </p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">
+                          {{ $schedule->client->name ?? 'Cliente não definido' }}
+                          @if($schedule->professional)
+                            • {{ $schedule->professional->name }}
+                          @endif
+                        </p>
+                      </div>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-sm font-medium text-gray-900 dark:text-white">
+                        {{ $schedule->start_at->format('d/m') }}
+                      </p>
+                      <p class="text-xs text-gray-500 dark:text-gray-400">
+                        {{ $schedule->start_at->format('H:i') }}
+                      </p>
+                    </div>
+                  </div>
+                @endforeach
+              </div>
+              <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-600">
+                <a href="{{ route('schedules.index') }}" class="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
+                  Ver todas as aulas →
+                </a>
+              </div>
+            @else
+              <div class="text-center py-6">
+                <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">Nenhuma aula agendada</h3>
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Comece agendando sua primeira aula.</p>
+                <div class="mt-4">
+                  <a href="{{ route('schedules.create') }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200">
+                    <svg class="-ml-1 mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    Agendar Aula
+                  </a>
+                </div>
+              </div>
+            @endif
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  @endif
 </div>
 @endsection

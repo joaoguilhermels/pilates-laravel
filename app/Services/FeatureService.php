@@ -67,21 +67,26 @@ class FeatureService
         return Cache::remember($cacheKey, 300, function () use ($user, $resource) {
             switch ($resource) {
                 case 'clients':
-                    return $user->clients()->count();
+                    // For now, use global count - in a multi-tenant app, this would be filtered by user/organization
+                    return \App\Models\Client::count();
                 case 'users':
                     // For studio owners, count all users in their organization
-                    if ($user->hasRole('studio_owner')) {
+                    if (method_exists($user, 'hasRole') && $user->hasRole('studio_owner')) {
                         return User::where('studio_name', $user->studio_name)->count();
                     }
                     return 1; // Professional only counts themselves
                 case 'locations':
-                    return $user->locations()->count() ?? 0;
+                    // No locations model exists yet, return 0
+                    return 0;
                 case 'rooms':
-                    return $user->rooms()->count() ?? 0;
+                    // Use global count - in a multi-tenant app, this would be filtered by user/organization
+                    return \App\Models\Room::count();
                 case 'plans':
-                    return $user->plans()->count() ?? 0;
+                    // Use global count - in a multi-tenant app, this would be filtered by user/organization
+                    return \App\Models\Plan::count();
                 case 'schedules_today':
-                    return $user->schedules()->whereDate('created_at', today())->count();
+                    // Use global count for today's schedules
+                    return \App\Models\Schedule::whereDate('created_at', today())->count();
                 default:
                     return 0;
             }

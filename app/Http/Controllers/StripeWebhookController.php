@@ -86,7 +86,7 @@ class StripeWebhookController extends Controller
     /**
      * Handle subscription created event
      */
-    protected function handleSubscriptionCreated($subscription)
+    public function handleSubscriptionCreated($subscription)
     {
         $user = $this->findUserByCustomerId($subscription->customer);
         
@@ -115,7 +115,7 @@ class StripeWebhookController extends Controller
     /**
      * Handle subscription updated event
      */
-    protected function handleSubscriptionUpdated($subscription)
+    public function handleSubscriptionUpdated($subscription)
     {
         $user = $this->findUserByCustomerId($subscription->customer);
         
@@ -144,7 +144,7 @@ class StripeWebhookController extends Controller
     /**
      * Handle subscription deleted event
      */
-    protected function handleSubscriptionDeleted($subscription)
+    public function handleSubscriptionDeleted($subscription)
     {
         $user = $this->findUserByCustomerId($subscription->customer);
         
@@ -171,7 +171,7 @@ class StripeWebhookController extends Controller
     /**
      * Handle trial will end event
      */
-    protected function handleTrialWillEnd($subscription)
+    public function handleTrialWillEnd($subscription)
     {
         $user = $this->findUserByCustomerId($subscription->customer);
         
@@ -192,7 +192,7 @@ class StripeWebhookController extends Controller
     /**
      * Handle payment succeeded event
      */
-    protected function handlePaymentSucceeded($invoice)
+    public function handlePaymentSucceeded($invoice)
     {
         $user = $this->findUserByCustomerId($invoice->customer);
         
@@ -222,7 +222,7 @@ class StripeWebhookController extends Controller
     /**
      * Handle payment failed event
      */
-    protected function handlePaymentFailed($invoice)
+    public function handlePaymentFailed($invoice)
     {
         $user = $this->findUserByCustomerId($invoice->customer);
         
@@ -252,7 +252,7 @@ class StripeWebhookController extends Controller
     /**
      * Handle upcoming invoice event
      */
-    protected function handleUpcomingInvoice($invoice)
+    public function handleUpcomingInvoice($invoice)
     {
         $user = $this->findUserByCustomerId($invoice->customer);
         
@@ -276,7 +276,7 @@ class StripeWebhookController extends Controller
     /**
      * Handle customer created event
      */
-    protected function handleCustomerCreated($customer)
+    public function handleCustomerCreated($customer)
     {
         Log::info('Customer created', [
             'customer_id' => $customer->id,
@@ -287,7 +287,7 @@ class StripeWebhookController extends Controller
     /**
      * Handle customer updated event
      */
-    protected function handleCustomerUpdated($customer)
+    public function handleCustomerUpdated($customer)
     {
         $user = $this->findUserByCustomerId($customer->id);
         
@@ -305,7 +305,7 @@ class StripeWebhookController extends Controller
     /**
      * Handle payment method attached event
      */
-    protected function handlePaymentMethodAttached($paymentMethod)
+    public function handlePaymentMethodAttached($paymentMethod)
     {
         $user = $this->findUserByCustomerId($paymentMethod->customer);
         

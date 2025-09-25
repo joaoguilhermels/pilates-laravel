@@ -1,7 +1,13 @@
 @props(['user'])
 
 @php
-    // Simulate the onboarding steps logic here for the component
+    // Get counts for onboarding steps - these are global counts, not user-specific
+    $roomsCount = \App\Models\Room::count();
+    $classTypesCount = \App\Models\ClassType::count();
+    $plansCount = \App\Models\Plan::count();
+    $professionalsCount = \App\Models\Professional::count();
+    
+    // Define onboarding steps
     $steps = [
         [
             'id' => 'profile',
@@ -11,25 +17,26 @@
         [
             'id' => 'rooms',
             'title' => 'Configure Salas',
-            'completed' => $user->rooms()->count() > 0
+            'completed' => $roomsCount > 0
         ],
         [
             'id' => 'class_types',
             'title' => 'Tipos de Aula',
-            'completed' => $user->classTypes()->count() > 0
+            'completed' => $classTypesCount > 0
         ],
         [
             'id' => 'plans',
             'title' => 'Criar Planos',
-            'completed' => $user->plans()->count() > 0
+            'completed' => $plansCount > 0
         ]
     ];
     
-    if ($user->isStudioOwner()) {
+    // Add professionals step for studio owners
+    if (method_exists($user, 'hasRole') && $user->hasRole('studio_owner')) {
         array_splice($steps, 3, 0, [[
             'id' => 'professionals',
             'title' => 'Adicionar Profissionais',
-            'completed' => $user->professionals()->count() > 0
+            'completed' => $professionalsCount > 0
         ]]);
     }
     

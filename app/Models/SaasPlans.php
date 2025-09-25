@@ -22,6 +22,10 @@ class SaasPlans extends Model
         'is_popular',
         'is_active',
         'trial_days',
+        'stripe_product_id',
+        'stripe_monthly_price_id',
+        'stripe_yearly_price_id',
+        'stripe_metadata',
     ];
 
     protected $casts = [
@@ -30,6 +34,7 @@ class SaasPlans extends Model
         'is_active' => 'boolean',
         'monthly_price' => 'decimal:2',
         'yearly_price' => 'decimal:2',
+        'stripe_metadata' => 'array',
     ];
 
     /**

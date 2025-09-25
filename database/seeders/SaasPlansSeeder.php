@@ -69,7 +69,10 @@ class SaasPlansSeeder extends Seeder
         ];
 
         foreach ($plans as $planData) {
-            SaasPlans::create($planData);
+            SaasPlans::updateOrCreate(
+                ['slug' => $planData['slug']],
+                $planData
+            );
         }
 
         $this->command->info('✅ SaaS Plans seeded successfully!');

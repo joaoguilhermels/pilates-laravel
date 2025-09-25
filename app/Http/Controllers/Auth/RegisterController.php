@@ -102,6 +102,9 @@ class RegisterController extends Controller
             'onboarding_completed' => false,
         ]);
 
+        // Ensure roles exist before assigning
+        $this->ensureRolesExist();
+        
         // Assign role based on selected plan
         if ($plan->slug === 'profissional') {
             $user->assignRole('studio_professional');
@@ -110,5 +113,24 @@ class RegisterController extends Controller
         }
 
         return $user;
+    }
+
+    /**
+     * Ensure required roles exist in the system
+     */
+    private function ensureRolesExist()
+    {
+        $requiredRoles = [
+            'system_admin',
+            'studio_owner', 
+            'studio_professional',
+            'studio_client'
+        ];
+
+        foreach ($requiredRoles as $roleName) {
+            if (!\Spatie\Permission\Models\Role::where('name', $roleName)->exists()) {
+                \Spatie\Permission\Models\Role::create(['name' => $roleName]);
+            }
+        }
     }
 }

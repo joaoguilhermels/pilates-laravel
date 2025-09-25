@@ -3,10 +3,10 @@
   <div class="max-w-md w-full space-y-8">
     <div>
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
-        Reset your password
+        {{ __('auth.reset_password_form_title') }}
       </h2>
       <p class="mt-2 text-center text-sm text-gray-600 dark:text-gray-300">
-        Enter your new password below
+        {{ __('auth.reset_password_form_subtitle') }}
       </p>
     </div>
     <form class="mt-8 space-y-6" action="{{ route('password.update') }}" method="POST">
@@ -15,48 +15,48 @@
       
       <div class="space-y-4">
         <div>
-          <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email Address</label>
+          <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('auth.email_label') }}</label>
           <input id="email" name="email" type="email" autocomplete="email" required 
                  class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-gray-700 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm @error('email') border-red-300 @enderror" 
-                 placeholder="Enter your email address" value="{{ $email ?? old('email') }}">
+                 placeholder="{{ __('auth.email_placeholder') }}" value="{{ $email ?? old('email') }}">
           @error('email')
             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
           @enderror
         </div>
         
         <div>
-          <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">New Password</label>
+          <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('auth.new_password_label') }}</label>
           <input id="password" name="password" type="password" autocomplete="new-password" required 
-                 class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-gray-700 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm @error('password') border-red-300 @enderror" 
-                 placeholder="Enter your new password">
+                 class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-gray-800 rounded-md focus:outline-none focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-indigo-500 dark:focus:border-indigo-400 focus:z-10 sm:text-sm transition-colors duration-200 @error('password') border-red-300 dark:border-red-500 @enderror" 
+                 placeholder="{{ __('auth.new_password_placeholder') }}">
           @error('password')
             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
           @enderror
         </div>
         
         <div>
-          <label for="password_confirmation" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Confirm New Password</label>
+          <label for="password_confirmation" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('auth.confirm_new_password_label') }}</label>
           <input id="password_confirmation" name="password_confirmation" type="password" autocomplete="new-password" required 
-                 class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-gray-700 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" 
-                 placeholder="Confirm your new password">
+                 class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-gray-800 rounded-md focus:outline-none focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-indigo-500 dark:focus:border-indigo-400 focus:z-10 sm:text-sm transition-colors duration-200" 
+                 placeholder="{{ __('auth.confirm_new_password_placeholder') }}">
         </div>
       </div>
 
       <div>
         <button type="submit" 
-                class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-900">
+                class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 dark:focus:ring-offset-gray-900 transition-colors duration-200">
           <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-            <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="h-5 w-5 text-indigo-300 group-hover:text-indigo-200 dark:text-indigo-400 dark:group-hover:text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
           </span>
-          Reset Password
+          {{ __('auth.reset_password_button') }}
         </button>
       </div>
 
       <div class="text-center">
         <a href="{{ route('login') }}" class="font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
-          Back to sign in
+          {{ __('auth.back_to_sign_in') }}
         </a>
       </div>
 
