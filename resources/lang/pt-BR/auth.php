@@ -18,20 +18,34 @@ return [
 
     // Login
     'sign_in' => 'Entrar na sua conta',
-    'create_new_account' => 'criar uma nova conta',
     'email_address' => 'Endereço de email',
     'password_field' => 'Senha',
     'remember_me' => 'Lembrar de mim',
     'forgot_password' => 'Esqueceu sua senha?',
     'sign_in_button' => 'Entrar',
-    'login_errors_title' => 'Houve erros no seu login',
+    'login_errors_title' => 'Houve alguns problemas com seu login:',
+
+    // Demo Accounts Section
+    'demo_accounts_title' => 'Contas de Demonstração',
+    'demo_accounts_subtitle' => 'Use estas credenciais para testar diferentes níveis de acesso',
+    'system_admin_role' => 'Administrador do Sistema',
+    'studio_owner_role' => 'Proprietário do Estúdio',
+    'studio_professional_role' => 'Profissional do Estúdio',
+    'studio_client_role' => 'Cliente do Estúdio',
+    'full_access' => 'Acesso Total',
+    'management_access' => 'Acesso Gerencial',
+    'limited_access' => 'Acesso Limitado',
+    'client_access' => 'Acesso Cliente',
+    'use_credentials' => 'Usar Credenciais',
+    'demo_warning_title' => 'Ambiente de Demonstração',
+    'demo_warning_text' => 'Estas são contas de teste. Em produção, use credenciais seguras e únicas.',
+
     'sign_out' => 'Sair',
 
     // Password Reset
     'forgot_password_title' => 'Esqueceu sua senha?',
     'forgot_password_subtitle' => 'Digite seu endereço de email e enviaremos um link para redefinir sua senha.',
     'send_reset_link' => 'Enviar Link de Redefinição',
-    'back_to_login' => 'Voltar ao login',
     'reset_password_title' => 'Redefinir Senha',
     'new_password' => 'Nova Senha',
     'confirm_new_password' => 'Confirmar Nova Senha',

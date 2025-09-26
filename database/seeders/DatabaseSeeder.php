@@ -24,15 +24,67 @@ class DatabaseSeeder extends Seeder
         // Seed roles and permissions first
         $this->call(RolePermissionSeeder::class);
 
-        // Create a test user if it doesn't exist
-        if (!User::where('email', 'test@example.com')->exists()) {
-            User::factory()->create([
+        // Create demo users with different roles
+        $demoUsers = [
+            [
+                'name' => 'Admin Sistema',
+                'email' => 'admin@pilatesflow.com',
+                'password' => bcrypt('admin123'),
+                'role' => 'system_admin',
+                'studio_name' => 'PilatesFlow HQ',
+                'phone' => '(11) 99999-0001',
+            ],
+            [
+                'name' => 'João Silva',
+                'email' => 'dono@estudio.com',
+                'password' => bcrypt('dono123'),
+                'role' => 'studio_owner',
+                'studio_name' => 'Estúdio Pilates Bem-Estar',
+                'phone' => '(11) 99999-0002',
+            ],
+            [
+                'name' => 'Maria Santos',
+                'email' => 'instrutora@estudio.com',
+                'password' => bcrypt('instrutora123'),
+                'role' => 'studio_professional',
+                'studio_name' => 'Estúdio Pilates Bem-Estar',
+                'phone' => '(11) 99999-0003',
+            ],
+            [
+                'name' => 'Ana Costa',
+                'email' => 'cliente@email.com',
+                'password' => bcrypt('cliente123'),
+                'role' => 'studio_client',
+                'studio_name' => 'Estúdio Pilates Bem-Estar',
+                'phone' => '(11) 99999-0004',
+            ],
+            [
                 'name' => 'Test User',
                 'email' => 'test@example.com',
-            ]);
-            echo "Created test user\n";
-        } else {
-            echo "Test user already exists\n";
+                'password' => bcrypt('password'),
+                'role' => 'studio_owner',
+                'studio_name' => 'Test Studio',
+                'phone' => '(11) 99999-0000',
+            ],
+        ];
+
+        foreach ($demoUsers as $userData) {
+            if (!User::where('email', $userData['email'])->exists()) {
+                $user = User::factory()->create([
+                    'name' => $userData['name'],
+                    'email' => $userData['email'],
+                    'password' => $userData['password'],
+                    'studio_name' => $userData['studio_name'],
+                    'phone' => $userData['phone'],
+                    'onboarding_completed' => true,
+                    'email_verified_at' => now(),
+                ]);
+                
+                $user->assignRole($userData['role']);
+                echo "Created {$userData['role']} user: {$userData['name']} ({$userData['email']})\n";
+            } else {
+                echo "User {$userData['email']} already exists\n";
+            }
         }
 
         // Create clients
