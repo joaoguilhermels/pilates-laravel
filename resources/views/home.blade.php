@@ -15,23 +15,23 @@
       <div>
         <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">
           @if($needsOnboarding)
-            Bem-vindo ao PilatesFlow! 👋
+            {{ __('app.welcome_pilatesflow') }}
           @else
             {{ __('app.dashboard') }}
           @endif
         </h1>
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
           @if($needsOnboarding)
-            Vamos configurar seu estúdio em poucos passos
+            {{ __('app.setup_studio_steps') }}
           @else
             {{ __('app.welcome') }}, {{ $user->name }}! 
             @if($isStudioOwner)
               <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-purple-100 dark:bg-purple-900/20 text-purple-800 dark:text-purple-200 ml-2">
-                👑 Studio Owner
+                {{ __('app.studio_owner') }}
               </span>
             @elseif($isProfessional)
               <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900/20 text-blue-800 dark:text-blue-200 ml-2">
-                💪 Professional
+                {{ __('app.professional_badge') }}
               </span>
             @endif
           @endif
@@ -101,24 +101,24 @@
       <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg shadow-lg p-6 text-white">
         <div class="flex items-center justify-between">
           <div>
-            <h2 class="text-lg font-semibold">Hoje, {{ now()->format('d/m/Y') }}</h2>
+            <h2 class="text-lg font-semibold">{{ __('app.today_date', ['date' => now()->format('d/m/Y')]) }}</h2>
             <p class="text-indigo-100 mt-1">
               @if($stats['today_schedules'] > 0)
-                Você tem {{ $stats['today_schedules'] }} aula{{ $stats['today_schedules'] > 1 ? 's' : '' }} agendada{{ $stats['today_schedules'] > 1 ? 's' : '' }} hoje
+                {{ trans_choice('app.classes_scheduled_today', $stats['today_schedules'], ['count' => $stats['today_schedules']]) }}
               @else
-                Nenhuma aula agendada para hoje
+                {{ __('app.no_classes_today') }}
               @endif
             </p>
           </div>
           <div class="text-right">
             <div class="text-2xl font-bold">{{ $stats['today_schedules'] }}</div>
-            <div class="text-indigo-100 text-sm">aulas hoje</div>
+            <div class="text-indigo-100 text-sm">{{ __('app.classes_today') }}</div>
           </div>
         </div>
         @if($stats['upcoming_schedules'] > 0)
           <div class="mt-4 pt-4 border-t border-indigo-400">
             <p class="text-indigo-100 text-sm">
-              {{ $stats['upcoming_schedules'] }} próximas aulas nos próximos dias
+              {{ __('app.upcoming_classes_days', ['count' => $stats['upcoming_schedules']]) }}
             </p>
           </div>
         @endif
@@ -148,7 +148,7 @@
             </div>
             <div class="bg-gray-50 dark:bg-gray-700 px-5 py-3">
               <a href="{{ route('clients.index') }}" class="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
-                {{ __('app.view') }} todos →
+                {{ __('app.view_all') }} →
               </a>
             </div>
           </div>
@@ -172,7 +172,7 @@
             </div>
             <div class="bg-gray-50 dark:bg-gray-700 px-5 py-3">
               <a href="{{ route('professionals.index') }}" class="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
-                {{ __('app.view') }} todos →
+                {{ __('app.view_all') }} →
               </a>
             </div>
           </div>
@@ -196,7 +196,7 @@
             </div>
             <div class="bg-gray-50 dark:bg-gray-700 px-5 py-3">
               <a href="{{ route('plans.index') }}" class="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
-                {{ __('app.view') }} todos →
+                {{ __('app.view_all') }} →
               </a>
             </div>
           </div>
@@ -223,13 +223,13 @@
                 </div>
                 <div class="ml-4 flex-1">
                   <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ $stats['clients'] }}</div>
-                  <div class="text-sm text-gray-500 dark:text-gray-400">Meus Clientes</div>
+                  <div class="text-sm text-gray-500 dark:text-gray-400">{{ __('app.my_clients') }}</div>
                 </div>
               </div>
             </div>
             <div class="bg-gray-50 dark:bg-gray-700 px-5 py-3">
               <a href="{{ route('clients.index') }}" class="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
-                Ver clientes →
+                {{ __('app.view_clients') }} →
               </a>
             </div>
           </div>
@@ -247,13 +247,13 @@
                 </div>
                 <div class="ml-4 flex-1">
                   <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ $stats['upcoming_schedules'] }}</div>
-                  <div class="text-sm text-gray-500 dark:text-gray-400">Próximas Aulas</div>
+                  <div class="text-sm text-gray-500 dark:text-gray-400">{{ __('app.upcoming_classes') }}</div>
                 </div>
               </div>
             </div>
             <div class="bg-gray-50 dark:bg-gray-700 px-5 py-3">
               <a href="{{ route('schedules.index') }}" class="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
-                Ver agenda →
+                {{ __('app.view_schedule') }} →
               </a>
             </div>
           </div>
@@ -267,7 +267,7 @@
         <!-- Quick Actions -->
         <div class="bg-white dark:bg-gray-800 shadow rounded-lg">
           <div class="px-6 py-5">
-            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Ações Rápidas</h3>
+            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">{{ __('app.quick_actions') }}</h3>
             <div class="space-y-3">
               @if($isStudioOwner)
                 <a href="{{ route('clients.create') }}" class="flex items-center p-3 rounded-lg border border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
@@ -280,7 +280,7 @@
                   </div>
                   <div class="ml-3">
                     <p class="text-sm font-medium text-gray-900 dark:text-white">{{ __('app.add_client') }}</p>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">Cadastrar novo cliente</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">{{ __('app.register_new_client') }}</p>
                   </div>
                 </a>
                 <a href="{{ route('professionals.create') }}" class="flex items-center p-3 rounded-lg border border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
@@ -292,8 +292,8 @@
                     </div>
                   </div>
                   <div class="ml-3">
-                    <p class="text-sm font-medium text-gray-900 dark:text-white">Adicionar Profissional</p>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">Cadastrar novo instrutor</p>
+                    <p class="text-sm font-medium text-gray-900 dark:text-white">{{ __('app.add_professional') }}</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">{{ __('app.register_new_instructor') }}</p>
                   </div>
                 </a>
               @endif
@@ -307,8 +307,8 @@
                   </div>
                 </div>
                 <div class="ml-3">
-                  <p class="text-sm font-medium text-gray-900 dark:text-white">Nova Aula</p>
-                  <p class="text-xs text-gray-500 dark:text-gray-400">Agendar nova sessão</p>
+                  <p class="text-sm font-medium text-gray-900 dark:text-white">{{ __('app.new_class') }}</p>
+                  <p class="text-xs text-gray-500 dark:text-gray-400">{{ __('app.schedule_new_session') }}</p>
                 </div>
               </a>
             </div>
@@ -318,7 +318,7 @@
         <!-- Recent Activity -->
         <div class="bg-white dark:bg-gray-800 shadow rounded-lg">
           <div class="px-6 py-5">
-            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Próximas Aulas</h3>
+            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">{{ __('app.upcoming_classes_section') }}</h3>
             
             @if(count($recentActivity['upcoming_schedules']) > 0)
               <div class="space-y-3">
@@ -334,10 +334,10 @@
                       </div>
                       <div class="flex-1 min-w-0">
                         <p class="text-sm font-medium text-gray-900 dark:text-white truncate">
-                          {{ $schedule->classType->name ?? 'Aula' }}
+                          {{ $schedule->classType->name ?? __('app.class_fallback') }}
                         </p>
                         <p class="text-xs text-gray-500 dark:text-gray-400">
-                          {{ $schedule->client->name ?? 'Cliente não definido' }}
+                          {{ $schedule->client->name ?? __('app.client_not_defined') }}
                           @if($schedule->professional)
                             • {{ $schedule->professional->name }}
                           @endif
@@ -357,7 +357,7 @@
               </div>
               <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-600">
                 <a href="{{ route('schedules.index') }}" class="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
-                  Ver todas as aulas →
+                  {{ __('app.view_all_classes') }} →
                 </a>
               </div>
             @else
@@ -365,14 +365,14 @@
                 <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">Nenhuma aula agendada</h3>
-                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Comece agendando sua primeira aula.</p>
+                <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('app.no_classes_scheduled') }}</h3>
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ __('app.start_first_class') }}</p>
                 <div class="mt-4">
                   <a href="{{ route('schedules.create') }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200">
                     <svg class="-ml-1 mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                     </svg>
-                    Agendar Aula
+                    {{ __('app.schedule_class') }}
                   </a>
                 </div>
               </div>

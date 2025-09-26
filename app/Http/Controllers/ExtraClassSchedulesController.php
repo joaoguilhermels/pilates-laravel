@@ -16,8 +16,10 @@ class ExtraClassSchedulesController extends Controller
     {
         $clients = Client::orderBy('name')->get();
         $classTypes = ClassType::with('professionals', 'rooms')->orderBy('name')->get();
+        $professionals = \App\Models\Professional::orderBy('name')->get();
+        $rooms = \App\Models\Room::orderBy('name')->get();
 
-        return view('schedules.extra.create', compact('clients', 'classTypes'));
+        return view('schedules.extra.create', compact('clients', 'classTypes', 'professionals', 'rooms'));
     }
 
     public function store(ScheduleRequest $request)

@@ -3,6 +3,12 @@
 @section('content')
 <div class="py-6">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Smart Breadcrumbs -->
+        <x-smart-breadcrumbs :items="[
+          ['title' => 'Cobrança', 'url' => route('billing.index')],
+          ['title' => 'Planos', 'url' => '']
+        ]" />
+        
         <!-- Header -->
         <div class="text-center mb-12">
             <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -14,31 +20,33 @@
             </p>
         </div>
 
-        <!-- Billing Toggle -->
-        <div class="flex justify-center mb-8" x-data="{ billingCycle: 'monthly' }">
-            <div class="bg-gray-100 dark:bg-gray-700 p-1 rounded-lg">
-                <button 
-                    @click="billingCycle = 'monthly'"
-                    :class="billingCycle === 'monthly' ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow' : 'text-gray-600 dark:text-gray-400'"
-                    class="px-4 py-2 rounded-md text-sm font-medium transition-all"
-                >
-                    Mensal
-                </button>
-                <button 
-                    @click="billingCycle = 'yearly'"
-                    :class="billingCycle === 'yearly' ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow' : 'text-gray-600 dark:text-gray-400'"
-                    class="px-4 py-2 rounded-md text-sm font-medium transition-all"
-                >
-                    Anual
-                    <span class="ml-1 text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded-full">-20%</span>
-                </button>
+        <!-- Billing Toggle and Plans Section -->
+        <div x-data="{ billingCycle: 'monthly' }">
+            <!-- Billing Toggle -->
+            <div class="flex justify-center mb-8">
+                <div class="bg-gray-100 dark:bg-gray-700 p-1 rounded-lg">
+                    <button 
+                        @click="billingCycle = 'monthly'"
+                        :class="billingCycle === 'monthly' ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow' : 'text-gray-600 dark:text-gray-400'"
+                        class="px-4 py-2 rounded-md text-sm font-medium transition-all"
+                    >
+                        Mensal
+                    </button>
+                    <button 
+                        @click="billingCycle = 'yearly'"
+                        :class="billingCycle === 'yearly' ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow' : 'text-gray-600 dark:text-gray-400'"
+                        class="px-4 py-2 rounded-md text-sm font-medium transition-all"
+                    >
+                        Anual
+                        <span class="ml-1 text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded-full">-20%</span>
+                    </button>
+                </div>
             </div>
-        </div>
 
-        <!-- Plans Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto" x-data="{ billingCycle: 'monthly' }">
+            <!-- Plans Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-start">
             @foreach($plans as $plan)
-            <div class="relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg border {{ $plan->is_popular ? 'border-indigo-500 ring-2 ring-indigo-500' : 'border-gray-200 dark:border-gray-700' }} overflow-hidden">
+            <div class="relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg border {{ $plan->is_popular ? 'border-indigo-500 ring-2 ring-indigo-500' : 'border-gray-200 dark:border-gray-700' }} overflow-hidden flex flex-col h-full">
                 @if($plan->is_popular)
                     <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                         <span class="bg-indigo-500 text-white px-4 py-1 rounded-full text-sm font-medium">
@@ -47,7 +55,7 @@
                     </div>
                 @endif
 
-                <div class="p-8">
+                <div class="p-8 flex flex-col flex-grow">
                     <!-- Plan Header -->
                     <div class="text-center mb-8">
                         <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
@@ -104,40 +112,75 @@
                     </div>
 
                     <!-- Features List -->
-                    <div class="space-y-4">
+                    <div class="space-y-4 flex-grow">
                         <h4 class="font-semibold text-gray-900 dark:text-white mb-3">
                             Recursos inclusos:
                         </h4>
                         @php
-                            $features = json_decode($plan->features, true) ?? [];
+                            $features = $plan->features ?? [];
                         @endphp
-                        @foreach($features as $feature)
-                            <div class="flex items-start">
-                                <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                                </svg>
-                                <span class="text-gray-700 dark:text-gray-300 text-sm">{{ $feature }}</span>
+                        @if(is_array($features) && count($features) > 0)
+                            @foreach($features as $feature)
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <span class="text-gray-700 dark:text-gray-300 text-sm">{{ $feature }}</span>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="text-gray-500 dark:text-gray-400 text-sm">
+                                Recursos serão listados em breve.
                             </div>
-                        @endforeach
+                        @endif
                     </div>
 
                     <!-- Limits -->
-                    @if($plan->limits)
-                        <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                    @php
+                        $limits = [];
+                        if ($plan->limits) {
+                            if (is_string($plan->limits)) {
+                                $limits = json_decode($plan->limits, true) ?? [];
+                            } elseif (is_array($plan->limits)) {
+                                $limits = $plan->limits;
+                            }
+                        }
+                        
+                        // Fallback to model attributes if limits is empty
+                        if (empty($limits)) {
+                            $limits = [
+                                'clients' => $plan->max_clients ?? 0,
+                                'professionals' => $plan->max_professionals ?? 0,
+                                'rooms' => $plan->max_rooms ?? 0,
+                            ];
+                        }
+                    @endphp
+                    
+                    @if(!empty($limits))
+                        <div class="mt-auto pt-6 border-t border-gray-200 dark:border-gray-700">
                             <h4 class="font-semibold text-gray-900 dark:text-white mb-3">
                                 Limites:
                             </h4>
-                            @php
-                                $limits = json_decode($plan->limits, true) ?? [];
-                            @endphp
-                            <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div class="grid grid-cols-3 gap-4 text-sm">
                                 @foreach($limits as $key => $value)
                                     <div class="text-center">
-                                        <div class="font-medium text-gray-900 dark:text-white">
+                                        <div class="font-medium text-gray-900 dark:text-white text-lg">
                                             {{ $value === -1 ? 'Ilimitado' : number_format($value, 0, ',', '.') }}
                                         </div>
-                                        <div class="text-gray-600 dark:text-gray-400">
-                                            {{ ucfirst(str_replace('_', ' ', $key)) }}
+                                        <div class="text-gray-600 dark:text-gray-400 text-xs">
+                                            @switch($key)
+                                                @case('clients')
+                                                    Clientes
+                                                    @break
+                                                @case('professionals')
+                                                    Profissionais
+                                                    @break
+                                                @case('rooms')
+                                                    Salas
+                                                    @break
+                                                @default
+                                                    {{ ucfirst(str_replace('_', ' ', $key)) }}
+                                            @endswitch
                                         </div>
                                     </div>
                                 @endforeach
@@ -147,6 +190,7 @@
                 </div>
             </div>
             @endforeach
+            </div>
         </div>
 
         <!-- FAQ Section -->

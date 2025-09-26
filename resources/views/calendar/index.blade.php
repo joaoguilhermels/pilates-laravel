@@ -2,26 +2,31 @@
 
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Smart Breadcrumbs -->
+  <x-smart-breadcrumbs :items="[
+    ['title' => __('app.calendar'), 'url' => '']
+  ]" />
+  
   <!-- Page Header -->
   <div class="mb-8">
     <div class="sm:flex sm:items-center sm:justify-between">
       <div>
-        <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Calendar</h1>
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">View and manage your studio schedule.</p>
+        <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">{{ __('app.calendar') }}</h1>
+        <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">{{ __('app.view_manage_schedule') }}</p>
       </div>
       <div class="mt-4 sm:mt-0 sm:flex sm:space-x-3">
-        <a href="{{ route('schedules.create') }}" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <a href="{{ route('schedules.create') }}" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200">
           <svg class="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
           </svg>
-          New Session
+          {{ __('app.new_session') }}
         </a>
         @if($has_available_trial_class)
-        <a href="{{ route('schedules.trial.create') }}" class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <a href="{{ route('schedules.trial.create') }}" class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200">
           <svg class="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
           </svg>
-          Trial Class
+          {{ __('app.trial_class') }}
         </a>
         @endif
       </div>
@@ -37,67 +42,67 @@
 
   <!-- Quick Actions -->
   <div class="mt-8">
-    <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Quick Actions</h3>
+    <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">{{ __('app.quick_actions') }}</h3>
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      <a href="{{ route('schedules.create') }}" class="relative rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 dark:hover:border-gray-500 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+      <a href="{{ route('schedules.create') }}" class="relative rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 dark:hover:border-gray-500 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 transition-colors duration-200">
         <div class="flex-shrink-0">
-          <div class="h-10 w-10 bg-indigo-100 rounded-lg flex items-center justify-center">
-            <svg class="h-6 w-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="h-10 w-10 bg-indigo-100 dark:bg-indigo-900/20 rounded-lg flex items-center justify-center">
+            <svg class="h-6 w-6 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
             </svg>
           </div>
         </div>
         <div class="flex-1 min-w-0">
           <span class="absolute inset-0" aria-hidden="true"></span>
-          <p class="text-sm font-medium text-gray-900 dark:text-white">Schedule Session</p>
-          <p class="text-sm text-gray-500 dark:text-gray-400">Book a regular class</p>
+          <p class="text-sm font-medium text-gray-900 dark:text-white">{{ __('app.schedule_session') }}</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">{{ __('app.book_regular_class') }}</p>
         </div>
       </a>
 
       @if($has_available_trial_class)
-      <a href="{{ route('schedules.trial.create') }}" class="relative rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 dark:hover:border-gray-500 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+      <a href="{{ route('schedules.trial.create') }}" class="relative rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 dark:hover:border-gray-500 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 transition-colors duration-200">
         <div class="flex-shrink-0">
-          <div class="h-10 w-10 bg-yellow-100 rounded-lg flex items-center justify-center">
-            <svg class="h-6 w-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="h-10 w-10 bg-yellow-100 dark:bg-yellow-900/20 rounded-lg flex items-center justify-center">
+            <svg class="h-6 w-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
           </div>
         </div>
         <div class="flex-1 min-w-0">
           <span class="absolute inset-0" aria-hidden="true"></span>
-          <p class="text-sm font-medium text-gray-900 dark:text-white">Trial Class</p>
-          <p class="text-sm text-gray-500 dark:text-gray-400">Free trial session</p>
+          <p class="text-sm font-medium text-gray-900 dark:text-white">{{ __('app.trial_class') }}</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">{{ __('app.free_trial_session') }}</p>
         </div>
       </a>
       @endif
 
-      <a href="{{ route('schedules.reposition.create') }}" class="relative rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 dark:hover:border-gray-500 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+      <a href="{{ route('schedules.reposition.create') }}" class="relative rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 dark:hover:border-gray-500 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 transition-colors duration-200">
         <div class="flex-shrink-0">
-          <div class="h-10 w-10 bg-green-100 rounded-lg flex items-center justify-center">
-            <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="h-10 w-10 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center">
+            <svg class="h-6 w-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
             </svg>
           </div>
         </div>
         <div class="flex-1 min-w-0">
           <span class="absolute inset-0" aria-hidden="true"></span>
-          <p class="text-sm font-medium text-gray-900 dark:text-white">Makeup Class</p>
-          <p class="text-sm text-gray-500 dark:text-gray-400">Reschedule session</p>
+          <p class="text-sm font-medium text-gray-900 dark:text-white">{{ __('app.makeup_class') }}</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">{{ __('app.reschedule_session') }}</p>
         </div>
       </a>
 
-      <a href="{{ route('schedules.extra.create') }}" class="relative rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 dark:hover:border-gray-500 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+      <a href="{{ route('schedules.extra.create') }}" class="relative rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 dark:hover:border-gray-500 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 transition-colors duration-200">
         <div class="flex-shrink-0">
-          <div class="h-10 w-10 bg-purple-100 rounded-lg flex items-center justify-center">
-            <svg class="h-6 w-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="h-10 w-10 bg-purple-100 dark:bg-purple-900/20 rounded-lg flex items-center justify-center">
+            <svg class="h-6 w-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
           </div>
         </div>
         <div class="flex-1 min-w-0">
           <span class="absolute inset-0" aria-hidden="true"></span>
-          <p class="text-sm font-medium text-gray-900 dark:text-white">Extra Class</p>
-          <p class="text-sm text-gray-500 dark:text-gray-400">Additional session</p>
+          <p class="text-sm font-medium text-gray-900 dark:text-white">{{ __('app.extra_class') }}</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">{{ __('app.additional_session') }}</p>
         </div>
       </a>
     </div>
@@ -238,6 +243,7 @@
 
 @push('scripts')
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/locales/pt-br.global.min.js'></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
@@ -254,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
             url: '{{ route("calendar.data") }}',
             method: 'GET',
             failure: function() {
-                alert('There was an error while fetching events!');
+                alert('Erro ao carregar os eventos do calendário!');
             }
         },
         eventDisplay: 'block',
@@ -266,26 +272,26 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Create a simple modal-like alert for now
             var eventDetails = `
-Schedule Details:
-• Client: ${event.title}
-• Time: ${event.start.toLocaleString()}
-• Duration: ${Math.round((event.end - event.start) / (1000 * 60))} minutes
+Detalhes do Agendamento:
+• Cliente: ${event.title}
+• Horário: ${event.start.toLocaleString('pt-BR')}
+• Duração: ${Math.round((event.end - event.start) / (1000 * 60))} minutos
             `;
             
-            if (confirm(eventDetails + '\n\nWould you like to edit this schedule?')) {
+            if (confirm(eventDetails + '\n\nDeseja editar este agendamento?')) {
                 // Navigate to schedule edit page with error handling
                 try {
                     const editUrl = `{{ url('schedules') }}/${event.id}/edit`;
                     window.location.href = editUrl;
                 } catch (error) {
                     console.error('Error navigating to schedule edit:', error);
-                    alert('Error opening schedule edit page. Please try again.');
+                    alert('Erro ao abrir a página de edição. Tente novamente.');
                 }
             }
         },
         dateClick: function(info) {
             // Handle date click - could open schedule creation modal
-            if (confirm(`Create a new schedule for ${info.dateStr}?`)) {
+            if (confirm(`Criar um novo agendamento para ${new Date(info.dateStr).toLocaleDateString('pt-BR')}?`)) {
                 // Navigate to schedule creation with pre-filled date
                 var createUrl = new URL('{{ route("schedules.create") }}', window.location.origin);
                 createUrl.searchParams.set('date', info.dateStr);
@@ -306,11 +312,11 @@ Schedule Details:
             var endTime = event.end ? event.end.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : '';
             var duration = event.end ? Math.round((event.end - event.start) / (1000 * 60)) : '';
             
-            var tooltipContent = `📅 ${event.extendedProps.class_type_name || 'Class'}
-👤 Client: ${event.extendedProps.client_name || event.title}
-👨‍🏫 Instructor: ${event.extendedProps.professional_name || 'N/A'}
-🏠 Room: ${event.extendedProps.room_name || 'N/A'}
-⏰ Time: ${startTime}${endTime ? ' - ' + endTime : ''}${duration ? ' (' + duration + ' min)' : ''}`;
+            var tooltipContent = `📅 ${event.extendedProps.class_type_name || 'Aula'}
+👤 Cliente: ${event.extendedProps.client_name || event.title}
+👨‍🏫 Instrutor: ${event.extendedProps.professional_name || 'N/A'}
+🏠 Sala: ${event.extendedProps.room_name || 'N/A'}
+⏰ Horário: ${startTime}${endTime ? ' - ' + endTime : ''}${duration ? ' (' + duration + ' min)' : ''}`;
             
             // Add tooltip using native browser tooltip
             info.el.setAttribute('title', tooltipContent);
@@ -331,8 +337,8 @@ Schedule Details:
                 tooltip.innerHTML = `
                     <div class="bg-gray-900 dark:bg-gray-800 text-white text-sm rounded-lg shadow-lg p-3 border border-gray-700">
                         <div class="flex items-center justify-between mb-2">
-                            <div class="font-semibold text-indigo-200 dark:text-indigo-300">${event.extendedProps.class_type_name || 'Class'}</div>
-                            ${event.extendedProps.trial ? '<span class="px-2 py-1 bg-yellow-600 text-yellow-100 text-xs rounded-full">Trial</span>' : ''}
+                            <div class="font-semibold text-indigo-200 dark:text-indigo-300">${event.extendedProps.class_type_name || 'Aula'}</div>
+                            ${event.extendedProps.trial ? '<span class="px-2 py-1 bg-yellow-600 text-yellow-100 text-xs rounded-full">Experimental</span>' : ''}
                         </div>
                         <div class="space-y-1">
                             <div class="flex items-center">
@@ -363,7 +369,7 @@ Schedule Details:
                                 <svg class="w-4 h-4 mr-2 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                                 </svg>
-                                <span class="text-gray-200">${duration} minutes</span>
+                                <span class="text-gray-200">${duration} minutos</span>
                             </div>` : ''}
                             ${event.extendedProps.status_name ? `<div class="flex items-center">
                                 <svg class="w-4 h-4 mr-2 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -385,7 +391,7 @@ Schedule Details:
                             </div>` : ''}
                         </div>
                         <div class="mt-2 pt-2 border-t border-gray-700 text-xs text-gray-400">
-                            Click to edit • Drag to reschedule
+                            Clique para editar • Arraste para reagendar
                         </div>
                     </div>
                 `;
@@ -477,7 +483,7 @@ Schedule Details:
             startTime: '06:00',
             endTime: '22:00',
         },
-        locale: 'en',
+        locale: 'pt-br',
         firstDay: 1, // Monday
         weekNumbers: false,
         navLinks: true,
@@ -485,7 +491,7 @@ Schedule Details:
         selectMirror: true,
         select: function(info) {
             // Handle date range selection
-            if (confirm(`Create a new schedule from ${info.startStr} to ${info.endStr}?`)) {
+            if (confirm(`Criar um novo agendamento de ${new Date(info.startStr).toLocaleDateString('pt-BR')} até ${new Date(info.endStr).toLocaleDateString('pt-BR')}?`)) {
                 var createUrl = new URL('{{ route("schedules.create") }}', window.location.origin);
                 createUrl.searchParams.set('start_date', info.startStr);
                 createUrl.searchParams.set('start_time', info.start.toTimeString().slice(0, 5));

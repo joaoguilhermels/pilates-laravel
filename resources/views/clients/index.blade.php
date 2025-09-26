@@ -28,14 +28,14 @@
       <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
       </svg>
-      <h3 class="mt-2 text-sm font-medium text-gray-900">No clients</h3>
-      <p class="mt-1 text-sm text-gray-500">Get started by creating your first client.</p>
+      <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('app.no_clients') }}</h3>
+      <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ __('app.get_started_first_client') }}</p>
       <div class="mt-6">
         <a href="{{ route('clients.create') }}" class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
           <svg class="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
           </svg>
-          Add Client
+          {{ __('app.add_client') }}
         </a>
       </div>
     </div>
@@ -44,18 +44,18 @@
     <div class="mt-8 mb-6">
       <form action="{{ route('clients.index') }}" method="GET" class="flex gap-4">
         <div class="flex-1">
-          <label for="name" class="sr-only">Search clients</label>
+          <label for="name" class="sr-only">{{ __('app.search_clients') }}</label>
           <div class="relative">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
-            <input type="text" name="name" value="{{ $name ?? '' }}" class="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md leading-5 bg-white dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Search clients by name...">
+            <input type="text" name="name" value="{{ $name ?? '' }}" class="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md leading-5 bg-white dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="{{ __('app.search_clients_by_name') }}">
           </div>
         </div>
         <button type="submit" class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-          Search
+          {{ __('app.search') }}
         </button>
       </form>
     </div>
@@ -68,12 +68,12 @@
             <table class="min-w-full divide-y divide-gray-300 dark:divide-gray-600">
               <thead class="bg-gray-50 dark:bg-gray-700">
                 <tr>
-                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 dark:text-white sm:pl-6">Name</th>
-                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">Email</th>
-                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">Reschedules</th>
-                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">Plans</th>
+                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 dark:text-white sm:pl-6">{{ __('app.name') }}</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">{{ __('app.email') }}</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">{{ __('app.reschedules') }}</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">{{ __('app.plans') }}</th>
                   <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                    <span class="sr-only">Actions</span>
+                    <span class="sr-only">{{ __('app.actions') }}</span>
                   </th>
                 </tr>
               </thead>
@@ -100,12 +100,12 @@
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">{{ $client->email }}</td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
                       @if($client->schedules->count() > 0)
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                          {{ $client->schedules->count() }} pending
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200">
+                          {{ $client->schedules->count() }} {{ __('app.pending') }}
                         </span>
                       @else
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                          Up to date
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-200">
+                          {{ __('app.up_to_date') }}
                         </span>
                       @endif
                     </td>
@@ -120,53 +120,53 @@
                             @endphp
                             <div class="flex items-center space-x-2">
                               <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium {{ $badgeColor }}">
-                                {{ $clientPlan->plan->name ?? 'Unknown Plan' }}
+                                {{ $clientPlan->plan->name ?? __('app.unknown_plan') }}
                               </span>
-                              <span class="text-xs text-gray-400">
+                              <span class="text-xs text-gray-400 dark:text-gray-500">
                                 {{ $startDate->format('M Y') }}
                               </span>
                               @if($isRecent)
-                                <span class="inline-flex items-center text-xs text-green-600">
+                                <span class="inline-flex items-center text-xs text-green-600 dark:text-green-400">
                                   <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                   </svg>
-                                  Active
+                                  {{ __('app.active') }}
                                 </span>
                               @endif
                             </div>
                           @endforeach
                           @if($client->clientPlans->count() > 2)
-                            <div class="text-xs text-gray-400">
-                              +{{ $client->clientPlans->count() - 2 }} more plans
+                            <div class="text-xs text-gray-400 dark:text-gray-500">
+                              +{{ $client->clientPlans->count() - 2 }} {{ __('app.more_plans') }}
                             </div>
                           @endif
                         </div>
                       @else
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
-                          No plans
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
+                          {{ __('app.no_plans') }}
                         </span>
                       @endif
                     </td>
                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                       <div class="flex justify-end space-x-2">
-                        <a href="{{ route('clients.show', $client) }}" class="text-blue-600 hover:text-blue-900" title="View client details and plans">View</a>
-                        <a href="{{ route('clients.plans.create', $client) }}" class="text-indigo-600 hover:text-indigo-900" title="Add new plan">Add Plan</a>
-                        <a href="{{ route('clients.edit', $client) }}" class="text-indigo-600 hover:text-indigo-900" title="Edit client information">Edit</a>
+                        <a href="{{ route('clients.show', $client) }}" class="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300" title="{{ __('app.view') }} {{ strtolower(__('app.clients')) }}">{{ __('app.view') }}</a>
+                        <a href="{{ route('clients.plans.create', $client) }}" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-300" title="{{ __('app.add_plan') }}">{{ __('app.add_plan') }}</a>
+                        <a href="{{ route('clients.edit', $client) }}" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-300" title="{{ __('app.edit') }}">{{ __('app.edit') }}</a>
                         <button type="button" 
                                 data-delete-entity="client"
                                 data-delete-id="{{ $client->id }}"
                                 data-delete-name="{{ $client->name }}"
                                 data-delete-url="{{ route('clients.destroy', $client) }}"
-                                class="text-red-600 hover:text-red-900 transition-colors duration-200" 
-                                title="Delete client">
-                          Delete
+                                class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300 transition-colors duration-200" 
+                                title="{{ __('app.delete') }}">
+                          {{ __('app.delete') }}
                         </button>
                       </div>
                     </td>
                   </tr>
                 @empty
                   <tr>
-                    <td colspan="5" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">No clients found</td>
+                    <td colspan="5" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 text-center">{{ __('app.no_clients_found') }}</td>
                   </tr>
                 @endforelse
               </tbody>

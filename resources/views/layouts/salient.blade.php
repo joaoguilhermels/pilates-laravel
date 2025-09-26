@@ -6,6 +6,18 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{{ config('app.name', 'Pilates') }}</title>
   
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+  <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+  <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+  
+  <!-- Theme and App Meta -->
+  <meta name="theme-color" content="#6366f1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="PilatesFlow">
+  
   <!-- Dark theme detection script - MUST run before CSS loads -->
   <script>
     (function() {
@@ -42,13 +54,13 @@
           @include('components.theme-toggle')
           
           @guest
-            <a href="{{ route('login') }}" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">Login</a>
-            <a href="{{ route('register') }}" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-white hover:bg-indigo-500 transition-colors duration-200">Register</a>
+            <a href="{{ route('login') }}" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">{{ __('auth.login') }}</a>
+            <a href="{{ route('register') }}" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-white hover:bg-indigo-500 transition-colors duration-200">{{ __('auth.register') }}</a>
           @else
-            <a href="{{ route('home') }}" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">Dashboard</a>
+            <a href="{{ route('home') }}" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">{{ __('app.dashboard') }}</a>
             <form method="POST" action="{{ route('logout') }}">
               @csrf
-              <button class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">Logout</button>
+              <button class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">{{ __('auth.logout') }}</button>
             </form>
           @endguest
         </nav>
@@ -62,7 +74,7 @@
 
   <footer class="mt-24 border-t border-gray-200/80 dark:border-gray-700/80">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-sm text-gray-500 dark:text-gray-400">
-      <p>&copy; {{ date('Y') }} {{ config('app.name', 'Pilates') }}. All rights reserved.</p>
+      <p>&copy; {{ date('Y') }} {{ config('app.name', 'Pilates') }}. {{ __('app.all_rights_reserved') }}</p>
     </div>
   </footer>
 </body>

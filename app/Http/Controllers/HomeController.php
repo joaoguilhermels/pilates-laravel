@@ -55,48 +55,48 @@ class HomeController extends Controller
 
         $steps = [
             'professionals' => [
-                'title' => 'Add Your First Instructor',
-                'description' => 'Add professionals who will teach classes',
+                'title' => __('app.onboarding_add_instructor_title'),
+                'description' => __('app.onboarding_add_instructor_desc'),
                 'completed' => Professional::count() > 0,
                 'route' => 'professionals.create',
                 'icon' => 'users',
                 'priority' => 1
             ],
             'rooms' => [
-                'title' => 'Set Up Studio Rooms',
-                'description' => 'Define the spaces where classes will be held',
+                'title' => __('app.onboarding_setup_rooms_title'),
+                'description' => __('app.onboarding_setup_rooms_desc'),
                 'completed' => Room::count() > 0,
                 'route' => 'rooms.create',
                 'icon' => 'home',
                 'priority' => 2
             ],
             'class_types' => [
-                'title' => 'Create Class Types',
-                'description' => 'Define the types of classes you offer',
+                'title' => __('app.onboarding_create_class_types_title'),
+                'description' => __('app.onboarding_create_class_types_desc'),
                 'completed' => ClassType::count() > 0,
                 'route' => 'classes.create',
                 'icon' => 'academic-cap',
                 'priority' => 3
             ],
             'plans' => [
-                'title' => 'Set Up Pricing Plans',
-                'description' => 'Create subscription plans for your clients',
+                'title' => __('app.onboarding_setup_plans_title'),
+                'description' => __('app.onboarding_setup_plans_desc'),
                 'completed' => Plan::count() > 0,
                 'route' => 'plans.create',
                 'icon' => 'currency-dollar',
                 'priority' => 4
             ],
             'clients' => [
-                'title' => 'Add Your First Client',
-                'description' => 'Start building your client base',
+                'title' => __('app.onboarding_add_client_title'),
+                'description' => __('app.onboarding_add_client_desc'),
                 'completed' => Client::count() > 0,
                 'route' => 'clients.create',
                 'icon' => 'user-group',
                 'priority' => 5
             ],
             'schedules' => [
-                'title' => 'Schedule Your First Class',
-                'description' => 'Create your first class booking',
+                'title' => __('app.onboarding_schedule_class_title'),
+                'description' => __('app.onboarding_schedule_class_desc'),
                 'completed' => Schedule::count() > 0,
                 'route' => 'schedules.create',
                 'icon' => 'calendar',
@@ -212,16 +212,16 @@ class HomeController extends Controller
      */
     public function getActionText($title)
     {
-        // Convert titles to action text
+        // Convert titles to action text using translations
         $actionMap = [
-            'Add Your First Instructor' => 'Add Instructor',
-            'Set Up Studio Rooms' => 'Add Room',
-            'Create Class Types' => 'Add Class Type',
-            'Set Up Pricing Plans' => 'Add Plan',
-            'Add Your First Client' => 'Add Client',
-            'Schedule Your First Class' => 'Add Schedule'
+            __('app.onboarding_add_instructor_title') => __('app.onboarding_add_instructor_action'),
+            __('app.onboarding_setup_rooms_title') => __('app.onboarding_add_room_action'),
+            __('app.onboarding_create_class_types_title') => __('app.onboarding_add_class_type_action'),
+            __('app.onboarding_setup_plans_title') => __('app.onboarding_add_plan_action'),
+            __('app.onboarding_add_client_title') => __('app.onboarding_add_client_action'),
+            __('app.onboarding_schedule_class_title') => __('app.onboarding_add_schedule_action')
         ];
 
-        return $actionMap[$title] ?? 'Start Setup';
+        return $actionMap[$title] ?? __('app.start_setup');
     }
 }

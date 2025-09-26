@@ -1,37 +1,5 @@
 {{-- Improved SaaS Registration Form Component --}}
 <div class="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-  <!-- Enhanced Header -->
-  <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-sm border-b border-gray-200/50 dark:border-gray-700/50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center py-4">
-        <div class="flex items-center space-x-3">
-          <div class="w-8 h-8 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
-            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <div>
-            <h1 class="text-xl font-bold text-gray-900 dark:text-white">PilatesFlow</h1>
-            <p class="text-xs text-gray-500 dark:text-gray-400">Gestão Inteligente</p>
-          </div>
-        </div>
-        <div class="flex items-center space-x-4">
-          <div class="hidden sm:flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-300">
-            <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span>SSL Seguro</span>
-          </div>
-          <div class="text-sm text-gray-600 dark:text-gray-300">
-            {{ __('auth.register_or') }}
-            <a href="{{ route('login') }}" class="font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300 ml-1">
-              {{ __('auth.register_signin_link') }}
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- Progress Indicator -->
   <div class="bg-white/50 dark:bg-gray-800/50 border-b border-gray-200/50 dark:border-gray-700/50">

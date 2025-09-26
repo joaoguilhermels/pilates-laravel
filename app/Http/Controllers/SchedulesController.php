@@ -78,8 +78,10 @@ class SchedulesController extends Controller
     {
         $clients = Client::orderBy('name')->get();
         $classTypes = ClassType::with('professionals', 'rooms', 'statuses')->orderBy('name')->get();
+        $professionals = \App\Models\Professional::orderBy('name')->get();
+        $rooms = Room::orderBy('name')->get();
 
-        return view('schedules.create', compact('clients', 'classTypes'));
+        return view('schedules.create', compact('clients', 'classTypes', 'professionals', 'rooms'));
     }
 
     public function store(ScheduleRequest $request)

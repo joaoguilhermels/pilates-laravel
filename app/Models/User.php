@@ -234,6 +234,15 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Check if user is a studio owner
+     */
+    public function isStudioOwner()
+    {
+        return $this->hasRole('studio_owner') || 
+               ($this->saasPlans && str_contains(strtolower($this->saasPlans->name), 'estúdio'));
+    }
+
+    /**
      * Send the email verification notification.
      */
     public function sendEmailVerificationNotification()

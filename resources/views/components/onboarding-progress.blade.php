@@ -11,8 +11,8 @@
     $steps = [
         [
             'id' => 'profile',
-            'title' => 'Complete seu Perfil',
-            'description' => 'Adicione suas informações básicas',
+            'title' => __('app.complete_your_profile'),
+            'description' => __('app.add_basic_information'),
             'icon' => 'user',
             'route' => 'profile.edit',
             'priority' => 1,
@@ -20,8 +20,8 @@
         ],
         [
             'id' => 'rooms',
-            'title' => 'Configure Salas',
-            'description' => 'Defina os espaços do seu estúdio',
+            'title' => __('app.set_up_studio_rooms'),
+            'description' => __('app.define_spaces_classes_held'),
             'icon' => 'building',
             'route' => 'rooms.create',
             'priority' => 2,
@@ -29,8 +29,8 @@
         ],
         [
             'id' => 'class_types',
-            'title' => 'Tipos de Aula',
-            'description' => 'Configure os tipos de aulas oferecidas',
+            'title' => __('app.create_class_types'),
+            'description' => __('app.define_types_classes_offer'),
             'icon' => 'academic-cap',
             'route' => 'classes.create',
             'priority' => 3,
@@ -38,8 +38,8 @@
         ],
         [
             'id' => 'plans',
-            'title' => 'Criar Planos',
-            'description' => 'Configure planos de assinatura',
+            'title' => __('app.set_up_pricing_plans'),
+            'description' => __('app.create_subscription_plans_clients'),
             'icon' => 'document-text',
             'route' => 'plans.create',
             'priority' => 4,
@@ -51,8 +51,8 @@
     if (method_exists($user, 'hasRole') && $user->hasRole('studio_owner')) {
         array_splice($steps, 2, 0, [[
             'id' => 'professionals',
-            'title' => 'Adicionar Profissionais',
-            'description' => 'Cadastre instrutores da equipe',
+            'title' => __('app.add_your_first_instructor'),
+            'description' => __('app.add_professionals_teach_classes'),
             'icon' => 'users',
             'route' => 'professionals.create',
             'priority' => 3,
@@ -85,13 +85,13 @@
                     <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
                 </svg>
             </div>
-            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Configuração Inicial</span>
+            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('app.initial_setup') }}</span>
         </div>
         <div class="flex items-center space-x-3">
             <span class="text-sm text-gray-500 dark:text-gray-400">{{ $completedSteps }}/{{ $totalSteps }}</span>
             <button onclick="skipOnboarding()" 
                     class="text-xs text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
-                Pular
+                {{ __('app.skip') }}
             </button>
         </div>
     </div>
@@ -108,11 +108,11 @@
                 <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                 </svg>
-                <span class="text-sm text-green-700 dark:text-green-300 font-medium">Configuração completa!</span>
+                <span class="text-sm text-green-700 dark:text-green-300 font-medium">{{ __('app.setup_complete') }}</span>
             </div>
             <a href="{{ route('onboarding.wizard') }}" 
                class="inline-flex items-center px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md transition-colors duration-200">
-                Finalizar
+                {{ __('app.finish') }}
             </a>
         </div>
     @elseif($nextStep)
@@ -144,7 +144,7 @@
                 <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
                 </svg>
-                Começar
+                {{ __('app.start') }}
             </a>
         </div>
     @endif
@@ -154,8 +154,8 @@
 <!-- Quick Setup Grid - Only show after first step -->
 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 mb-6">
     <div class="flex items-center justify-between mb-4">
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Configuração Rápida</h3>
-        <span class="text-xs text-gray-500 dark:text-gray-400">Opcional</span>
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ __('app.quick_setup') }}</h3>
+        <span class="text-xs text-gray-500 dark:text-gray-400">{{ __('app.optional') }}</span>
     </div>
     
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -186,7 +186,7 @@
 
 <script>
 async function skipOnboarding() {
-    if (!confirm('Tem certeza que deseja pular a configuração inicial? Você pode completá-la depois.')) {
+    if (!confirm('{{ __('app.confirm_skip_setup') }}')) {
         return;
     }
     
@@ -204,11 +204,11 @@ async function skipOnboarding() {
         if (result.success) {
             location.reload();
         } else {
-            alert(result.message || 'Erro ao pular configuração');
+            alert(result.message || '{{ __('app.error_skipping_setup') }}');
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('Erro ao pular configuração');
+        alert('{{ __('app.error_skipping_setup') }}');
     }
 }
 </script>

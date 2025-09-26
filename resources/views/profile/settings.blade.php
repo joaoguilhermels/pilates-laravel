@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Smart Breadcrumbs -->
+  <x-smart-breadcrumbs :items="[
+    ['title' => __('app.settings'), 'url' => '']
+  ]" />
+  
   <!-- Page Header -->
   <div class="mb-8">
     <div class="flex items-center justify-between">

@@ -5,6 +5,11 @@
   <div class="py-8">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       
+      <!-- Smart Breadcrumbs -->
+      <x-smart-breadcrumbs :items="[
+        ['title' => 'Configuração Inicial', 'url' => '']
+      ]" />
+      
       <!-- Header -->
       <div class="text-center mb-8">
         <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
@@ -29,7 +34,7 @@
       <!-- Steps -->
       <div class="space-y-6" x-data="onboardingWizard({{ json_encode(['steps' => $steps, 'currentStep' => $currentStep, 'progress' => $progress]) }})">
         @foreach($steps as $index => $step)
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border {{ $step['completed'] ? 'border-green-200 dark:border-green-800' : ($index === $currentStep ? 'border-indigo-200 dark:border-indigo-800' : 'border-gray-200 dark:border-gray-700') }} overflow-hidden">
+          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border {{ $step['completed'] ? 'border-green-200 dark:border-green-800' : ($index === $currentStep ? 'border-indigo-200 dark:border-indigo-800' : (!$step['available'] ? 'border-gray-100 dark:border-gray-800' : 'border-gray-200 dark:border-gray-700')) }} overflow-hidden {{ !$step['available'] && !$step['completed'] ? 'opacity-60' : '' }}">
             <div class="p-6">
               <div class="flex items-start space-x-4">
                 <!-- Step Icon -->
@@ -40,9 +45,15 @@
                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                       </svg>
                     </div>
-                  @elseif($index === $currentStep)
+                  @elseif($index === $currentStep && $step['available'])
                     <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/20 rounded-full flex items-center justify-center">
                       <span class="text-indigo-600 dark:text-indigo-400 font-semibold">{{ $index + 1 }}</span>
+                    </div>
+                  @elseif(!$step['available'])
+                    <div class="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
+                      <svg class="w-6 h-6 text-gray-400 dark:text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                      </svg>
                     </div>
                   @else
                     <div class="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
@@ -55,15 +66,37 @@
                 <div class="flex-1 min-w-0">
                   <div class="flex items-center justify-between">
                     <div>
-                      <h3 class="text-lg font-semibold text-gray-900 dark:text-white flex items-center">
+                      <h3 class="text-lg font-semibold {{ !$step['available'] && !$step['completed'] ? 'text-gray-500 dark:text-gray-400' : 'text-gray-900 dark:text-white' }} flex items-center">
                         {{ $step['title'] }}
                         @if($step['required'])
                           <span class="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200">
                             Obrigatório
                           </span>
                         @endif
+                        @if(!$step['available'] && !$step['completed'])
+                          <span class="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
+                            🔒 Bloqueado
+                          </span>
+                        @endif
                       </h3>
                       <p class="text-gray-600 dark:text-gray-400 mt-1">{{ $step['description'] }}</p>
+                      
+                      @if(isset($step['help_text']))
+                        <p class="text-sm text-blue-600 dark:text-blue-400 mt-2 italic">
+                          💡 {{ $step['help_text'] }}
+                        </p>
+                      @endif
+                      
+                      @if(isset($step['dependency_message']))
+                        <div class="mt-2 p-2 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-md">
+                          <p class="text-sm text-amber-800 dark:text-amber-200 flex items-center">
+                            <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                            </svg>
+                            {{ $step['dependency_message'] }}
+                          </p>
+                        </div>
+                      @endif
                     </div>
                     
                     @if($step['completed'])
@@ -81,8 +114,13 @@
                   @if(!$step['completed'] && $step['id'] !== 'complete')
                     <div class="mt-4">
                       @if(isset($step['route']))
-                        <a href="{{ route($step['route'], $step['params'] ?? []) }}" 
-                           class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-200">
+                        @if($step['available'])
+                          <a href="{{ route($step['route'], $step['params'] ?? []) }}" 
+                             class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-200">
+                        @else
+                          <button disabled 
+                                  class="inline-flex items-center px-4 py-2 bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 font-medium rounded-lg cursor-not-allowed">
+                        @endif
                           @if($step['id'] === 'profile')
                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                               <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
@@ -105,7 +143,11 @@
                             </svg>
                           @endif
                           {{ $step['id'] === 'profile' ? 'Completar Perfil' : 'Configurar' }}
-                        </a>
+                        @if($step['available'])
+                          </a>
+                        @else
+                          </button>
+                        @endif
                       @endif
                     </div>
                   @elseif($step['id'] === 'complete' && $index === $currentStep)

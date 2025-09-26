@@ -31,11 +31,11 @@ class OnboardingController extends Controller
     }
 
     /**
-     * Get onboarding steps based on user's plan
+     * Get onboarding steps based on user's plan with intelligent dependencies
      */
     private function getOnboardingSteps(User $user): array
     {
-        $baseSteps = [
+        $steps = [
             [
                 'id' => 'profile',
                 'title' => 'Complete seu Perfil',
@@ -44,7 +44,9 @@ class OnboardingController extends Controller
                 'required' => true,
                 'completed' => $this->isProfileComplete($user),
                 'route' => 'profile.edit',
-                'fields' => ['name', 'email', 'phone', 'studio_name']
+                'fields' => ['name', 'email', 'phone', 'studio_name'],
+                'dependencies' => [],
+                'blocks' => ['rooms', 'class_types', 'professionals', 'plans']
             ],
             [
                 'id' => 'rooms',
@@ -55,7 +57,10 @@ class OnboardingController extends Controller
                 'completed' => $user->rooms()->count() > 0,
                 'route' => 'rooms.create',
                 'params' => ['onboarding' => 1],
-                'min_count' => 1
+                'min_count' => 1,
+                'dependencies' => ['profile'],
+                'blocks' => ['class_types', 'plans'],
+                'help_text' => 'As salas são necessárias para criar tipos de aula e planos'
             ],
             [
                 'id' => 'class_types',
@@ -66,13 +71,16 @@ class OnboardingController extends Controller
                 'completed' => $user->classTypes()->count() > 0,
                 'route' => 'classes.create',
                 'params' => ['onboarding' => 1],
-                'min_count' => 1
+                'min_count' => 1,
+                'dependencies' => ['profile', 'rooms'],
+                'blocks' => ['plans'],
+                'help_text' => 'Os tipos de aula são necessários para criar planos de mensalidade'
             ]
         ];
 
         // Add plan-specific steps
         if ($user->isStudioOwner()) {
-            $baseSteps[] = [
+            $steps[] = [
                 'id' => 'professionals',
                 'title' => 'Adicionar Profissionais',
                 'description' => 'Cadastre os profissionais da sua equipe',
@@ -81,11 +89,14 @@ class OnboardingController extends Controller
                 'completed' => $user->professionals()->count() > 0,
                 'route' => 'professionals.create',
                 'params' => ['onboarding' => 1],
-                'min_count' => 0
+                'min_count' => 0,
+                'dependencies' => ['profile'],
+                'blocks' => [],
+                'help_text' => 'Opcional: Adicione profissionais para gerenciar sua equipe'
             ];
         }
 
-        $baseSteps[] = [
+        $steps[] = [
             'id' => 'plans',
             'title' => 'Criar Planos',
             'description' => 'Configure os planos de mensalidade',
@@ -94,31 +105,71 @@ class OnboardingController extends Controller
             'completed' => $user->plans()->count() > 0,
             'route' => 'plans.create',
             'params' => ['onboarding' => 1],
-            'min_count' => 1
+            'min_count' => 1,
+            'dependencies' => ['profile', 'rooms', 'class_types'],
+            'blocks' => [],
+            'help_text' => 'Os planos precisam de salas e tipos de aula configurados'
         ];
 
-        $baseSteps[] = [
+        $steps[] = [
             'id' => 'complete',
             'title' => 'Finalizar',
             'description' => 'Revisar configurações e começar a usar',
             'icon' => 'check-circle',
             'required' => true,
             'completed' => false,
-            'route' => 'onboarding.complete'
+            'route' => 'onboarding.complete',
+            'dependencies' => ['profile', 'rooms', 'class_types', 'plans'],
+            'blocks' => []
         ];
 
-        return $baseSteps;
+        // Add dependency status and availability to each step
+        return $this->enrichStepsWithDependencies($steps, $user);
     }
 
     /**
-     * Get current step based on completion status
+     * Enrich steps with dependency information
+     */
+    private function enrichStepsWithDependencies(array $steps, User $user): array
+    {
+        $stepMap = collect($steps)->keyBy('id');
+        
+        foreach ($steps as &$step) {
+            // Check if all dependencies are met
+            $dependenciesMet = true;
+            $missingDependencies = [];
+            
+            foreach ($step['dependencies'] as $depId) {
+                $depStep = $stepMap->get($depId);
+                if (!$depStep || !$depStep['completed']) {
+                    $dependenciesMet = false;
+                    $missingDependencies[] = $depStep ? $depStep['title'] : $depId;
+                }
+            }
+            
+            $step['dependencies_met'] = $dependenciesMet;
+            $step['missing_dependencies'] = $missingDependencies;
+            $step['available'] = $dependenciesMet || $step['completed'];
+            
+            // Add dependency message
+            if (!$dependenciesMet && !empty($missingDependencies)) {
+                $step['dependency_message'] = 'Complete primeiro: ' . implode(', ', $missingDependencies);
+            }
+        }
+        
+        return $steps;
+    }
+
+    /**
+     * Get current step based on completion status and dependencies
      */
     private function getCurrentStep(User $user): int
     {
         $steps = $this->getOnboardingSteps($user);
         
+        // Find the first incomplete step that has all dependencies met
         foreach ($steps as $index => $step) {
-            if (!$step['completed']) {
+            if (!$step['completed'] && $step['available']) {
                 return $index;
             }
         }

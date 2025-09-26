@@ -88,4 +88,9 @@ return [
     'plan_features' => 'Recursos inclusos:',
     'plan_continue' => 'Continuar com :plan',
 
+    // Navigation
+    'login' => 'Entrar',
+    'register' => 'Cadastrar',
+    'logout' => 'Sair',
+
 ];

@@ -37,9 +37,9 @@ class BillingController extends Controller
     {
         $user = Auth::user();
         $currentPlan = $user->saasPlans;
-        $availablePlans = SaasPlans::where('id', '!=', $user->saas_plan_id)->get();
+        $plans = SaasPlans::active()->get();
 
-        return view('billing.plans', compact('user', 'currentPlan', 'availablePlans'));
+        return view('billing.plans', compact('user', 'currentPlan', 'plans'));
     }
 
     /**

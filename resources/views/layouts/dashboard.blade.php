@@ -6,6 +6,18 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{{ config('app.name', 'Pilates') }} - Dashboard</title>
   
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+  <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+  <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+  
+  <!-- Theme and App Meta -->
+  <meta name="theme-color" content="#6366f1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="PilatesFlow">
+  
   <!-- Dark theme detection script - MUST run before CSS loads -->
   <script>
     (function() {
@@ -116,9 +128,39 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16">
         <div class="flex items-center">
-          <a href="{{ route('home') }}" class="font-semibold text-xl tracking-tight text-gray-900 dark:text-white">
-            {{ config('app.name', 'Pilates') }}
-          </a>
+          @php
+            $user = Auth::user();
+            $isStudioPlan = $user && $user->saasPlans && str_contains(strtolower($user->saasPlans->name), 'estúdio');
+            $isProfessionalPlan = $user && $user->saasPlans && str_contains(strtolower($user->saasPlans->name), 'profissional');
+            $studioName = $user->studio_name ?? $user->company_name ?? 'Meu Estúdio';
+          @endphp
+          
+          @if($isStudioPlan && $studioName)
+            <!-- Studio Branding -->
+            <div class="flex flex-col justify-center">
+              <a href="{{ route('home') }}" class="font-bold text-lg leading-none text-gray-900 dark:text-white truncate max-w-48 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">
+                {{ $studioName }}
+              </a>
+              <div class="flex items-center mt-0.5">
+                <svg class="w-3 h-3 text-gray-400 dark:text-gray-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-xs text-gray-500 dark:text-gray-400 font-medium tracking-wide">
+                  by PilatesFlow
+                </span>
+              </div>
+            </div>
+          @elseif($isProfessionalPlan)
+            <!-- Professional Branding -->
+            <a href="{{ route('home') }}" class="font-bold text-xl tracking-tight text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">
+              PilatesFlow
+            </a>
+          @else
+            <!-- Default Branding -->
+            <a href="{{ route('home') }}" class="font-semibold text-xl tracking-tight text-gray-900 dark:text-white">
+              {{ config('app.name', 'Pilates') }}
+            </a>
+          @endif
           <!-- Global Search -->
           <div class="hidden md:block md:ml-6 md:w-96">
             <x-global-search />
@@ -138,14 +180,11 @@
             <a href="{{ route('calendar') }}" class="{{ request()->routeIs('calendar*') ? 'border-indigo-500 text-gray-900 dark:text-white' : 'border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200' }} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200">
               {{ __('app.calendar') }}
             </a>
-            <a href="{{ route('billing.index') }}" class="{{ request()->routeIs('billing.*') ? 'border-indigo-500 text-gray-900 dark:text-white' : 'border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200' }} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200">
-              💳 Cobrança
-            </a>
             
             <!-- Management Dropdown -->
             <div class="relative">
-              <button data-dropdown-toggle="management-dropdown" class="{{ request()->routeIs(['professionals.*', 'rooms.*', 'classes.*']) ? 'border-indigo-500 text-gray-900 dark:text-white' : 'border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200' }} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200">
-                Gestão
+              <button data-dropdown-toggle="management-dropdown" class="{{ request()->routeIs(['professionals.*', 'rooms.*', 'classes.*', 'plans.*']) ? 'border-indigo-500 text-gray-900 dark:text-white' : 'border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200' }} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200">
+                {{ __('app.management') }}
                 <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
@@ -171,6 +210,12 @@
                     </svg>
                     {{ __('app.classes') }}
                   </a>
+                  <a href="{{ route('plans.index') }}" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+                    <svg class="mr-3 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    {{ __('app.plans') }}
+                  </a>
                 </div>
               </div>
             </div>
@@ -180,7 +225,7 @@
           <!-- Mobile menu button -->
           <div class="md:hidden">
             <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 transition-colors duration-200" aria-controls="mobile-menu">
-              <span class="sr-only">Open main menu</span>
+              <span class="sr-only">{{ __('app.open_main_menu') }}</span>
               <!-- Hamburger icon when menu is closed -->
               <svg class="hamburger-icon h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -197,7 +242,7 @@
           <!-- User Dropdown -->
           <div class="relative">
             <button data-dropdown-toggle="user-dropdown" class="flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-              <span class="sr-only">Open user menu</span>
+              <span class="sr-only">{{ __('app.open_user_menu') }}</span>
               <div class="flex items-center space-x-3">
                 <div class="h-8 w-8 rounded-full bg-indigo-500 flex items-center justify-center">
                   <span class="text-sm font-medium text-white">{{ substr(Auth::user()->name, 0, 1) }}</span>
@@ -275,6 +320,13 @@
                   {{ __('app.settings') }}
                 </a>
                 
+                <a href="{{ route('billing.index') }}" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-colors duration-200" role="menuitem">
+                  <svg class="mr-3 h-5 w-5 text-gray-400 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                  </svg>
+                  {{ __('app.billing') }}
+                </a>
+                
                 <!-- Divider -->
                 <div class="border-t border-gray-100 dark:border-gray-700"></div>
                 
@@ -297,6 +349,22 @@
       <!-- Mobile menu -->
       <div id="mobile-menu" class="md:hidden" style="display: none;">
         <div class="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+          @if($isStudioPlan && $studioName)
+            <!-- Studio Header in Mobile -->
+            <div class="px-3 py-3 mb-2 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50 rounded-lg mx-2">
+              <div class="font-bold text-base text-gray-900 dark:text-white leading-tight">
+                {{ $studioName }}
+              </div>
+              <div class="flex items-center mt-1">
+                <svg class="w-3 h-3 text-gray-400 dark:text-gray-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-xs text-gray-500 dark:text-gray-400 font-medium tracking-wide">
+                  by PilatesFlow
+                </span>
+              </div>
+            </div>
+          @endif
           <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'bg-indigo-50 dark:bg-indigo-900 border-indigo-500 text-indigo-700 dark:text-indigo-200' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-800 dark:hover:text-gray-200' }} block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors duration-200">
             {{ __('app.dashboard') }}
           </a>
@@ -318,8 +386,8 @@
           <a href="{{ route('calendar') }}" class="{{ request()->routeIs('calendar*') ? 'bg-indigo-50 dark:bg-indigo-900 border-indigo-500 text-indigo-700 dark:text-indigo-200' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-800 dark:hover:text-gray-200' }} block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors duration-200">
             {{ __('app.calendar') }}
           </a>
-          <a href="{{ route('billing.index') }}" class="{{ request()->routeIs('billing.*') ? 'bg-indigo-50 dark:bg-indigo-900 border-indigo-500 text-indigo-700 dark:text-indigo-200' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-800 dark:hover:text-gray-200' }} block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors duration-200">
-            💳 Cobrança
+          <a href="{{ route('plans.index') }}" class="{{ request()->routeIs('plans.*') ? 'bg-indigo-50 dark:bg-indigo-900 border-indigo-500 text-indigo-700 dark:text-indigo-200' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-800 dark:hover:text-gray-200' }} block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors duration-200">
+            {{ __('app.plans') }}
           </a>
         </div>
       </div>

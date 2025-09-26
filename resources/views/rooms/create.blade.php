@@ -2,6 +2,12 @@
 
 @section('content')
 <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Smart Breadcrumbs -->
+  <x-smart-breadcrumbs :items="[
+    ['title' => __('app.rooms'), 'url' => route('rooms.index')],
+    ['title' => __('app.create'), 'url' => '']
+  ]" />
+  
   <!-- Page Header -->
   <div class="mb-8">
     <div class="flex items-center justify-between">

@@ -18,21 +18,21 @@
             </div>
             <div class="ml-4">
               <h3 class="text-lg font-semibold text-white">
-                Welcome to Your Pilates Studio! 🎉
+                {{ __('app.welcome_pilatesflow') }}
               </h3>
               <p class="text-indigo-100 text-sm">
-                Let's get your studio set up in just a few minutes.
+                {{ __('app.setup_studio_steps') }}
               </p>
             </div>
           </div>
           <div class="flex items-center space-x-3">
             <button onclick="startOnboarding()" 
                     class="px-4 py-2 text-sm font-medium text-indigo-600 bg-white rounded-md hover:bg-gray-50 transition-colors duration-200">
-              Get Started
+              {{ __('app.get_started') }}
             </button>
             <button onclick="skipOnboarding()" 
                     class="text-indigo-200 hover:text-white text-sm">
-              Skip for now
+              {{ __('app.skip_for_now') }}
             </button>
           </div>
         </div>
@@ -52,10 +52,10 @@
           </div>
           <div class="ml-4">
             <h3 class="text-lg font-semibold text-white">
-              Studio Setup Progress
+              {{ __('app.studio_setup_progress') }}
             </h3>
             <p class="text-indigo-100">
-              {{ $onboardingStatus['completedCount'] }} of {{ $onboardingStatus['totalSteps'] }} steps completed
+              {{ __('app.steps_completed', ['count' => $onboardingStatus['completedCount'], 'total' => $onboardingStatus['totalSteps']]) }}
             </p>
           </div>
         </div>
@@ -75,9 +75,9 @@
     <!-- Simplified Setup Steps -->
     <div id="setup-steps" class="mt-6">
       <div class="mb-4">
-        <h4 class="text-lg font-medium text-gray-900 dark:text-white">Quick Setup</h4>
+        <h4 class="text-lg font-medium text-gray-900 dark:text-white">{{ __('app.quick_setup') }}</h4>
         <p class="text-sm text-gray-600 dark:text-gray-400">
-          Complete these essential steps to get started.
+          {{ __('app.complete_essential_steps') }}
         </p>
       </div>
       
@@ -133,10 +133,10 @@
                       <a href="{{ $step['url'] }}?onboarding=1" 
                        class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200">
                       {{ $step['action'] }}
-                      </a>
                       <svg class="ml-1 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                       </svg>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -158,19 +158,19 @@
               <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
               </svg>
-              Quick Start: Add Instructor
+              {{ __('app.quick_start_add_instructor') }}
             </a>
             <a href="{{ route('rooms.create') }}" 
                class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 transition-colors duration-200">
               <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
               </svg>
-              Add Room
+              {{ __('app.add_room') }}
             </a>
             <button type="button" 
-                    @click="if(confirm('Are you sure you want to skip the setup guide? You can access it later from the help menu.')) { skipOnboarding(); }"
+                    @click="if(confirm('{{ __('app.confirm_skip_setup_guide') }}')) { skipOnboarding(); }"
                     class="inline-flex items-center px-4 py-2 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-md hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors duration-200">
-              Skip Setup Guide
+              {{ __('app.skip_setup_guide') }}
             </button>
           </div>
         </div>
@@ -187,10 +187,10 @@
         </div>
         <div class="ml-4">
           <h3 class="text-lg font-medium text-green-800 dark:text-green-200">
-            🎉 Setup Complete! Your studio is ready to go.
+            {{ __('app.setup_complete_celebration') }}
           </h3>
           <p class="text-green-700 dark:text-green-300 mt-1">
-            You've completed all the essential setup steps. Your Pilates studio management system is now fully configured and ready for daily operations.
+            {{ __('app.setup_complete_description') }}
           </p>
         </div>
       </div>
